@@ -420,7 +420,7 @@ export default function AdminSiteConfigView() {
               {/* AI Chat Widget Toggle */}
               <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
                 <div>
-                  <h4 className="text-xs font-bold text-slate-900 font-sans">VANI AI Live Chatbot</h4>
+                  <h4 className="text-xs font-bold text-slate-900 font-sans">DT AI Live Chatbot</h4>
                   <p className="text-[10px] text-slate-500 font-sans">Floating assistant on bottom right</p>
                 </div>
                 <button

@@ -21,13 +21,31 @@ const DEFAULT_HEADING = {
  * different again. Add a row per location you actually operate from.
  */
 const DEFAULT_ITEMS = [
-    {
-      city: "Jaipur, Rajasthan (India)",
-      tz: "India Standard Time (IST)",
-      hours: "09:30 AM - 08:30 PM",
-      coverage: "All client engagements, worldwide"
-    }
-  ];
+  {
+    city: "Jaipur, Rajasthan (India - HQ)",
+    tz: "IST (UTC+5:30)",
+    hours: "10:00 AM - 08:00 PM",
+    coverage: "Office 104, Vaishali Tower 2nd, Nursery Circle, Vaishali Nagar Jaipur 302021 • Phone: +91-6375073511 • Mail: business@divanextechnologies.com"
+  },
+  {
+    city: "Tsuen Wan (Hong Kong Hub)",
+    tz: "HKT (UTC+8:00)",
+    hours: "09:00 AM - 07:00 PM",
+    coverage: "FLAT/RM E (36) ON 3RD FLOOR SUPERLUCK INDUSTRIAL CENTRE PHASE 2, 57 SHA TSUI ROAD TSUEN WAN, Hong Kong • Phone: +852-90270926"
+  },
+  {
+    city: "Dubai Media City (UAE Hub)",
+    tz: "GST (UTC+4:00)",
+    hours: "10:00 AM - 07:00 PM",
+    coverage: "C8, Dubai Media City, Dubai, United Arab Emirates • Middle East & GCC Operations"
+  },
+  {
+    city: "Newmarket, Ontario (Canada Hub)",
+    tz: "EST (UTC-5:00)",
+    hours: "09:00 AM - 06:00 PM",
+    coverage: "105 Sawmill Valley Dr, Newmarket, ON, Canada • North America Client Relations"
+  }
+];
 
 export default function GlobalHubsAndHours() {
   const { heading, items: hubs } = useSection("contact/hubs", {

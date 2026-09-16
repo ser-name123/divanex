@@ -586,7 +586,7 @@ export default function AdminChatsView() {
                   <div className="flex items-center gap-2">
                     <Bot className="w-4 h-4 text-emerald-600" />
                     <span className="font-sans font-medium">
-                      Autonomous AI Mode: VANI AI Bot is actively replying to user queries in real-time.
+                      Autonomous AI Mode: DT AI Bot is actively replying to user queries in real-time.
                     </span>
                   </div>
                   <button
@@ -647,7 +647,7 @@ export default function AdminChatsView() {
                           }`}
                         >
                           <div className="flex items-center justify-between gap-4 mb-1 text-[10px] opacity-75 font-semibold font-mono">
-                            <span>{isAdmin ? "You (Admin)" : isAi ? "VANI AI Assistant" : selectedSession.userName}</span>
+                            <span>{isAdmin ? "You (Admin)" : isAi ? "DT AI Assistant" : selectedSession.userName}</span>
                             <span>
                               {new Date(msg.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                             </span>

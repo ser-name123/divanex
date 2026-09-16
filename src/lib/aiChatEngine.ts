@@ -19,9 +19,9 @@ export interface AiContactDetails {
 }
 
 const FALLBACK_CONTACTS: AiContactDetails = {
-  contactEmail: "contact@divanextechnologies.com",
-  supportEmail: "support@divanextechnologies.com",
-  contactPhone: "+91 98765 43210",
+  contactEmail: "business@divanextechnologies.com",
+  supportEmail: "business@divanextechnologies.com",
+  contactPhone: "+91-6375073511",
 };
 
 export function generateAiBotResponse(
@@ -98,7 +98,7 @@ export function generateAiBotResponse(
   if (/^(hi|hello|hey|namaste|hlo|ola|good morning|good evening|good afternoon|kaise ho|kya hal)/.test(cleanMsg)) {
     if (isHinglishOrHindi) {
       return {
-        text: `Namaste ${firstName}! 👋 Divanex me aapka swagat hai.\n\nMain **Vani AI** hoon, aapki technical solution consultant. Hum websites, mobile apps, healthcare HMIS, custom ERP aur AI automation software develop karte hain. Aapko kis tarah ke project ke baare me janna hai?`,
+        text: `Namaste ${firstName}! 👋 Divanex me aapka swagat hai.\n\nMain **DT AI** hoon, aapki technical solution consultant. Hum websites, mobile apps, healthcare HMIS, custom ERP aur AI automation software develop karte hain. Aapko kis tarah ke project ke baare me janna hai?`,
         quickReplies: [
           { id: "qr_web_hi", label: "🌐 Website / Web App", payload: "Mujhe website ya web app banwani hai." },
           { id: "qr_app_hi", label: "📱 Mobile App (Android/iOS)", payload: "Mujhe mobile app banwani hai." },
@@ -109,7 +109,7 @@ export function generateAiBotResponse(
     }
 
     return {
-      text: `Hello ${firstName}! 👋 Welcome to **Divanex Technologies**.\n\nI am **Vani AI**, your personal AI solution consultant. Whether you need a high-performance web platform, cross-platform mobile app, autonomous AI agent, or custom enterprise software, I'm here to help walk you through our approach, architecture, and pricing.\n\nWhat project are you looking to build today?`,
+      text: `Hello ${firstName}! 👋 Welcome to **Divanex Technologies**.\n\nI am **DT AI**, your personal AI solution consultant. Whether you need a high-performance web platform, cross-platform mobile app, autonomous AI agent, or custom enterprise software, I'm here to help walk you through our approach, architecture, and pricing.\n\nWhat project are you looking to build today?`,
       quickReplies: [
         { id: "qr_web_en", label: "🌐 Website & Web Apps", payload: "I need a website or web application developed." },
         { id: "qr_mobile_en", label: "📱 Mobile App Development", payload: "I want to build a mobile application." },

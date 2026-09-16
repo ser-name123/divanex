@@ -345,7 +345,7 @@ export async function verifySessionOtp(
     id: `msg_${Date.now()}_welcome`,
     sessionId: session.id,
     sender: "ai",
-    text: `Welcome ${session.userName}! 🎉 Your email **${session.userEmail}** is successfully verified via SMTP.\n\nI am **Vani AI**, your personal technical solution consultant at Divanex. How can I help you today? Ask me about our custom websites, mobile apps, ERPs, Healthcare HMIS, AI Agents, or project cost estimates.`,
+    text: `Welcome ${session.userName}! 🎉 Your email **${session.userEmail}** is successfully verified via SMTP.\n\nI am **DT AI**, your personal technical solution consultant at Divanex. How can I help you today? Ask me about our custom websites, mobile apps, ERPs, Healthcare HMIS, AI Agents, or project cost estimates.`,
     timestamp: new Date().toISOString(),
     quickReplies: aiGreeting.quickReplies
   };
@@ -525,7 +525,7 @@ export function adminHandBackToAi(sessionId: string): boolean {
     id: `msg_${Date.now()}_sys_resume`,
     sessionId,
     sender: "system",
-    text: `🤖 Chat has been handed back to Vani AI Assistant. Automated intelligent replies are active.`,
+    text: `🤖 Chat has been handed back to DT AI Assistant. Automated intelligent replies are active.`,
     timestamp: new Date().toISOString()
   };
 

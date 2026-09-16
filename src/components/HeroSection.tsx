@@ -1,446 +1,309 @@
 "use client";
 
-import RichText from "@/components/RichText";
 import { useState, useEffect } from "react";
 import { useSiteConfig } from "@/context/SiteConfigContext";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Calendar,
   Layers,
-  Cpu,
   ShieldCheck,
   Zap,
-  Terminal,
-  Activity,
-  CheckCircle2,
-  ChevronRight,
-  Radio,
-  Server,
+  Bot,
+  Smartphone,
   Globe2,
-  GitBranch,
-  Bot
+  Sparkles,
+  CheckCircle2,
+  Cpu,
+  Server,
+  Star,
+  Activity,
+  Lock,
+  ArrowUpRight
 } from "lucide-react";
 
 interface HeroSectionProps {
   onOpenConsultation?: () => void;
 }
 
-const promptPresets = {
-  saas: {
-    label: "Multi-Tenant SaaS",
-    prompt: "Synthesize enterprise multi-tenant cloud engine with isolated schemas & Stripe billing",
-    code: `// Divanex High-Velocity Architecture
-import { CloudMesh, TenantIsolation } from "@divanex/core";
-
-export const Engine = new CloudMesh({
-  tenancy: "dynamic-schema-isolated",
-  autoScale: { min: 3, max: 250, targetLatencyMs: 12 },
-  telemetry: "distributed-tracing-v4",
-  compliance: ["SOC2", "HIPAA-Ready", "GDPR"]
-});`,
-    logs: [
-      "✓ PostgreSQL isolated schema migration complete",
-      "✓ Serverless edge routes deployed across 310+ POPs",
-      "✓ Zero cold-start latency warmup policy verified"
-    ]
-  },
-  rag: {
-    label: "Autonomous AI Agent",
-    prompt: "Deploy hybrid neural agent with vector semantic caching & sub-50ms RAG retrieval",
-    code: `// Divanex Neural Agent Fabric
-import { NeuralRAG, VectorStore } from "@divanex/ai";
-
-export const Agent = new NeuralRAG({
-  embeddings: "text-embedding-3-large",
-  vectorStore: "pinecone-serverless",
-  hybridSearch: { semanticWeight: 0.85, keywordWeight: 0.15 },
-  citationVerification: "strict-hallucination-guard"
-});`,
-    logs: [
-      "✓ 420,000 document vectors embedded in 14.2s",
-      "✓ Semantic cache hit ratio: 89.4% (latency: 18ms)",
-      "✓ Guardrails active: zero-hallucination verified"
-    ]
-  },
-  mobile: {
-    label: "Cross-Platform App",
-    prompt: "Compile universal iOS/Android/Web runtime with biometric auth & offline SQLite sync",
-    code: `// Divanex Universal Mobile Runtime
-import { CrossPlatformRuntime, OfflineSync } from "@divanex/mobile";
-
-export const MobileCore = new CrossPlatformRuntime({
-  engines: ["React Native Fabric", "WebAssembly"],
-  syncProtocol: "CRDT-Conflict-Free",
-  frameRateTarget: "120FPS-ProMotion"
-});`,
-    logs: [
-      "✓ iOS & Android binary compiled in parallel",
-      "✓ Biometric FaceID/TouchID security layer active",
-      "✓ Offline-first state synced with 0 conflict"
-    ]
-  }
-};
-
 export default function HeroSection({ onOpenConsultation: _onOpenConsultation }: HeroSectionProps) {
   const siteConfig = useSiteConfig();
-  const [activeTab, setActiveTab] = useState<"ai" | "mesh" | "telemetry">("ai");
-  const [selectedPrompt, setSelectedPrompt] = useState<"saas" | "rag" | "mobile">("saas");
-  const [typedCode, setTypedCode] = useState("");
-  const [isSynthesizing, setIsSynthesizing] = useState(false);
-  const [pingLatency, setPingLatency] = useState(8);
+  const [activeCard, setActiveCard] = useState<number>(0);
+  const [pingLatency, setPingLatency] = useState(6);
 
-  useEffect(() => {
-    let index = 0;
-    const currentCode = promptPresets[selectedPrompt].code;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setTypedCode("");
-    setIsSynthesizing(true);
-    const interval = setInterval(() => {
-      index += 1;
-      setTypedCode(currentCode.slice(0, index));
-      if (index >= currentCode.length) {
-        clearInterval(interval);
-        setIsSynthesizing(false);
-      }
-    }, 38);
-    return () => clearInterval(interval);
-  }, [selectedPrompt]);
-
-  // Ping jitter simulation
   useEffect(() => {
     const timer = setInterval(() => {
-      setPingLatency(Math.floor(6 + Math.random() * 5));
+      setPingLatency(Math.floor(Math.random() * 3 + 5));
     }, 2500);
     return () => clearInterval(timer);
   }, []);
 
-  return (
-    <section className="hero-section relative pt-24 pb-8 sm:pb-10 lg:pt-28 lg:pb-12 flex flex-col justify-center overflow-hidden bg-cyber-grid bg-radial-cone">
-      {/* Background Glowing Ambient Orbs */}
-      <div className="glow-orb-blue w-[420px] h-[420px] md:w-[750px] md:h-[750px] -top-20 -left-20 opacity-40"></div>
-      <div className="glow-orb-cyan w-[350px] h-[350px] md:w-[600px] md:h-[600px] top-40 -right-20 opacity-30"></div>
-      <div className="glow-orb-orange w-[280px] h-[280px] md:w-[500px] md:h-[500px] bottom-10 left-1/3 opacity-20"></div>
+  const capabilities = [
+    {
+      id: "ai",
+      title: "Autonomous AI & Neural Fabric",
+      subtitle: "Custom AI Agents, RAG Pipelines & Automated Workflows",
+      icon: Bot,
+      color: "from-teal-500 to-emerald-600",
+      accent: "#0f7670",
+      badge: "AI 4.0 READY",
+      stats: "99.8% Precision • Sub-50ms TTFT",
+      techs: ["OpenAI GPT-4o", "Claude 3.5", "LangChain", "FastAPI"],
+    },
+    {
+      id: "cloud",
+      title: "High-Scale SaaS & Web Platforms",
+      subtitle: "Multi-Tenant Serverless Engines with Global CDN Edge",
+      icon: Globe2,
+      color: "from-sky-500 to-blue-600",
+      accent: "#189a91",
+      badge: "ZERO COLD START",
+      stats: "310+ Edge POPs • 99.99% Uptime",
+      techs: ["Next.js 15", "React 19", "PostgreSQL", "Stripe"],
+    },
+    {
+      id: "mobile",
+      title: "Cross-Platform Mobile Apps",
+      subtitle: "Silky 120 FPS Fluid iOS & Android Apps with Offline Sync",
+      icon: Smartphone,
+      color: "from-emerald-500 to-teal-600",
+      accent: "#5c9556",
+      badge: "PROMOTION NATIVE",
+      stats: "120 FPS • CRDT Offline Sync",
+      techs: ["Flutter", "React Native", "Swift", "SQLite"],
+    },
+    {
+      id: "enterprise",
+      title: "Enterprise ERP & Security Vault",
+      subtitle: "Hospital HMIS, Modular ERPs, RBAC & SOC-2 Compliance",
+      icon: ShieldCheck,
+      color: "from-blue-600 to-indigo-700",
+      accent: "#000838",
+      badge: "BANK-GRADE AES-256",
+      stats: "SOC-2 Type II • HIPAA Verified",
+      techs: ["Microservices", "Docker / K8s", "GraphQL", "Redis"],
+    },
+  ];
 
-      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 xl:gap-16 items-center">
+  return (
+    <section className="relative pt-28 pb-16 md:pt-36 md:pb-20 overflow-hidden bg-transparent">
+      {/* Subtle Ambient Radial Glow */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute top-[-5%] left-[-5%] w-[550px] h-[550px] rounded-full bg-[#0f7670]/6 blur-[140px]" />
+        <div className="absolute top-[20%] right-[-5%] w-[500px] h-[500px] rounded-full bg-[#5c9556]/6 blur-[140px]" />
+      </div>
+
+      {/* Main Full-Width Container */}
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16 2xl:px-20 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center">
           
-          {/* Left Column: Hero Content */}
-          <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
+          {/* ─── LEFT COLUMN: HEADLINE & VALUE PROP ─── */}
+          <div className="lg:col-span-6 xl:col-span-6 space-y-6 text-center lg:text-left">
             
-            {/* High-Tech Eyebrow Pill */}
-            <div className="reveal-init reveal-delay-1 inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-sky-200 text-xs sm:text-sm text-sky-800 shadow-sm animate-soft-pulse">
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-500 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            {/* Top Eyebrow Badge */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-[#0f7670]/30 shadow-xs text-xs font-semibold text-slate-800">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#5c9556] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#5c9556]" />
               </span>
-              <span className="font-bold tracking-wide text-slate-900">
-                Next-Gen Digital Solutions & Cloud Architecture
-              </span>
-              <span className="hidden sm:inline text-slate-300">•</span>
-              <span className="hidden sm:inline text-sky-600 font-semibold">
-                SaaS & AI Specialized
+              <span className="text-slate-800 font-bold">
+                {siteConfig.heroEyebrow || "Next-Gen Digital Solutions & Cloud Architecture"}
               </span>
             </div>
 
-            {/* Headline */}
-            <h1 className="reveal-init reveal-delay-2 text-3xl sm:text-4xl md:text-5xl lg:text-[42px] xl:text-[48px] font-semibold tracking-tight leading-[1.2] text-slate-900">
-              <span className="block">{siteConfig.heroHeadlineMain}</span>
-              <span className="block mt-1 sm:mt-2">
-                <span className="gradient-text">{siteConfig.heroHeadlineHighlight}</span>
+            {/* Main Headline */}
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] xl:text-[42px] font-bold tracking-tight text-[#000838] leading-[1.25]">
+              <span>{siteConfig.heroHeadlineMain || "Transforming Businesses with"}</span>
+              <span className="block mt-1 text-transparent bg-clip-text bg-gradient-to-r from-[#0f7670] via-[#189a91] to-[#5c9556]">
+                {siteConfig.heroHeadlineHighlight || "Next-Gen Tech Solutions."}
               </span>
             </h1>
 
             {/* Sub-headline */}
-            <p className="reveal-init reveal-delay-3 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-              <RichText inline value={siteConfig.heroSubhead} />
+            <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              {siteConfig.heroSubhead ||
+                "SaaS, Web, Mobile Apps, AI & Digital Marketing Solutions for Scaling Businesses. From conceptual system architecture to resilient global serverless deployment, we engineer digital engines that outperform."}
             </p>
 
-            {/* Call to Action Buttons */}
-            <div className="reveal-init reveal-delay-4 flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2">
-              {/* CTA 1: Get Free Quote */}
-              <a
-                href="/contact"
-                className="btn-futuristic-primary w-full sm:w-auto text-center justify-center text-xs sm:text-sm !py-3.5 sm:!py-4 !px-6 sm:!px-8 !rounded-2xl"
-              >
-                <span>{siteConfig.heroCtaQuoteText}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-sky-300"></span>
-                </span>
-              </a>
-
-              {/* CTA 2: Explore Services */}
-              <a
-                href="#services"
-                className="btn-futuristic-glass w-full sm:w-auto text-center justify-center text-xs sm:text-sm !py-3.5 sm:!py-4 !px-5 sm:!px-7 !rounded-2xl"
-              >
-                <Layers className="w-4 h-4 text-sky-600" />
-                <span>Explore Services</span>
-              </a>
-
-              {/* CTA 3: Book a Free Consultation */}
+            {/* CTA Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2">
               <Link
                 href="/contact"
-                className="btn-futuristic-amber w-full sm:w-auto text-center justify-center text-xs sm:text-sm !py-3.5 sm:!py-4 !px-5 sm:!px-7 !rounded-2xl"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm bg-[#0f7670] hover:bg-[#0f5f5b] text-white shadow-lg shadow-[#0f7670]/20 hover:shadow-[#0f7670]/30 transition-all cursor-pointer transform hover:-translate-y-0.5"
               >
-                <Calendar className="w-4 h-4 text-amber-600" />
-                <span>{siteConfig.heroCtaConsultText}</span>
+                <span>{siteConfig.heroCtaQuoteText || "Get a Free Quote"}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+
+              <Link
+                href="/services"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-white/95 backdrop-blur-md hover:bg-slate-50 text-slate-800 border border-slate-200 shadow-xs hover:border-[#0f7670]/50 transition-all cursor-pointer"
+              >
+                <Layers className="w-4 h-4 text-[#0f7670]" />
+                <span>Explore Services</span>
+              </Link>
+
+              <Link
+                href="/contact"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-[#f3f8f2]/90 backdrop-blur-md hover:bg-[#e2f0e0] text-[#385d36] border border-[#c6e1c3] shadow-xs transition-all cursor-pointer"
+              >
+                <Calendar className="w-4 h-4 text-[#5c9556]" />
+                <span>{siteConfig.heroCtaConsultText || "Book Consultation"}</span>
               </Link>
             </div>
 
-            {/* High-Contrast HUD Badges */}
-            <div className="reveal-init reveal-delay-5 pt-6 border-t border-slate-200 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 text-xs sm:text-sm text-slate-700">
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-2xs">
-                <div className="flex text-amber-500 text-xs sm:text-sm">★★★★★</div>
+            {/* Trust Proof Badges */}
+            <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3 text-xs text-slate-600">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-2xs">
+                <div className="flex text-amber-500 text-xs">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
                 <span className="font-bold text-slate-900">4.9/5 Rating</span>
-                <span className="text-slate-500 font-medium hidden sm:inline">(50+ Reviews)</span>
+                <span className="text-slate-500">(50+ Reviews)</span>
               </div>
-              
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-emerald-200 text-emerald-700 shadow-2xs">
-                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-emerald-200 text-emerald-700 shadow-2xs">
+                <ShieldCheck className="w-4 h-4 text-[#5c9556] shrink-0" />
                 <span className="font-semibold text-slate-800">Enterprise SLA & SOC2</span>
               </div>
 
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-sky-200 text-sky-700 shadow-2xs">
-                <Zap className="w-4 h-4 text-sky-600 shrink-0" />
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-[#0f7670]/30 text-[#0f7670] shadow-2xs">
+                <Zap className="w-4 h-4 text-[#0f7670] shrink-0" />
                 <span className="text-slate-700 font-medium">Edge Latency:</span>
-                <span className="font-mono font-bold text-sky-700">{pingLatency}ms</span>
+                <span className="font-mono font-bold text-[#0f7670]">{pingLatency}ms</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: 3D Control Center in Light Mode */}
-          <div className="lg:col-span-5 relative reveal-init reveal-delay-3">
-            <div className="relative mx-auto max-w-lg lg:max-w-none">
-              
-              {/* Subtle ambient blur glow */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/15 via-sky-400/15 to-teal-400/15 rounded-3xl blur-xl opacity-60"></div>
+          {/* ─── RIGHT COLUMN: 3D INTERACTIVE ARCHITECTURE HUB ─── */}
+          <div className="lg:col-span-6 xl:col-span-6 relative w-full">
+            
+            {/* Ambient Multi-Hue Glow Backdrop */}
+            <div className="absolute -inset-4 bg-gradient-to-tr from-[#0f7670]/15 via-sky-300/10 to-[#5c9556]/15 rounded-3xl blur-3xl opacity-70 pointer-events-none" />
 
-              {/* Main Console Window */}
-              <div className="relative rounded-2xl bg-white border border-slate-200 shadow-xl shadow-sky-950/5 overflow-hidden">
-                
-                {/* Console Window Header */}
-                <div className="flex items-center justify-between px-4 py-3 sm:px-5 sm:py-3.5 border-b border-slate-200 bg-slate-50/90">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-amber-400"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
-                    <span className="ml-1.5 text-xs font-mono text-slate-700 flex items-center gap-1.5 font-bold">
-                      <Terminal className="w-3.5 h-3.5 text-sky-600" />
-                      divanex-command-v3.0
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-emerald-50 border border-emerald-300 text-emerald-700">
-                      <Radio className="w-3 h-3 animate-pulse text-emerald-600" />
-                      ONLINE • {pingLatency}ms
-                    </span>
-                  </div>
-                </div>
+            {/* Floating Top Header Pill */}
+            <div className="flex items-center justify-between gap-3 mb-4 px-2">
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#5c9556] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#5c9556]" />
+                </span>
+                <span className="text-xs font-mono font-bold text-[#000838] tracking-wider uppercase">
+                  ENTERPRISE SOLUTIONS ECOSYSTEM
+                </span>
+              </div>
 
-                {/* Interactive Mode Switcher */}
-                <div className="grid grid-cols-3 text-xs font-semibold border-b border-slate-200 bg-slate-100/60">
-                  <button
-                    onClick={() => setActiveTab("ai")}
-                    className={`py-3 px-2 flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                      activeTab === "ai"
-                        ? "text-sky-700 border-b-2 border-sky-600 bg-white font-bold shadow-2xs"
-                        : "text-slate-600 hover:text-slate-900"
-                    }`}
-                  >
-                    <Bot className="w-4 h-4 text-sky-600" />
-                    <span>AI Engine</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("mesh")}
-                    className={`py-3 px-2 flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                      activeTab === "mesh"
-                        ? "text-emerald-700 border-b-2 border-emerald-600 bg-white font-bold shadow-2xs"
-                        : "text-slate-600 hover:text-slate-900"
-                    }`}
-                  >
-                    <GitBranch className="w-4 h-4 text-emerald-600" />
-                    <span>Cloud Mesh</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("telemetry")}
-                    className={`py-3 px-2 flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                      activeTab === "telemetry"
-                        ? "text-amber-700 border-b-2 border-amber-600 bg-white font-bold shadow-2xs"
-                        : "text-slate-600 hover:text-slate-900"
-                    }`}
-                  >
-                    <Server className="w-4 h-4 text-amber-600" />
-                    <span>Telemetry</span>
-                  </button>
-                </div>
-
-                {/* TAB BODY CONTAINER (LOCKED FIXED HEIGHT TO PREVENT ANY JUMPING OR EXPANSION) */}
-                <div className="h-[435px] sm:h-[425px] flex flex-col justify-between overflow-hidden">
-                  {/* TAB 1: AI Code & Architecture Synthesizer */}
-                  {activeTab === "ai" && (
-                    <div className="p-5 h-full flex flex-col justify-between font-mono text-xs">
-                      {/* Interactive Preset Buttons */}
-                      <div className="flex items-center gap-2 flex-wrap shrink-0">
-                        <span className="text-[11px] text-slate-500 font-sans font-semibold">Architecture:</span>
-                        {(["saas", "rag", "mobile"] as const).map((p) => (
-                          <button
-                            key={p}
-                            onClick={() => setSelectedPrompt(p)}
-                            className={`px-2.5 py-1 rounded-md text-[11px] transition-all font-sans font-semibold cursor-pointer ${
-                              selectedPrompt === p
-                                ? "bg-sky-600 text-white shadow-xs"
-                                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                            }`}
-                          >
-                            {promptPresets[p].label}
-                          </button>
-                        ))}
-                      </div>
-
-                      {/* Live Streaming Code View - 100% Locked Fixed Height */}
-                      <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-mono text-[12px] leading-relaxed relative overflow-hidden h-[185px] flex flex-col shadow-xs shrink-0">
-                        <div className="text-sky-800 mb-1.5 text-[11px] flex items-center justify-between font-bold border-b border-slate-200 pb-1 shrink-0">
-                          <span className="flex items-center gap-1.5">
-                            <span className="w-2 h-2 rounded-full bg-sky-600 animate-ping"></span>
-                            // ACTIVE STREAMING RUNTIME
-                          </span>
-                          <span className="text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300 text-[10px] font-bold">● COMPILED</span>
-                        </div>
-                        <div className="overflow-hidden flex-1">
-                          <pre className="text-slate-900 font-mono font-bold text-[11.5px] leading-relaxed whitespace-pre-wrap">{typedCode}</pre>
-                          {isSynthesizing && (
-                            <span className="inline-block w-2 h-3.5 bg-sky-600 animate-pulse ml-0.5 align-middle"></span>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Verification Pipeline Checks */}
-                      <div className="space-y-1.5 shrink-0">
-                        <div className="flex items-center justify-between text-[11px] text-slate-700 font-sans font-bold pb-0.5">
-                          <span>Automated Verification Pipeline</span>
-                          <span className="text-emerald-800 font-mono font-bold">100% HEALTHY</span>
-                        </div>
-                        {promptPresets[selectedPrompt].logs.map((log, i) => (
-                          <div key={i} className="flex items-center gap-2 text-[11px] text-slate-800 bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200 font-medium">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
-                            <span className="font-mono text-[11px] truncate font-semibold text-slate-800">{log}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* TAB 2: Cloud Infrastructure Mesh Visualizer */}
-                  {activeTab === "mesh" && (
-                    <div className="p-5 h-full flex flex-col justify-between">
-                      <div className="flex items-center justify-between text-xs text-slate-600 font-mono font-semibold shrink-0">
-                        <span>GLOBAL TOPOLOGY MESH</span>
-                        <span className="text-sky-700 font-bold">EDGE REGIONS: 310+</span>
-                      </div>
-
-                      {/* Interactive Topology Graph */}
-                      <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 relative space-y-2.5 my-auto">
-                        {/* Node 1 */}
-                        <div className="flex items-center justify-between p-2.5 rounded-lg bg-white border border-sky-200 shadow-2xs">
-                          <div className="flex items-center gap-2">
-                            <Globe2 className="w-4 h-4 text-sky-600" />
-                            <span className="text-xs font-bold text-slate-900">Global Edge CDN</span>
-                          </div>
-                          <span className="text-[11px] font-mono text-sky-700 font-bold">{pingLatency}ms</span>
-                        </div>
-
-                        {/* Connecting Pulse Line */}
-                        <div className="w-0.5 h-3 bg-gradient-to-b from-sky-400 to-emerald-500 mx-auto"></div>
-
-                        {/* Node 2 */}
-                        <div className="flex items-center justify-between p-2.5 rounded-lg bg-white border border-emerald-200 shadow-2xs">
-                          <div className="flex items-center gap-2">
-                            <Server className="w-4 h-4 text-emerald-600" />
-                            <span className="text-xs font-bold text-slate-900">Serverless Microservices</span>
-                          </div>
-                          <span className="text-[11px] font-mono text-emerald-700 font-bold">10,000 req/s</span>
-                        </div>
-
-                        {/* Connecting Pulse Line */}
-                        <div className="w-0.5 h-3 bg-gradient-to-b from-emerald-500 to-amber-500 mx-auto"></div>
-
-                        {/* Node 3 */}
-                        <div className="flex items-center justify-between p-2.5 rounded-lg bg-white border border-amber-200 shadow-2xs">
-                          <div className="flex items-center gap-2">
-                            <Cpu className="w-4 h-4 text-amber-600" />
-                            <span className="text-xs font-bold text-slate-900">Vector Neural Engine</span>
-                          </div>
-                          <span className="text-[11px] font-mono text-amber-700 font-bold">99.4% Acc</span>
-                        </div>
-                      </div>
-
-                      <div className="text-[11px] text-slate-500 text-center font-sans font-medium shrink-0 pt-1">
-                        Automated multi-region failover with zero downtime deployment
-                      </div>
-                    </div>
-                  )}
-
-                  {/* TAB 3: Real-Time Telemetry Monitor */}
-                  {activeTab === "telemetry" && (
-                    <div className="p-5 h-full flex flex-col justify-between">
-                      <div className="grid grid-cols-2 gap-3 my-auto">
-                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-                          <span className="text-[10.5px] text-slate-500 font-semibold block">SLA Availability</span>
-                          <span className="text-lg font-bold font-mono text-emerald-700">99.999%</span>
-                          <span className="text-[9.5px] text-slate-500 block mt-0.5">Enterprise Guaranteed</span>
-                        </div>
-
-                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-                          <span className="text-[10.5px] text-slate-500 font-semibold block">Cold Start Penalty</span>
-                          <span className="text-lg font-bold font-mono text-sky-700">0.00ms</span>
-                          <span className="text-[9.5px] text-slate-500 block mt-0.5">Pre-warmed Containers</span>
-                        </div>
-
-                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-                          <span className="text-[10.5px] text-slate-500 font-semibold block">Encryption Standard</span>
-                          <span className="text-lg font-bold font-mono text-amber-700">TLS 1.3</span>
-                          <span className="text-[9.5px] text-slate-500 block mt-0.5">Quantum-Resistant AES</span>
-                        </div>
-
-                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-                          <span className="text-[10.5px] text-slate-500 font-semibold block">Compute Threads</span>
-                          <span className="text-lg font-bold font-mono text-slate-900">Dynamic ∞</span>
-                          <span className="text-[9.5px] text-slate-500 block mt-0.5">Auto-Scaling Nodes</span>
-                        </div>
-                      </div>
-
-                      <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-300 flex items-center justify-between shrink-0 mt-2">
-                        <div className="flex items-center gap-2">
-                          <Activity className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
-                          <span className="text-xs font-bold text-slate-900">All 16 Cloud Clusters Operational</span>
-                        </div>
-                        <span className="text-[10.5px] font-mono text-emerald-700 font-bold">READY</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Console Bottom Action Bar */}
-                <div className="px-5 py-3.5 border-t border-slate-200 bg-slate-50/80 flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-sky-500 animate-ping"></span>
-                    <span className="text-slate-600 font-medium">Next Engineering Sprint:</span>
-                    <span className="text-sky-700 font-bold">Booking Open</span>
-                  </div>
-                  <Link
-                    href="/contact"
-                    className="flex items-center gap-1 text-sky-700 hover:text-sky-900 font-bold hover:underline"
-                  >
-                    <span>Reserve Slot</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-slate-200 shadow-xs text-[11px] font-mono text-[#0f7670] font-bold">
+                <Activity className="w-3.5 h-3.5" />
+                <span>ACTIVE DEPLOYMENTS: 50+</span>
               </div>
             </div>
+
+            {/* Interactive 4-Pillar Grid of High-Impact Solution Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 relative z-10">
+              {capabilities.map((cap, idx) => {
+                const Icon = cap.icon;
+                const isSelected = activeCard === idx;
+                return (
+                  <div
+                    key={cap.id}
+                    onClick={() => setActiveCard(idx)}
+                    className={`group relative p-5 rounded-2xl transition-all duration-300 cursor-pointer overflow-hidden backdrop-blur-xl ${
+                      isSelected
+                        ? "bg-white/95 border-2 border-[#0f7670] shadow-xl shadow-[#0f7670]/10 scale-[1.02]"
+                        : "bg-white/80 hover:bg-white/95 border border-slate-200/90 hover:border-[#0f7670]/40 shadow-sm hover:shadow-md"
+                    }`}
+                  >
+                    {/* Glowing corner flare for selected card */}
+                    {isSelected && (
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#0f7670]/15 to-transparent rounded-bl-full pointer-events-none" />
+                    )}
+
+                    {/* Top Row: Icon & Status Badge */}
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <div
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+                          isSelected
+                            ? "bg-gradient-to-tr from-[#0f7670] to-[#5c9556] text-white shadow-md shadow-[#0f7670]/30"
+                            : "bg-slate-100 group-hover:bg-[#0f7670]/10 text-[#0f7670]"
+                        }`}
+                      >
+                        <Icon className="w-5 h-5" />
+                      </div>
+
+                      <span
+                        className={`text-[9.5px] font-mono font-bold tracking-wider px-2 py-0.5 rounded-full border ${
+                          isSelected
+                            ? "bg-emerald-50 text-[#385d36] border-emerald-200"
+                            : "bg-slate-50 text-slate-600 border-slate-200"
+                        }`}
+                      >
+                        {cap.badge}
+                      </span>
+                    </div>
+
+                    {/* Title & Description */}
+                    <div className="space-y-1 mb-3">
+                      <h3 className="text-sm font-bold text-[#000838] group-hover:text-[#0f7670] transition-colors leading-snug flex items-center justify-between">
+                        <span>{cap.title}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#0f7670]" />
+                      </h3>
+                      <p className="text-[11.5px] text-slate-500 leading-relaxed line-clamp-2">
+                        {cap.subtitle}
+                      </p>
+                    </div>
+
+                    {/* Live Performance Stats & Tech Tags */}
+                    <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
+                      <div className="flex items-center gap-1.5 text-[10.5px] font-mono font-semibold text-[#0f7670]">
+                        <Sparkles className="w-3 h-3 text-[#5c9556]" />
+                        <span>{cap.stats}</span>
+                      </div>
+
+                      <div className="flex items-center gap-1 flex-wrap">
+                        {cap.techs.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-1.5 py-0.5 rounded bg-slate-100/90 text-slate-600 text-[9.5px] font-medium"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Bottom Floating Interactive Action Bar */}
+            <div className="mt-4 p-3.5 rounded-2xl bg-white/90 backdrop-blur-xl border border-slate-200 shadow-md flex items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[#5c9556] shrink-0">
+                  <CheckCircle2 className="w-4 h-4" />
+                </div>
+                <div className="truncate">
+                  <span className="font-bold text-slate-900 block truncate">
+                    Ready to build your solution?
+                  </span>
+                  <span className="text-[11px] text-slate-500 block truncate">
+                    14-Day Delivery Guarantee • Free Architecture Consultation
+                  </span>
+                </div>
+              </div>
+
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#000838] hover:bg-[#0f7670] text-white text-xs font-bold transition-all shadow-sm shrink-0"
+              >
+                <span>Discuss Project</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
           </div>
 
         </div>

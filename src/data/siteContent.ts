@@ -38,6 +38,8 @@ export interface SiteConfig {
   contactEmail: string;
   /** Existing clients and technical support. Shown by the chat widget. */
   supportEmail: string;
+  /** Job applicants and talent recruitment. */
+  careersEmail?: string;
   /** Responsible-disclosure address on the security page. */
   securityEmail: string;
   contactPhone: string;
@@ -72,15 +74,16 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
   heroCtaQuoteText: "Get a Free Quote",
   heroCtaConsultText: "Book a Free Consultation",
 
-  contactEmail: "contact@divanextechnologies.com",
-  supportEmail: "support@divanextechnologies.com",
+  contactEmail: "business@divanextechnologies.com",
+  supportEmail: "business@divanextechnologies.com",
+  careersEmail: "hr@divanextechnologies.com",
   securityEmail: "security@divanextechnologies.com",
-  contactPhone: "+91 98765 43210",
-  whatsappNumber: "+919876543210",
+  contactPhone: "+91-6375073511",
+  whatsappNumber: "+919571618625",
   whatsappGreeting:
     "Hello Divanex! I would like to inquire about your digital & tech solutions for my business.",
-  officeAddress: "Jaipur, Rajasthan, India",
-  businessHours: "24/7 Global Engineering Operations (Sub-15m SLA)",
+  officeAddress: "Office 104, Vaishali Tower 2nd, Nursery Circle, Vaishali Nagar Jaipur 302021",
+  businessHours: "Monday – Friday: 10:00 AM – 08:00 PM (Sat–Sun: Closed)",
 
   githubUrl: "https://github.com/ser-name123/divanex",
   linkedinUrl: "https://linkedin.com/company/divanex",

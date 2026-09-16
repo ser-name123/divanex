@@ -16,7 +16,10 @@
 # next.js
 /.next/
 /out/
-# custom distDir set in next.config.ts
+# custom distDir set in next.config.ts — the glob covers any NEXT_DIST_DIR
+# name, because a build output that slipped past this once carried Supabase
+# fetch-cache entries, complete with project ref and response cookies.
+/.next-*/
 /.build/
 
 # production

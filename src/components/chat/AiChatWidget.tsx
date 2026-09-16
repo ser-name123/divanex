@@ -453,10 +453,10 @@ export default function AiChatWidget() {
 
           <div className="relative flex flex-col text-left pr-1">
             <div className="flex items-center gap-1.5">
-              <span className="text-[11px] font-bold tracking-wider uppercase text-sky-700">VANI AI LIVE</span>
+              <span className="text-[11px] font-bold tracking-wider uppercase text-sky-700">DT AI LIVE</span>
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
             </div>
-            <span className="text-xs font-extrabold tracking-tight text-slate-900">Chat with Vani AI</span>
+            <span className="text-xs font-extrabold tracking-tight text-slate-900">Chat with DT AI</span>
           </div>
 
           {unreadCount > 0 && (
@@ -485,7 +485,7 @@ export default function AiChatWidget() {
             </div>
             <div className="flex flex-col text-left">
               <div className="flex items-center gap-1.5">
-                <span className="text-xs font-extrabold text-slate-900">Vani AI</span>
+                <span className="text-xs font-extrabold text-slate-900">DT AI</span>
                 <span className="px-1.5 py-0.2 text-[9px] font-mono font-bold rounded-md bg-sky-50 text-sky-800 border border-sky-200">
                   {activeSession?.status === "admin_active" ? "Admin Live" : "Active"}
                 </span>
@@ -576,7 +576,7 @@ export default function AiChatWidget() {
 
               <div className="flex flex-col">
                 <div className="flex items-center gap-1.5">
-                  <span className="font-extrabold text-sm text-slate-900 tracking-tight">Vani AI</span>
+                  <span className="font-extrabold text-sm text-slate-900 tracking-tight">DT AI</span>
                   <span
                     className={`px-2 py-0.5 text-[10px] font-mono font-bold rounded-md border ${
                       activeSession?.status === "admin_active"
@@ -584,7 +584,7 @@ export default function AiChatWidget() {
                         : "bg-sky-100 text-sky-800 border-sky-200"
                     }`}
                   >
-                    {activeSession?.status === "admin_active" ? "Admin Live" : "Vani Core"}
+                    {activeSession?.status === "admin_active" ? "Admin Live" : "DT Core"}
                   </span>
                 </div>
                 <span className="text-[11px] font-medium flex items-center gap-1">
@@ -595,7 +595,7 @@ export default function AiChatWidget() {
                   ) : (
                     <span className="text-emerald-700 font-semibold flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                      Vani AI Active (Sub-1s)
+                      DT AI Active (Sub-1s)
                     </span>
                   )}
                 </span>
@@ -1048,7 +1048,7 @@ export default function AiChatWidget() {
                         placeholder={
                           activeSession?.status === "admin_active"
                             ? "Type live message to Senior Admin..."
-                            : "Ask Vani AI about websites, apps, ERP, AI agents, pricing..."
+                            : "Ask DT AI about websites, apps, ERP, AI agents, pricing..."
                         }
                         value={inputText}
                         onChange={(e) => setInputText(e.target.value)}

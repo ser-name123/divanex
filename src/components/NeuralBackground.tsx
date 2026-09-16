@@ -224,7 +224,7 @@ export default function NeuralBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-60 transition-opacity duration-1000"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-85 transition-opacity duration-1000"
       aria-hidden="true"
     />
   );

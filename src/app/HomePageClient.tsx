@@ -1,6 +1,5 @@
 "use client";
 
-
 import Navbar from "@/components/Navbar";
 import type { TestimonialItem } from "@/data/testimonials";
 import type { PortfolioProject } from "@/data/portfolio";
@@ -8,6 +7,7 @@ import type { TechItem } from "@/data/techStack";
 import type { ServiceItem } from "@/data/services";
 import type { BlogPost } from "@/data/blogData";
 import HeroSection from "@/components/HeroSection";
+import GlobalRatingsStrip from "@/components/GlobalRatingsStrip";
 import PartnerTicker from "@/components/PartnerTicker";
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
@@ -16,6 +16,7 @@ import TechStackGrid from "@/components/TechStackGrid";
 import PortfolioSection from "@/components/PortfolioSection";
 import StatsSection from "@/components/StatsSection";
 import Testimonials from "@/components/Testimonials";
+import GlobalOfficesSection from "@/components/GlobalOfficesSection";
 import HomeBlogSection from "@/components/HomeBlogSection";
 import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
@@ -37,8 +38,6 @@ export default function HomePageClient({
   services?: ServiceItem[];
   posts?: BlogPost[];
 }) {
-
-
   return (
     <div className="relative min-h-screen bg-[#f7f9f9] text-slate-900 selection:bg-sky-500 selection:text-white overflow-x-hidden">
       {/* Interactive AI Neural Synaptic Constellation Animation */}
@@ -57,16 +56,17 @@ export default function HomePageClient({
         {/* Section 1: Hero Section */}
         <HeroSection />
 
-        {/* Section 2: Partner & Ecosystem Marquee */}
+        {/* Section 2: Verified Multi-Platform Ratings (Google, Clutch, Upwork, Freelancer, Fiverr) */}
+        <GlobalRatingsStrip />
+
+        {/* Section 3: Partner & Ecosystem Marquee */}
         <PartnerTicker />
 
-        {/* Section 3: Core Services Grid */}
+        {/* Section 4: Core Services Grid */}
         <ServicesSection isHome={true} items={services} />
 
-        {/* Section 4: Why Choose Divanex */}
+        {/* Section 5: Why Choose Divanex */}
         <WhyChooseUs />
-
-        {/* Section 5: Interactive Cost & Scope Estimator */}
 
         {/* Section 6: How We Work (5-Step Process Flow) */}
         <ProcessFlow />
@@ -83,17 +83,20 @@ export default function HomePageClient({
         {/* Section 10: Client Testimonials & Reviews */}
         <Testimonials isHome={true} items={testimonials} />
 
-        {/* Section 11: Engineering Blog & Technical Insights */}
+        {/* Section 11: Global Offices & Regional Hubs (India, Hong Kong, Dubai, Canada) */}
+        <GlobalOfficesSection />
+
+        {/* Section 12: Engineering Blog & Technical Insights */}
         <HomeBlogSection posts={posts} />
 
-        {/* Section 12: Interactive FAQ Section */}
+        {/* Section 13: Interactive FAQ Section */}
         <FAQSection />
 
-        {/* Section 13: Contact & Lead Capture Form */}
+        {/* Section 14: Contact & Lead Capture Form */}
         <ContactSection />
       </main>
 
-      {/* Section 13: Footer */}
+      {/* Section 15: Footer */}
       <Footer />
     </div>
   );

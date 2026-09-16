@@ -142,9 +142,9 @@ export default function ContactSection() {
               </a>
             </div>
 
-            {/* Direct Channels Grid (Click to Reveal) */}
+            {/* Direct Channels Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Email Card */}
+              {/* Business Inquiries Email Card */}
               <div className="rounded-2xl p-5 border border-slate-200 bg-slate-50 space-y-2.5 shadow-2xs">
                 <div className="flex items-center justify-between">
                   <div className="w-10 h-10 rounded-xl bg-sky-100 border border-sky-200 flex items-center justify-center text-sky-700">
@@ -160,11 +160,11 @@ export default function ContactSection() {
                     </button>
                   )}
                 </div>
-                <div className="text-xs text-slate-500 font-semibold">Direct Email</div>
+                <div className="text-xs text-slate-500 font-semibold">Business Inquiries</div>
                 {emailRevealed ? (
                   <a
                     href={mailtoHref(CONTACT_EMAIL)}
-                    className="text-sm font-bold text-slate-900 hover:text-sky-700 block truncate"
+                    className="text-xs sm:text-sm font-bold text-slate-900 hover:text-sky-700 block truncate"
                   >
                     {CONTACT_EMAIL}
                   </a>
@@ -178,6 +178,28 @@ export default function ContactSection() {
                     <span className="text-[10px] bg-sky-50 text-sky-700 px-1.5 py-0.5 rounded">Reveal</span>
                   </button>
                 )}
+              </div>
+
+              {/* Careers / Job Applications Card */}
+              <div className="rounded-2xl p-5 border border-purple-200/80 bg-purple-50/40 space-y-2.5 shadow-2xs">
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 rounded-xl bg-purple-100 border border-purple-200 flex items-center justify-center text-purple-700">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <a
+                    href={`mailto:${siteConfig.careersEmail || "hr@divanextechnologies.com"}?subject=Job Application - [Your Role]`}
+                    className="text-[11px] font-mono font-bold text-purple-700 bg-white border border-purple-200 px-2 py-1 rounded-md hover:bg-purple-100 transition-all"
+                  >
+                    Apply Now
+                  </a>
+                </div>
+                <div className="text-xs text-purple-900 font-semibold">Job Applications / Careers</div>
+                <a
+                  href={`mailto:${siteConfig.careersEmail || "hr@divanextechnologies.com"}?subject=Job Application - [Your Role]`}
+                  className="text-xs sm:text-sm font-bold text-purple-950 hover:text-purple-700 block truncate"
+                >
+                  {siteConfig.careersEmail || "hr@divanextechnologies.com"}
+                </a>
               </div>
 
               {/* Phone Card */}
@@ -199,7 +221,7 @@ export default function ContactSection() {
                 {phoneRevealed ? (
                   <a
                     href={telHref(CONTACT_PHONE)}
-                    className="text-sm font-bold text-slate-900 hover:text-cyan-700 block truncate"
+                    className="text-xs sm:text-sm font-bold text-slate-900 hover:text-cyan-700 block truncate"
                   >
                     {CONTACT_PHONE}
                   </a>
@@ -214,16 +236,36 @@ export default function ContactSection() {
                   </button>
                 )}
               </div>
+
+              {/* Direct WhatsApp Pill Card */}
+              <div className="rounded-2xl p-5 border border-emerald-200 bg-emerald-50/40 space-y-2.5 shadow-2xs">
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-700">
+                    <MessageCircle className="w-5 h-5" />
+                  </div>
+                  <a
+                    href={whatsappDirectUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] font-mono font-bold text-emerald-700 bg-white border border-emerald-200 px-2 py-1 rounded-md hover:bg-emerald-100 transition-all"
+                  >
+                    Open WA
+                  </a>
+                </div>
+                <div className="text-xs text-emerald-900 font-semibold">WhatsApp Chat Number</div>
+                <a
+                  href={whatsappDirectUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs sm:text-sm font-bold text-emerald-950 hover:text-emerald-700 block truncate"
+                >
+                  +91 9571618625
+                </a>
+              </div>
             </div>
 
             {/* Location & Response Commitment */}
             <div className="rounded-2xl p-5 border border-slate-200 bg-slate-50 space-y-3 shadow-2xs">
-              {/*
-                The office address and hours are admin fields that nothing
-                rendered: this block showed a fixed "Global Engineering Hub"
-                line instead, so editing the address in the console changed
-                nothing a visitor could see.
-              */}
               <div className="flex items-center gap-3">
                 <MapPin className="w-5 h-5 text-amber-600 shrink-0" />
                 <div className="text-xs sm:text-sm text-slate-700">
