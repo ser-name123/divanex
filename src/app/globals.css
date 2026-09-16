@@ -1,0 +1,1386 @@
+/*
+ * Tailwind scans the application source, and only that.
+ *
+ * Left to detect sources itself it walks the whole project directory, which
+ * means a build output folder is scanned as if it were source — slower, and a
+ * hard failure if any directory in there is not readable.
+ */
+@import "tailwindcss" source(none);
+@source "../";
+
+/* ========================================================================== */
+/* DIVANEX TECHNOLOGIES — BRAND COLOR SYSTEM                                  */
+/* --------------------------------------------------------------------------*/
+/* Sourced directly from the logo artwork:                                    */
+/*   Navy  #000838  — the DIVANEX wordmark and the bracket mark               */
+/*   Teal  #0f7670  — the cool end of the mark's gradient                     */
+/*   Green #5c9556  — the warm end of the mark's gradient / the arrow         */
+/*   Gray  #858585  — the TECHNOLOGIES sub-wordmark                           */
+/*                                                                            */
+/* The whole UI is built from ramps interpolated off those four values. The   */
+/* @theme block below REDEFINES Tailwind's stock palettes so that every       */
+/* existing utility in the codebase (bg-sky-600, text-emerald-400, from-      */
+/* amber-500, …) resolves to a brand color — one definition, site-wide reach. */
+/*   sky / cyan / teal  -> brand teal                                         */
+/*   blue / indigo / purple / violet / fuchsia / pink -> brand navy           */
+/*   emerald / green / lime / amber / orange / yellow -> brand green          */
+/*   slate / gray / zinc -> brand neutral (logo gray)                         */
+/* red / rose stay red: they carry destructive & error meaning, not brand.    */
+/* ========================================================================== */
+
+:root {
+  /* Raw brand constants */
+  --brand-navy: #000838;
+  --brand-teal: #0f7670;
+  --brand-green: #5c9556;
+  --brand-gray: #858585;
+
+  /* Semantic surface tokens */
+  --background: #f7f9f9;
+  --foreground: #0a1130;
+  --card-bg: #ffffff;
+  --border-glow: rgba(15, 118, 112, 0.2);
+
+  /* The logo's own gradient, reusable anywhere */
+  --brand-gradient: linear-gradient(135deg, #0f7670 0%, #2f8767 45%, #5c9556 100%);
+  --brand-gradient-deep: linear-gradient(135deg, #000838 0%, #0f5f5b 55%, #5c9556 100%);
+}
+
+@theme {
+  /* ---- Named brand tokens (bg-divanex-navy, text-divanex-green, …) ------ */
+  --color-divanex-navy: #000838;
+  --color-divanex-navy-soft: #0e1a4a;
+  --color-divanex-teal: #0f7670;
+  --color-divanex-teal-soft: #189a91;
+  --color-divanex-green: #5c9556;
+  --color-divanex-green-soft: #6fae69;
+  --color-divanex-gray: #858585;
+  --color-divanex-surface: #f7f9f9;
+  --color-divanex-ink: #0a1130;
+
+  /* ---- NAVY ramp — maps blue / indigo / purple / violet / fuchsia / pink - */
+  --color-blue-50: #f2f5fb;
+  --color-blue-100: #e2e8f5;
+  --color-blue-200: #c3cde8;
+  --color-blue-300: #94a6d2;
+  --color-blue-400: #5e77b4;
+  --color-blue-500: #3a5296;
+  --color-blue-600: #26397a;
+  --color-blue-700: #1a2a60;
+  --color-blue-800: #0e1a4a;
+  --color-blue-900: #060f3d;
+  --color-blue-950: #000838;
+
+  --color-indigo-50: #f2f5fb;
+  --color-indigo-100: #e0e7f4;
+  --color-indigo-200: #bfcce5;
+  --color-indigo-300: #8ea3cd;
+  --color-indigo-400: #5771ad;
+  --color-indigo-500: #344c8e;
+  --color-indigo-600: #213473;
+  --color-indigo-700: #16265b;
+  --color-indigo-800: #0c1746;
+  --color-indigo-900: #050d39;
+  --color-indigo-950: #000630;
+
+  --color-purple-50: #f3f5fb;
+  --color-purple-100: #e4e8f5;
+  --color-purple-200: #c7cfe9;
+  --color-purple-300: #9aa9d4;
+  --color-purple-400: #667ab7;
+  --color-purple-500: #43569a;
+  --color-purple-600: #2e3e7e;
+  --color-purple-700: #202f64;
+  --color-purple-800: #131f4d;
+  --color-purple-900: #09133f;
+  --color-purple-950: #020a35;
+
+  --color-violet-50: #f3f5fb;
+  --color-violet-100: #e4e8f5;
+  --color-violet-200: #c7cfe9;
+  --color-violet-300: #9aa9d4;
+  --color-violet-400: #667ab7;
+  --color-violet-500: #43569a;
+  --color-violet-600: #2e3e7e;
+  --color-violet-700: #202f64;
+  --color-violet-800: #131f4d;
+  --color-violet-900: #09133f;
+  --color-violet-950: #020a35;
+
+  --color-fuchsia-50: #f3f5fb;
+  --color-fuchsia-100: #e4e8f5;
+  --color-fuchsia-200: #c7cfe9;
+  --color-fuchsia-300: #9aa9d4;
+  --color-fuchsia-400: #667ab7;
+  --color-fuchsia-500: #43569a;
+  --color-fuchsia-600: #2e3e7e;
+  --color-fuchsia-700: #202f64;
+  --color-fuchsia-800: #131f4d;
+  --color-fuchsia-900: #09133f;
+  --color-fuchsia-950: #020a35;
+
+  --color-pink-50: #f3f5fb;
+  --color-pink-100: #e4e8f5;
+  --color-pink-200: #c7cfe9;
+  --color-pink-300: #9aa9d4;
+  --color-pink-400: #667ab7;
+  --color-pink-500: #43569a;
+  --color-pink-600: #2e3e7e;
+  --color-pink-700: #202f64;
+  --color-pink-800: #131f4d;
+  --color-pink-900: #09133f;
+  --color-pink-950: #020a35;
+
+  /* ---- TEAL ramp — maps sky / cyan / teal ------------------------------- */
+  --color-sky-50: #eefaf8;
+  --color-sky-100: #cef3ee;
+  --color-sky-200: #9ee6de;
+  --color-sky-300: #66d2c8;
+  --color-sky-400: #35b5ac;
+  --color-sky-500: #189a91;
+  --color-sky-600: #0f7670;
+  --color-sky-700: #0f5f5b;
+  --color-sky-800: #114c49;
+  --color-sky-900: #123f3d;
+  --color-sky-950: #042726;
+
+  --color-cyan-50: #eefaf8;
+  --color-cyan-100: #cef3ee;
+  --color-cyan-200: #9ee6de;
+  --color-cyan-300: #66d2c8;
+  --color-cyan-400: #35b5ac;
+  --color-cyan-500: #189a91;
+  --color-cyan-600: #0f7670;
+  --color-cyan-700: #0f5f5b;
+  --color-cyan-800: #114c49;
+  --color-cyan-900: #123f3d;
+  --color-cyan-950: #042726;
+
+  --color-teal-50: #eefaf8;
+  --color-teal-100: #cef3ee;
+  --color-teal-200: #9ee6de;
+  --color-teal-300: #66d2c8;
+  --color-teal-400: #35b5ac;
+  --color-teal-500: #189a91;
+  --color-teal-600: #0f7670;
+  --color-teal-700: #0f5f5b;
+  --color-teal-800: #114c49;
+  --color-teal-900: #123f3d;
+  --color-teal-950: #042726;
+
+  /* ---- GREEN ramp — maps emerald / green / lime / amber / orange / yellow  */
+  --color-emerald-50: #f3f8f2;
+  --color-emerald-100: #e2f0e0;
+  --color-emerald-200: #c6e1c3;
+  --color-emerald-300: #9bcb96;
+  --color-emerald-400: #6fae69;
+  --color-emerald-500: #5c9556;
+  --color-emerald-600: #447541;
+  --color-emerald-700: #385d36;
+  --color-emerald-800: #2f4b2e;
+  --color-emerald-900: #283e28;
+  --color-emerald-950: #122212;
+
+  --color-green-50: #f3f8f2;
+  --color-green-100: #e2f0e0;
+  --color-green-200: #c6e1c3;
+  --color-green-300: #9bcb96;
+  --color-green-400: #6fae69;
+  --color-green-500: #5c9556;
+  --color-green-600: #447541;
+  --color-green-700: #385d36;
+  --color-green-800: #2f4b2e;
+  --color-green-900: #283e28;
+  --color-green-950: #122212;
+
+  --color-lime-50: #f3f8f2;
+  --color-lime-100: #e2f0e0;
+  --color-lime-200: #c6e1c3;
+  --color-lime-300: #9bcb96;
+  --color-lime-400: #6fae69;
+  --color-lime-500: #5c9556;
+  --color-lime-600: #447541;
+  --color-lime-700: #385d36;
+  --color-lime-800: #2f4b2e;
+  --color-lime-900: #283e28;
+  --color-lime-950: #122212;
+
+  /* amber / orange / yellow were the old warm accent — folded into the      */
+  /* logo's green so nothing off-brand survives anywhere in the UI.          */
+  --color-amber-50: #f4f8f1;
+  --color-amber-100: #e6f0df;
+  --color-amber-200: #cee2c2;
+  --color-amber-300: #a8cc97;
+  --color-amber-400: #7db26c;
+  --color-amber-500: #5c9556;
+  --color-amber-600: #4a7c43;
+  --color-amber-700: #3b6337;
+  --color-amber-800: #314f2e;
+  --color-amber-900: #2a4128;
+  --color-amber-950: #142413;
+
+  --color-orange-50: #f4f8f1;
+  --color-orange-100: #e6f0df;
+  --color-orange-200: #cee2c2;
+  --color-orange-300: #a8cc97;
+  --color-orange-400: #7db26c;
+  --color-orange-500: #5c9556;
+  --color-orange-600: #4a7c43;
+  --color-orange-700: #3b6337;
+  --color-orange-800: #314f2e;
+  --color-orange-900: #2a4128;
+  --color-orange-950: #142413;
+
+  --color-yellow-50: #f4f8f1;
+  --color-yellow-100: #e6f0df;
+  --color-yellow-200: #cee2c2;
+  --color-yellow-300: #a8cc97;
+  --color-yellow-400: #7db26c;
+  --color-yellow-500: #5c9556;
+  --color-yellow-600: #4a7c43;
+  --color-yellow-700: #3b6337;
+  --color-yellow-800: #314f2e;
+  --color-yellow-900: #2a4128;
+  --color-yellow-950: #142413;
+
+  /* ---- NEUTRAL ramp — maps slate / gray / zinc, keyed to the logo gray --- */
+  --color-slate-50: #f7f8f9;
+  --color-slate-100: #eef0f2;
+  --color-slate-200: #dfe2e6;
+  --color-slate-300: #c8ccd2;
+  --color-slate-400: #a3a8b1;
+  --color-slate-500: #858a93;
+  --color-slate-600: #666c77;
+  --color-slate-700: #4e535d;
+  --color-slate-800: #2a3043;
+  --color-slate-900: #141b33;
+  --color-slate-950: #0a1130;
+
+  --color-gray-50: #f7f8f9;
+  --color-gray-100: #eef0f2;
+  --color-gray-200: #dfe2e6;
+  --color-gray-300: #c8ccd2;
+  --color-gray-400: #a3a8b1;
+  --color-gray-500: #858585;
+  --color-gray-600: #666c77;
+  --color-gray-700: #4e535d;
+  --color-gray-800: #2a3043;
+  --color-gray-900: #141b33;
+  --color-gray-950: #0a1130;
+
+  --color-zinc-50: #f7f8f9;
+  --color-zinc-100: #eef0f2;
+  --color-zinc-200: #dfe2e6;
+  --color-zinc-300: #c8ccd2;
+  --color-zinc-400: #a3a8b1;
+  --color-zinc-500: #858585;
+  --color-zinc-600: #666c77;
+  --color-zinc-700: #4e535d;
+  --color-zinc-800: #2a3043;
+  --color-zinc-900: #141b33;
+  --color-zinc-950: #0a1130;
+}
+
+html {
+  background-color: #f7f9f9;
+  color: #0a1130;
+  scroll-behavior: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(15, 118, 112, 0.5) #eef0f2;
+}
+
+body {
+  background: #f7f9f9;
+  color: #0a1130;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ======================================================== */
+/* BRAND SCROLLBAR                                          */
+/* ======================================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eef0f2;
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(15, 118, 112, 0.55) 0%, rgba(47, 135, 103, 0.55) 50%, rgba(92, 149, 86, 0.55) 100%);
+  border-radius: 9999px;
+  border: 2px solid #eef0f2;
+  background-clip: padding-box;
+  transition: all 0.2s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #0f7670 0%, #2f8767 50%, #5c9556 100%);
+  border: 2px solid #f7f9f9;
+  box-shadow: 0 0 10px rgba(15, 118, 112, 0.4);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #0f5f5b 0%, #276f53 50%, #447541 100%);
+}
+
+::-webkit-scrollbar-corner {
+  background: #eef0f2;
+}
+
+/* Typography Base - Enforce weight 600 maximum for all headings across entire website */
+h1, h2, h3, h4, h5, h6,
+h1 *, h2 *, h3 *, h4 *, h5 *, h6 *,
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6,
+.hero-title, .section-title, .page-title,
+[class*="text-lg"][class*="font-bold"],
+[class*="text-xl"][class*="font-bold"],
+[class*="text-2xl"][class*="font-bold"],
+[class*="text-3xl"][class*="font-bold"],
+[class*="text-4xl"][class*="font-bold"],
+[class*="text-5xl"][class*="font-bold"],
+[class*="text-6xl"][class*="font-bold"],
+[class*="text-lg"][class*="font-extrabold"],
+[class*="text-xl"][class*="font-extrabold"],
+[class*="text-2xl"][class*="font-extrabold"],
+[class*="text-3xl"][class*="font-extrabold"],
+[class*="text-4xl"][class*="font-extrabold"],
+[class*="text-5xl"][class*="font-extrabold"],
+[class*="text-6xl"][class*="font-extrabold"],
+[class*="text-lg"][class*="font-black"],
+[class*="text-xl"][class*="font-black"],
+[class*="text-2xl"][class*="font-black"],
+[class*="text-3xl"][class*="font-black"],
+[class*="text-4xl"][class*="font-black"],
+[class*="text-5xl"][class*="font-black"],
+[class*="text-6xl"][class*="font-black"] {
+  font-weight: 600 !important;
+}
+
+@layer base {
+  h1 {
+    font-size: clamp(1.75rem, 3vw, 2.375rem);
+    font-weight: 600 !important;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #0a1130;
+  }
+
+  h2 {
+    font-size: clamp(1.35rem, 2.4vw, 1.875rem);
+    font-weight: 600 !important;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: #0a1130;
+  }
+
+  h3 {
+    font-size: clamp(1.125rem, 1.8vw, 1.375rem);
+    font-weight: 600 !important;
+    line-height: 1.3;
+    color: #0a1130;
+  }
+
+  h4, h5, h6 {
+    font-weight: 600 !important;
+    color: #0a1130;
+  }
+}
+
+/* Glassmorphism & Custom Gradient Utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(223, 226, 230, 0.9);
+  box-shadow: 0 4px 20px -2px rgba(10, 17, 48, 0.05);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-hover:hover {
+  background: #ffffff !important;
+  border-color: rgba(15, 118, 112, 0.5) !important;
+  box-shadow: 0 14px 36px -8px rgba(15, 118, 112, 0.14), 0 4px 12px -2px rgba(10, 17, 48, 0.06) !important;
+  transform: translateY(-3px);
+}
+
+/* The logo gradient, as text */
+.gradient-text {
+  background: linear-gradient(135deg, #000838 0%, #0f5f5b 40%, #0f7670 65%, #5c9556 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Secondary accent wash — the warm (green) end of the mark */
+.gradient-text-orange {
+  background: linear-gradient(135deg, #0f7670 0%, #43885d 50%, #5c9556 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-brand {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-border {
+  position: relative;
+  background: linear-gradient(90deg, #000838, #0f7670, #5c9556);
+  padding: 1px;
+  border-radius: 1rem;
+}
+
+.gradient-border-inner {
+  background: #ffffff;
+  border-radius: calc(1rem - 1px);
+}
+
+/* Ambient glow */
+.glow-orb-blue {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(0, 8, 56, 0.1) 0%, rgba(0, 8, 56, 0) 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.glow-orb-cyan {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(15, 118, 112, 0.12) 0%, rgba(15, 118, 112, 0) 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.glow-orb-orange {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(92, 149, 86, 0.12) 0%, rgba(92, 149, 86, 0) 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.glow-orb-green {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(92, 149, 86, 0.12) 0%, rgba(92, 149, 86, 0) 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+/* Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes softPulse {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.015); }
+}
+
+.animate-soft-pulse {
+  animation: softPulse 4s ease-in-out infinite;
+}
+
+/* Light Background Grid */
+.bg-cyber-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(133, 138, 147, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(133, 138, 147, 0.12) 1px, transparent 1px);
+}
+
+.bg-cyber-grid-dense {
+  background-size: 24px 24px;
+  background-image:
+    linear-gradient(to right, rgba(15, 118, 112, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 118, 112, 0.08) 1px, transparent 1px);
+}
+
+.bg-radial-cone {
+  background: radial-gradient(circle at 50% 0%, rgba(15, 118, 112, 0.1) 0%, rgba(92, 149, 86, 0.04) 45%, transparent 70%);
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+/* Light Holographic Cards */
+.hologram-card {
+  position: relative;
+  background: #ffffff;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(223, 226, 230, 0.9);
+  box-shadow: 0 4px 20px -2px rgba(10, 17, 48, 0.05);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hologram-card:hover {
+  background: #ffffff !important;
+  border-color: rgba(15, 118, 112, 0.5) !important;
+  box-shadow: 0 16px 36px -8px rgba(15, 118, 112, 0.14), 0 4px 12px -2px rgba(92, 149, 86, 0.08) !important;
+  transform: translateY(-3px);
+}
+
+/* ======================================================== */
+/* BALANCED SECTION SPACING SYSTEM - HALVED GAPS GLOBALLY   */
+/* ======================================================== */
+
+section,
+main > section,
+main > div > section,
+[data-section] {
+  box-sizing: border-box;
+}
+
+/* Force halved padding on any section with vertical padding classes */
+section[class*="py-"],
+section[class*="pt-"],
+section[class*="pb-"],
+.section-py,
+.section-container {
+  padding-top: 1.75rem !important;
+  padding-bottom: 1.75rem !important;
+}
+
+/* Clear navbar spacing on first section / hero */
+main > section:first-child,
+section.hero-section,
+.hero-pt {
+  padding-top: 5.5rem !important;
+  padding-bottom: 2rem !important;
+}
+
+@media (min-width: 1024px) {
+  section[class*="py-"],
+  section[class*="pt-"],
+  section[class*="pb-"],
+  .section-py,
+  .section-container {
+    padding-top: 2.25rem !important;
+    padding-bottom: 2.25rem !important;
+  }
+
+  main > section:first-child,
+  section.hero-section,
+  .hero-pt {
+    padding-top: 6.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+}
+
+/* Tightly balance content top margins inside sections */
+section .mt-16,
+main section .mt-16,
+section .mt-20,
+main section .mt-20,
+section .mt-14,
+main section .mt-14 {
+  margin-top: 2rem !important;
+}
+
+@media (min-width: 1024px) {
+  section .mt-16,
+  main section .mt-16,
+  section .mt-20,
+  main section .mt-20,
+  section .mt-14,
+  main section .mt-14 {
+    margin-top: 2.25rem !important;
+  }
+}
+
+section .space-y-16 > :not([hidden]) ~ :not([hidden]),
+main section .space-y-16 > :not([hidden]) ~ :not([hidden]),
+section .space-y-14 > :not([hidden]) ~ :not([hidden]),
+main section .space-y-14 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 2rem !important;
+}
+
+/* ======================================================== */
+/* DIVANEX BUTTON DESIGN SYSTEM                             */
+/* ======================================================== */
+
+.btn-futuristic-primary,
+.btn-nav-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #0f7670 0%, #2f8767 55%, #5c9556 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 4px 18px rgba(15, 118, 112, 0.32), 0 2px 6px rgba(10, 17, 48, 0.06) !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.btn-futuristic-primary *,
+.btn-nav-primary * {
+  color: #ffffff !important;
+}
+
+.btn-futuristic-primary svg,
+.btn-nav-primary svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.btn-futuristic-primary::before,
+.btn-nav-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-20deg);
+  transition: transform 0.75s ease;
+}
+
+.btn-futuristic-primary:hover,
+.btn-nav-primary:hover {
+  background: linear-gradient(135deg, #0f5f5b 0%, #276f53 55%, #447541 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 24px rgba(15, 118, 112, 0.45) !important;
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn-futuristic-primary:hover *,
+.btn-nav-primary:hover * {
+  color: #ffffff !important;
+}
+
+.btn-futuristic-primary:hover::before,
+.btn-nav-primary:hover::before {
+  transform: translateX(400%) skewX(-20deg);
+}
+
+/* Deep navy variant — the wordmark colour, for high-authority CTAs */
+.btn-futuristic-navy {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #000838 0%, #0e1a4a 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 18px rgba(0, 8, 56, 0.3) !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.btn-futuristic-navy:hover {
+  background: linear-gradient(135deg, #0f5f5b 0%, #000838 100%) !important;
+  box-shadow: 0 6px 24px rgba(0, 8, 56, 0.42) !important;
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn-futuristic-navy *,
+.btn-futuristic-navy svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.btn-futuristic-glass {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  color: #0a1130 !important;
+  background: #ffffff;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(200, 204, 210, 0.9);
+  box-shadow: 0 2px 8px rgba(10, 17, 48, 0.04);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.btn-futuristic-glass:hover {
+  background: #f7f9f9 !important;
+  color: #0f7670 !important;
+  border-color: rgba(15, 118, 112, 0.5) !important;
+  box-shadow: 0 6px 20px rgba(15, 118, 112, 0.12) !important;
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Formerly the amber button — now the soft green brand tint */
+.btn-futuristic-amber {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  color: #2f4b2e !important;
+  background: linear-gradient(135deg, rgba(226, 240, 224, 0.9) 0%, #ffffff 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(92, 149, 86, 0.4);
+  box-shadow: 0 2px 8px rgba(92, 149, 86, 0.12);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.btn-futuristic-amber:hover {
+  color: #283e28 !important;
+  background: linear-gradient(135deg, #e2f0e0 0%, #c6e1c3 100%) !important;
+  border-color: rgba(68, 117, 65, 0.7) !important;
+  box-shadow: 0 6px 20px rgba(92, 149, 86, 0.22) !important;
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn-nav-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.15rem;
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #0f7670 0%, #2f8767 55%, #5c9556 100%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 2px 10px rgba(15, 118, 112, 0.28);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-nav-primary * {
+  color: #ffffff !important;
+}
+
+.btn-nav-primary svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.btn-nav-primary:hover {
+  box-shadow: 0 4px 18px rgba(15, 118, 112, 0.45);
+  transform: translateY(-1px) scale(1.03);
+  color: #ffffff !important;
+}
+
+.btn-nav-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.15rem;
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  color: #0a1130 !important;
+  background: #ffffff;
+  border: 1px solid rgba(200, 204, 210, 0.8);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-nav-glass:hover {
+  border-color: rgba(15, 118, 112, 0.6) !important;
+  background: #f7f9f9 !important;
+  color: #0f7670 !important;
+  box-shadow: 0 2px 10px rgba(15, 118, 112, 0.14);
+  transform: translateY(-1px);
+}
+
+
+/* Animations */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(0.5deg); }
+}
+
+.animate-float-slow {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+@keyframes floatDelayed {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(6px) rotate(-0.5deg); }
+}
+
+.animate-float-delayed {
+  animation: floatDelayed 6s ease-in-out infinite;
+}
+
+.reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.reveal-delay-1 { transition-delay: 100ms; }
+.reveal-delay-2 { transition-delay: 200ms; }
+.reveal-delay-3 { transition-delay: 300ms; }
+.reveal-delay-4 { transition-delay: 400ms; }
+.reveal-delay-5 { transition-delay: 500ms; }
+
+/* ======================================================== */
+/* LIGHT THEME SYSTEM & HOVER GUARDS                        */
+/* ======================================================== */
+
+/* Universal light background overrides (legacy dark hex literals) */
+.bg-\[\#070c18\],
+.bg-\[\#091122\],
+.bg-\[\#091124\],
+.bg-\[\#091226\],
+.bg-\[\#0b1329\],
+.bg-\[\#040711\],
+.bg-\[\#030712\],
+.bg-slate-950,
+.bg-slate-950\/60,
+.bg-slate-950\/70,
+.bg-slate-950\/80,
+.bg-slate-950\/90 {
+  background-color: transparent !important;
+}
+
+/* Section cards & containers */
+.bg-slate-900\/95,
+.bg-slate-900\/90,
+.bg-slate-900\/80,
+.bg-slate-900\/70,
+.bg-slate-900\/60,
+.bg-slate-900\/50,
+.bg-slate-900\/40,
+.bg-slate-900,
+.bg-slate-900\/20,
+.bg-slate-900\/30 {
+  background-color: #ffffff !important;
+  border-color: rgba(223, 226, 230, 0.9) !important;
+  color: #2a3043 !important;
+  box-shadow: 0 4px 20px -2px rgba(10, 17, 48, 0.05) !important;
+}
+
+.bg-slate-800\/90,
+.bg-slate-800\/80,
+.bg-slate-800\/70,
+.bg-slate-800\/60,
+.bg-slate-800\/50,
+.bg-slate-800\/40,
+.bg-slate-800 {
+  background-color: #f7f9f9 !important;
+  border-color: #dfe2e6 !important;
+  color: #2a3043 !important;
+}
+
+/* Text Colors - high contrast */
+.text-white {
+  color: #ffffff !important;
+}
+
+.text-slate-100,
+.text-slate-200 {
+  color: #2a3043 !important;
+}
+
+.text-slate-300 {
+  color: #4e535d !important;
+}
+
+.text-slate-400 {
+  color: #666c77 !important;
+}
+
+.text-slate-500 {
+  color: #858585 !important;
+}
+
+/* Protect vibrant gradient text & primary buttons */
+.gradient-text,
+.gradient-text-orange,
+.gradient-text-brand,
+.btn-futuristic-primary,
+.btn-futuristic-primary *,
+.btn-futuristic-navy,
+.btn-futuristic-navy *,
+.btn-nav-primary,
+.btn-nav-primary * {
+  color: inherit !important;
+}
+
+/* Terminal & Code Block Styling — the navy from the wordmark */
+.dark-terminal,
+pre.dark-code {
+  background-color: #000838 !important;
+  color: #f7f9f9 !important;
+  border-color: #1a2a60 !important;
+}
+
+/* High Contrast Light Mode Badges & Accent Containers */
+.bg-cyan-950\/90,
+.bg-cyan-950\/80,
+.bg-cyan-950\/70,
+.bg-cyan-950\/60,
+.bg-cyan-950\/50,
+.bg-cyan-950\/40,
+.bg-cyan-950\/30,
+.bg-cyan-950 {
+  background-color: #eefaf8 !important;
+  border-color: #9ee6de !important;
+  color: #0f5f5b !important;
+}
+
+.bg-emerald-950\/90,
+.bg-emerald-950\/80,
+.bg-emerald-950\/70,
+.bg-emerald-950\/60,
+.bg-emerald-950\/50,
+.bg-emerald-950\/40,
+.bg-emerald-950 {
+  background-color: #f3f8f2 !important;
+  border-color: #c6e1c3 !important;
+  color: #385d36 !important;
+}
+
+.bg-amber-950\/90,
+.bg-amber-950\/80,
+.bg-amber-950\/70,
+.bg-amber-950\/60,
+.bg-amber-950\/50,
+.bg-amber-950\/40,
+.bg-amber-950,
+.bg-orange-950\/90,
+.bg-orange-950\/80,
+.bg-orange-950\/70,
+.bg-orange-950\/60,
+.bg-orange-950\/50,
+.bg-orange-950\/40,
+.bg-orange-950 {
+  background-color: #f4f8f1 !important;
+  border-color: #cee2c2 !important;
+  color: #3b6337 !important;
+}
+
+.bg-blue-950\/90,
+.bg-blue-950\/80,
+.bg-blue-950\/70,
+.bg-blue-950\/60,
+.bg-blue-950\/50,
+.bg-blue-950\/40,
+.bg-blue-950 {
+  background-color: #f2f5fb !important;
+  border-color: #c3cde8 !important;
+  color: #1a2a60 !important;
+}
+
+.bg-purple-950\/90,
+.bg-purple-950\/80,
+.bg-purple-950\/70,
+.bg-purple-950\/60,
+.bg-purple-950\/50,
+.bg-purple-950\/40,
+.bg-purple-950 {
+  background-color: #f3f5fb !important;
+  border-color: #c7cfe9 !important;
+  color: #202f64 !important;
+}
+
+/* Vivid accent text for light background */
+.text-cyan-300,
+.text-cyan-400 {
+  color: #0f7670 !important;
+}
+
+.text-emerald-300,
+.text-emerald-400 {
+  color: #447541 !important;
+}
+
+.text-amber-300,
+.text-amber-400 {
+  color: #4a7c43 !important;
+}
+
+.text-orange-300,
+.text-orange-400 {
+  color: #4a7c43 !important;
+}
+
+.text-purple-300,
+.text-purple-400 {
+  color: #2e3e7e !important;
+}
+
+.text-blue-300,
+.text-blue-400 {
+  color: #26397a !important;
+}
+
+/* Light Mode Borders */
+.border-white\/5,
+.border-white\/10,
+.border-white\/15,
+.border-white\/20,
+.border-white\/25,
+.border-slate-800\/60,
+.border-slate-800,
+.border-slate-800\/80,
+.border-slate-700 {
+  border-color: rgba(223, 226, 230, 0.9) !important;
+}
+
+/* Clean Form Controls */
+input, textarea, select {
+  background-color: #ffffff !important;
+  color: #0a1130 !important;
+  border-color: #c8ccd2 !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #a3a8b1 !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #0f7670 !important;
+  box-shadow: 0 0 0 3px rgba(15, 118, 112, 0.15) !important;
+}
+
+/* ======================================================== */
+/* COMPLETE HOVER SANITIZATION: ZERO DARK ON HOVER          */
+/* ======================================================== */
+
+/* All dark slate / dark color hovers mapped to crisp light surfaces */
+.hover\:bg-slate-950:hover,
+.hover\:bg-slate-950\/80:hover,
+.hover\:bg-slate-900:hover,
+.hover\:bg-slate-900\/95:hover,
+.hover\:bg-slate-900\/90:hover,
+.hover\:bg-slate-900\/80:hover,
+.hover\:bg-slate-900\/70:hover,
+.hover\:bg-slate-900\/60:hover,
+.hover\:bg-slate-900\/40:hover,
+.hover\:bg-slate-800:hover,
+.hover\:bg-slate-800\/90:hover,
+.hover\:bg-slate-800\/80:hover,
+.hover\:bg-slate-800\/70:hover,
+.hover\:bg-slate-800\/60:hover,
+.hover\:bg-slate-800\/50:hover,
+.hover\:bg-slate-800\/30:hover,
+.hover\:bg-slate-700:hover,
+.hover\:bg-white\/10:hover,
+.hover\:bg-white\/20:hover,
+.hover\:bg-white\/5:hover {
+  background-color: #eef0f2 !important;
+  color: #0a1130 !important;
+}
+
+/* Tinted hover states */
+.hover\:bg-cyan-950:hover,
+.hover\:bg-cyan-950\/80:hover,
+.hover\:bg-cyan-950\/70:hover,
+.hover\:bg-cyan-950\/60:hover,
+.hover\:bg-cyan-950\/40:hover,
+.hover\:bg-blue-950:hover,
+.hover\:bg-blue-950\/80:hover,
+.hover\:bg-blue-950\/60:hover {
+  background-color: #cef3ee !important;
+  color: #0f5f5b !important;
+}
+
+.hover\:bg-emerald-950:hover,
+.hover\:bg-emerald-950\/80:hover,
+.hover\:bg-emerald-950\/60:hover,
+.hover\:bg-emerald-800:hover {
+  background-color: #e2f0e0 !important;
+  color: #385d36 !important;
+}
+
+.hover\:bg-amber-950:hover,
+.hover\:bg-amber-950\/80:hover,
+.hover\:bg-amber-950\/60:hover,
+.hover\:bg-orange-950:hover,
+.hover\:bg-orange-950\/80:hover {
+  background-color: #e6f0df !important;
+  color: #314f2e !important;
+}
+
+.hover\:bg-purple-950:hover,
+.hover\:bg-purple-950\/80:hover {
+  background-color: #e4e8f5 !important;
+  color: #202f64 !important;
+}
+
+/* Prevent text color from turning white on hover unless inside a colored button */
+.hover\:text-white:hover {
+  color: #0f7670 !important;
+}
+
+.group:hover .group-hover\:text-white {
+  color: #0f7670 !important;
+}
+
+.hover\:text-cyan-300:hover,
+.hover\:text-cyan-400:hover,
+.hover\:text-sky-400:hover {
+  color: #0f7670 !important;
+}
+
+.hover\:text-emerald-300:hover,
+.hover\:text-emerald-400:hover {
+  color: #385d36 !important;
+}
+
+.hover\:text-amber-300:hover,
+.hover\:text-amber-400:hover,
+.hover\:text-orange-300:hover,
+.hover\:text-orange-400:hover {
+  color: #3b6337 !important;
+}
+
+.hover\:text-purple-300:hover,
+.hover\:text-purple-400:hover {
+  color: #2e3e7e !important;
+}
+
+/* Group hovers */
+.group:hover .group-hover\:bg-slate-900,
+.group:hover .group-hover\:bg-slate-800,
+.group:hover .group-hover\:bg-slate-950 {
+  background-color: #eef0f2 !important;
+}
+
+/* Table row hovers */
+tr:hover,
+.hover\:bg-slate-800\/30:hover {
+  background-color: #f7f9f9 !important;
+}
+
+/* ======================================================== */
+/* PURE WHITE TEXT & ICONS ON ALL SOLID BRAND BUTTONS       */
+/* ======================================================== */
+
+/* Primary CTA & Navigation Buttons */
+.btn-futuristic-primary,
+.btn-futuristic-primary *,
+.btn-futuristic-primary:hover,
+.btn-futuristic-primary:hover *,
+.btn-futuristic-navy,
+.btn-futuristic-navy *,
+.btn-futuristic-navy:hover,
+.btn-futuristic-navy:hover *,
+.btn-nav-primary,
+.btn-nav-primary *,
+.btn-nav-primary:hover,
+.btn-nav-primary:hover * {
+  color: #ffffff !important;
+}
+
+.btn-futuristic-primary svg,
+.btn-futuristic-primary svg path,
+.btn-nav-primary svg,
+.btn-nav-primary svg path {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Solid saturated brand action buttons & selected tabs */
+.bg-sky-500,
+.bg-sky-500 *,
+.bg-sky-600,
+.bg-sky-600 *,
+.bg-sky-700,
+.bg-sky-700 *,
+.bg-sky-800,
+.bg-sky-800 *,
+.bg-cyan-500,
+.bg-cyan-500 *,
+.bg-cyan-600,
+.bg-cyan-600 *,
+.bg-cyan-700,
+.bg-cyan-700 *,
+.bg-cyan-800,
+.bg-cyan-800 *,
+.bg-blue-500,
+.bg-blue-500 *,
+.bg-blue-600,
+.bg-blue-600 *,
+.bg-blue-700,
+.bg-blue-700 *,
+.bg-blue-800,
+.bg-blue-800 *,
+.bg-indigo-500,
+.bg-indigo-500 *,
+.bg-indigo-600,
+.bg-indigo-600 *,
+.bg-indigo-700,
+.bg-indigo-700 *,
+.bg-indigo-800,
+.bg-indigo-800 *,
+.bg-purple-600,
+.bg-purple-600 *,
+.bg-purple-700,
+.bg-purple-700 *,
+.bg-purple-800,
+.bg-purple-800 *,
+.bg-slate-900,
+.bg-slate-900 * {
+  color: #ffffff !important;
+}
+
+/* Green / teal action buttons & WhatsApp CTAs */
+.bg-emerald-600,
+.bg-emerald-600 *,
+.bg-emerald-700,
+.bg-emerald-700 *,
+.bg-teal-600,
+.bg-teal-600 *,
+.bg-teal-700,
+.bg-teal-700 *,
+.from-emerald-600,
+.from-emerald-600 *,
+.from-teal-600,
+.from-teal-600 *,
+.from-emerald-500,
+.from-emerald-500 * {
+  color: #ffffff !important;
+}
+
+/* Vibrant Gradient CTA Buttons */
+.from-sky-500.to-blue-600,
+.from-sky-600.to-blue-600,
+.from-sky-600.to-indigo-600,
+.from-blue-600.to-indigo-600,
+.from-emerald-600.to-teal-600,
+.from-emerald-500.to-teal-500 {
+  color: #ffffff !important;
+}
+
+/* Ensure icons inside solid primary buttons are white */
+.bg-sky-500 svg,
+.bg-sky-600 svg,
+.bg-sky-700 svg,
+.bg-blue-500 svg,
+.bg-blue-600 svg,
+.bg-blue-700 svg,
+.bg-indigo-500 svg,
+.bg-indigo-600 svg,
+.bg-indigo-700 svg,
+.bg-emerald-600 svg,
+.bg-emerald-700 svg,
+.bg-teal-600 svg,
+.bg-teal-700 svg,
+.from-emerald-600 svg,
+.from-teal-600 svg,
+.from-emerald-500 svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Ensure hover:text-white triggers white text & strokes on hover */
+.hover\:text-white:hover,
+.hover\:text-white:hover svg,
+.group:hover .group-hover\:text-white {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Guarantee text on light cards & unselected items is always dark & readable */
+.bg-white,
+.bg-slate-50,
+.bg-sky-50,
+.bg-blue-50 {
+  color: inherit;
+}
+
+@keyframes routeProgress {
+  0% {
+    width: 0%;
+    opacity: 1;
+  }
+  70% {
+    width: 85%;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-route-progress {
+  animation: routeProgress 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes scanLine {
+  0% {
+    top: 0%;
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    top: 100%;
+    opacity: 0.1;
+  }
+}
+
+.animate-scan-line {
+  animation: scanLine 3s linear infinite;
+}

@@ -1,0 +1,1497 @@
+/**
+ * GENERATED FILE — do not edit by hand.
+ *
+ * Produced by scripts/gen-section-defaults.js from the DEFAULT_HEADING,
+ * DEFAULT_ITEMS and DEFAULT_CTA constants in the section components. It exists
+ * so the admin console can show a section that has never been edited without
+ * importing every section component into the admin bundle.
+ *
+ * Run `npm run gen-sections` after changing a section's built-in copy.
+ *
+ * Icons are null here: they are React components in the source and the admin
+ * console edits text.
+ */
+
+import type { SectionContent } from "@/data/pageSections";
+
+export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
+{
+  "contact/24-hours": {
+    "heading": {
+      "eyebrow": "Response Velocity",
+      "title": "What Happens After You Contact Us:",
+      "highlight": "24-Hour SLA Timeline",
+      "description": "No sales queues or weeks of silence. Here is our exact hour-by-hour onboarding protocol once you hit send."
+    },
+    "items": [
+      {
+        "hour": "Hour 01",
+        "title": "Inquiry Ingestion & Mutual NDA",
+        "desc": "Our automated system logs your inquiry, assigns an engineering ticket, and sends a mutual NDA if requested."
+      },
+      {
+        "hour": "Hour 04",
+        "title": "Senior Architect Technical Review",
+        "desc": "A principal engineer reviews your feature list, technology constraints, and API requirements to prepare initial architecture questions."
+      },
+      {
+        "hour": "Hour 12",
+        "title": "Discovery Call & Clarification",
+        "desc": "We host an optional 20-minute video sync to resolve any open questions regarding database scale or third-party integrations."
+      },
+      {
+        "hour": "Hour 24",
+        "title": "Locked Proposal & Milestone Schedule",
+        "desc": "You receive a formal proposal containing technical architecture recommendations, sprint breakdown, timeline, and locked milestone pricing."
+      }
+    ]
+  },
+  "contact/escalation": {
+    "heading": {
+      "eyebrow": "Critical Project Rescue & Emergency Hotline",
+      "title": "Stalled Project, Active Production Outage, or Ghosting Agency?",
+      "highlight": "",
+      "description": "If your current vendor has abandoned a critical release or you have an active production emergency requiring immediate senior engineering intervention, trigger our rapid emergency response pod."
+    },
+    "items": [],
+    "cta": {
+      "label": "Trigger Emergency Call",
+      "href": ""
+    }
+  },
+  "contact/hubs": {
+    "heading": {
+      "eyebrow": "Where We Work",
+      "title": "Our Engineering Hub &",
+      "highlight": "Operating Hours",
+      "description": "One team, one office, working with clients across time zones. Add a row here for every location you actually operate from."
+    },
+    "items": [
+      {
+        "city": "Jaipur, Rajasthan (India)",
+        "tz": "India Standard Time (IST)",
+        "hours": "09:30 AM - 08:30 PM",
+        "coverage": "All client engagements, worldwide"
+      }
+    ]
+  },
+  "contact/privacy": {
+    "heading": {
+      "eyebrow": "Integrity Guarantee",
+      "title": "Our Zero Spam &",
+      "highlight": "Privacy Pledge",
+      "description": "We treat your privacy with the same architectural rigor as your software code."
+    },
+    "items": [
+      {
+        "icon": null,
+        "title": "No Pushy Sales Reps",
+        "desc": "You will never be contacted by commission-driven sales reps. Your inquiry is handled directly by experienced technical leads."
+      },
+      {
+        "icon": null,
+        "title": "Data Confidentiality",
+        "desc": "Your email, phone number, and project ideas are never sold, rented, or shared with third-party lead brokers."
+      },
+      {
+        "icon": null,
+        "title": "Zero Spam Policy",
+        "desc": "We do not enroll you in marketing newsletters or automated cold sequences. You only receive direct answers to your inquiry."
+      },
+      {
+        "icon": null,
+        "title": "Immediate Mutual NDA",
+        "desc": "We gladly sign our standard mutual non-disclosure agreement or your company's proprietary NDA prior to technical deep-dives."
+      }
+    ]
+  },
+  "contact/rfp": {
+    "heading": {
+      "eyebrow": "Fast-Track Checklist",
+      "title": "How to Submit an RFP or",
+      "highlight": "Technical Project Brief",
+      "description": "Have existing documentation? You can attach files or include links directly in our contact form for immediate analysis."
+    },
+    "items": [
+      {
+        "label": "Executive Summary / Pitch Deck",
+        "desc": "PDF or Notion link explaining the vision and business context."
+      },
+      {
+        "label": "Feature Requirements or User Stories",
+        "desc": "Bullet-point list of primary features for MVP vs Phase 2."
+      },
+      {
+        "label": "Design References or Figma Links",
+        "desc": "Wireframes, UI mockups, or competitor references."
+      },
+      {
+        "label": "Target Launch Date & Milestones",
+        "desc": "Your desired go-to-market timeline (e.g., within 8 weeks)."
+      }
+    ]
+  },
+  "contact/scheduler": {
+    "heading": {
+      "eyebrow": "Real-Time Calendar Sync",
+      "title": "Book a 30-Minute",
+      "highlight": "Technical Discovery Session",
+      "description": "Skip email back-and-forth. Pick a slot directly on our lead architect's Google Calendar to discuss requirements, architecture schemas, and budget fit."
+    },
+    "items": [],
+    "cta": {
+      "label": "Select Date & Time on Calendar",
+      "href": "https://calendly.com"
+    }
+  },
+  "faqs/categories": {
+    "heading": {
+      "eyebrow": "Knowledge Index",
+      "title": "Explore Questions by",
+      "highlight": "Topic Category",
+      "description": "Navigate directly to the answers you need or browse our comprehensive knowledge policies below."
+    },
+    "items": [
+      {
+        "icon": null,
+        "title": "IP & Contracts",
+        "desc": "Source code ownership, Git repo transfer, and NDA agreements."
+      },
+      {
+        "icon": null,
+        "title": "Pricing & Invoicing",
+        "desc": "Milestone-gated payments, wire transfers, and currency support."
+      },
+      {
+        "icon": null,
+        "title": "Sprint Execution",
+        "desc": "14-day cadence, daily standups, and bi-weekly live staging demos."
+      },
+      {
+        "icon": null,
+        "title": "Security & SLAs",
+        "desc": "OWASP compliance, SOC2 adherence, and uptime guarantees."
+      },
+      {
+        "icon": null,
+        "title": "Tech Stack & Code",
+        "desc": "Next.js, React Native, Python, Go, and PostgreSQL architecture."
+      },
+      {
+        "icon": null,
+        "title": "Post-Launch Hypercare",
+        "desc": "30-day warranty, retainer options, and emergency incident SLA."
+      }
+    ]
+  },
+  "faqs/channels": {
+    "heading": {
+      "eyebrow": "Real Human Assistance",
+      "title": "Didn't Find Your Answer?",
+      "highlight": "Direct Support Channels",
+      "description": "Our engineering team is always on standby to discuss your technical architecture or answer questions."
+    },
+    "items": []
+  },
+  "faqs/ip": {
+    "heading": {
+      "eyebrow": "Legal Governance",
+      "title": "IP Ownership &",
+      "highlight": "Contract Governance Policies",
+      "description": "Complete legal clarity and peace of mind. Our agreements are straightforward, institutional, and founder-friendly."
+    },
+    "items": [
+      {
+        "title": "100% Intellectual Property Assignment",
+        "desc": "Upon milestone completion and invoice clearance, all custom code, architectural designs, algorithms, and documentation become your sole, exclusive intellectual property."
+      },
+      {
+        "title": "Mutual Non-Disclosure Agreement (NDA)",
+        "desc": "We sign a comprehensive bilateral NDA before reviewing proprietary PRDs, business models, or code repositories, protecting your trade secrets with strict legal remedies."
+      },
+      {
+        "title": "No Vendor Lock-In Frameworks",
+        "desc": "We build strictly with open-source industry standard runtimes (Next.js, Node, Python, PostgreSQL). We never inject proprietary, closed-source dependencies."
+      },
+      {
+        "title": "Direct GitHub Organization Transfer",
+        "desc": "All code repositories are initialized directly under your company's GitHub or GitLab organization with your internal team retaining administrative master keys."
+      }
+    ]
+  },
+  "faqs/payment": {
+    "heading": {
+      "eyebrow": "Financial Logistics",
+      "title": "Payment &",
+      "highlight": "Invoicing Terms",
+      "description": "Frictionless global billing tailored for early-stage startups and multinational enterprise accounting teams alike."
+    },
+    "items": [
+      {
+        "title": "Global Currencies Supported",
+        "detail": "Invoices issued in USD ($), EUR (€), GBP (£), and INR (₹) with zero cross-currency conversion markups."
+      },
+      {
+        "title": "Payment Rails & Methods",
+        "detail": "Bank wire transfers (ACH, SWIFT, SEPA, NEFT/RTGS), corporate credit cards via Stripe, and escrow options for enterprise contracts."
+      },
+      {
+        "title": "GST & Tax Compliance",
+        "detail": "Full corporate invoicing with tax IDs, GST / VAT compliance receipts, and standardized accounting documentation."
+      },
+      {
+        "title": "Milestone-Gated Releases",
+        "detail": "No open-ended monthly burn. Payments are tied to agreed sprint gates and explicit customer acceptance."
+      }
+    ]
+  },
+  "faqs/support": {
+    "heading": {
+      "eyebrow": "Operational Continuity",
+      "title": "Post-Launch Support &",
+      "highlight": "Hypercare Guide",
+      "description": "We don't abandon you on launch day. Our comprehensive post-deployment protocols ensure smooth production operations."
+    },
+    "items": [
+      {
+        "title": "30-Day Zero-Cost Hypercare",
+        "badge": "INCLUDED IN ALL BUILDS",
+        "desc": "Immediate priority bug fixing for any discrepancies against agreed sprint specifications, server log monitoring, and DNS stabilization."
+      },
+      {
+        "title": "Ongoing Monthly Maintenance Pod",
+        "badge": "OPTIONAL RETAINER",
+        "desc": "Dedicated senior engineer allocated for security dependency updates, framework patching, performance audits, and small feature backlogs."
+      },
+      {
+        "title": "24/7 Production Incident SLA",
+        "badge": "CRITICAL PLATFORMS",
+        "desc": "Under 15-minute P1 response time guarantee with direct on-call pager escalation for high-volume SaaS, fintech, and e-commerce applications."
+      }
+    ]
+  },
+  "faqs/timezone": {
+    "heading": {
+      "eyebrow": "Collaboration Discipline",
+      "title": "Timezone &",
+      "highlight": "Communication Policy",
+      "description": "Distance is never a barrier. Our battle-tested async protocols ensure high velocity across global timezones."
+    },
+    "items": [
+      {
+        "title": "Guaranteed 4-Hour Daily Working Overlap",
+        "desc": "Whether you are located in New York (EST), California (PST), London (GMT), or Dubai (GST), our teams maintain a guaranteed 4-hour daily overlap for live syncs."
+      },
+      {
+        "title": "Async-First Culture with Loom & Linear",
+        "desc": "No unnecessary meetings. Detailed video walkthroughs, clear ticket specifications on Linear, and daily Slack digests keep decisions moving 24/7."
+      },
+      {
+        "title": "Direct WhatsApp Business Channel",
+        "desc": "Direct access to your dedicated technical lead on WhatsApp for urgent queries, with a verified sub-15 minute response time during business hours."
+      },
+      {
+        "title": "Zero Junior Account Manager Buffers",
+        "desc": "You converse directly with the engineers and architects writing your code, eliminating misunderstandings and game-of-telephone delays."
+      }
+    ]
+  },
+  "portfolio/architecture": {
+    "heading": {
+      "eyebrow": "Technical Deep-Dives",
+      "title": "Complex Engineering Challenges:",
+      "highlight": "Architectural Case Studies",
+      "description": "Beyond pretty interfaces: real distributed systems, concurrency bottlenecks solved, and mission-critical reliability delivered."
+    },
+    "items": [
+      {
+        "slug": "fintech-clearing-engine",
+        "title": "FinTech Multi-Currency Clearing Engine",
+        "sector": "FinTech & Payments",
+        "icon": null,
+        "challenge": "Handling 25,000 transactions/second with zero race conditions and strict double-entry ledger verification.",
+        "solution": "Engineered Go microservices backed by PostgreSQL serializable isolation and Redis distributed redlocks.",
+        "metrics": "99.999% ledger accuracy, <18ms transaction finality."
+      },
+      {
+        "slug": "neurochat-ai",
+        "title": "Autonomous Healthcare RAG Diagnosis Assistant",
+        "sector": "HealthTech & MedAI",
+        "icon": null,
+        "challenge": "HIPAA-compliant private vector search across 500k+ clinical research papers with zero data leakage.",
+        "solution": "Isolated self-hosted Qdrant vector cluster, encrypted embedding pipelines, and strict role-based access control (RBAC).",
+        "metrics": "94.2% diagnostic retrieval relevance, 100% HIPAA compliant."
+      },
+      {
+        "slug": "supply-chain-telemetry",
+        "title": "Global Supply Chain Real-Time Telemetry HUD",
+        "sector": "Logistics & IoT",
+        "icon": null,
+        "challenge": "Streaming GPS and temperature telemetry from 40,000 active freight containers worldwide simultaneously.",
+        "solution": "MQTT broker ingestion with Kafka event streaming feeding ClickHouse real-time database and Next.js WebSocket dashboards.",
+        "metrics": "<200ms end-to-end device-to-screen latency."
+      }
+    ]
+  },
+  "portfolio/audit": {
+    "heading": {
+      "eyebrow": "Engineering Quality Standards",
+      "title": "How We Define Success:",
+      "highlight": "Release Quality Criteria",
+      "description": "We don't ship until our stringent quality benchmarks are met. Here are the non-negotiable criteria every Divanex project must satisfy."
+    },
+    "items": [
+      {
+        "title": "Google Core Web Vitals 95+",
+        "target": "LCP < 1.2s / CLS = 0",
+        "desc": "Every web platform we release is audited for maximum Lighthouse performance, ensuring superior SEO crawlability and conversion rates."
+      },
+      {
+        "title": "Zero P1 / P2 Vulnerability Audit",
+        "target": "OWASP Hardened",
+        "desc": "Static and dynamic penetration tests pass without critical vulnerabilities before any production domain switch is permitted."
+      },
+      {
+        "title": "Sub-Second Global API Latency",
+        "target": "p99 < 85ms",
+        "desc": "Edge-cached database responses and regional Redis workers ensure sub-second response times for end-users globally."
+      },
+      {
+        "title": "Strict 100% TypeScript Coverage",
+        "target": "No `any` Types",
+        "desc": "Strict type contracts between frontend clients and backend APIs eliminate silent runtime bugs in production."
+      }
+    ]
+  },
+  "portfolio/confidential": {
+    "heading": {
+      "eyebrow": "Enterprise NDA & Confidentiality Notice",
+      "title": "60%+ of Our Production Deployments Are Protected Under Mutual NDA",
+      "highlight": "",
+      "description": "Many of our high-scale enterprise contracts, proprietary algorithmic trading bots, and stealth-mode venture-backed platforms cannot be published publicly. We respect client confidentiality above all else."
+    },
+    "items": [],
+    "cta": {
+      "label": "Request Private Architecture Demo",
+      "href": "/contact"
+    }
+  },
+  "portfolio/impact": {
+    "heading": {
+      "eyebrow": "CROSS-INDUSTRY DOMINANCE",
+      "title": "Delivering Impact Across",
+      "highlight": "Diverse Verticals",
+      "description": "Our architectural primitives power mission-critical platforms across heavily regulated, high-concurrency industries."
+    },
+    "items": [
+      {
+        "name": "FinTech & Payments",
+        "stat": "$420M+",
+        "label": "Transaction Volume Processed",
+        "icon": null
+      },
+      {
+        "name": "HealthTech & Telehealth",
+        "stat": "180k+",
+        "label": "Active HIPAA Consultations",
+        "icon": null
+      },
+      {
+        "name": "E-Commerce & Retail",
+        "stat": "+280%",
+        "label": "Conversion Rate Uplift",
+        "icon": null
+      },
+      {
+        "name": "Supply Chain & Logistics",
+        "stat": "99.99%",
+        "label": "GPS Telemetry Tracking Uptime",
+        "icon": null
+      }
+    ]
+  },
+  "portfolio/roi": {
+    "heading": {
+      "eyebrow": "BUSINESS OUTCOMES",
+      "title": "Client ROI &",
+      "highlight": "Value Acceleration",
+      "description": "We measure our success by the compounding revenue and speed advantages our code delivers to your balance sheet."
+    },
+    "items": [
+      {
+        "title": "3.8x Average ROI",
+        "desc": "Clients recoup their full engineering investment within an average of 5.4 months post-launch through new ARR.",
+        "icon": null
+      },
+      {
+        "title": "60% Faster Time to Market",
+        "desc": "Pre-tested architectural foundations cut engineering cycles from 9 months down to 10-12 weeks.",
+        "icon": null
+      },
+      {
+        "title": "45% Cloud Hosting Savings",
+        "desc": "Serverless edge functions and Dockerized right-sizing dramatically reduce runaway AWS / GCP monthly bills.",
+        "icon": null
+      },
+      {
+        "title": "99.999% Verified Uptime",
+        "desc": "Resilient automated failover configurations eliminate revenue loss from unexpected system outages.",
+        "icon": null
+      }
+    ]
+  },
+  "portfolio/timeline": {
+    "heading": {
+      "eyebrow": "Velocity Track Record",
+      "title": "Average Time-to-Production:",
+      "highlight": "4 to 12 Weeks",
+      "description": "Across 50+ shipped production software releases, here is how our predictable sprint cadence transforms requirements into revenue-generating platforms."
+    },
+    "items": [
+      {
+        "sprint": "Sprint 01-02",
+        "duration": "Weeks 1-4",
+        "milestone": "Architecture & Interactive Staging MVP",
+        "detail": "Database schema migrations, auth endpoints, core business logic, and clickable frontend prototype deployed to preview branch."
+      },
+      {
+        "sprint": "Sprint 03-04",
+        "duration": "Weeks 5-8",
+        "milestone": "Feature Integration & External APIs",
+        "detail": "Stripe/Razorpay billing, 3rd party webhooks, automated email flows, background job workers, and automated test passes."
+      },
+      {
+        "sprint": "Sprint 05-06",
+        "duration": "Weeks 9-12",
+        "milestone": "Security Hardening & Production Launch",
+        "detail": "OWASP penetration test scan, load testing to 10k RPM, DNS switchover, and live launch under 24/7 monitoring."
+      }
+    ]
+  },
+  "process/involvement": {
+    "heading": {
+      "eyebrow": "Founder & Stakeholder Time Investment",
+      "title": "What We Need From You:",
+      "highlight": "Client Involvement Guide",
+      "description": "We respect your time. Our async-first workflows mean you don't sit in endless meetings—just high-leverage decision checkpoints that keep momentum surging."
+    },
+    "items": [
+      {
+        "icon": null,
+        "commitment": "30 Min / Week",
+        "title": "Sprint Planning & Prioritization",
+        "desc": "Review sprint goals on Linear, confirm user stories for the upcoming 14 days, and align business priorities with our tech lead."
+      },
+      {
+        "icon": null,
+        "commitment": "45 Min / Bi-Weekly",
+        "title": "Live Interactive Staging Demo",
+        "desc": "Our engineers walk through testable features in live preview environments. You test user journeys, provide feedback, and sign off milestones."
+      },
+      {
+        "icon": null,
+        "commitment": "5 Min / Daily (Async)",
+        "title": "Slack / WhatsApp Daily Digest",
+        "desc": "Read brief bullet-point updates from your dedicated pod: what was merged yesterday, today's targets, and any blocker resolutions."
+      },
+      {
+        "icon": null,
+        "commitment": "15 Min / Milestone",
+        "title": "Sign-Off & Code Repository Sync",
+        "desc": "Review automated test pass reports, inspect PRs, and authorize milestone release with clean Git sync directly to your private org."
+      }
+    ]
+  },
+  "process/launch": {
+    "heading": {
+      "eyebrow": "DAY 0 TO PRODUCTION",
+      "title": "Production Launch &",
+      "highlight": "30-Day Hypercare",
+      "description": "Our relationship doesn't end at deployment. We stand shoulder-to-shoulder with your team during live market launch."
+    },
+    "items": [
+      {
+        "title": "Zero-Downtime Blue/Green Deployment",
+        "desc": "Traffic switches seamlessly to new container clusters with zero user disruption and instant rollback capabilities."
+      },
+      {
+        "title": "30-Day Dedicated Hypercare Guarantee",
+        "desc": "Our senior engineers monitor logs, address user edge-cases, and fix any emerging bugs free of charge for a full month post-launch."
+      },
+      {
+        "title": "DNS & Production SSL Hardening",
+        "desc": "Configuration of Cloudflare enterprise WAF, TLS 1.3 certificates, DDoS protection, and automated CDN caching rules."
+      },
+      {
+        "title": "Executive Video & Documentation Handover",
+        "desc": "Recorded walkthroughs and architecture runbooks detailing how to manage, scale, and maintain your platform independently."
+      }
+    ]
+  },
+  "process/qa": {
+    "heading": {
+      "eyebrow": "ZERO-DEFECT ARCHITECTURE",
+      "title": "Our 4-Stage",
+      "highlight": "QA & Testing Pipeline",
+      "description": "We don't treat testing as an afterthought. Every sprint is gated by four strict automated and manual quality checks before client demo."
+    },
+    "items": [
+      {
+        "gate": "GATE 01",
+        "name": "Unit & Logic Tests",
+        "desc": "Jest and Vitest coverage validating business logic, state mutations, and edge cases before code merges.",
+        "badge": "85%+ Code Coverage"
+      },
+      {
+        "gate": "GATE 02",
+        "name": "API & Integration Tests",
+        "desc": "Supertest and Postman test collections verifying database transactions, webhook idempotency, and auth tokens.",
+        "badge": "Idempotent Endpoints"
+      },
+      {
+        "gate": "GATE 03",
+        "name": "E2E User Flow Tests",
+        "desc": "Playwright and Cypress automated browser simulations testing onboarding, checkout, and critical customer journeys.",
+        "badge": "Cross-Browser Verified"
+      },
+      {
+        "gate": "GATE 04",
+        "name": "Stress & Load Testing",
+        "desc": "k6 load testing simulating 10,000+ concurrent virtual users to verify zero database deadlocks and sub-second p99 latency.",
+        "badge": "10k+ Concurrent Users"
+      }
+    ]
+  },
+  "process/release": {
+    "heading": {
+      "eyebrow": "Production Release Safety",
+      "title": "Release & Deployment",
+      "highlight": "Playbook",
+      "description": "Deploying to production shouldn't be a high-stress event. Our automated pipeline guarantees zero downtime, automated rollbacks, and rock-solid reliability."
+    },
+    "items": [
+      {
+        "title": "Blue/Green Zero-Downtime Traffic Ingress",
+        "badge": "ZERO PACKET DROP",
+        "desc": "New Docker images are stood up in parallel green clusters. Cloudflare and Kubernetes ingress only cut over traffic once health check probes pass 100%."
+      },
+      {
+        "title": "Automated Rollback Circuit Breakers",
+        "badge": "< 60 SEC ROLLBACK",
+        "desc": "If HTTP 5xx error spikes or latency increases occur within the first 5 minutes post-deploy, automated Datadog webhooks instantly roll back to previous healthy revision."
+      },
+      {
+        "title": "Database Migration Zero-Lock Protocol",
+        "badge": "EXPAND / CONTRACT",
+        "desc": "All PostgreSQL schema alterations follow the dual-phase expand-and-contract pattern, ensuring backward compatibility with running instances during migrations."
+      },
+      {
+        "title": "Secrets Isolation & Runtime Environment Locks",
+        "badge": "VAULT ENCRYPTED",
+        "desc": "Zero hardcoded keys. Production secrets are fetched dynamically from AWS Secrets Manager or HashiCorp Vault at container launch with automated key rotation."
+      }
+    ]
+  },
+  "process/tooling": {
+    "heading": {
+      "eyebrow": "DEVELOPER TOOLCHAIN",
+      "title": "Our Modern",
+      "highlight": "Tooling Ecosystem",
+      "description": "We use industry-standard enterprise developer tools to ensure rapid velocity, automated testing, and seamless client collaboration."
+    },
+    "items": [
+      {
+        "category": "Sprint Management",
+        "tool": "Linear & Jira Software",
+        "desc": "Real-time issue tracking, sprint backlogs, and milestone burn-down velocity charts.",
+        "icon": null
+      },
+      {
+        "category": "Version Control & CI/CD",
+        "tool": "GitHub Actions & GitLab",
+        "desc": "Automated test runs, security scans, and preview deployments on every pull request.",
+        "icon": null
+      },
+      {
+        "category": "Design Engineering",
+        "tool": "Figma & Design Systems",
+        "desc": "Tokenized design systems, responsive component libraries, and interactive high-fidelity prototypes.",
+        "icon": null
+      },
+      {
+        "category": "Containerization",
+        "tool": "Docker & Kubernetes",
+        "desc": "Isolated development environments matching staging and production byte-for-byte.",
+        "icon": null
+      },
+      {
+        "category": "Error Telemetry",
+        "tool": "Sentry & Datadog",
+        "desc": "24/7 crash reporting, distributed APM performance tracing, and live memory profiling.",
+        "icon": null
+      },
+      {
+        "category": "Security Scanning",
+        "tool": "SonarQube & Snyk",
+        "desc": "Continuous dependency vulnerability audits and OWASP static code analysis.",
+        "icon": null
+      }
+    ]
+  },
+  "security/pillars": {
+    "heading": {
+      "eyebrow": "DEFENSE IN DEPTH",
+      "title": "Multi-Layered Security Infrastructure",
+      "highlight": "",
+      "description": "Every layer of our software lifecycle is hardened against sophisticated attack vectors, unauthorized inspection, and zero-day threats."
+    },
+    "items": [
+      {
+        "icon": null,
+        "title": "Zero-Trust Data Protection",
+        "badge": "DATA ENCRYPTION",
+        "description": "All customer records, database shards, and sensitive credentials are encrypted using AES-256-GCM at rest and TLS 1.3 in transit with automated secret rotation.",
+        "points": [
+          "Row-Level Security (RLS) partition boundaries",
+          "Hardware Security Module (HSM) key storage",
+          "Zero plaintext password or token logging",
+          "Zero cross-tenant data leakage guarantees"
+        ]
+      },
+      {
+        "icon": null,
+        "title": "Network & Ingress Defense",
+        "badge": "DEEP PACKET FIREWALL",
+        "description": "Distributed edge proxy with real-time threat signature matching, sliding-window rate limiters, and automated bot vulnerability scanner blocking.",
+        "points": [
+          "Real-time SQLi, XSS, and Path Traversal filters",
+          "Malicious scanner (sqlmap, nikto) auto-drop",
+          "Sliding-window IP rate limiting against DoS",
+          "CSRF and Origin header cryptographic validation"
+        ]
+      },
+      {
+        "icon": null,
+        "title": "Regulatory Compliance Suite",
+        "badge": "GLOBAL STANDARDS",
+        "description": "Engineered from the ground up to comply with the most stringent global healthcare, fintech, and data sovereignty compliance mandates.",
+        "points": [
+          "HIPAA & ABDM Health ID compliance ready",
+          "PCI-DSS Level 1 tokenized payment gateways",
+          "ISO 27001 Information Security Management",
+          "GDPR & CCPA strict right-to-be-forgotten"
+        ]
+      },
+      {
+        "icon": null,
+        "title": "Client-Side DevTools Guard",
+        "badge": "BROWSER PROTECTION",
+        "description": "Continuous in-browser anti-tampering protection shielding user sessions from Self-XSS, prototype pollution, and malicious iframe clickjacking.",
+        "points": [
+          "Object and Array prototype sealing",
+          "Anti-Clickjacking automatic iframe breakout",
+          "Memory hygiene clearing runtime credentials",
+          "Automated CSP violation telemetry logging"
+        ]
+      }
+    ]
+  },
+  "services/ai-agents": {
+    "heading": {
+      "eyebrow": "AI NEURAL WORKFLOWS",
+      "title": "Autonomous",
+      "highlight": "AI Agents & RAG Systems",
+      "description": "Move beyond simple ChatGPT wrappers. We build enterprise-grade intelligence layers with real vector stores, self-hosted models, and structured business task automation."
+    },
+    "items": [
+      {
+        "title": "Private Vector Search (RAG)",
+        "desc": "Connect your enterprise knowledge base to private embeddings in Pinecone or pgvector with strict semantic caching for sub-50ms retrieval.",
+        "badge": "Sub-50ms RAG"
+      },
+      {
+        "title": "Autonomous Multi-Agent Swarms",
+        "desc": "LangGraph and CrewAI workflows where specialized agents plan, review code, execute SQL queries, and synthesize executive reports autonomously.",
+        "badge": "Autonomous Execution"
+      },
+      {
+        "title": "Zero-Hallucination Guardrails",
+        "desc": "Multi-layered citation verification and strict prompt guardrails ensuring AI responses are grounded strictly in your proprietary documentation.",
+        "badge": "100% Grounded"
+      },
+      {
+        "title": "Fine-Tuning & Open-Source LLMs",
+        "desc": "Self-hosted DeepSeek-R1, LLaMA-3, and Mistral models deployed on private Kubernetes GPUs for total data sovereignty and zero vendor lock-in.",
+        "badge": "On-Prem / Private Cloud"
+      }
+    ]
+  },
+  "services/deliverables": {
+    "heading": {
+      "eyebrow": "Verifiable Artifact Handover",
+      "title": "What You Receive:",
+      "highlight": "Technical Deliverables Matrix",
+      "description": "We don't just deliver a running URL. Every project includes comprehensive production assets, documentation, and architectural artifacts for complete operational autonomy."
+    },
+    "items": [
+      {
+        "icon": null,
+        "title": "Clean Source Code Repository",
+        "badge": "100% OWNERSHIP",
+        "desc": "Full Git commit history, strict TypeScript interfaces, and linted modular directory structure transferred directly to your organization GitHub/GitLab."
+      },
+      {
+        "icon": null,
+        "title": "Interactive Swagger & Postman Docs",
+        "badge": "REST & GRAPHQL",
+        "desc": "Comprehensive API endpoints documentation with request/response schemas, JWT auth headers, and mock environments ready for 3rd-party integration."
+      },
+      {
+        "icon": null,
+        "title": "Schema Migrations & DB Architecture",
+        "badge": "POSTGRESQL / PRISMA",
+        "desc": "Version-controlled database migration scripts, ER diagrams, foreign key relationships, indexes, and automated seed scripts for staging and local dev."
+      },
+      {
+        "icon": null,
+        "title": "Automated CI/CD Pipeline Configs",
+        "badge": "GITHUB ACTIONS",
+        "desc": "Production-ready YAML workflows executing automated unit tests, linting, Docker container builds, and zero-downtime deployment triggers."
+      },
+      {
+        "icon": null,
+        "title": "Figma Component Design System",
+        "badge": "AUTO-LAYOUT & TOKENS",
+        "desc": "Organized Figma source file with atomic components, interactive prototypes, dark/light color tokens, typography scales, and responsive variants."
+      },
+      {
+        "icon": null,
+        "title": "Security & Vulnerability Audit Report",
+        "badge": "OWASP TOP 10",
+        "desc": "Automated static analysis (SAST) reports, dependency vulnerability audits (Snyk/Trivy), and zero-trust CORS/headers configuration verify pass."
+      }
+    ]
+  },
+  "services/mobile-cloud": {
+    "heading": {
+      "eyebrow": "Mobile & Cloud Runtime Foundation",
+      "title": "High-Performance Mobile &",
+      "highlight": "Cloud Infrastructure",
+      "description": "Software built to withstand real-world enterprise load. We architect every mobile client and cloud backend for sub-second latency and seamless auto-scaling."
+    },
+    "items": [
+      {
+        "category": "Cross-Platform Mobile Engineering",
+        "badge": "60 FPS NATIVE FEEL",
+        "badgeColor": "text-sky-800 bg-sky-50 border-sky-200",
+        "description": "Production iOS and Android apps engineered with React Native and Flutter, featuring offline sync, hardware encryption, biometric authentication, and sub-100ms response times.",
+        "capabilities": [
+          "Offline-first sync engine with SQLite / WatermelonDB",
+          "Biometric authentication (FaceID, TouchID, Android Keystore)",
+          "Zero-latency push notifications via Firebase & Apple APNs",
+          "Universal design system matching Figma token specifications"
+        ],
+        "metrics": {
+          "label": "App Store Rating Target",
+          "val": "4.8+"
+        }
+      },
+      {
+        "category": "Cloud Native & DevOps Infrastructure",
+        "badge": "ZERO-DOWNTIME SCALE",
+        "badgeColor": "text-emerald-800 bg-emerald-50 border-emerald-200",
+        "description": "Enterprise-grade infrastructure as code (IaC) with Terraform, automated Kubernetes orchestration, multi-region failover, and automated CI/CD deployment pipelines.",
+        "capabilities": [
+          "Terraform-managed AWS, GCP & DigitalOcean environments",
+          "Kubernetes (EKS/GKE) horizontal pod auto-scaling (HPA)",
+          "Zero-trust VPC networks with Cloudflare WAF perimeter",
+          "Automated GitHub Actions CI/CD with security scanning"
+        ],
+        "metrics": {
+          "label": "Deployment Uptime SLA",
+          "val": "99.99%"
+        }
+      }
+    ]
+  },
+  "services/pricing-tiers": {
+    "heading": {
+      "eyebrow": "TRANSPARENT ENGAGEMENT TIERS",
+      "title": "Predictable Investment",
+      "highlight": "Tiers",
+      "description": "No surprise billing, no runaway agency fees. Choose the tier that matches your product maturity."
+    },
+    "items": [
+      {
+        "name": "MVP Launchpad",
+        "cadence": "3-4 Weeks",
+        "price": "From $2,800",
+        "target": "Early-Stage Startups & Validations",
+        "features": [
+          "Full-stack Next.js or React Native build",
+          "Authentication & basic database models",
+          "Stripe or Razorpay payment setup",
+          "Cloud deployment on Vercel / Supabase",
+          "100% intellectual property transfer"
+        ],
+        "highlight": false
+      },
+      {
+        "name": "Growth Engine",
+        "cadence": "6-8 Weeks",
+        "price": "From $5,500",
+        "target": "Scaling Startups & Revenue SaaS",
+        "features": [
+          "Multi-tenant PostgreSQL schema isolation",
+          "Custom private RAG or LLM agent integration",
+          "Granular RBAC and admin telemetry dashboard",
+          "Kubernetes or Dockerized CI/CD pipelines",
+          "30-day dedicated post-launch hypercare"
+        ],
+        "highlight": true
+      },
+      {
+        "name": "Enterprise Mesh",
+        "cadence": "Dedicated Sprints",
+        "price": "Custom Scope",
+        "target": "High-Concurrency Scale & Enterprises",
+        "features": [
+          "Multi-cloud Terraform (AWS, GCP, Cloudflare)",
+          "Zero-trust security & SOC2 audit readiness",
+          "Dedicated senior engineering pod with daily Slack",
+          "99.999% uptime guarantee with 24/7 telemetry",
+          "Direct architect phone & emergency line"
+        ],
+        "highlight": false
+      }
+    ]
+  },
+  "services/saas-deep-dive": {
+    "heading": {
+      "eyebrow": "SAAS ARCHITECTURE MATRIX",
+      "title": "Architected for",
+      "highlight": "Multi-Tenant Scale",
+      "description": "We don't just write frontend wrappers. We engineer deep cloud primitives designed to support millions in monthly recurring revenue without architectural rewrites."
+    },
+    "items": [
+      {
+        "icon": null,
+        "title": "Isolated PostgreSQL Schema Tenancy",
+        "desc": "Every tenant gets dedicated database schema isolation, preventing cross-tenant data leakage and ensuring GDPR & HIPAA compliance.",
+        "stat": "Zero Data Leakage"
+      },
+      {
+        "icon": null,
+        "title": "Metered Billing & Stripe Webhooks",
+        "desc": "Native integration with Stripe Billing, Razorpay, and Lemon Squeezy with automated tier upgrades, invoice generation, and dunning management.",
+        "stat": "100% Automated"
+      },
+      {
+        "icon": null,
+        "title": "Granular Role-Based Access (RBAC)",
+        "desc": "Enterprise SSO (SAML / Okta), Multi-Factor Authentication (MFA), and customizable permission policies for organizations with 1,000+ seats.",
+        "stat": "SSO & SAML Ready"
+      },
+      {
+        "icon": null,
+        "title": "Sub-20ms Redis Caching Fabric",
+        "desc": "Multi-tiered Redis cache invalidation and distributed locking ensure lightning-fast read operations under million-user traffic spikes.",
+        "stat": "< 20ms Latency"
+      }
+    ]
+  },
+  "services/slas": {
+    "heading": {
+      "eyebrow": "Guaranteed Incident Response",
+      "title": "Production Service Level",
+      "highlight": "Agreements (SLAs)",
+      "description": "Contractual uptime, round-the-clock monitoring, and strict ticket response times backed by financial remedies and dedicated senior engineers."
+    },
+    "items": [
+      {
+        "level": "Severity P1 (Critical Outage)",
+        "response": "< 15 Minutes",
+        "resolution": "< 4 Hours",
+        "color": "border-rose-200 bg-rose-50/70 text-rose-800",
+        "description": "Complete platform outage or critical security compromise affecting production traffic."
+      },
+      {
+        "level": "Severity P2 (Major Degradation)",
+        "response": "< 1 Hour",
+        "resolution": "< 12 Hours",
+        "color": "border-amber-200 bg-amber-50/70 text-amber-800",
+        "description": "Core features impaired with non-critical workarounds available for end-users."
+      },
+      {
+        "level": "Severity P3 (Minor Defect)",
+        "response": "< 4 Hours",
+        "resolution": "Next Sprint Release",
+        "color": "border-sky-200 bg-sky-50/70 text-sky-800",
+        "description": "Cosmetic bugs, non-blocking UI issues, or minor workflow edge-cases."
+      },
+      {
+        "level": "Severity P4 (Feature Enhancement)",
+        "response": "< 8 Hours",
+        "resolution": "Backlog Prioritized",
+        "color": "border-emerald-200 bg-emerald-50/70 text-emerald-800",
+        "description": "New component requests, third-party API additions, or optimization ideas."
+      }
+    ]
+  },
+  "tech/data": {
+    "heading": {
+      "eyebrow": "Persistence & Data Flow",
+      "title": "Database &",
+      "highlight": "Real-Time Data Pipelines",
+      "description": "Data integrity without speed bottlenecks. We configure dual-layer persistence engines combining relational guarantees with sub-millisecond edge caching."
+    },
+    "items": [
+      {
+        "name": "PostgreSQL & Supabase",
+        "role": "Primary Relational Core",
+        "badge": "ACID COMPLIANT",
+        "desc": "Robust relational data integrity, row-level security (RLS), custom indexing, and pgvector embeddings for hybrid transactional and vector queries."
+      },
+      {
+        "name": "Redis & Upstash",
+        "role": "Sub-Millisecond In-Memory Caching",
+        "badge": "< 1MS LATENCY",
+        "desc": "Session state synchronization, distributed locks, rate-limiting tokens, and lightning-fast edge cache warming for frequent API responses."
+      },
+      {
+        "name": "Pinecone & Qdrant",
+        "role": "Vector Search & Semantic RAG",
+        "badge": "HIGH-DIMENSIONAL",
+        "desc": "Instant cosine-similarity searches across billions of embeddings, powering autonomous AI agent contextual retrieval and enterprise semantic search."
+      },
+      {
+        "name": "ClickHouse & BigQuery",
+        "role": "Real-Time Event Analytics",
+        "badge": "PETABYTE SCALE",
+        "desc": "Columnar database architecture for real-time telemetry processing, financial transaction logs, and analytical user journey queries."
+      }
+    ]
+  },
+  "tech/devops": {
+    "heading": {
+      "eyebrow": "Infrastructure Reliability",
+      "title": "DevOps &",
+      "highlight": "Cloud Infrastructure",
+      "description": "Deployments that scale from 10 to 1,000,000 requests per minute without human intervention. We engineer infrastructure for maximum uptime and minimal cloud cost."
+    },
+    "items": [
+      {
+        "title": "Infrastructure as Code (IaC)",
+        "tech": "Terraform & Pulumi",
+        "desc": "Reproducible multi-environment provisioning (Development, Staging, Production) with version-controlled state files."
+      },
+      {
+        "title": "Container Orchestration",
+        "tech": "Docker & AWS ECS / EKS",
+        "desc": "Microservice cluster isolation, horizontal auto-scaling triggers based on CPU/RAM metrics, and self-healing pods."
+      },
+      {
+        "title": "Edge Delivery Network & WAF",
+        "tech": "Cloudflare Workers & Fastly",
+        "desc": "Global CDN asset caching, DDoS mitigation, rate-limiting, and geo-distributed DNS routing with SSL/TLS termination."
+      },
+      {
+        "title": "Observability & APM Telemetry",
+        "tech": "Datadog, Sentry & Prometheus",
+        "desc": "Real-time error tracking, distributed request tracing, log aggregation, and automated Slack alert escalation."
+      }
+    ]
+  },
+  "tech/frontend-backend": {
+    "heading": {
+      "eyebrow": "FULL-STACK BREAKDOWN",
+      "title": "Frontend, Backend &",
+      "highlight": "Data Layer Anatomy",
+      "description": "Every layer of our application architecture is carefully chosen to ensure optimal developer experience, developer velocity, and runtime reliability."
+    },
+    "items": [
+      {
+        "title": "Next.js 16 & React 19 App Router",
+        "category": "Frontend Layer",
+        "desc": "Server-side rendering (SSR), Streaming Server Components (RSC), and Turbopack for near-instant cold loads and 100/100 Google Lighthouse Core Web Vitals.",
+        "tags": [
+          "React 19",
+          "Server Components",
+          "Turbopack",
+          "TailwindCSS v4"
+        ]
+      },
+      {
+        "title": "Python FastAPI & Go Microservices",
+        "category": "Backend Engine",
+        "desc": "High-throughput asynchronous APIs capable of handling 50,000+ requests per second with automatic OpenAPI schema generation and native Pydantic validation.",
+        "tags": [
+          "FastAPI",
+          "Go / Golang",
+          "gRPC",
+          "tRPC"
+        ]
+      },
+      {
+        "title": "PostgreSQL & Pinecone Hybrid Storage",
+        "category": "Data & Vectors",
+        "desc": "Relational ACID transaction safety paired with pgvector and Pinecone serverless indexes for high-speed AI embeddings and semantic search.",
+        "tags": [
+          "PostgreSQL 17",
+          "pgvector",
+          "Redis 7",
+          "Pinecone"
+        ]
+      },
+      {
+        "title": "React Native Fabric & Flutter",
+        "category": "Mobile Runtimes",
+        "desc": "Universal iOS and Android apps compiled with native C++ bridges, CRDT offline-first data synchronization, and 120 FPS fluid gestures.",
+        "tags": [
+          "React Native",
+          "Flutter",
+          "Hermes Engine",
+          "SQLite"
+        ]
+      }
+    ]
+  },
+  "tech/migration": {
+    "heading": {
+      "eyebrow": "Modernization Roadmap",
+      "title": "Legacy Monolith to",
+      "highlight": "Modern Stack Migration",
+      "description": "Strangled monolith architecture allows you to migrate legacy code incrementally without stopping your daily business operations or risking data loss."
+    },
+    "items": [
+      {
+        "from": "Legacy PHP / WordPress / Drupal",
+        "to": "Next.js App Router + Headless CMS / Go API",
+        "benefits": "10x faster page loads, headless flexibility, zero plugin vulnerability exploits."
+      },
+      {
+        "from": "Monolithic Django / Rails API",
+        "to": "Modular Microservices & FastAPI / Node TypeScript",
+        "benefits": "Sub-50ms API response times, horizontal worker scaling, strict type-safety."
+      },
+      {
+        "from": "Slow WebViews / Hybrid Apps",
+        "to": "Native 60 FPS React Native / Flutter",
+        "benefits": "Silky smooth gestures, native hardware access, unified codebase across iOS & Android."
+      },
+      {
+        "from": "On-Premises Dedicated Servers",
+        "to": "Containerized AWS / GCP Kubernetes & Terraform",
+        "benefits": "Elastic auto-scaling, disaster recovery failover, reduced infrastructure management overhead."
+      }
+    ]
+  },
+  "tech/philosophy": {
+    "heading": {
+      "eyebrow": "ARCHITECTURAL PRINCIPLES",
+      "title": "How We Architect for",
+      "highlight": "Decade-Long Durability",
+      "description": "Technology fads come and go. We build systems on bedrock engineering principles designed to scale gracefully from 1,000 to 10,000,000 users."
+    },
+    "items": [
+      {
+        "title": "End-to-End Type Safety",
+        "desc": "TypeScript strict mode from the database schema (Drizzle/Prisma) through the API layer (tRPC/FastAPI) to the UI components. Zero runtime undefined errors.",
+        "icon": null
+      },
+      {
+        "title": "Edge Compute & Serverless First",
+        "desc": "We leverage edge CDN nodes across 300+ global points of presence to execute compute closest to your users, driving p95 response times under 40ms.",
+        "icon": null
+      },
+      {
+        "title": "Stateless Microservices",
+        "desc": "Core business logic is isolated into lightweight, auto-scaling stateless services with Docker and Kubernetes, backed by persistent distributed databases.",
+        "icon": null
+      },
+      {
+        "title": "Zero Vendor Lock-In",
+        "desc": "All frameworks used (Next.js, FastAPI, PostgreSQL, Docker) are open-source and portable. You can host on AWS, GCP, Azure, or bare metal without rewriting code.",
+        "icon": null
+      }
+    ]
+  },
+  "tech/security": {
+    "heading": {
+      "eyebrow": "Zero-Trust Hardening",
+      "title": "Security &",
+      "highlight": "Encryption Stack",
+      "description": "Security isn't an afterthought. Every layer of our stack is hardened against modern attack vectors from Day 1."
+    },
+    "items": [
+      {
+        "icon": null,
+        "title": "AES-256 & TLS 1.3 Encryption",
+        "detail": "Hardware-level encryption for all database volumes, S3 storage buckets, and end-to-end TLS 1.3 socket cipher enforcement."
+      },
+      {
+        "icon": null,
+        "title": "Zero-Trust Auth & OAuth2 / OIDC",
+        "detail": "Stateless JWT tokens with short expiration windows, refresh token rotation, and multi-factor biometric authentication options."
+      },
+      {
+        "icon": null,
+        "title": "Automated SAST & Dependency Auditing",
+        "detail": "GitHub Actions integrated with Snyk, Trivy, and SonarQube to block merge requests that introduce CVE security vulnerabilities."
+      },
+      {
+        "icon": null,
+        "title": "OWASP Top 10 Hardened Headers",
+        "detail": "Configured Content Security Policy (CSP), HSTS preloading, XSS sanitization, and parameterized SQL queries preventing injection attacks."
+      }
+    ]
+  },
+  "testimonials/map": {
+    "heading": {
+      "eyebrow": "Worldwide Reach",
+      "title": "Trusted Across 15+ Nations:",
+      "highlight": "Global Client Footprint",
+      "description": "We operate seamlessly across Pacific, Eastern, GMT, GST, and IST time zones with structured async workflows and dedicated overlaps."
+    },
+    "items": [
+      {
+        "region": "North America (US & Canada)",
+        "clients": "22+ Deployments",
+        "hubs": "San Francisco, New York, Austin, Toronto",
+        "focus": "AI SaaS, FinTech, Web3 Protocols"
+      },
+      {
+        "region": "United Kingdom & Europe",
+        "clients": "14+ Deployments",
+        "hubs": "London, Berlin, Amsterdam, Zurich",
+        "focus": "GDPR Enterprise Platforms, HealthTech"
+      },
+      {
+        "region": "Middle East (GCC & UAE)",
+        "clients": "8+ Deployments",
+        "hubs": "Dubai, Abu Dhabi, Riyadh",
+        "focus": "E-Commerce, Government Portals, Logistics"
+      },
+      {
+        "region": "Asia Pacific & India",
+        "clients": "12+ Deployments",
+        "hubs": "Singapore, Bengaluru, Mumbai",
+        "focus": "High-Concurrency Mobile Apps, Quick Commerce"
+      }
+    ]
+  },
+  "testimonials/nps": {
+    "heading": {
+      "eyebrow": "Audited Client Feedback",
+      "title": "Institutional Net Promoter Score:",
+      "highlight": "98.4 NPS",
+      "description": "Software engineering agencies typically average 35-45 NPS. Our relentless dedication to clean code and predictable delivery places us in the top 1% globally."
+    },
+    "items": [
+      {
+        "category": "Architectural Caliber & Code Cleanliness",
+        "score": "99.2%"
+      },
+      {
+        "category": "Adherence to Sprint Deadlines",
+        "score": "98.4%"
+      },
+      {
+        "category": "Communication Transparency & Responsiveness",
+        "score": "99.8%"
+      },
+      {
+        "category": "Post-Launch Hypercare Support",
+        "score": "97.6%"
+      }
+    ]
+  },
+  "testimonials/outcomes": {
+    "heading": {
+      "eyebrow": "Verifiable ROI",
+      "title": "Before vs After:",
+      "highlight": "Client Business Outcomes",
+      "description": "Our code transforms businesses. Here is the concrete financial and operational impact experienced by founders after shipping with Divanex."
+    },
+    "items": [
+      {
+        "company": "FleetWave Logistics",
+        "before": "Legacy manual spreadsheets, delayed dispatch, driver churn.",
+        "after": "Automated real-time dispatch dashboard with sub-second GPS tracking.",
+        "stat": "+320% Revenue",
+        "statDetail": "Expanded to 4 new states in 6 months"
+      },
+      {
+        "company": "MediFlow EHR",
+        "before": "Non-compliant legacy database with slow patient record retrieval.",
+        "after": "HIPAA-hardened cloud architecture with sub-50ms search index.",
+        "stat": "4.2x Faster",
+        "statDetail": "Saved doctors 12 hours/week in data entry"
+      },
+      {
+        "company": "FinPulse Global",
+        "before": "Fragile monolithic payment code with frequent cart drop-offs.",
+        "after": "Fault-tolerant Next.js & Stripe multi-currency checkout engine.",
+        "stat": "99.999% SLA",
+        "statDetail": "$12M+ processed in first 90 days"
+      }
+    ]
+  },
+  "testimonials/reference-calls": {
+    "heading": {
+      "eyebrow": "Direct Founder Verification",
+      "title": "Request a 1-on-1 Confidential Client Reference Call",
+      "highlight": "",
+      "description": "Evaluating a major enterprise contract or $25k+ development sprint? We are pleased to connect you directly with existing founders and CTOs who have scaled their platforms with our engineering pods."
+    },
+    "items": [],
+    "cta": {
+      "label": "Schedule Reference Call",
+      "href": "/contact"
+    }
+  },
+  "testimonials/spotlights": {
+    "heading": {
+      "eyebrow": "Executive Testimonials",
+      "title": "Founder & CTO",
+      "highlight": "Video & Case Spotlights",
+      "description": "Hear directly from technical decision-makers why they trust Divanex with their mission-critical software codebases."
+    },
+    "items": [
+      {
+        "author": "Marcus Vance",
+        "role": "CTO, CloudScale Inc (San Francisco, CA)",
+        "quote": "Divanex took over our stalled Kubernetes migration and delivered it 3 weeks ahead of schedule. Their architectural discipline is unmatched.",
+        "badge": "VERIFIED CTO REVIEW"
+      },
+      {
+        "author": "Elena Rostova",
+        "role": "Founder, MedSync AI (London, UK)",
+        "quote": "The autonomous RAG agent they built increased our clinical query speed by 400%. They are true senior engineering partners.",
+        "badge": "VERIFIED FOUNDER REVIEW"
+      }
+    ]
+  },
+  "testimonials/verification": {
+    "heading": {
+      "eyebrow": "Independent Verification",
+      "title": "Third-Party Verified",
+      "highlight": "Industry Accolades",
+      "description": "Don't just take our word for it. Independent B2B review portals consistently rank Divanex among the top software engineering teams globally."
+    },
+    "items": [
+      {
+        "platform": "Clutch Global Leader",
+        "rating": "4.9 / 5.0",
+        "reviews": "38 Verified Reviews"
+      },
+      {
+        "platform": "Google Verified Partner",
+        "rating": "5.0 / 5.0",
+        "reviews": "52 Reviews"
+      },
+      {
+        "platform": "GoodFirms Top Custom Software",
+        "rating": "4.95 / 5.0",
+        "reviews": "29 Verified Reviews"
+      },
+      {
+        "platform": "G2 High Performer 2025",
+        "rating": "4.9 / 5.0",
+        "reviews": "Enterprise Software"
+      }
+    ]
+  },
+  "why-us/communication": {
+    "heading": {
+      "eyebrow": "COLLABORATION ARCHITECTURE",
+      "title": "Transparent",
+      "highlight": "Communication Protocols",
+      "description": "We work as an organic extension of your internal engineering leadership. Here is how we communicate every single day."
+    },
+    "items": [
+      {
+        "icon": null,
+        "title": "Direct Slack Connect",
+        "desc": "Real-time communication with the engineers actually writing your code. No middleman account managers playing telephone.",
+        "badge": "Real-Time Chat"
+      },
+      {
+        "icon": null,
+        "title": "Bi-Weekly Screen Share Demos",
+        "desc": "Live walkthroughs of working staging builds every two weeks. You see tangible progress, test features, and guide development.",
+        "badge": "Every 2 Weeks"
+      },
+      {
+        "icon": null,
+        "title": "Global Timezone Overlap",
+        "desc": "Coordinated overlap with US (EST/PST), UK (GMT), UAE (GST), and India (IST) business hours to ensure same-day feedback cycles.",
+        "badge": "4-6 Hours Overlap"
+      },
+      {
+        "icon": null,
+        "title": "Guaranteed Response SLAs",
+        "desc": "Under 15-minute response times during active business hours for urgent staging queries, and same-day PR turnarounds.",
+        "badge": "< 15 Mins SLA"
+      }
+    ]
+  },
+  "why-us/comparison": {
+    "heading": {
+      "eyebrow": "Market Benchmark Comparison",
+      "title": "How Divanex Outperforms the",
+      "highlight": "Alternatives",
+      "description": "Stop sacrificing velocity for quality or paying exorbitant legacy agency overhead. See why scaling businesses partner with Divanex."
+    },
+    "items": [
+      {
+        "vector": "Speed to Working MVP",
+        "freelancers": "Unpredictable (12-24 weeks)",
+        "agencies": "Slow bureaucratic (16-32 weeks)",
+        "divanex": "Fast agile sprints (4-8 weeks)"
+      },
+      {
+        "vector": "Code & IP Ownership",
+        "freelancers": "Vague, risk of repo hostage",
+        "agencies": "Often proprietary framework lock-in",
+        "divanex": "100% immediate IP transfer on milestone"
+      },
+      {
+        "vector": "Architectural Caliber",
+        "freelancers": "Junior to mid-level shortcuts",
+        "agencies": "Delegated to low-cost junior interns",
+        "divanex": "Strict senior engineering & code reviews"
+      },
+      {
+        "vector": "Communication Protocol",
+        "freelancers": "Ghosting & timezone lag",
+        "agencies": "Account managers buffer engineers",
+        "divanex": "Direct Slack channel with tech leads"
+      },
+      {
+        "vector": "Pricing & Invoicing",
+        "freelancers": "Hourly scope-creep & unpredictability",
+        "agencies": "Hefty markups & $20k+/mo retainers",
+        "divanex": "Transparent milestone-gated flat pricing"
+      },
+      {
+        "vector": "Post-Launch Warranty",
+        "freelancers": "Disappears after payment",
+        "agencies": "Billable $250/hr maintenance tier",
+        "divanex": "30-day comprehensive zero-cost hypercare"
+      }
+    ]
+  },
+  "why-us/culture": {
+    "heading": {
+      "eyebrow": "THE DIVANEX ENGINEERING BAR",
+      "title": "A High-Caliber",
+      "highlight": "Engineering Culture",
+      "description": "We treat software as an engineering discipline, not a creative experiment. We prioritize type-safety, maintainability, and clean architecture over flashy shortcuts that lead to technical debt."
+    },
+    "items": [
+      {
+        "title": "Senior-Only Engineers",
+        "desc": "Zero junior bait-and-switch. Every team member working on your codebase has at least 5+ years of production SaaS and distributed systems experience."
+      },
+      {
+        "title": "Radical Transparency",
+        "desc": "You have real-time access to our pull requests, code reviews, and project issue boards. If there is a roadblock, you know about it immediately."
+      },
+      {
+        "title": "Continuous Code Reviews",
+        "desc": "No code merges to staging without dual peer reviews checking for memory leaks, SQL indexing, OWASP vulnerabilities, and UX consistency."
+      }
+    ]
+  },
+  "why-us/guarantees": {
+    "heading": {
+      "eyebrow": "Zero Downside Commitment",
+      "title": "Institutional",
+      "highlight": "Risk Reversal Guarantees",
+      "description": "We eliminate the anxiety of outsourcing software development with legally enforceable warranties, IP escrow, and milestone-gated payment releases."
+    },
+    "items": [
+      {
+        "icon": null,
+        "title": "14-Day Sprint Milestone Guarantee",
+        "desc": "If our initial 14-day sprint deliverables do not meet the exact architectural specifications defined in our statement of work, we revise at zero additional cost until approved."
+      },
+      {
+        "icon": null,
+        "title": "Clean Source Code Escrow & IP Transfer",
+        "desc": "Every line of code, Docker file, and schema migration is committed directly to your enterprise GitHub repository under an unrestricted, non-exclusive intellectual property deed."
+      },
+      {
+        "icon": null,
+        "title": "30-Day Zero-Cost Hypercare Warranty",
+        "desc": "Following production deployment, our engineering team provides 30 calendar days of comprehensive bug-fixing and configuration monitoring at no additional charge."
+      },
+      {
+        "icon": null,
+        "title": "Fixed-Price Scope Lock Protection",
+        "desc": "Once an estimate and sprint specification is signed, you are protected against unexpected budget creep. If a feature takes longer than expected, we absorb the cost."
+      }
+    ]
+  },
+  "why-us/ownership": {
+    "heading": {
+      "eyebrow": "100% CODE SOVEREIGNTY",
+      "title": "Our Code",
+      "highlight": "Ownership Manifesto",
+      "description": "Many traditional agencies trap clients by hosting apps on their internal servers or using proprietary CMSs. At Divanex, you own 100% of everything we build."
+    },
+    "items": [
+      {
+        "icon": null,
+        "title": "Direct Git Repository Transfer",
+        "desc": "All source code is committed directly to your GitHub/GitLab organization from Day 1. You hold the master keys at all times."
+      },
+      {
+        "icon": null,
+        "title": "Zero Proprietary Lock-In",
+        "desc": "We write clean, standard, idiomatic code without proprietary frameworks or black-box libraries. Any competent engineering team can pick it up immediately."
+      },
+      {
+        "icon": null,
+        "title": "Root Infrastructure Access",
+        "desc": "Cloud accounts (AWS, GCP, Vercel, Supabase) are created under your organization. We deploy via your permissions, not our agency servers."
+      },
+      {
+        "icon": null,
+        "title": "Signed Legal Assignment",
+        "desc": "Full intellectual property assignment contracts legally transferring all copyright, patents, and trade secrets to your legal entity upon payment."
+      }
+    ]
+  },
+  "why-us/retention": {
+    "heading": {
+      "eyebrow": "Partnership Longevity",
+      "title": "Client Retention &",
+      "highlight": "Partnership Loyalty",
+      "description": "Agencies focus on signing you; we focus on scaling you. Our high client retention rate is a direct outcome of disciplined software execution and honest collaboration."
+    },
+    "items": [
+      {
+        "value": "96.2%",
+        "label": "Annual Client Retention",
+        "desc": "Percentage of founders who continue for version 2.0 or maintain ongoing infrastructure retainers."
+      },
+      {
+        "value": "18+ Mo",
+        "label": "Average Partnership Tenure",
+        "desc": "Our clients treat us as an embedded internal engineering department rather than an external agency."
+      },
+      {
+        "value": "84%",
+        "label": "Direct Referral Rate",
+        "desc": "Over four out of five new enterprise contracts originate from direct founder-to-founder recommendations."
+      },
+      {
+        "value": "0%",
+        "label": "Code Held Hostage",
+        "desc": "Strict policy of transparent daily commits ensuring you retain complete control of your tech assets at all times."
+      }
+    ]
+  }
+};
