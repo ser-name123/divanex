@@ -117,7 +117,7 @@ export async function handleIngressEvent(request: Request) {
     `Achieved ${caseStudy.impactHighlight} ${caseStudy.impactLabel} within the first 30 days of production deployment.`,
     "Decoupled legacy bottlenecks into isolated, horizontally scalable microservices with sub-50ms latency.",
     "Zero downtime production migration with 100% data integrity verified across all historical records.",
-    "Delivered ahead of schedule with 99.999% SLA uptime and comprehensive end-to-end type safety."
+    "Delivered on schedule with production-proven reliability and comprehensive end-to-end type safety."
   ];
 
   return (
@@ -710,14 +710,14 @@ export async function handleIngressEvent(request: Request) {
               href="/contact"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-lg shadow-blue-500/20 hover:scale-105 transition-all"
             >
-              <span>Discuss Project Scope & Investment</span>
+              <span>Start a Project</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              href="/contact"
+              href="/portfolio"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white border border-slate-200 hover:border-sky-400 text-slate-700 hover:text-slate-900 shadow-xs transition-all"
             >
-              <span>Speak with Lead Architect</span>
+              <span>View Case Studies</span>
             </Link>
           </div>
         </div>

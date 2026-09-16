@@ -75,7 +75,7 @@ export async function sendFormNotifications(params: NotifyParams): Promise<Notif
   try {
     const [settings, site] = await Promise.all([getContent("forms"), getSiteSettings()]);
     const flow = formFlow(settings, params.kind);
-    const siteUrl = (site.siteUrl || "https://divanextechnologies.com").replace(/\/$/, "");
+    const siteUrl = (site.siteUrl || "https://divanex.vercel.app").replace(/\/$/, "");
     const kindLabel = FORM_KIND_LABELS[params.kind];
 
     const jobs: Array<Promise<void>> = [];

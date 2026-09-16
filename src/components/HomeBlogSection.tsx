@@ -25,6 +25,7 @@ import {
  */
 export default function HomeBlogSection({ posts: incoming }: { posts?: BlogPost[] }) {
   const posts = (incoming && incoming.length > 0 ? incoming : initialBlogPosts).slice(0, 3);
+  if (posts.length === 0) return null;
 
   return (
     <section className="py-8 lg:py-10 relative overflow-hidden bg-slate-50/60 border-t border-slate-200/80 select-none">
@@ -78,6 +79,9 @@ export default function HomeBlogSection({ posts: incoming }: { posts?: BlogPost[
                   <img
                     src={post.coverImage}
                     alt={post.title}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=1200&q=80";
+                    }}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3.5 left-3.5">
@@ -141,6 +145,9 @@ export default function HomeBlogSection({ posts: incoming }: { posts?: BlogPost[
                   <img
                     src={post.author.avatar}
                     alt={post.author.name}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80";
+                    }}
                     className="w-9 h-9 rounded-full object-cover border border-sky-200 shrink-0"
                   />
                   <div className="min-w-0">
@@ -190,7 +197,7 @@ export default function HomeBlogSection({ posts: incoming }: { posts?: BlogPost[
               href="/contact"
               className="px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 hover:text-sky-700 border border-slate-200 font-bold text-xs sm:text-sm transition-all shadow-2xs flex items-center gap-1.5"
             >
-              <span>Schedule Architecture Review →</span>
+              <span>Start a Project →</span>
             </Link>
           </div>
         </div>

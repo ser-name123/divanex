@@ -352,66 +352,98 @@ function ProjectLaptopMockup({ project }: { project: PortfolioProject }) {
     );
   }
 
-  // Parana Tool (Default)
-  return (
-    <div className="w-full h-full bg-gradient-to-br from-[#12141a] via-[#1a1d26] to-[#0d0f14] text-white flex items-center justify-between p-3 sm:p-4 relative select-none overflow-hidden font-sans border border-amber-900/40">
-      {/* Background Glowing Warm Radial Orb */}
-      <div className="absolute right-6 top-1/2 -translate-y-1/2 w-28 h-28 rounded-full bg-gradient-to-tr from-amber-500/30 to-orange-500/30 blur-xl pointer-events-none" />
+  if (project.id === "parana-tool") {
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-[#12141a] via-[#1a1d26] to-[#0d0f14] text-white flex items-center justify-between p-3 sm:p-4 relative select-none overflow-hidden font-sans border border-amber-900/40">
+        {/* Background Glowing Warm Radial Orb */}
+        <div className="absolute right-6 top-1/2 -translate-y-1/2 w-28 h-28 rounded-full bg-gradient-to-tr from-amber-500/30 to-orange-500/30 blur-xl pointer-events-none" />
 
-      {/* Left Info */}
-      <div className="flex-1 pr-2 flex flex-col justify-between h-full py-0.5 relative z-10">
-        <div className="space-y-1">
-          <div className="flex items-center gap-1.5">
-            <ShoppingBag className="w-4 h-4 text-amber-400" />
-            <span className="font-black text-xs sm:text-sm text-white tracking-wide">Parana Tool</span>
+        {/* Left Info */}
+        <div className="flex-1 pr-2 flex flex-col justify-between h-full py-0.5 relative z-10">
+          <div className="space-y-1">
+            <div className="flex items-center gap-1.5">
+              <span className="font-black text-xs sm:text-sm text-amber-400 tracking-wide">PARANA TOOL</span>
+              <span className="text-[8px] font-bold px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                CNC &amp; Tooling
+              </span>
+            </div>
+            <div className="text-[10px] sm:text-[11px] font-extrabold text-amber-200 leading-tight">
+              Industrial CNC Tooling &amp; CAD Vault
+            </div>
+            <p className="text-[8px] text-slate-300 leading-tight">
+              Precision carbide end mills, inserts &amp; instant B2B engineering RFQ portal.
+            </p>
           </div>
-          <div className="text-[10px] sm:text-[11px] font-extrabold text-amber-200 leading-tight">
-            Design Products • Deliver Experience
+
+          <div className="flex flex-wrap gap-1 pt-1">
+            <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-400/40 text-[8px] font-bold">
+              3,200+ CNC SKUs
+            </span>
+            <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 text-[8px] font-bold">
+              Instant CAD STEP
+            </span>
           </div>
-          <p className="text-[8px] text-slate-300 leading-tight">
-            Trusted E-Commerce Mobile Application &amp; B2B Wholesale Portal.
-          </p>
+
+          <div className="text-[8px] text-slate-400 font-mono">
+            Sub-40ms Parametric Tool Search
+          </div>
         </div>
 
-        <div className="flex flex-wrap gap-1 pt-1">
-          <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-400/40 text-[8px] font-bold">
-            45,000+ SKUs
-          </span>
-          <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 text-[8px] font-bold">
-            4.9 ★ Rating
-          </span>
-        </div>
+        {/* Right Floating CNC Component Card */}
+        <div className="w-[92px] sm:w-[106px] h-[138px] sm:h-[152px] bg-slate-950 rounded-[14px] border-[2px] border-amber-500/40 p-1.5 shadow-2xl flex flex-col justify-between shrink-0 transform rotate-1 hover:rotate-0 transition-transform duration-300 relative z-10">
+          <div className="w-5 h-1.5 bg-slate-800 rounded-full mx-auto" />
 
-        <div className="text-[8px] text-slate-400">
-          Sub-70ms Algolia SKU Instant Search
+          <div className="bg-slate-900 rounded p-1 border border-slate-800 text-[7px] text-amber-400 font-mono">
+            🔍 CNC End Mill Ø12mm
+          </div>
+
+          {/* CNC Tool Spec Card */}
+          <div className="bg-slate-900 rounded-lg p-1.5 border border-slate-800 space-y-0.5">
+            <div className="h-7 rounded bg-gradient-to-tr from-amber-500/20 to-orange-500/20 flex items-center justify-center text-xs font-mono font-bold text-amber-300">
+              ⚙️ 4-Flute TiAlN
+            </div>
+            <div className="text-[7px] font-bold text-white truncate">
+              Solid Carbide Mill
+            </div>
+            <div className="flex justify-between items-center text-[6px] text-slate-400 font-mono">
+              <span>HRC 55 Hardness</span>
+              <span className="text-emerald-400 font-bold">In Stock</span>
+            </div>
+          </div>
+
+          <div className="w-full py-0.5 rounded bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black text-[7px] text-center shadow-xs">
+            Download CAD / RFQ
+          </div>
         </div>
       </div>
+    );
+  }
 
-      {/* Right Floating Phone */}
-      <div className="w-[92px] sm:w-[106px] h-[138px] sm:h-[152px] bg-slate-950 rounded-[14px] border-[2px] border-amber-500/40 p-1.5 shadow-2xl flex flex-col justify-between shrink-0 transform rotate-1 hover:rotate-0 transition-transform duration-300 relative z-10">
-        <div className="w-5 h-1.5 bg-slate-800 rounded-full mx-auto" />
-
-        <div className="bg-slate-900 rounded p-1 border border-slate-800 text-[7px] text-slate-400">
-          🔍 Search 45k+ Tools...
+  // Dynamic Generic Project Mockup Fallback
+  return (
+    <div className="w-full h-full bg-gradient-to-br from-[#0c1322] via-[#111c33] to-[#080d19] text-white flex flex-col justify-between p-3.5 sm:p-4 relative select-none overflow-hidden font-sans border border-sky-900/40">
+      <div className="flex items-center justify-between pb-1.5 border-b border-slate-800">
+        <div className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
+          <span className="font-black text-xs text-white tracking-wide">{project.title}</span>
         </div>
+        <span className="text-[8px] font-bold px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-400/30">
+          {project.category}
+        </span>
+      </div>
 
-        {/* Product Card */}
-        <div className="bg-slate-900 rounded-lg p-1.5 border border-slate-800 space-y-0.5">
-          <div className="h-7 rounded bg-gradient-to-tr from-amber-500/30 to-orange-500/30 flex items-center justify-center text-xs">
-            ⚡ 🔧
-          </div>
-          <div className="flex justify-between items-center text-[7px] font-bold text-white">
-            <span>Multimeter Pro</span>
-          </div>
-          <div className="flex justify-between items-center text-[6px]">
-            <span className="text-amber-400 font-black">$89.00</span>
-            <span className="text-emerald-400 font-bold">Bulk: $64</span>
-          </div>
+      <div className="my-auto space-y-1">
+        <div className="text-xs sm:text-sm font-black text-slate-100 leading-snug">
+          {project.tagline || project.title}
         </div>
+        <p className="text-[8px] sm:text-[9px] text-slate-300 line-clamp-2">
+          {project.description}
+        </p>
+      </div>
 
-        <div className="w-full py-0.5 rounded bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black text-[7px] text-center shadow-xs">
-          1-Click Reorder
-        </div>
+      <div className="flex items-center justify-between text-[8px] text-slate-400 bg-slate-900/80 px-2.5 py-1 rounded border border-slate-800">
+        <span className="text-emerald-400 font-bold">{project.impactMetric} {project.impactLabel}</span>
+        <span className="font-mono text-slate-300">{(project.techStack || [])[0] || "Next.js 15"}</span>
       </div>
     </div>
   );
@@ -656,7 +688,7 @@ export default function PortfolioSection({ isHome = false, items }: PortfolioSec
               href="/portfolio"
               className="btn-futuristic-primary text-xs sm:text-sm !py-3 !px-6 !rounded-xl"
             >
-              <span>Explore All Technical Case Studies &amp; Architecture Blueprints</span>
+              <span>View Case Studies &amp; Architecture Blueprints</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

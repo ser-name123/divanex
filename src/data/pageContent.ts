@@ -225,8 +225,8 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
       description:
         "Zero bloat, type-safe integrity, sub-second latency, and horizontal scalability. We build exclusively with modern, long-term durable frameworks including Next.js, React Native, Python, Go, Kubernetes, and PostgreSQL.",
       statusText: "PRODUCTION ARSENAL // MODERN RUNTIMES",
-      actionLabel: "Browse the Stack",
-      actionHref: "#stack",
+      actionLabel: "Start a Project",
+      actionHref: "/contact",
       stats: [
         s("ts-1", "TypeScript Coverage", "100%", "Strict Type-Safety Contract", "Code2", "blue"),
         s("ts-2", "Cloud Architecture", "Multi-Cloud", "AWS, GCP & Kubernetes Ingress", "Cloud", "cyan"),
@@ -243,8 +243,8 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
       description:
         "Explore our proven track record engineering custom multi-tenant SaaS platforms, autonomous AI agents, cross-platform mobile apps, and low-latency fintech web applications that deliver compounding ROI.",
       statusText: "CLIENT SHOWCASE // VERIFIABLE SUCCESS",
-      actionLabel: "View Case Studies",
-      actionHref: "#cases",
+      actionLabel: "Start a Project",
+      actionHref: "/contact",
       stats: [
         s("pf-1", "Platforms Shipped", "50+", "SaaS, Mobile & AI Apps", "Briefcase", "blue"),
         s("pf-2", "Average ARR Growth", "+320%", "Client Business Expansion", "TrendingUp", "emerald"),
@@ -406,11 +406,11 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
     title: "Have Something You Need Built",
     highlight: "Properly This Time?",
     subtitle:
-      "Half an hour with an engineer, not a salesperson. Bring the problem and whatever you have already tried — you will leave with a rough scope, an honest timeline and a number.",
-    primaryLabel: "Send Us the Brief",
+      "Bring your project vision or technical challenge — you will receive a direct technical blueprint, realistic delivery milestones, and an honest quote.",
+    primaryLabel: "Start a Project",
     primaryHref: "/contact",
-    secondaryLabel: "Book a Half-Hour Call",
-    secondaryHref: "/contact",
+    secondaryLabel: "View Case Studies",
+    secondaryHref: "/portfolio",
   },
   ctaOverrides: {
     "/services": {
@@ -464,11 +464,11 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
   },
 
   whyUsHeading: {
-    eyebrow: "WHY TEAMS PICK US // NO SURPRISES",
-    title: "A Small Senior Team, and",
-    highlight: "Work You Can Audit",
+    eyebrow: "REAL PROOF // WHY COMPANIES CHOOSE DIVANEX",
+    title: "Why Companies Choose",
+    highlight: "Divanex",
     description:
-      "No account managers relaying messages, no juniors learning on your budget. You work with the engineers writing the code, you see the repository from week one, and you keep it whatever happens next.",
+      "Real engineering experience, verifiable weekly milestones, and 100% intellectual property protection—without agency bloat or junior handoffs.",
   },
   whyUsPillars: whyChoosePillars,
   whyUsComparison: comparisonData,

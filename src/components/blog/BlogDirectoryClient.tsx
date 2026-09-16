@@ -38,25 +38,30 @@ interface BlogDirectoryClientProps {
 
 const CATEGORIES = [
   "All",
-  "Architecture & SaaS",
-  "Healthcare HMIS",
+  "Food Delivery & Logistics",
+  "PropTech & SaaS",
+  "E-Commerce & Retail",
+  "IoT & Smart Mobility",
   "Enterprise ERP",
-  "Fintech & Security",
   "AI & Autonomous Agents",
-  "Cloud & DevOps"
+  "Healthcare HMIS",
+  "Fintech & Payments",
+  "Cloud & DevOps",
+  "Mobile Engineering"
 ];
 
 const POPULAR_TAGS = [
-  "PostgreSQL",
-  "Healthcare HMIS",
+  "Hyperlocal Delivery",
+  "PropTech",
+  "E-Commerce",
+  "EV Mobility",
+  "Industrial ERP",
+  "AI Agents",
+  "Healthcare",
   "Fintech",
-  "HL7 FHIR",
-  "Next.js 15",
-  "Kubernetes",
-  "LLM Agents",
-  "Double-Entry",
-  "Kafka",
-  "ClickHouse"
+  "Cloud Cost Optimization",
+  "React Native",
+  "Flutter"
 ];
 
 export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClientProps) {
@@ -178,16 +183,27 @@ export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClien
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
+      case "Food Delivery & Logistics":
+        return <Layers className="w-3.5 h-3.5 text-amber-600" />;
+      case "PropTech & SaaS":
+        return <Briefcase className="w-3.5 h-3.5 text-blue-600" />;
+      case "E-Commerce & Retail":
+        return <Flame className="w-3.5 h-3.5 text-rose-600" />;
+      case "IoT & Smart Mobility":
+        return <Cpu className="w-3.5 h-3.5 text-emerald-600" />;
       case "Healthcare HMIS":
         return <Stethoscope className="w-3.5 h-3.5 text-sky-600" />;
       case "Enterprise ERP":
         return <Briefcase className="w-3.5 h-3.5 text-indigo-600" />;
+      case "Fintech & Payments":
       case "Fintech & Security":
         return <Banknote className="w-3.5 h-3.5 text-emerald-600" />;
       case "AI & Autonomous Agents":
         return <Cpu className="w-3.5 h-3.5 text-purple-600" />;
       case "Cloud & DevOps":
         return <Cloud className="w-3.5 h-3.5 text-sky-600" />;
+      case "Mobile Engineering":
+        return <Layers className="w-3.5 h-3.5 text-cyan-600" />;
       default:
         return <Layers className="w-3.5 h-3.5 text-blue-600" />;
     }
@@ -357,6 +373,9 @@ export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClien
                   <img
                     src={featuredPost.author.avatar}
                     alt={featuredPost.author.name}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80";
+                    }}
                     className="w-12 h-12 rounded-2xl object-cover border-2 border-sky-200 shadow-sm"
                   />
                   <div>
@@ -383,6 +402,9 @@ export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClien
               <img
                 src={featuredPost.coverImage}
                 alt={featuredPost.title}
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=1200&q=80";
+                }}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-slate-950/10 to-transparent pointer-events-none" />
@@ -427,22 +449,28 @@ export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClien
         {gridPosts.length === 0 ? (
           <div className="p-16 text-center rounded-3xl bg-white border border-slate-200 space-y-4 shadow-sm">
             <div className="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-400">
-              <Filter className="w-6 h-6" />
+              <BookOpen className="w-6 h-6 text-sky-600" />
             </div>
-            <h4 className="text-xl font-bold text-slate-900">No matching blueprints found</h4>
+            <h4 className="text-xl font-bold text-slate-900">
+              {posts.length === 0 ? "Engineering Articles Coming Soon" : "No matching blueprints found"}
+            </h4>
             <p className="text-sm text-slate-500 max-w-md mx-auto font-medium">
-              We couldn&apos;t find any articles matching your search criteria. Try modifying your keywords or resetting filters.
+              {posts.length === 0
+                ? "Our solutions architects are currently compiling new technical deep-dives and production blueprints."
+                : "We couldn't find any articles matching your search criteria. Try modifying your keywords or resetting filters."}
             </p>
-            <button
-              onClick={() => {
-                setSelectedCategory("All");
-                setSearchQuery("");
-                setSelectedTag(null);
-              }}
-              className="px-5 py-2.5 rounded-xl text-xs font-bold bg-sky-50 text-sky-800 border border-sky-200 hover:bg-sky-100 transition-colors shadow-2xs cursor-pointer"
-            >
-              Reset All Filters
-            </button>
+            {posts.length > 0 && (
+              <button
+                onClick={() => {
+                  setSelectedCategory("All");
+                  setSearchQuery("");
+                  setSelectedTag(null);
+                }}
+                className="px-5 py-2.5 rounded-xl text-xs font-bold bg-sky-50 text-sky-800 border border-sky-200 hover:bg-sky-100 transition-colors shadow-2xs cursor-pointer"
+              >
+                Reset All Filters
+              </button>
+            )}
           </div>
         ) : (
           <div className="space-y-10">
@@ -458,6 +486,9 @@ export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClien
                       <img
                         src={post.coverImage}
                         alt={post.title}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=1200&q=80";
+                        }}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -518,6 +549,9 @@ export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClien
                         <img
                           src={post.author.avatar}
                           alt={post.author.name}
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80";
+                          }}
                           className="w-8 h-8 rounded-xl object-cover border border-slate-200 shadow-2xs"
                         />
                         <div>

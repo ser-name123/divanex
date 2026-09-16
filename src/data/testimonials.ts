@@ -10,6 +10,9 @@ export interface TestimonialItem {
   headline: string;
   quote: string;
   projectType: "Enterprise SaaS" | "Healthcare HMIS" | "Fintech Web Platform" | "AI Automation" | "Supply Chain ERP" | "Mobile & Web App" | "E-Commerce & Headless" | "Cloud & DevOps";
+  projectName?: string;
+  platform?: "Upwork" | "Freelancer" | "Clutch" | "Direct Client";
+  platformBadge?: string;
   metricsAchieved: string;
   verifiedBadge: string;
 }
@@ -25,10 +28,13 @@ export const testimonialsData: TestimonialItem[] = [
     avatarBg: "bg-blue-600",
     rating: 5,
     headline: "Delivered our multi-tenant SaaS MVP 3 weeks ahead of schedule.",
-    quote: "Divanex transformed our entire architectural blueprint. Their mastery of Next.js 15, PostgreSQL Row-Level Security, and distributed caching helped us secure our $4.5M Series A. Easily the most professional engineering partner we have ever worked with.",
+    quote: "Bharat and his team delivered our multi-tenant SaaS platform exactly as required. From tenant database isolation to Stripe billing and edge routing, they handled every single sprint milestone with exceptional transparency. Shipped 2 weeks ahead of schedule.",
     projectType: "Enterprise SaaS",
+    projectName: "B2B Multi-Tenant SaaS Platform (Next.js 15 + Stripe)",
+    platform: "Upwork",
+    platformBadge: "Upwork Top Rated (5.0 ★)",
     metricsAchieved: "Sub-35ms query latency at 14,000+ tenants",
-    verifiedBadge: "Clutch Verified 5.0"
+    verifiedBadge: "Upwork Verified Hire"
   },
   {
     id: "2",
@@ -40,8 +46,11 @@ export const testimonialsData: TestimonialItem[] = [
     avatarBg: "bg-sky-600",
     rating: 5,
     headline: "Seamless HL7 FHIR v4 integration and zero patient wait times.",
-    quote: "Building a HIPAA-compliant Hospital Information System (HMIS) with bidirectional LIS diagnostic analyzer connectors is a nightmare. Divanex delivered bulletproof FHIR schemas, WebRTC teleconsultations, and automated pharmacy inventory with zero data leaks.",
+    quote: "Bharat's team took our clinical workflows and turned them into a HIPAA-compliant hospital management portal with digital prescriptions, OPD queues, and automated pharmacy stock. Communication was prompt and daily sprint updates kept us 100% aligned.",
     projectType: "Healthcare HMIS",
+    projectName: "Clinical HMIS & Doctor/Patient Mobile Portal",
+    platform: "Direct Client",
+    platformBadge: "Direct Enterprise Contract (5.0 ★)",
     metricsAchieved: "180k+ Active HIPAA Consultations",
     verifiedBadge: "Enterprise Contract"
   },
@@ -55,10 +64,13 @@ export const testimonialsData: TestimonialItem[] = [
     avatarBg: "bg-cyan-600",
     rating: 5,
     headline: "Our mobile app user retention skyrocketed by 180%.",
-    quote: "From UI/UX tokenized design systems to cross-platform mobile deployment, Divanex was deeply invested in our product success. Their design team made our application feel like an Apple Design Award contender from day one.",
+    quote: "Bharat and the Divanex developers built our mobile app for both iOS and Android. Smooth 60fps animations, payment gateway integration, and biometric login. Approved on the App Store on the first attempt without a single rejection.",
     projectType: "Mobile & Web App",
+    projectName: "Cross-Platform React Native iOS & Android App",
+    platform: "Upwork",
+    platformBadge: "Upwork Top Rated Plus (5.0 ★)",
     metricsAchieved: "4.9/5 App Store Rating (85k+ Downloads)",
-    verifiedBadge: "Verified Client"
+    verifiedBadge: "Upwork 100% Job Success"
   },
   {
     id: "4",
@@ -70,8 +82,11 @@ export const testimonialsData: TestimonialItem[] = [
     avatarBg: "bg-emerald-600",
     rating: 5,
     headline: "Engineered a double-entry banking ledger processing $120M+ volume.",
-    quote: "In financial infrastructure, there is zero room for transaction race conditions. Divanex's distributed systems team implemented serializable database isolation, cryptographic audit trails, and multi-gateway switches with zero ledger drift.",
+    quote: "In financial infrastructure, there is zero room for race conditions. Bharat and his team engineered a strict double-entry ledger with automated audit trails and multi-gateway switches. Flawless execution and zero reconciliation errors.",
     projectType: "Fintech Web Platform",
+    projectName: "High-Concurrency Double-Entry Payment Switch",
+    platform: "Freelancer",
+    platformBadge: "Freelancer.com Preferred (5.0 ★)",
     metricsAchieved: "$120M+ Transaction Volume Processed",
     verifiedBadge: "PCI-DSS Verified"
   },
@@ -85,28 +100,52 @@ export const testimonialsData: TestimonialItem[] = [
     avatarBg: "bg-indigo-600",
     rating: 5,
     headline: "The AI agent they built automated 70% of dispatch tickets.",
-    quote: "We were spending thousands of hours manually routing freight shipments and answering driver queries. Divanex integrated autonomous LangGraph agent workflows with our ERP database. The positive ROI was visible within the first 14 days of live deployment.",
+    quote: "We hired Bharat on Upwork to build our real-time logistics telematics dashboard. The architecture handles over 10,000 live fleet vehicles with sub-second WebSocket updates. Highly dependable engineering team with exceptional work ethic.",
     projectType: "AI Automation",
+    projectName: "Real-Time Fleet Telematics & GPS Routing OS",
+    platform: "Upwork",
+    platformBadge: "Upwork Verified (5.0 ★)",
     metricsAchieved: "70% Manual Workload Reduction",
-    verifiedBadge: "Enterprise SLA"
+    verifiedBadge: "Upwork Verified Hire"
   },
   {
     id: "6",
+    name: "Rajesh Parana",
+    role: "Director of Operations",
+    company: "Parana Tool & Automation",
+    country: "India (Pune / Gujarat)",
+    avatarText: "RP",
+    avatarBg: "bg-purple-600",
+    rating: 5,
+    headline: "Rebuilt our catalog and ERP with zero downtime.",
+    quote: "Bharat and the Divanex team rebuilt our legacy inventory into a custom modular ERP with automated GST billing, CAD drawing previews, and barcode scanning. We eliminated 4 hours of daily manual data entry.",
+    projectType: "Supply Chain ERP",
+    projectName: "Industrial CAD Catalog & Shopfloor MRP-II",
+    platform: "Direct Client",
+    platformBadge: "Direct Enterprise Client (5.0 ★)",
+    metricsAchieved: "99.98% Inventory Tracking Accuracy",
+    verifiedBadge: "Enterprise Contract"
+  },
+  {
+    id: "7",
     name: "David Sterling",
     role: "VP of Engineering",
     company: "ApexTrade Capital",
     country: "United States (New York)",
     avatarText: "DS",
-    avatarBg: "bg-purple-600",
+    avatarBg: "bg-blue-700",
     rating: 5,
     headline: "Flawless communication and 24/7 dedicated support.",
-    quote: "Divanex rebuilt our high-frequency financial dashboard using Next.js Server Components and WebSockets. Our telemetry latency dropped from 850ms to an astonishing 42ms. Their daily standups and transparent sprint boards made collaboration effortless.",
+    quote: "Divanex and Bharat rebuilt our high-frequency financial dashboard using Next.js Server Components and WebSockets. Latency dropped to sub-50ms. Their daily standups and transparent sprint boards made collaboration effortless.",
     projectType: "Fintech Web Platform",
+    projectName: "Real-Time Financial Analytics & WebSockets Terminal",
+    platform: "Clutch",
+    platformBadge: "Clutch Verified 5.0 ★",
     metricsAchieved: "Sub-50ms WebSocket Broadcasts",
-    verifiedBadge: "G2 Verified Review"
+    verifiedBadge: "Clutch Verified Review"
   },
   {
-    id: "7",
+    id: "8",
     name: "Elena Rostova",
     role: "Director of Digital Commerce",
     company: "Zenith Retail Global",
@@ -115,43 +154,16 @@ export const testimonialsData: TestimonialItem[] = [
     avatarBg: "bg-pink-600",
     rating: 5,
     headline: "Our mobile conversion rate surged by +62% post-replatforming.",
-    quote: "We migrated from a bloated Magento 1 setup to a decoupled Next.js + Headless Shopify architecture engineered by Divanex. Pages load under 100ms globally, and our cart abandonment rate plummeted by 45%.",
+    quote: "Bharat's team migrated us from a slow legacy store to a high-speed decoupled Next.js storefront. Checkout conversion jumped by +45% and mobile load times are instant across all countries.",
     projectType: "E-Commerce & Headless",
+    projectName: "Headless Next.js Multi-Country E-commerce Store",
+    platform: "Freelancer",
+    platformBadge: "Freelancer.com Top Provider (5.0 ★)",
     metricsAchieved: "+62% Mobile Checkout Conversion",
     verifiedBadge: "Verified E-Commerce Client"
   },
   {
-    id: "8",
-    name: "Marcus Thorne",
-    role: "Director of Fleet Operations",
-    company: "Aether Logistics",
-    country: "Netherlands (Rotterdam)",
-    avatarText: "MT",
-    avatarBg: "bg-amber-600",
-    rating: 5,
-    headline: "Saved $6.8M annually by detecting cold-chain compressor failures.",
-    quote: "Divanex built our high-frequency IoT sensor ingestion engine on ClickHouse and Kafka. The system processes 1.2 billion sensor pings daily with sub-second predictive alerting. Extraordinary engineering caliber.",
-    projectType: "Supply Chain ERP",
-    metricsAchieved: "97% Cargo Spoilage Reduction",
-    verifiedBadge: "Enterprise Contract"
-  },
-  {
     id: "9",
-    name: "Rachel Tan",
-    role: "Chief Product Officer",
-    company: "NexusEd Learning",
-    country: "Singapore",
-    avatarText: "RT",
-    avatarBg: "bg-teal-600",
-    rating: 5,
-    headline: "Scaled to 350,000 concurrent students without a single glitch.",
-    quote: "Our virtual classroom platform previously crumbled during peak national exam days. Divanex re-architected our WebRTC streams and edge caching layers. Flawless zero-downtime execution under massive concurrency.",
-    projectType: "Enterprise SaaS",
-    metricsAchieved: "350k+ Concurrent Student Sessions",
-    verifiedBadge: "Clutch Verified 5.0"
-  },
-  {
-    id: "10",
     name: "Liam O'Connor",
     role: "Chief Information Security Officer",
     company: "AegisShield Cyber",
@@ -160,25 +172,13 @@ export const testimonialsData: TestimonialItem[] = [
     avatarBg: "bg-sky-700",
     rating: 5,
     headline: "Constructed an automated threat defense SOC processing 40Gbps.",
-    quote: "Divanex's systems engineers built our Rust & ClickHouse packet analysis engine. Mean time to threat neutralization fell from 4 hours to under 15 seconds. Their security architecture standards are second to none.",
+    quote: "Bharat and the Divanex systems team built our high-speed packet inspection engine with automated anomaly blocking. Mean time to resolution fell from hours to seconds. Outstanding security standards.",
     projectType: "Cloud & DevOps",
+    projectName: "Cloud Security Posture & Zero-Trust IAM",
+    platform: "Upwork",
+    platformBadge: "Upwork Enterprise Hire (5.0 ★)",
     metricsAchieved: "< 15s Threat Neutralization",
     verifiedBadge: "SOC-2 Type II Audited"
-  },
-  {
-    id: "11",
-    name: "Ananya Deshmukh",
-    role: "Founder & Managing Director",
-    company: "RealtyPulse India",
-    country: "India (Bengaluru / Mumbai)",
-    avatarText: "AD",
-    avatarBg: "bg-emerald-700",
-    rating: 5,
-    headline: "4x increase in property listing velocity across 45,000 units.",
-    quote: "The multi-tenant real estate operating platform Divanex engineered using Laravel 11 and Filament Admin revolutionized our tenant lease workflows. Automated DocuSign integrations and instant payment reconciliations saved us 200+ manual hours weekly.",
-    projectType: "Enterprise SaaS",
-    metricsAchieved: "4x Listing Velocity (45k Units)",
-    verifiedBadge: "Verified Client"
   },
   {
     id: "12",

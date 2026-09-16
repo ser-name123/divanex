@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { servicesData, type ServiceItem } from "@/data/services";
@@ -24,14 +24,11 @@ import {
   Activity,
   Database,
   Terminal,
-  Play,
-  RotateCcw,
   Flame,
   ShieldCheck,
   Building2,
   Truck,
   Globe2,
-  Check,
   Search,
   X,
   SlidersHorizontal,
@@ -39,8 +36,232 @@ import {
   BatteryCharging
 } from "lucide-react";
 
-// Category membership. Hoisted to module scope so the filter memo below can
-// depend on it honestly instead of rebuilding these arrays every render.
+// The 8 Core Flagship Services showcased on the top-level / homepage (Business-Problem Oriented)
+interface CoreServiceItem {
+  id: string;
+  slug: string;
+  title: string;
+  badge: string;
+  tagline: string;
+  modulesSummary: string;
+  description: string;
+  icon: React.ElementType;
+  modules: string[];
+  features: string[];
+  theme: {
+    badgeClass: string;
+    iconBg: string;
+    iconColor: string;
+    tagBg: string;
+    tagText: string;
+    glowBg: string;
+  };
+}
+
+const CORE_SERVICES_LIST: CoreServiceItem[] = [
+  {
+    id: "hospital-healthcare-management",
+    slug: "hospital-healthcare-management",
+    title: "Healthcare & Clinic Software",
+    badge: "CLINICAL & COMPLIANT",
+    tagline: "End-to-end digital hospital, clinic & telehealth operations",
+    modulesSummary: "HMIS • Patient Portal • Doctor App • Lab • Pharmacy",
+    description:
+      "Modernize clinical workflows with automated electronic health records, doctor scheduling, integrated diagnostic lab workflows, and automated pharmacy inventory.",
+    icon: Stethoscope,
+    modules: ["HMIS & EMR", "Patient Portal", "Doctor App", "Lab / LIS", "Pharmacy POS", "Telehealth"],
+    features: [
+      "OPD/IPD patient flow, triage & digital prescriptions",
+      "Automated pharmacy stock, billing & insurance claims",
+      "Doctor mobile apps & secure patient health portals"
+    ],
+    theme: {
+      badgeClass: "bg-emerald-50 text-emerald-800 border-emerald-200",
+      iconBg: "bg-emerald-50 border-emerald-200",
+      iconColor: "text-emerald-700",
+      tagBg: "bg-emerald-50/70 hover:bg-emerald-100/70 border-emerald-200/80",
+      tagText: "text-emerald-900",
+      glowBg: "from-emerald-100/30 to-transparent"
+    }
+  },
+  {
+    id: "saas-development",
+    slug: "saas-development",
+    title: "SaaS Platforms & Products",
+    badge: "RECURRING REVENUE",
+    tagline: "Subscriptions, metered billing & multi-tenant cloud scale",
+    modulesSummary: "Multi-tenant • Subscription • Billing • Analytics",
+    description:
+      "Launch your multi-tenant SaaS platform with automated Stripe subscriptions, metered usage billing, subscriber analytics, and scalable cloud architecture.",
+    icon: Layers,
+    modules: ["Multi-tenant RLS", "Stripe Subscriptions", "Metered Billing", "Subscriber Analytics", "Admin Telemetry"],
+    features: [
+      "Multi-tenant setup with 100% customer data isolation",
+      "Automated Stripe & Razorpay recurring billing",
+      "Self-serve customer onboarding & admin telemetry"
+    ],
+    theme: {
+      badgeClass: "bg-indigo-50 text-indigo-800 border-indigo-200",
+      iconBg: "bg-indigo-50 border-indigo-200",
+      iconColor: "text-indigo-700",
+      tagBg: "bg-indigo-50/70 hover:bg-indigo-100/70 border-indigo-200/80",
+      tagText: "text-indigo-900",
+      glowBg: "from-indigo-100/30 to-transparent"
+    }
+  },
+  {
+    id: "ai-solutions-automation",
+    slug: "ai-solutions-automation",
+    title: "AI & Workflow Automation",
+    badge: "AI AGENTS & RAG",
+    tagline: "Connect existing tools & eliminate repetitive manual tasks",
+    modulesSummary: "AI Agents • RAG • Document AI • Automation",
+    description:
+      "Connect your existing tools and automate repetitive workflows with custom AI assistants, smart document processing, vector search, and automated API pipelines.",
+    icon: Cpu,
+    modules: ["AI Agents", "RAG Pipelines", "Document AI / OCR", "Workflow Automation", "Custom LLM Integrations"],
+    features: [
+      "Custom AI assistants trained on your company data & SOPs",
+      "Automated data sync across CRM, emails & spreadsheets",
+      "Eliminate manual data entry and save 20+ hours per week"
+    ],
+    theme: {
+      badgeClass: "bg-purple-50 text-purple-800 border-purple-200",
+      iconBg: "bg-purple-50 border-purple-200",
+      iconColor: "text-purple-700",
+      tagBg: "bg-purple-50/70 hover:bg-purple-100/70 border-purple-200/80",
+      tagText: "text-purple-900",
+      glowBg: "from-purple-100/30 to-transparent"
+    }
+  },
+  {
+    id: "ecommerce-marketplace-platforms",
+    slug: "ecommerce-marketplace-platforms",
+    title: "E-Commerce & Marketplaces",
+    badge: "MULTI-VENDOR ENGINE",
+    tagline: "Sell products online with vendor payouts & fast checkout",
+    modulesSummary: "Buyer • Seller • Payments • Commission • Admin",
+    description:
+      "Launch high-converting online storefronts or multi-vendor marketplaces with sub-second product search, automated commission splits, escrow, and merchant dashboards.",
+    icon: ShoppingCart,
+    modules: ["Buyer App", "Seller Portal", "Split Payments", "Commission Engine", "Superadmin Console"],
+    features: [
+      "Multi-vendor seller onboarding & automated commission splits",
+      "Sub-second catalog search & friction-free mobile checkout",
+      "Wholesale B2B tiered pricing, bulk discounts & customer accounts"
+    ],
+    theme: {
+      badgeClass: "bg-amber-50 text-amber-800 border-amber-200",
+      iconBg: "bg-amber-50 border-amber-200",
+      iconColor: "text-amber-700",
+      tagBg: "bg-amber-50/70 hover:bg-amber-100/70 border-amber-200/80",
+      tagText: "text-amber-900",
+      glowBg: "from-amber-100/30 to-transparent"
+    }
+  },
+  {
+    id: "mobile-app-development",
+    slug: "web-app-development",
+    title: "Mobile App Development",
+    badge: "IOS & ANDROID NATIVE",
+    tagline: "Fast, engaging mobile apps for Apple & Google Play",
+    modulesSummary: "iOS • Android • GPS & Maps • Payments • Offline Sync",
+    description:
+      "iOS and Android apps with real-time features, secure payment checkout, live GPS maps, push notifications, and offline data synchronization.",
+    icon: Smartphone,
+    modules: ["iOS & Android Apps", "Live GPS & Maps", "Biometric Auth", "In-App Payments", "Offline Data Sync"],
+    features: [
+      "Single codebase for Apple App Store & Google Play",
+      "Push notifications, camera & location hardware access",
+      "Integrated checkout, subscriptions & biometric login"
+    ],
+    theme: {
+      badgeClass: "bg-sky-50 text-sky-800 border-sky-200",
+      iconBg: "bg-sky-50 border-sky-200",
+      iconColor: "text-sky-700",
+      tagBg: "bg-sky-50/70 hover:bg-sky-100/70 border-sky-200/80",
+      tagText: "text-sky-900",
+      glowBg: "from-sky-100/30 to-transparent"
+    }
+  },
+  {
+    id: "custom-web-applications",
+    slug: "web-app-development",
+    title: "Custom Web Applications",
+    badge: "HIGH-SPEED PORTALS",
+    tagline: "Client portals, internal tools & customer dashboards",
+    modulesSummary: "Client Portals • Admin Tools • Dashboards • APIs • RBAC",
+    description:
+      "Transform your manual business operations into intuitive, lightning-fast web applications, self-serve customer portals, and interactive analytical dashboards.",
+    icon: Globe2,
+    modules: ["Client Portals", "Admin Consoles", "Real-Time Dashboards", "Role-Based RBAC", "REST/GraphQL APIs"],
+    features: [
+      "Custom customer portals, admin consoles & dashboards",
+      "Role-based user permissions & secure authentication",
+      "Fast, responsive design optimized for high conversion"
+    ],
+    theme: {
+      badgeClass: "bg-blue-50 text-blue-800 border-blue-200",
+      iconBg: "bg-blue-50 border-blue-200",
+      iconColor: "text-blue-700",
+      tagBg: "bg-blue-50/70 hover:bg-blue-100/70 border-blue-200/80",
+      tagText: "text-blue-900",
+      glowBg: "from-blue-100/30 to-transparent"
+    }
+  },
+  {
+    id: "enterprise-erp-systems",
+    slug: "enterprise-erp-systems",
+    title: "ERP & Business Systems",
+    badge: "ZERO SEAT FEES",
+    tagline: "Unified inventory, supply chain, accounts & payroll",
+    modulesSummary: "Inventory • GST Billing • Production • Supply Chain • HR",
+    description:
+      "Replace messy spreadsheets and rigid off-the-shelf software with an ERP tailored to your exact business operations—without recurring per-user license fees.",
+    icon: Briefcase,
+    modules: ["Multi-Warehouse Stock", "GST Invoicing", "Production & MRP", "Vendor Procurement", "Automated Payroll"],
+    features: [
+      "Multi-location warehouse inventory & barcode tracking",
+      "Automated GST invoicing, double-entry ledger & payroll",
+      "Production planning, vendor purchasing & live profit reports"
+    ],
+    theme: {
+      badgeClass: "bg-slate-100 text-slate-800 border-slate-300",
+      iconBg: "bg-slate-100 border-slate-300",
+      iconColor: "text-slate-800",
+      tagBg: "bg-slate-100/80 hover:bg-slate-200/80 border-slate-300/80",
+      tagText: "text-slate-900",
+      glowBg: "from-slate-200/30 to-transparent"
+    }
+  },
+  {
+    id: "cloud-devops",
+    slug: "cloud-devops",
+    title: "Cloud & DevOps Infrastructure",
+    badge: "CRASH-PROOF CLOUD",
+    tagline: "Zero-downtime hosting, security & cloud cost reduction",
+    modulesSummary: "AWS • GCP • Docker Pods • Auto-Scaling • CI/CD",
+    description:
+      "Ensure your applications never crash under heavy traffic. We engineer auto-scaling cloud servers, automated CI/CD pipelines, 24/7 security, and reduce monthly cloud bills.",
+    icon: Cloud,
+    modules: ["AWS & GCP Setup", "Docker & Kubernetes", "Zero-Downtime CI/CD", "Automated Backups", "Cost Optimization"],
+    features: [
+      "Auto-scaling servers that handle traffic surges seamlessly",
+      "Automated daily backups & continuous disaster recovery",
+      "Cloud audit to reduce your AWS/GCP hosting costs by up to 40%"
+    ],
+    theme: {
+      badgeClass: "bg-teal-50 text-teal-800 border-teal-200",
+      iconBg: "bg-teal-50 border-teal-200",
+      iconColor: "text-teal-700",
+      tagBg: "bg-teal-50/70 hover:bg-teal-100/70 border-teal-200/80",
+      tagText: "text-teal-900",
+      glowBg: "from-teal-100/30 to-transparent"
+    }
+  }
+];
+
+// Category membership for the full /services catalog
 const enterpriseIds = [
   "hospital-healthcare-management",
   "enterprise-erp-systems",
@@ -52,7 +273,6 @@ const enterpriseIds = [
   "legaltech-contract-automation",
   "energytech-smart-grid"
 ];
-
 
 const fintechIds = [
   "fintech-banking-solutions",
@@ -91,33 +311,6 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
   const [activeCategory, setActiveCategory] = useState<"all" | "enterprise" | "fintech_commerce" | "ai_cloud">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedService, setSelectedService] = useState<ServiceItem>(services[0]);
-
-  // Micro-widget 1: Hospital Triage & Bed Occupancy Simulator
-  const [hospitalBedOccupancy, setHospitalBedOccupancy] = useState(88);
-  const [activeClinicalWard, setActiveClinicalWard] = useState<"icu" | "opd" | "ot">("icu");
-
-  // Micro-widget 2: ERP Factory Telemetry Simulator
-  const [erpPlantEfficiency, setErpPlantEfficiency] = useState(96.4);
-  const [activeErpModule, setActiveErpModule] = useState<"wms" | "mrp" | "ledger">("mrp");
-
-  // Micro-widget 3: SaaS Multi-Tenant Interactive State
-  const [activeTenant, setActiveTenant] = useState<"alpha" | "fintech" | "global">("alpha");
-  const [tenantQps, setTenantQps] = useState(14280);
-
-  // Micro-widget 4: AI Engine Model Selector & Streaming Prompt
-  const [activeModel, setActiveModel] = useState<"r1" | "claude" | "gpt4">("r1");
-  const [aiTokensSec, setAiTokensSec] = useState(128);
-
-  // Dynamic simulation timer for telemetry
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTenantQps((prev) => prev + Math.floor(Math.random() * 31) - 15);
-      setAiTokensSec(120 + Math.floor(Math.random() * 18));
-      setHospitalBedOccupancy((prev) => Math.min(98, Math.max(78, prev + (Math.random() > 0.5 ? 1 : -1))));
-      setErpPlantEfficiency((prev) => Number((95.5 + Math.random() * 3).toFixed(1)));
-    }, 2500);
-    return () => clearInterval(interval);
-  }, []);
 
   const getServiceIcon = (iconName: string) => {
     switch (iconName) {
@@ -255,24 +448,37 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
   }, [services, activeCategory, searchQuery]);
 
   return (
-    <section id="services" className="relative py-8 lg:py-10 overflow-hidden bg-slate-50/50">
+    <section id="services" className="relative py-12 lg:py-16 overflow-hidden bg-slate-50/50">
       <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         
-        {/* Section Header with High-Contrast Badge */}
+        {/* Section Header */}
         <div className="reveal-init text-center max-w-4xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono font-bold text-sky-800 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-[#5c9556] animate-ping"></span>
-            <Sparkles className="w-3.5 h-3.5 text-[#0f7670]" />
-            <span className="tracking-wider uppercase">WHAT WE BUILD // 22 PRACTICE AREAS</span>
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border border-sky-200 text-xs font-mono font-bold text-sky-700 shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-sky-500 animate-ping"></span>
+            <Layers className="w-3.5 h-3.5 text-sky-600" />
+            <span className="tracking-wider uppercase">
+              {isHome ? "WHAT WE BUILD // CORE DOMAINS & PLATFORMS" : "WHAT WE BUILD // 22 PRACTICE AREAS"}
+            </span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-semibold tracking-tight text-slate-900 leading-tight">
-            The Systems Your Business Runs On,{" "}
-            <span className="gradient-text font-semibold">Built Properly</span>
+            {isHome ? (
+              <>
+                Software Built for Your{" "}
+                <span className="gradient-text font-semibold">Exact Business Model</span>
+              </>
+            ) : (
+              <>
+                Software Built to Solve{" "}
+                <span className="gradient-text font-semibold">Real Business Problems</span>
+              </>
+            )}
           </h2>
 
           <p className="text-slate-600 text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl mx-auto font-normal">
-            Hospital and clinic software, multi-tenant SaaS products, ERP and inventory platforms, payment and ledger engines, AI agents, mobile apps. If it has to stay up and stay correct, it is the kind of work we take on.
+            {isHome
+              ? "From multi-tenant SaaS and AI pipelines to clinical healthcare, ERPs, and multi-vendor marketplaces—we engineer the exact architecture, user portals, and automated backoffices your product needs."
+              : "Hospital and clinic software, multi-tenant SaaS products, ERP and inventory platforms, payment and ledger engines, AI agents, mobile apps. If it has to stay up and stay correct, it is the kind of work we take on."}
           </p>
 
           {/* Category Filter Pills & Search Bar (Rendered on /services or when viewing all) */}
@@ -356,471 +562,140 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
         </div>
 
         {/* ======================================================== */}
-        {/* HOMEPAGE VIEW: CURATED FLAGSHIP BENTO GRID (5 FEATURED) */}
+        {/* HOMEPAGE VIEW: CLEAN 8 CORE SERVICES HIGH-IMPACT GRID   */}
         {/* ======================================================== */}
         {isHome && (
-          <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 xl:gap-8">
-            
-            {/* BENTO CARD 1: Hospital HMIS & Healthcare Systems (Large 7 Cols) */}
-            <div
-              onClick={() => {
-                setSelectedService(services[0]);
-                router.push("/services/hospital-healthcare-management");
-              }}
-              className={`reveal-init reveal-delay-1 lg:col-span-7 rounded-3xl p-6 sm:p-8 transition-all duration-300 relative overflow-hidden group cursor-pointer border ${
-                selectedService.id === "hospital-healthcare-management"
-                  ? "bg-white border-sky-400 shadow-xl shadow-sky-500/10 ring-1 ring-sky-300"
-                  : "bg-white border-slate-200 hover:border-sky-300 hover:shadow-lg hover:shadow-sky-500/5"
-              }`}
-            >
-              <div className="absolute top-0 right-0 w-64 h-64 bg-sky-100/60 rounded-full blur-3xl pointer-events-none group-hover:bg-sky-200/50 transition-all"></div>
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {CORE_SERVICES_LIST.map((svc) => {
+              const IconComponent = svc.icon;
+              return (
+                <div
+                  key={svc.id}
+                  onClick={() => router.push(`/services/${svc.slug}`)}
+                  className="reveal-init rounded-3xl p-6 sm:p-7 bg-white border border-slate-200/90 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-950/5 transition-all duration-300 flex flex-col justify-between group cursor-pointer relative overflow-hidden"
+                >
+                  {/* Ambient accent glow on hover */}
+                  <div className={`absolute top-0 right-0 w-40 h-40 bg-gradient-to-br ${svc.theme.glowBg} rounded-full blur-2xl pointer-events-none group-hover:scale-125 transition-transform duration-500`}></div>
 
-              <div className="flex flex-wrap items-center justify-between gap-3 mb-6 relative z-10">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-sky-50 border border-sky-200 text-sky-700 shadow-xs">
-                    <Stethoscope className="w-6 h-6" />
-                  </div>
                   <div>
-                    <Link
-                      href="/services/hospital-healthcare-management"
-                      onClick={(e) => e.stopPropagation()}
-                      className="text-xl sm:text-2xl font-semibold text-slate-900 group-hover:text-sky-700 transition-colors inline-flex items-center gap-2"
-                    >
-                      <span>Hospital HMIS & Healthcare Systems</span>
-                      <ArrowRight className="w-4 h-4 text-sky-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                    </Link>
-                    <p className="text-xs text-sky-700 font-mono font-semibold">
-                      HL7_FHIR_V4 // HIPAA & ABDM LEVEL-2 COMPLIANT
+                    {/* Card Header: Icon + Domain Badge */}
+                    <div className="flex items-center justify-between gap-2 mb-4 relative z-10">
+                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border shadow-xs shrink-0 group-hover:scale-105 transition-all ${svc.theme.iconBg} ${svc.theme.iconColor}`}>
+                        <IconComponent className="w-6 h-6" />
+                      </div>
+                      <span className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border transition-all truncate max-w-[170px] ${svc.theme.badgeClass}`}>
+                        {svc.badge}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <div className="relative z-10 mb-2">
+                      <Link
+                        href={`/services/${svc.slug}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-sky-700 transition-colors inline-flex items-center gap-1.5"
+                      >
+                        <span>{svc.title}</span>
+                        <ArrowRight className="w-4 h-4 text-sky-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all shrink-0" />
+                      </Link>
+                      <p className="text-xs text-slate-500 font-mono font-medium mt-1 line-clamp-1">
+                        {svc.tagline}
+                      </p>
+                    </div>
+
+                    {/* Instant High-Impact Modules String Strip */}
+                    <div className="relative z-10 mb-4 px-3 py-2 rounded-xl bg-slate-50 border border-slate-200/80 group-hover:border-sky-200 group-hover:bg-sky-50/40 transition-colors">
+                      <div className="text-[10px] font-mono font-bold tracking-wide uppercase text-slate-700">
+                        {svc.modulesSummary}
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-normal line-clamp-2 relative z-10">
+                      {svc.description}
                     </p>
-                  </div>
-                </div>
-                <span className="px-3 py-1 rounded-full text-[11px] font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1.5 shadow-2xs">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>CLINICAL GRADE</span>
-                </span>
-              </div>
 
-              <p className="text-slate-600 text-sm leading-relaxed mb-6 relative z-10 font-medium">
-                For hospitals, clinic chains and diagnostic labs. Registration through discharge, prescriptions the pharmacy can read, lab and scan results attached to the right patient, and stock that reconciles at month end.
-              </p>
-
-              {/* Micro-Interactive Widget: Hospital Ward & Bed Occupancy Simulator */}
-              <div
-                onClick={(e) => e.stopPropagation()}
-                className="rounded-2xl bg-slate-50 border border-slate-200 p-4 sm:p-5 font-mono text-xs mb-6 relative z-10 shadow-xs"
-              >
-                <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-200 text-slate-600 font-sans">
-                  <div className="flex items-center gap-2 text-sky-900 font-bold font-mono">
-                    <Activity className="w-3.5 h-3.5 text-sky-600 animate-pulse" />
-                    <span>CLINICAL WARD TELEMETRY</span>
+                    {/* Included Modules Pill Cloud */}
+                    <div className="relative z-10 mb-5">
+                      <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-1.5">
+                        <Sparkles className="w-3 h-3 text-sky-600" />
+                        <span>Core Modules Built</span>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {svc.modules.map((mod, mIdx) => (
+                          <span
+                            key={mIdx}
+                            className={`inline-flex items-center px-2 py-0.5 rounded-lg text-[11px] font-medium border transition-colors ${svc.theme.tagBg} ${svc.theme.tagText}`}
+                          >
+                            {mod}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-[11px] text-emerald-700 font-bold flex items-center gap-1 font-mono">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                    <span>OCCUPANCY: {hospitalBedOccupancy}%</span>
-                  </div>
-                </div>
 
-                <div className="flex flex-wrap items-center gap-2 mt-3 mb-4">
-                  <span className="text-[11px] text-slate-500 uppercase font-sans font-bold">Active Dept:</span>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveClinicalWard("icu");
-                    }}
-                    className={`px-3 py-1 rounded-lg text-[11px] font-sans font-semibold transition-all cursor-pointer ${
-                      activeClinicalWard === "icu"
-                        ? "bg-sky-600 text-white shadow-xs"
-                        : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
-                    }`}
-                  >
-                    ICU / Critical Care
-                  </button>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveClinicalWard("opd");
-                    }}
-                    className={`px-3 py-1 rounded-lg text-[11px] font-sans font-semibold transition-all cursor-pointer ${
-                      activeClinicalWard === "opd"
-                        ? "bg-sky-600 text-white shadow-xs"
-                        : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
-                    }`}
-                  >
-                    OPD Triage Tokens
-                  </button>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveClinicalWard("ot");
-                    }}
-                    className={`px-3 py-1 rounded-lg text-[11px] font-sans font-semibold transition-all cursor-pointer ${
-                      activeClinicalWard === "ot"
-                        ? "bg-sky-600 text-white shadow-xs"
-                        : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
-                    }`}
-                  >
-                    Operation Theatre (OT)
-                  </button>
-                </div>
-
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-[11px]">
-                  <div className="bg-white p-2.5 rounded-xl border border-slate-200 shadow-2xs">
-                    <span className="text-slate-500 block text-[10px] font-sans font-semibold">FHIR Protocol</span>
-                    <span className="text-sky-800 font-bold">HL7 v4 Encrypted</span>
-                  </div>
-                  <div className="bg-white p-2.5 rounded-xl border border-slate-200 shadow-2xs">
-                    <span className="text-slate-500 block text-[10px] font-sans font-semibold">PACS Radiology</span>
-                    <span className="text-emerald-700 font-bold">&lt; 120ms Web DICOM</span>
-                  </div>
-                  <div className="bg-white p-2.5 rounded-xl border border-slate-200 shadow-2xs">
-                    <span className="text-slate-500 block text-[10px] font-sans font-semibold">Pharmacy Stock</span>
-                    <span className="text-purple-800 font-bold">FEFO Batch Auto</span>
-                  </div>
-                  <div className="bg-white p-2.5 rounded-xl border border-slate-200 shadow-2xs">
-                    <span className="text-slate-500 block text-[10px] font-sans font-semibold">TPA Cashless</span>
-                    <span className="text-amber-800 font-bold">EDI 837 Live Claims</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-200 relative z-10">
-                <div className="flex flex-wrap items-center gap-3 text-xs text-slate-700 font-medium">
-                  <span className="flex items-center gap-1">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> OPD/IPD Management
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> LIS Machine Drivers
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Doctor & Patient Portals
-                  </span>
-                </div>
-
-                <Link
-                  href="/services/hospital-healthcare-management"
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-xs font-bold text-sky-800 border border-sky-200 group-hover:border-sky-300 transition-all shadow-xs group-hover:translate-x-0.5"
-                >
-                  <span>View Full HMIS Architecture</span>
-                  <ArrowRight className="w-4 h-4 text-sky-700" />
-                </Link>
-              </div>
-            </div>
-
-            {/* BENTO CARD 2: Enterprise ERP & Supply Chain (5 Cols) */}
-            <div
-              onClick={() => {
-                setSelectedService(services[1]);
-                router.push("/services/enterprise-erp-systems");
-              }}
-              className={`reveal-init reveal-delay-2 lg:col-span-5 rounded-3xl p-6 sm:p-8 transition-all duration-300 relative overflow-hidden group cursor-pointer border ${
-                selectedService.id === "enterprise-erp-systems"
-                  ? "bg-white border-indigo-400 shadow-xl shadow-indigo-500/10 ring-1 ring-indigo-300"
-                  : "bg-white border-slate-200 hover:border-indigo-300 hover:shadow-lg hover:shadow-indigo-500/5"
-              }`}
-            >
-              <div className="absolute top-0 right-0 w-52 h-52 bg-indigo-100/50 rounded-full blur-3xl pointer-events-none group-hover:bg-indigo-200/50 transition-all"></div>
-
-              <div className="flex items-center justify-between mb-5 relative z-10">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-indigo-50 border border-indigo-200 text-indigo-700 shadow-xs">
-                    <Briefcase className="w-6 h-6" />
-                  </div>
-                  <div>
+                  {/* Card Footer Link */}
+                  <div className="pt-3.5 border-t border-slate-100 relative z-10 flex items-center justify-between gap-2">
+                    <span className="text-[11px] text-slate-600 font-mono flex items-center gap-1">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                      <span>Production Ready</span>
+                    </span>
                     <Link
-                      href="/services/enterprise-erp-systems"
+                      href={`/services/${svc.slug}`}
                       onClick={(e) => e.stopPropagation()}
-                      className="text-xl sm:text-2xl font-semibold text-slate-900 group-hover:text-indigo-700 transition-colors inline-flex items-center gap-2"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-sky-50 text-xs font-bold text-slate-800 hover:text-sky-800 border border-slate-200 hover:border-sky-300 group-hover:border-sky-300 transition-all shadow-xs group-hover:translate-x-0.5"
                     >
-                      <span>Enterprise ERP & Supply Chain</span>
-                      <ArrowRight className="w-4 h-4 text-indigo-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                      <span>Explore Modules</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-sky-600" />
                     </Link>
-                    <p className="text-xs text-indigo-700 font-mono font-semibold">
-                      MODULAR_MRP2 // ZERO_PER_SEAT_LICENSES
-                    </p>
                   </div>
                 </div>
-              </div>
-
-              <p className="text-slate-600 text-sm leading-relaxed mb-5 relative z-10 font-medium">
-                For manufacturers and distributors who have outgrown spreadsheets and refuse to bend their process to packaged software. Stock across locations, production, purchase, accounts and payroll in one place.
-              </p>
-
-              <div
-                onClick={(e) => e.stopPropagation()}
-                className="rounded-2xl bg-slate-50 border border-slate-200 p-4 font-mono text-xs mb-5 shadow-xs relative z-10"
-              >
-                <div className="flex items-center justify-between pb-2.5 border-b border-slate-200">
-                  <span className="text-[11px] text-indigo-900 font-bold flex items-center gap-1.5 font-mono">
-                    <Building2 className="w-3.5 h-3.5 text-indigo-600" />
-                    PLANT PRODUCTION MESH
-                  </span>
-                  <span className="text-[10px] text-emerald-800 font-bold px-2 py-0.5 rounded bg-emerald-100 border border-emerald-300">
-                    {erpPlantEfficiency}% OEE EFFICIENCY
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-3 gap-1.5 mt-3 mb-3">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveErpModule("mrp");
-                    }}
-                    className={`py-1 px-1.5 rounded text-[10px] font-sans font-semibold transition-all text-center cursor-pointer ${
-                      activeErpModule === "mrp"
-                        ? "bg-sky-600 text-white shadow-2xs"
-                        : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
-                    }`}
-                  >
-                    Shopfloor MRP-II
-                  </button>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveErpModule("wms");
-                    }}
-                    className={`py-1 px-1.5 rounded text-[10px] font-sans font-semibold transition-all text-center cursor-pointer ${
-                      activeErpModule === "wms"
-                        ? "bg-sky-600 text-white shadow-2xs"
-                        : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
-                    }`}
-                  >
-                    Multi-Plant WMS
-                  </button>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveErpModule("ledger");
-                    }}
-                    className={`py-1 px-1.5 rounded text-[10px] font-sans font-semibold transition-all text-center cursor-pointer ${
-                      activeErpModule === "ledger"
-                        ? "bg-sky-600 text-white shadow-2xs"
-                        : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
-                    }`}
-                  >
-                    GST / e-Invoice
-                  </button>
-                </div>
-
-                <div className="p-3 bg-white rounded-xl border border-slate-200 shadow-2xs flex items-center justify-between text-[10px]">
-                  <div>
-                    <span className="text-slate-500 block font-semibold">Inventory Accuracy</span>
-                    <span className="text-emerald-700 font-bold">99.98% Barcode / RFID</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-slate-500 block font-semibold">Annual License Tax</span>
-                    <span className="text-indigo-800 font-bold">$0.00 (100% Owned)</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between pt-3 border-t border-slate-200 relative z-10">
-                <span className="text-xs text-slate-600 font-semibold">Unlimited User Seats</span>
-                <Link
-                  href="/services/enterprise-erp-systems"
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-xs font-bold text-indigo-800 border border-indigo-200 group-hover:border-indigo-300 transition-all shadow-xs group-hover:translate-x-0.5"
-                >
-                  <span>View Full ERP Specs</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-indigo-700" />
-                </Link>
-              </div>
-            </div>
-
-            {/* BENTO CARD 3: Fintech & Digital Banking (4 Cols) */}
-            <div
-              onClick={() => {
-                setSelectedService(services[2]);
-                router.push("/services/fintech-banking-solutions");
-              }}
-              className={`reveal-init reveal-delay-1 lg:col-span-4 rounded-3xl p-6 sm:p-7 transition-all duration-300 relative overflow-hidden group cursor-pointer border ${
-                selectedService.id === "fintech-banking-solutions"
-                  ? "bg-white border-emerald-400 shadow-xl shadow-emerald-500/10 ring-1 ring-emerald-300"
-                  : "bg-white border-slate-200 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-500/5"
-              }`}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-11 h-11 rounded-2xl flex items-center justify-center bg-emerald-50 border border-emerald-200 text-emerald-700 shadow-xs">
-                  <Banknote className="w-5 h-5" />
-                </div>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-                  PCI-DSS LEVEL 1
-                </span>
-              </div>
-
-              <Link
-                href="/services/fintech-banking-solutions"
-                onClick={(e) => e.stopPropagation()}
-                className="text-lg sm:text-xl font-semibold text-slate-900 group-hover:text-emerald-700 transition-colors inline-flex items-center gap-1.5"
-              >
-                <span>Fintech & Digital Banking</span>
-                <ArrowRight className="w-4 h-4 text-emerald-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-              </Link>
-              <p className="text-xs text-emerald-700 font-mono font-semibold mt-0.5 mb-3">
-                CORE_LEDGER // SUB-50MS PAYMENTS
-              </p>
-
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-medium">
-                Lending platforms, wallets and payment flows, sitting on a double-entry ledger that balances. Correctness and a full audit trail come before anything else here.
-              </p>
-
-              <div className="bg-slate-50 rounded-2xl p-3 mb-4 border border-slate-200 shadow-xs font-mono text-[11px]">
-                <div className="flex items-center justify-between text-slate-800 mb-1">
-                  <span>Ledger Balance Drift:</span>
-                  <span className="text-emerald-700 font-bold">0.00% (Strict Double-Entry)</span>
-                </div>
-                <div className="flex items-center justify-between text-slate-600 text-[10px]">
-                  <span>Throughput:</span>
-                  <span className="text-sky-800 font-bold">25,000 TPS Scalable</span>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between pt-3 border-t border-slate-200">
-                <span className="text-xs text-slate-500 font-medium">ISO 20022 Ready</span>
-                <Link
-                  href="/services/fintech-banking-solutions"
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-xs font-bold text-emerald-800 border border-emerald-200 group-hover:border-emerald-300 transition-all shadow-xs group-hover:translate-x-0.5"
-                >
-                  <span>View Fintech Specs</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-emerald-700" />
-                </Link>
-              </div>
-            </div>
-
-            {/* BENTO CARD 4: Custom CRM & Sales Engines (4 Cols) */}
-            <div
-              onClick={() => {
-                setSelectedService(services[3]);
-                router.push("/services/custom-crm-automation");
-              }}
-              className={`reveal-init reveal-delay-2 lg:col-span-4 rounded-3xl p-6 sm:p-7 transition-all duration-300 relative overflow-hidden group cursor-pointer border ${
-                selectedService.id === "custom-crm-automation"
-                  ? "bg-white border-orange-400 shadow-xl shadow-orange-500/10 ring-1 ring-orange-300"
-                  : "bg-white border-slate-200 hover:border-orange-300 hover:shadow-lg hover:shadow-orange-500/5"
-              }`}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-11 h-11 rounded-2xl flex items-center justify-center bg-orange-50 border border-orange-200 text-orange-700 shadow-xs">
-                  <UserCheck className="w-5 h-5" />
-                </div>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-orange-50 text-orange-800 border border-orange-200">
-                  WHATSAPP CTI
-                </span>
-              </div>
-
-              <Link
-                href="/services/custom-crm-automation"
-                onClick={(e) => e.stopPropagation()}
-                className="text-lg sm:text-xl font-semibold text-slate-900 group-hover:text-orange-700 transition-colors inline-flex items-center gap-1.5"
-              >
-                <span>Custom CRM & Sales Engines</span>
-                <ArrowRight className="w-4 h-4 text-orange-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-              </Link>
-              <p className="text-xs text-orange-700 font-mono font-semibold mt-0.5 mb-3">
-                OMNICHANNEL // CLOUD TELEPHONY
-              </p>
-
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-medium">
-                Built around how your reps actually work — WhatsApp where the conversation already happens, quotes in a click, and field visits logged from the phone rather than typed up later.
-              </p>
-
-              <div className="bg-slate-50 rounded-2xl p-3 mb-4 border border-slate-200 shadow-xs font-mono text-[11px]">
-                <div className="flex items-center justify-between text-slate-800 mb-1">
-                  <span>Lead Response Velocity:</span>
-                  <span className="text-orange-700 font-bold">&lt; 10s Automated Bot</span>
-                </div>
-                <div className="flex items-center justify-between text-slate-600 text-[10px]">
-                  <span>Rep Allocation:</span>
-                  <span className="text-emerald-800 font-bold">Round-Robin + Territory</span>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between pt-3 border-t border-slate-200">
-                <span className="text-xs text-slate-500 font-medium">Zero Per-User Fees</span>
-                <Link
-                  href="/services/custom-crm-automation"
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-orange-50 hover:bg-orange-100 text-xs font-bold text-orange-800 border border-orange-200 group-hover:border-orange-300 transition-all shadow-xs group-hover:translate-x-0.5"
-                >
-                  <span>View CRM Specs</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-orange-700" />
-                </Link>
-              </div>
-            </div>
-
-            {/* BENTO CARD 5: Autonomous AI Agents & Vector RAG (4 Cols) */}
-            <div
-              onClick={() => {
-                setSelectedService(services[8]);
-                router.push("/services/ai-solutions-automation");
-              }}
-              className={`reveal-init reveal-delay-3 lg:col-span-4 rounded-3xl p-6 sm:p-7 transition-all duration-300 relative overflow-hidden group cursor-pointer border ${
-                selectedService.id === "ai-solutions-automation"
-                  ? "bg-white border-emerald-400 shadow-xl shadow-emerald-500/10 ring-1 ring-emerald-300"
-                  : "bg-white border-slate-200 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-500/5"
-              }`}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-11 h-11 rounded-2xl flex items-center justify-center bg-emerald-50 border border-emerald-200 text-emerald-700 shadow-xs">
-                  <Cpu className="w-5 h-5" />
-                </div>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-                  140+ TOK/SEC
-                </span>
-              </div>
-
-              <Link
-                href="/services/ai-solutions-automation"
-                onClick={(e) => e.stopPropagation()}
-                className="text-lg sm:text-xl font-semibold text-slate-900 group-hover:text-emerald-700 transition-colors inline-flex items-center gap-1.5"
-              >
-                <span>AI Agents & Vector RAG</span>
-                <ArrowRight className="w-4 h-4 text-emerald-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-              </Link>
-              <p className="text-xs text-emerald-700 font-mono font-semibold mt-0.5 mb-3">
-                PRIVATE_LLM // SUB-50MS VECTOR RETRIEVAL
-              </p>
-
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-medium">
-                Agents that read your own documents and answer from them, support that clears the repetitive half of the queue, and automations between systems nobody wanted to integrate.
-              </p>
-
-              <div className="bg-slate-50 rounded-2xl p-3 mb-4 border border-slate-200 shadow-xs font-mono text-[11px]">
-                <div className="flex items-center justify-between text-slate-800 mb-1">
-                  <span>RAG Retrieval Latency:</span>
-                  <span className="text-emerald-700 font-bold">&lt; 40ms Vector Index</span>
-                </div>
-                <div className="flex items-center justify-between text-slate-600 text-[10px]">
-                  <span>Operational Hours:</span>
-                  <span className="text-sky-800 font-bold">60%+ Labor Reduction</span>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between pt-3 border-t border-slate-200">
-                <span className="text-xs text-slate-500 font-medium">DeepSeek & Claude 3.5</span>
-                <Link
-                  href="/services/ai-solutions-automation"
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-xs font-bold text-emerald-800 border border-emerald-200 group-hover:border-emerald-300 transition-all shadow-xs group-hover:translate-x-0.5"
-                >
-                  <span>View AI Specs</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-emerald-700" />
-                </Link>
-              </div>
-            </div>
-
+              );
+            })}
           </div>
         )}
 
         {/* ======================================================== */}
-        {/* SERVICES PAGE VIEW: ALL 22 SERVICES DYNAMIC GRID */}
+        {/* HOMEPAGE ONLY: EXPANDED 22+ SERVICES DISCOVERY PORTAL    */}
+        {/* ======================================================== */}
+        {isHome && (
+          <div className="reveal-init mt-12 rounded-3xl p-6 sm:p-8 bg-white border border-slate-200 shadow-sm relative overflow-hidden transition-all duration-300">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-sky-100/40 via-cyan-50/20 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+              <div className="space-y-2 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-800 text-xs font-mono font-bold shadow-2xs">
+                  <Sparkles className="w-3.5 h-3.5 text-[#0f7670]" />
+                  <span>EXPANDED PRACTICE AREAS</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+                  Looking for a Specialized or Niche Engineering Capability?
+                </h3>
+                <p className="text-slate-600 text-xs sm:text-sm font-normal max-w-2xl">
+                  Beyond our 8 core services, we also engineer platforms for PropTech, Fintech & Banking, Logistics & Telematics OS, Industrial IoT, EdTech, Restaurant POS, Web3, and LegalTech.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-center gap-3 w-full lg:w-auto shrink-0">
+                <Link
+                  href="/services"
+                  className="btn-futuristic-primary w-full sm:w-auto text-xs sm:text-sm !py-3.5 !px-6 !rounded-xl"
+                >
+                  <span>View All 22+ Specialized Services</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/contact"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-slate-900 text-xs sm:text-sm font-semibold border border-slate-200 text-center transition-all cursor-pointer"
+                >
+                  Start a Project →
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ======================================================== */}
+        {/* SERVICES PAGE VIEW: ALL 22 SERVICES DYNAMIC GRID        */}
         {/* ======================================================== */}
         {!isHome && (
           <div className="mt-12">
@@ -845,7 +720,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredServices.map((svc, idx) => {
+                {filteredServices.map((svc) => {
                   const isCurrent = selectedService.id === svc.id;
                   const badgeText = getServiceBadge(svc.id);
 
@@ -931,102 +806,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
         )}
 
         {/* ======================================================== */}
-        {/* HOMEPAGE ONLY: VIEW ALL 22+ SERVICES DISCOVERY PORTAL */}
-        {/* ======================================================== */}
-        {isHome && (
-          <div className="reveal-init mt-14 rounded-3xl p-6 sm:p-10 bg-white border-2 border-sky-100 hover:border-sky-300 shadow-xl shadow-sky-900/5 relative overflow-hidden transition-all duration-300">
-            {/* Ambient Lighting Background */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-sky-100/60 via-cyan-50/40 to-transparent rounded-full blur-3xl pointer-events-none"></div>
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-indigo-50/50 to-transparent rounded-full blur-3xl pointer-events-none"></div>
-
-            <div className="relative z-10 space-y-8">
-              {/* Header & Status Indicator */}
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
-                <div className="space-y-2">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-[#385d36] text-xs font-mono font-bold shadow-2xs">
-                    <Sparkles className="w-3.5 h-3.5 text-[#5c9556] animate-pulse" />
-                    <span>EVERYTHING ELSE WE TAKE ON</span>
-                  </div>
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-slate-900">
-                    The Other Areas We Work In
-                  </h3>
-                  <p className="text-slate-600 text-xs sm:text-sm font-normal max-w-2xl">
-                    Past the systems above, we also build for property, logistics, education, retail and manufacturing. Pick any of these to see the stack, the timeline and what a build usually involves:
-                  </p>
-                </div>
-
-                {/* Progress Meter */}
-                <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200 min-w-[220px] text-center md:text-right shrink-0 shadow-2xs">
-                  <div className="flex items-center justify-between text-xs font-mono mb-1.5">
-                    <span className="text-slate-600 font-semibold">Catalog Status</span>
-                    <span className="text-sky-700 font-bold">22 / 22 Active</span>
-                  </div>
-                  <div className="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
-                    <div className="bg-gradient-to-r from-sky-500 to-teal-500 h-full rounded-full w-full transition-all duration-500"></div>
-                  </div>
-                  <span className="text-[11px] text-slate-500 mt-1.5 block font-mono font-medium">
-                    100% Production Ready
-                  </span>
-                </div>
-              </div>
-
-              {/* 22 Services Discovery Grid (Interactive Light Tiles) */}
-              <div>
-                <div className="text-xs font-mono uppercase tracking-wider text-slate-600 font-bold mb-3 flex items-center gap-2">
-                  <Layers className="w-3.5 h-3.5 text-sky-600" />
-                  <span>Click Any Discipline to View Architecture, Tech Stack & SLAs:</span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-                  {services.map((svc) => (
-                    <Link
-                      key={svc.id}
-                      href={`/services/${svc.id}`}
-                      className="p-3.5 rounded-2xl bg-white hover:bg-sky-50/60 border border-slate-200 hover:border-sky-300 shadow-2xs hover:shadow-md transition-all duration-200 group flex items-start gap-3 cursor-pointer"
-                    >
-                      <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-slate-50 text-slate-700 border border-slate-200 shrink-0 group-hover:bg-sky-50 group-hover:text-sky-700 group-hover:border-sky-300 group-hover:scale-105 transition-all">
-                        {getServiceIcon(svc.iconName)}
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="text-xs font-bold text-slate-900 group-hover:text-sky-700 transition-colors truncate flex items-center gap-1">
-                          <span>{svc.title}</span>
-                          <ArrowRight className="w-3 h-3 text-sky-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all shrink-0" />
-                        </div>
-                        <span className="text-[10px] text-slate-500 block truncate font-mono">{getServiceBadge(svc.id)}</span>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              {/* Big High-Impact Navigation Button Row */}
-              <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="text-xs text-slate-600 font-medium text-center sm:text-left">
-                  Ready to view detailed technology stacks, milestone timelines & deliverables?
-                </div>
-
-                <div className="flex flex-wrap items-center justify-center gap-3 w-full sm:w-auto">
-                  <Link
-                    href="/services"
-                    className="btn-futuristic-primary w-full sm:w-auto text-xs sm:text-sm !py-3 !px-6 !rounded-xl"
-                  >
-                    <span>View All 22 Services with Interactive Filters</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-slate-900 text-xs font-semibold border border-slate-200 text-center transition-all cursor-pointer"
-                  >
-                    Discuss Scope & ROI →
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ======================================================== */}
-        {/* SERVICES PAGE ONLY: INTERACTIVE FEATURE DEEP DIVE SPOTLIGHT BAR */}
+        {/* SERVICES PAGE ONLY: FEATURE DEEP DIVE SPOTLIGHT BAR      */}
         {/* ======================================================== */}
         {!isHome && (
           <div className="mt-14 rounded-3xl border border-sky-200 p-6 sm:p-8 bg-white relative overflow-hidden shadow-lg shadow-sky-950/5">

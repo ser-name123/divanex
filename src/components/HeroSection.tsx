@@ -113,67 +113,52 @@ export default function HeroSection({ onOpenConsultation: _onOpenConsultation }:
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] xl:text-[42px] font-bold tracking-tight text-[#000838] leading-[1.25]">
-              <span>{siteConfig.heroHeadlineMain || "Transforming Businesses with"}</span>
-              <span className="block mt-1 text-transparent bg-clip-text bg-gradient-to-r from-[#0f7670] via-[#189a91] to-[#5c9556]">
-                {siteConfig.heroHeadlineHighlight || "Next-Gen Tech Solutions."}
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] xl:text-[44px] font-bold tracking-tight text-[#000838] leading-[1.25]">
+              <span>Custom Software, AI &amp; SaaS Solutions</span>{" "}
+              <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-[#0f7670] via-[#189a91] to-[#5c9556]">
+                Built for Growing Businesses
               </span>
             </h1>
 
             {/* Sub-headline */}
             <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              {siteConfig.heroSubhead ||
-                "SaaS, Web, Mobile Apps, AI & Digital Marketing Solutions for Scaling Businesses. From conceptual system architecture to resilient global serverless deployment, we engineer digital engines that outperform."}
+              We design and build scalable web platforms, mobile apps, SaaS products and AI solutions—from product strategy to production deployment.
             </p>
 
             {/* CTA Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
               <Link
                 href="/contact"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm bg-[#0f7670] hover:bg-[#0f5f5b] text-white shadow-lg shadow-[#0f7670]/20 hover:shadow-[#0f7670]/30 transition-all cursor-pointer transform hover:-translate-y-0.5"
               >
-                <span>{siteConfig.heroCtaQuoteText || "Get a Free Quote"}</span>
+                <span>Start a Project</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
               <Link
-                href="/services"
+                href="/portfolio"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-white/95 backdrop-blur-md hover:bg-slate-50 text-slate-800 border border-slate-200 shadow-xs hover:border-[#0f7670]/50 transition-all cursor-pointer"
               >
                 <Layers className="w-4 h-4 text-[#0f7670]" />
-                <span>Explore Services</span>
-              </Link>
-
-              <Link
-                href="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-[#f3f8f2]/90 backdrop-blur-md hover:bg-[#e2f0e0] text-[#385d36] border border-[#c6e1c3] shadow-xs transition-all cursor-pointer"
-              >
-                <Calendar className="w-4 h-4 text-[#5c9556]" />
-                <span>{siteConfig.heroCtaConsultText || "Book Consultation"}</span>
+                <span>View Case Studies</span>
               </Link>
             </div>
 
             {/* Trust Proof Badges */}
             <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3 text-xs text-slate-600">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-2xs">
-                <div className="flex text-amber-500 text-xs">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <span className="font-bold text-slate-900">4.9/5 Rating</span>
-                <span className="text-slate-500">(50+ Reviews)</span>
+              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-2xs">
+                <CheckCircle2 className="w-4 h-4 text-[#0f7670] shrink-0" />
+                <span className="font-bold text-slate-900">50+ Projects Delivered</span>
               </div>
 
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-emerald-200 text-emerald-700 shadow-2xs">
+              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-emerald-200 text-emerald-700 shadow-2xs">
                 <ShieldCheck className="w-4 h-4 text-[#5c9556] shrink-0" />
-                <span className="font-semibold text-slate-800">Enterprise SLA & SOC2</span>
+                <span className="font-semibold text-slate-800">100% Code Ownership</span>
               </div>
 
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-[#0f7670]/30 text-[#0f7670] shadow-2xs">
+              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-[#0f7670]/30 text-[#0f7670] shadow-2xs">
                 <Zap className="w-4 h-4 text-[#0f7670] shrink-0" />
-                <span className="text-slate-700 font-medium">Edge Latency:</span>
-                <span className="font-mono font-bold text-[#0f7670]">{pingLatency}ms</span>
+                <span className="text-slate-800 font-semibold">Performance-Focused Architecture</span>
               </div>
             </div>
           </div>
@@ -198,7 +183,7 @@ export default function HeroSection({ onOpenConsultation: _onOpenConsultation }:
 
               <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-slate-200 shadow-xs text-[11px] font-mono text-[#0f7670] font-bold">
                 <Activity className="w-3.5 h-3.5" />
-                <span>ACTIVE DEPLOYMENTS: 50+</span>
+                <span>50+ PROJECTS DELIVERED</span>
               </div>
             </div>
 

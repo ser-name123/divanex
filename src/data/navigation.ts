@@ -173,21 +173,14 @@ export const DEFAULT_NAVIGATION: SiteNavigation = {
     megaMenuPromoTitle: "Book a Free Architecture Review",
     megaMenuPromoText:
       "45 minutes with a principal engineer. Scope, stack and a delivery plan — no obligation.",
-    megaMenuPromoCtaLabel: "Book a Free Consultation",
+    megaMenuPromoCtaLabel: "Book a Consultation",
     megaMenuPromoCtaHref: "/contact",
     megaMenuStatusText: "ALL SYSTEMS PRODUCTION READY",
     megaMenuStatusDetail: "99.99% SLA",
     megaMenuQuickLinks: [
-      { id: "quick-cases", label: "Case Studies", href: "/portfolio" },
+      { id: "quick-cases", label: "View Case Studies", href: "/portfolio" },
     ],
     ctas: [
-      {
-        id: "cta-estimate",
-        label: "Get a Free Quote",
-        href: "/contact",
-        style: "ghost",
-        icon: "Mail",
-      },
       {
         id: "cta-contact",
         label: "Book a Consultation",
@@ -260,13 +253,13 @@ export const DEFAULT_NAVIGATION: SiteNavigation = {
             id: "f-devops",
             label: "Cloud DevOps & Kubernetes",
             href: "/services/cloud-devops",
-            badge: "99.999%",
+            badge: "HIGH UPTIME",
           },
           {
             id: "f-cyber",
             label: "Cybersecurity & Compliance",
             href: "/services/cybersecurity-compliance",
-            badge: "SOC-2",
+            badge: "COMPLIANT",
           },
         ],
       },
@@ -277,7 +270,7 @@ export const DEFAULT_NAVIGATION: SiteNavigation = {
         accent: "blue",
         span: 2,
         links: [
-          { id: "f-blog", label: "Engineering Blog & Tech Papers", href: "/blog", badge: "8+ PAPERS" },
+          { id: "f-blog", label: "Engineering Blog & Tech Papers", href: "/blog", badge: "10+ PAPERS" },
           { id: "f-mesh", label: "Multi-Tenant Cloud Mesh Guide", href: "/services/saas-development" },
           { id: "f-rag", label: "Sub-50ms RAG Vector Retrieval", href: "/services/ai-solutions-automation" },
           { id: "f-crdt", label: "CRDT Conflict-Free Mobile Sync", href: "/services/web-app-development" },
@@ -296,7 +289,7 @@ export const DEFAULT_NAVIGATION: SiteNavigation = {
         accent: "emerald",
         span: 2,
         links: [
-          { id: "f-roi", label: "Engineering Case Studies & ROI", href: "/portfolio", badge: "24+ SYSTEMS" },
+          { id: "f-roi", label: "Engineering Case Studies & ROI", href: "/portfolio", badge: "50+ PROJECTS" },
           { id: "f-vs", label: "Why Divanex vs Legacy Agency", href: "/why-us" },
           { id: "f-nps", label: "Verified Client Reviews & NPS", href: "/testimonials" },
           { id: "f-faq", label: "Client FAQs & Code Ownership", href: "/faqs" },
@@ -314,7 +307,7 @@ export const DEFAULT_NAVIGATION: SiteNavigation = {
         span: 2,
         links: [
           { id: "f-trust", label: "Enterprise Trust & Security", href: "/security", badge: "HARDENED" },
-          { id: "f-sla", label: "Enterprise SLA & 99.999% Uptime", href: "/why-us" },
+          { id: "f-sla", label: "Enterprise Reliability & High Availability", href: "/why-us" },
           { id: "f-ip", label: "100% IP Assignment & Ownership", href: "/why-us" },
           { id: "f-bnda", label: "Bilateral Non-Disclosure Agreement", href: "/contact" },
           { id: "f-privacy", label: "Zero-Trust Privacy & Data Pledge", href: "/security" },

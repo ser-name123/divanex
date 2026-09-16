@@ -35,9 +35,14 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
         tags: Array.isArray(item.tags) ? item.tags : [],
         tableOfContents: Array.isArray(item.table_of_contents) ? item.table_of_contents : []
       }));
+      return memoryBlogPosts;
     }
   } catch {
     // Fall back to in-memory seed posts
+  }
+
+  if (memoryBlogPosts.length === 0) {
+    memoryBlogPosts = [...initialBlogPosts];
   }
 
   return memoryBlogPosts;

@@ -10,6 +10,19 @@ export interface BlogTOCItem {
   level: number;
 }
 
+export type BlogCategory =
+  | "Food Delivery & Logistics"
+  | "PropTech & SaaS"
+  | "E-Commerce & Retail"
+  | "IoT & Smart Mobility"
+  | "Enterprise ERP"
+  | "AI & Autonomous Agents"
+  | "Healthcare HMIS"
+  | "Fintech & Payments"
+  | "Cloud & DevOps"
+  | "Mobile Engineering"
+  | "Architecture & SaaS";
+
 export interface BlogPost {
   id: string;
   slug: string;
@@ -18,7 +31,7 @@ export interface BlogPost {
   excerpt: string;
   content: string;
   coverImage: string;
-  category: "Architecture & SaaS" | "Healthcare HMIS" | "Enterprise ERP" | "Fintech & Security" | "AI & Autonomous Agents" | "Cloud & DevOps";
+  category: BlogCategory;
   author: BlogAuthor;
   publishedAt: string;
   readTime: string;
@@ -33,726 +46,577 @@ export interface BlogPost {
 export const initialBlogPosts: BlogPost[] = [
   {
     id: "post-1",
-    slug: "architecting-multi-tenant-saas-databases-postgresql-rls",
-    title: "Architecting Sub-35ms Multi-Tenant SaaS Databases with Row-Level Security in PostgreSQL 16",
-    subtitle: "A deep engineering dive into schema partitioning, tenant isolation keys, and connection pooling at 14,000+ organizations scale.",
-    excerpt: "Learn how to build bulletproof multi-tenant database architectures in PostgreSQL 16 using Row-Level Security (RLS), schema shards, and pgBouncer to achieve sub-35ms query latency without data cross-leakage.",
-    coverImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
-    category: "Architecture & SaaS",
+    slug: "hyperlocal-delivery-dispatch-algorithms-gps-telemetry",
+    title: "Engineering Sub-15 Minute Hyperlocal Delivery: Dispatch Algorithms, Driver Batching & Live GPS Telemetry",
+    subtitle: "How we engineered the real-time dispatch core for Fynito, processing 10,000+ hourly orders with dynamic geofencing.",
+    excerpt: "A deep dive into building real-time dispatch systems: sub-second driver matching using H3 hexagonal spatial indexing, WebSocket order states, and battery-optimized mobile GPS telemetry.",
+    coverImage: "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=1200&q=80",
+    category: "Food Delivery & Logistics",
     author: {
       name: "Rajan S.",
       role: "Lead Solutions Architect, Divanex",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
     },
-    publishedAt: "2026-08-28",
+    publishedAt: "2026-09-14",
     readTime: "8 min read",
     featured: true,
     status: "published",
-    views: 4820,
-    likes: 312,
-    tags: ["PostgreSQL", "Multi-Tenancy", "SaaS Architecture", "Row-Level Security", "Database Scaling"],
+    views: 5820,
+    likes: 412,
+    tags: ["Hyperlocal Delivery", "Logistics", "WebSocket", "H3 Spatial Index", "Real-Time Tracking"],
     tableOfContents: [
-      { id: "the-multi-tenant-dilemma", title: "The Multi-Tenant Isolation Dilemma", level: 2 },
-      { id: "row-level-security-mechanics", title: "PostgreSQL 16 Row-Level Security Mechanics", level: 2 },
-      { id: "connection-pooling-pgbouncer", title: "Optimizing Connection Pooling with pgBouncer", level: 2 },
-      { id: "query-benchmarks", title: "Sub-35ms Latency Benchmarks & Sharding", level: 2 },
-      { id: "production-checklist", title: "Production Deployment Checklist", level: 2 }
+      { id: "the-15-minute-challenge", title: "The 15-Minute Logistics Challenge", level: 2 },
+      { id: "h3-spatial-indexing", title: "Uber H3 Spatial Hexagonal Clustering", level: 2 },
+      { id: "driver-batching-algorithms", title: "Dynamic Order Batching & Route Optimization", level: 2 },
+      { id: "battery-optimized-telemetry", title: "Battery-Efficient Driver Telemetry (MQTT vs WebSockets)", level: 2 },
+      { id: "key-takeaways", title: "Key Architectural Takeaways", level: 2 }
     ],
-    content: `## The Multi-Tenant Isolation Dilemma
+    content: `## The 15-Minute Logistics Challenge
 
-When engineering Software-as-a-Service (SaaS) platforms for enterprise clients, the database isolation strategy is the single most critical architectural choice. You typically face three choices:
+Hyperlocal food and grocery platforms operate on razor-thin delivery windows. When an order is placed, three critical clocks start ticking simultaneously:
 
-1. **Database-per-tenant:** High physical isolation, but unbearable DevOps overhead and connection pool exhaustion when scaling beyond 500 tenants.
-2. **Schema-per-tenant:** Moderate isolation, but complex migration rollouts across thousands of schema namespaces.
-3. **Shared-database, shared-schema with Row-Level Security (RLS):** Maximum resource efficiency, centralized indexing, and hardware utilization with kernel-enforced mathematical isolation.
+1. **Merchant Prep Time:** Kitchen or dark store picking & packing (5–8 minutes).
+2. **Driver Assignment & Ingress:** Finding the nearest active rider travelling toward the merchant (3–5 minutes).
+3. **Last-Mile Transit:** Dispatching the rider to the customer's doorstep with turn-by-turn routing (4–7 minutes).
 
-At Divanex, we standardize on **PostgreSQL 16 with native Row-Level Security (RLS)** paired with automated schema shards for Fortune 500 enterprise tenants.
+At Divanex, while architecting the multi-vendor **Fynito delivery platform**, our core challenge was eliminating the "dispatch lag" where orders waited 30–60 seconds simply searching for a driver.
 
 ---
 
-## PostgreSQL 16 Row-Level Security Mechanics
+## Uber H3 Spatial Hexagonal Clustering
 
-PostgreSQL RLS ensures that every query—even raw SQL executed through ORMs—automatically appends a tenant restriction filter at the database engine level:
+Traditional radial distance queries (\`ST_DWithin\` in PostGIS) require continuous spatial index scans that degrade under thousands of active GPS pings.
 
-\`\`\`sql
--- Enable Row Level Security on the Core Organization Entities
-ALTER TABLE customer_invoices ENABLE ROW LEVEL SECURITY;
-ALTER TABLE customer_invoices FORCE ROW LEVEL SECURITY;
-
--- Create Tenant Isolation Policy
-CREATE POLICY tenant_isolation_policy ON customer_invoices
-  FOR ALL
-  USING (tenant_id = current_setting('app.current_tenant_id', true))
-  WITH CHECK (tenant_id = current_setting('app.current_tenant_id', true));
-\`\`\`
-
-When a web request hits the Next.js API ingress, the middleware injects the authenticated \`tenant_id\` into the PostgreSQL session context before executing the transaction:
+Instead, we map geographical coordinates into discrete **Uber H3 Resolution 8 & 9 hexagons**:
 
 \`\`\`typescript
-await prisma.$executeRawUnsafe(
-  \`SET LOCAL app.current_tenant_id = '\${session.tenantId}';\`
-);
-const invoices = await prisma.customerInvoice.findMany();
+import { latLngToCell, gridDisk } from "h3-js";
+
+export function findEligibleDrivers(merchantLat: number, merchantLng: number, maxRadiusHops = 2) {
+  // Convert merchant coords to Resolution 8 H3 Index
+  const merchantHex = latLngToCell(merchantLat, merchantLng, 8);
+  
+  // Get all neighboring hex cells within distance
+  const searchRing = gridDisk(merchantHex, maxRadiusHops);
+  
+  // Query Redis In-Memory Hash Set for active riders in these cells
+  return redis.sunion(...searchRing.map(hex => \`riders:cell:\${hex}\`));
+}
 \`\`\`
 
-Even if an engineer writes a \`SELECT * FROM customer_invoices\` without a \`WHERE\` clause, PostgreSQL automatically filters out all records belonging to other corporate tenants.
+By organizing riders into in-memory Redis sets partitioned by H3 cell ID, driver discovery latency dropped from **420ms to under 14ms** across 15,000 concurrent delivery riders.
 
 ---
 
-## Optimizing Connection Pooling with pgBouncer
+## Dynamic Order Batching & Route Optimization
 
-Enforcing RLS on every transaction requires transaction-mode connection pooling. Traditional session-mode pooling pins physical TCP sockets to client instances, leading to port exhaustion.
+When two customers in the same residential apartment complex order from neighboring restaurants within 3 minutes of each other, assigning separate riders doubles operational costs.
 
-By deploying **pgBouncer in transaction pooling mode** paired with Unix domain sockets, we achieve over **18,000 queries per second (QPS)** across 14,000 simultaneous tenant organizations with an average query execution time of **2.1ms**.
-
----
-
-## Sub-35ms Latency Benchmarks & Sharding
-
-To prevent "noisy neighbor" problems where high-volume enterprise accounts slow down shared tables, we implement **Composite B-Tree Indexes** combining \`(tenant_id, created_at DESC)\`.
-
-\`\`\`sql
-CREATE INDEX CONCURRENTLY idx_invoices_tenant_created 
-ON customer_invoices (tenant_id, created_at DESC) 
-INCLUDE (amount, status);
-\`\`\`
-
-### Production Results:
-* **P95 Edge Ingress Latency:** 31.4ms
-* **Zero Cross-Tenant Leakage Incidents:** Verified through automated fuzz testing and red team pen-tests.
-* **Database Infrastructure Spend Reduction:** 42% compared to single-tenant RDS clusters.
+Our batching engine evaluates:
+- **Angle Alignment:** Rider trajectory must not divert by more than 15 degrees.
+- **Thermal Decay Threshold:** Hot food must never sit in transit for longer than 18 minutes total.
+- **Dynamic Payout Multipliers:** Automatically crediting the rider with a 1.4x bonus while reducing platform delivery cost by 35%.
 
 ---
 
-## Production Deployment Checklist
+## Battery-Efficient Driver Telemetry (MQTT vs WebSockets)
 
-1. Always use \`FORCE ROW LEVEL SECURITY\` so table owners cannot accidentally bypass RLS filters.
-2. Enforce prepared statement caching in pgBouncer.
-3. Set up automated tenant migration dry-runs in CI/CD before rolling out new schema migrations.
-4. Configure read-replica database streaming for real-time analytical and export queries.`
+Continuously polling GPS on mobile devices burns rider batteries in under 4 hours. We implemented an adaptive throttle protocol:
+- **Rider Moving (> 15 km/h):** Transmit GPS packet every 3 seconds over lightweight MQTT with QoS 0.
+- **Rider Stationary (Traffic light / Waiting at Restaurant):** Back off GPS broadcast interval to every 15 seconds.
+- **Device Standby:** Wake on high-priority geofence entry events using native iOS/Android background location fences.
+
+---
+
+## Key Architectural Takeaways
+
+- Pre-compute spatial indexes with H3 to keep real-time matching strictly in-memory.
+- Use MQTT gateways for high-frequency IoT/mobile telemetry to save 70% mobile bandwidth and 45% device battery.
+- Always implement deterministic idempotency keys on driver assignment transactions to avoid split-second race conditions.`
   },
   {
     id: "post-2",
-    slug: "building-fhir-compliant-hospital-hmis-lab-interfacing",
-    title: "Building FHIR-Compliant Hospital Management Systems (HMIS) with Automated Laboratory Machine Drivers",
-    subtitle: "How we engineered a high-throughput clinical software suite connecting 18 hospital departments with ASTM/RS232 analyzers and web DICOM PACS.",
-    excerpt: "A comprehensive case study on building modern Hospital Information Systems (HMIS) that comply with HL7 FHIR v4, connect bidirectional diagnostic analyzers, and eliminate patient wait times.",
-    coverImage: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
-    category: "Healthcare HMIS",
+    slug: "automating-coliving-operations-visual-bed-allocation-smart-meters",
+    title: "Automating Coliving & Student Housing: Visual Bed Allocations, Smart Electricity Meters & AutoPay Invoicing",
+    subtitle: "Architecting the Our PG multi-property coliving operating system managing 10,000+ residents across 15 cities.",
+    excerpt: "Learn how we built visual 2D floor plans with live bed availability, MQTT IoT smart energy sub-metering, and automated UPI recurring rent collection engines.",
+    coverImage: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=1200&q=80",
+    category: "PropTech & SaaS",
     author: {
-      name: "Dr. Vikram K.",
-      role: "HealthTech Systems Architect, Divanex",
+      name: "Vikram Malhotra",
+      role: "Principal Systems Engineer, Divanex",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
     },
-    publishedAt: "2026-08-22",
-    readTime: "11 min read",
+    publishedAt: "2026-09-10",
+    readTime: "7 min read",
     featured: true,
     status: "published",
-    views: 3910,
-    likes: 278,
-    tags: ["Healthcare HMIS", "HL7 FHIR", "PACS Radiology", "Lab Analyzers", "HIPAA Compliance"],
+    views: 4920,
+    likes: 388,
+    tags: ["PropTech", "Coliving SaaS", "Smart Meters", "IoT", "AutoPay", "Next.js 15"],
     tableOfContents: [
-      { id: "the-clinical-bottleneck", title: "The Clinical Inefficiency Bottleneck", level: 2 },
-      { id: "hl7-fhir-data-models", title: "Standardizing with HL7 FHIR v4 Data Models", level: 2 },
-      { id: "laboratory-lis-interfacing", title: "Bidirectional Lab Analyzer Drivers (ASTM / RS232)", level: 2 },
-      { id: "web-dicom-pacs", title: "Zero-Footprint Web DICOM Radiology Viewer", level: 2 },
-      { id: "hipaa-abdm-security", title: "HIPAA & ABDM Security Hardening", level: 2 }
+      { id: "the-coliving-nightmare", title: "The Fragmented Coliving Operations Challenge", level: 2 },
+      { id: "visual-floorplan-engine", title: "Building the Visual 2D Bed Allocation Canvas", level: 2 },
+      { id: "iot-smart-submetering", title: "IoT Sub-Meter Reading & Automated Utility Billing", level: 2 },
+      { id: "recurring-autopay-engine", title: "Zero-Friction UPI AutoPay Rent Collection", level: 2 }
     ],
-    content: `## The Clinical Inefficiency Bottleneck
+    content: `## The Fragmented Coliving Operations Challenge
 
-Most legacy hospitals suffer from fragmented software: OPD registration in one system, lab results printed on physical dot-matrix paper, pharmacy billing in desktop software, and radiology scans burned onto CD-ROMs.
+Managing high-density student housing and coliving properties using spreadsheets leads to three recurring disasters:
+1. **Double Booking:** Bed occupancy state desynchronization between on-ground wardens and online booking portals.
+2. **Electricity Disputes:** Shared AC and heater consumption split arbitrarily among room tenants.
+3. **Late Rent Defaults:** Manual reminder follow-ups with high payment collection friction.
 
-This fragmentation leads to:
-* 45+ minute wait times per patient admission
-* Manual transcription errors in diagnostic reports (averaging 3.2% error rates)
-* Millions in expired pharmaceutical inventory
-* Zero longitudinal health record continuity across multi-branch chains
-
-Here is how Divanex engineers end-to-end, HL7 FHIR v4 compliant **Hospital Management Information Systems (HMIS)**.
+When designing the **Our PG** enterprise platform, we set out to build an end-to-end digital twin for modern shared living facilities.
 
 ---
 
-## Standardizing with HL7 FHIR v4 Data Models
+## Building the Visual 2D Bed Allocation Canvas
 
-Instead of arbitrary proprietary schemas, our HMIS implements **HL7 FHIR (Fast Healthcare Interoperability Resources) v4.0** standards. Patient encounters, observations, prescriptions, and diagnostic reports are stored as strictly validated JSON resources:
+Instead of endless dropdown lists, property managers need an interactive spatial representation of their physical buildings:
 
-\`\`\`json
-{
-  "resourceType": "Observation",
-  "id": "obs-glucose-092",
-  "status": "final",
-  "category": [{
-    "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/observation-category", "code": "laboratory" }]
-  }],
-  "code": {
-    "coding": [{ "system": "http://loinc.org", "code": "2345-7", "display": "Glucose [Mass/volume] in Serum or Plasma" }]
+\`\`\`typescript
+interface RoomSlot {
+  roomId: string;
+  floorNumber: number;
+  roomType: "single" | "double" | "triple";
+  beds: {
+    bedId: string;
+    label: "Bed A" | "Bed B" | "Bed C";
+    status: "occupied" | "vacant" | "maintenance" | "reserved";
+    tenant?: {
+      name: string;
+      checkInDate: string;
+      rentDueDate: string;
+      outstandingDues: number;
+    };
+  }[];
+}
+\`\`\`
+
+Using high-performance SVG canvas rendering with CSS grid hardware acceleration, wardens can drag-and-drop tenants between rooms with automatic prorated billing adjustments.
+
+---
+
+## IoT Sub-Meter Reading & Automated Utility Billing
+
+Every room is equipped with an RS-485 Modbus smart energy meter connected to an ESP32 WiFi gateway:
+- Every 15 minutes, sub-meter kWh readings are securely pushed to our timeseries telemetry endpoint.
+- At midnight on the 1st of every month, consumption is calculated per room and divided proportionally among active occupants.
+- Invoices are automatically compiled and delivered directly to the tenant's mobile app with WhatsApp payment links.
+
+---
+
+## Zero-Friction UPI AutoPay Rent Collection
+
+By integrating UPI 2.0 Recurring Mandates and payment webhooks, Our PG automated 94% of monthly rent collection without requiring manual cashier reconciliations.`
   },
-  "subject": { "reference": "Patient/pat-48201" },
-  "valueQuantity": {
-    "value": 98.4,
-    "unit": "mg/dL",
-    "system": "http://unitsofmeasure.org"
+  {
+    id: "post-3",
+    slug: "scaling-high-frequency-ecommerce-instant-catalog-tiered-pricing",
+    title: "Scaling High-Frequency E-Commerce: Sub-60ms Catalog Search, Dynamic Tiered Pricing & Inventory Sync",
+    subtitle: "Powering SM Supermoda's multi-brand fashion platform across 50,000+ SKUs with instant Algolia search and ERP sync.",
+    excerpt: "How to build lightning-fast e-commerce stores with instant faceted filtering, edge-rendered product listings, and real-time inventory locking to eliminate cart abandonment.",
+    coverImage: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1200&q=80",
+    category: "E-Commerce & Retail",
+    author: {
+      name: "Pooja Sharma",
+      role: "Head of Digital Commerce, Divanex",
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80"
+    },
+    publishedAt: "2026-09-06",
+    readTime: "8 min read",
+    featured: true,
+    status: "published",
+    views: 4610,
+    likes: 345,
+    tags: ["E-Commerce", "Algolia", "Inventory Sync", "Dynamic Pricing", "Next.js"],
+    tableOfContents: [
+      { id: "the-speed-to-conversion-equation", title: "The Speed-to-Conversion Equation in Fashion Retail", level: 2 },
+      { id: "sub-60ms-faceted-search", title: "Faceted Search with Pre-Indexed Edge Attributes", level: 2 },
+      { id: "dynamic-tiered-b2b-pricing", title: "Dynamic B2B Wholesale vs B2C Retail Pricing Engine", level: 2 },
+      { id: "real-time-inventory-locking", title: "Distributed Inventory Locking During Flash Sales", level: 2 }
+    ],
+    content: `## The Speed-to-Conversion Equation in Fashion Retail
+
+Every 100ms of latency on e-commerce catalog pages drops conversion rates by 7%. In multi-category apparel retail, shoppers apply multiple simultaneous filters: *Size (M, L), Color (Emerald, Navy), Fit (Slim, Regular), and Price (< ₹1,999)*.
+
+If each filter toggle triggers a heavy database query, page jank causes immediate bounce.
+
+---
+
+## Faceted Search with Pre-Indexed Edge Attributes
+
+For **SM Supermoda**, we engineered a decoupled search index architecture:
+- Product variants are flattened into denormalized search documents with pre-computed facet counts.
+- Search queries execute directly against distributed edge replicas, returning results in **under 45ms worldwide**.
+- Product images utilize dynamic responsive WebP srcset transforms based on client device DPR.
+
+---
+
+## Dynamic B2B Wholesale vs B2C Retail Pricing Engine
+
+B2B wholesale buyers require volume tier discounts (e.g. 50+ units = 25% off, 500+ units = 40% off with credit terms). Our pricing microservice computes personalized tier rules in real-time without caching stale cart totals.
+
+---
+
+## Distributed Inventory Locking During Flash Sales
+
+During festival flash sales, 500 customers might attempt to buy the last 10 units of a trending jacket. We use Redis atomic \`DECRBY\` operations to lock stock for 10 minutes during checkout, preventing overselling while gracefully unlocking expired carts.`
+  },
+  {
+    id: "post-4",
+    slug: "smart-ev-charging-infrastructure-ocpp-load-balancing",
+    title: "Architecting Smart EV Charging Networks: OCPP 2.0.1 Protocols, Dynamic Load Balancing & Mobile Payments",
+    subtitle: "How Divanex engineered the Evtor EV infrastructure switch supporting 500+ commercial DC fast chargers.",
+    excerpt: "Deep dive into implementing OCPP 2.0.1 charge-point communication gateways, WebSocket telemetry streams, and dynamic grid power balancing algorithms.",
+    coverImage: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=1200&q=80",
+    category: "IoT & Smart Mobility",
+    author: {
+      name: "Vikram Malhotra",
+      role: "Principal Systems Engineer, Divanex",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+    },
+    publishedAt: "2026-09-01",
+    readTime: "9 min read",
+    featured: false,
+    status: "published",
+    views: 3980,
+    likes: 290,
+    tags: ["EV Mobility", "OCPP 2.0.1", "IoT Gateway", "Dynamic Load Balancing", "CleanTech"],
+    tableOfContents: [
+      { id: "the-ev-charging-revolution", title: "The Next Phase of EV Charging Infrastructure", level: 2 },
+      { id: "ocpp-protocol-gateway", title: "OCPP 2.0.1 WebSocket Protocol Gateway", level: 2 },
+      { id: "dynamic-load-balancing", title: "Dynamic Transformer Load Balancing Algorithms", level: 2 },
+      { id: "seamless-rfid-mobile-start", title: "Instant QR & RFID Session Authorization", level: 2 }
+    ],
+    content: `## The Next Phase of EV Charging Infrastructure
+
+Commercial EV charging stations require constant bi-directional telemetry between the physical charger hardware (AC Level 2 / DC Fast Chargers) and the cloud billing management system.
+
+The international standard governing this communication is **OCPP (Open Charge Point Protocol)**.
+
+---
+
+## OCPP 2.0.1 WebSocket Protocol Gateway
+
+For the **Evtor platform**, we implemented an OCPP 2.0.1 gateway using secure WebSockets (\`wss://\`):
+- **BootNotification:** Validates hardware firmware, connector configurations, and station certificates.
+- **StatusNotification:** Emits state changes (*Available, Preparing, Charging, Faulted*) with sub-second event broadcasts to mobile apps.
+- **MeterValues:** Streams live voltage, current (Amps), state-of-charge (SoC %), and energy delivered (kWh).
+
+---
+
+## Dynamic Transformer Load Balancing Algorithms
+
+When 10 electric vehicles plug in simultaneously at a commercial complex, total demand can exceed the building's transformer capacity.
+
+Our smart load balancing algorithm continuously adjusts the maximum allowed charging current per connector based on real-time grid headroom:
+
+\`\`\`typescript
+export function computeAllocatedCurrent(totalAvailableAmps: number, activeSessions: ChargingSession[]): Map<string, number> {
+  const allocation = new Map<string, number>();
+  const activeCount = activeSessions.length;
+  if (activeCount === 0) return allocation;
+
+  const fairShareAmps = Math.floor(totalAvailableAmps / activeCount);
+  
+  for (const session of activeSessions) {
+    // Cap allocation by vehicle maximum onboard charger capacity
+    const cappedAmps = Math.min(session.maxVehicleAmps, fairShareAmps);
+    allocation.set(session.chargerId, cappedAmps);
   }
+  return allocation;
 }
 \`\`\`
 
 ---
 
-## Bidirectional Lab Analyzer Drivers (ASTM / RS232)
+## Instant QR & RFID Session Authorization
 
-We engineered lightweight edge gateway microservices that connect directly to laboratory diagnostic analyzers (Sysmex, Roche Cobas, Mindray, Beckman Coulter) over serial RS-232 and TCP/IP sockets using ASTM 1381/1394 protocols.
-
-1. **Sample Barcoding:** When blood is drawn, a unique barcode is printed and affixed to the test tube.
-2. **Analyzer Query:** The technician loads the tube into the machine. The analyzer scans the barcode and queries the HMIS gateway over TCP/IP.
-3. **Automated Result Transmission:** Once the test finishes (60 seconds), results are transmitted directly into the pathologist's digital validation desk—zero manual data entry required.
-
----
-
-## Zero-Footprint Web DICOM Radiology Viewer
-
-Radiologists can inspect high-resolution CT, MRI, and X-Ray scans directly in Chrome or Safari without downloading gigabytes of desktop software. Built with **Cornerstone.js and WebAssembly**, our web viewer supports:
-* Multi-Planar Reconstruction (MPR - Axial, Coronal, Sagittal)
-* Window/Level presets (Bone, Soft Tissue, Lung)
-* Measurement calipers and Cobb angle calculations
-* Instant sub-120ms slice streaming from Orthanc PACS servers
-
----
-
-## HIPAA & ABDM Security Hardening
-
-All Protected Health Information (PHI) is encrypted at rest using AES-256-GCM. We implement role-based access control where nurses, attending doctors, and billing clerks only see data fields strictly necessary for their clinical shift.`
-  },
-  {
-    id: "post-3",
-    slug: "zero-drift-double-entry-accounting-ledgers-fintech-go",
-    title: "Zero-Drift Double-Entry Accounting Ledgers: Engineering High-Concurrency Financial Core Engines in Go",
-    subtitle: "How to design immutable financial transaction pipelines supporting 25,000 TPS with mathematical debit-credit balance guarantees.",
-    excerpt: "Deep architectural principles for building core banking ledgers, neo-bank digital wallets, and payment gateway switches with zero ledger drift and serializable database isolation.",
-    coverImage: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&q=80",
-    category: "Fintech & Security",
-    author: {
-      name: "Aman V.",
-      role: "Principal Fintech Engineer, Divanex",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
-    },
-    publishedAt: "2026-08-15",
-    readTime: "10 min read",
-    featured: true,
-    status: "published",
-    views: 4120,
-    likes: 345,
-    tags: ["Fintech", "Core Banking", "Go", "Double-Entry Ledger", "Payment Systems"],
-    tableOfContents: [
-      { id: "the-rules-of-money", title: "The Fundamental Rules of Financial Ledgers", level: 2 },
-      { id: "double-entry-schema", title: "Double-Entry Cryptographic Data Schema", level: 2 },
-      { id: "concurrency-and-locks", title: "Handling 25,000 TPS without Race Conditions", level: 2 },
-      { id: "audit-hash-chains", title: "Immutable Audit Hash Chains", level: 2 },
-      { id: "pci-dss-compliance", title: "PCI-DSS Level 1 Hardening", level: 2 }
-    ],
-    content: `## The Fundamental Rules of Financial Ledgers
-
-In fintech and digital banking systems, there is no such thing as an \`UPDATE accounts SET balance = balance + 100\`. Modifying balances in place destroys audit trails, creates phantom discrepancies, and makes regulatory audits impossible.
-
-Every financial event must be modeled as an **immutable, append-only journal entry** composed of at least one debit and one credit that mathematically sum to zero.
-
----
-
-## Double-Entry Cryptographic Data Schema
-
-\`\`\`sql
--- Immutable Financial Transactions Table
-CREATE TABLE transactions (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    reference_id VARCHAR(120) UNIQUE NOT NULL,
-    posted_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    status VARCHAR(20) NOT NULL,
-    description TEXT NOT NULL
-);
-
--- Immutable Ledger Postings Table
-CREATE TABLE postings (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    transaction_id UUID REFERENCES transactions(id),
-    account_id UUID NOT NULL,
-    amount BIGINT NOT NULL, -- Stored in smallest currency unit (e.g. Cents/Paise)
-    direction VARCHAR(2) CHECK (direction IN ('DR', 'CR')),
-    currency VARCHAR(3) NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-\`\`\`
-
----
-
-## Handling 25,000 TPS without Race Conditions
-
-To prevent double-spending when thousands of micro-transactions hit the same account simultaneously:
-1. We execute ledger postings inside **PostgreSQL Serializable Isolation** transactions.
-2. In-memory distributed locks via **Redis Redlock** serialize debit requests per account ID.
-3. High-throughput Go microservices batch non-conflicting settlements over Apache Kafka event streams.
-
-This guarantees sub-45ms transaction execution with **0.00% ledger discrepancy** across millions of daily payment transfers.`
-  },
-  {
-    id: "post-4",
-    slug: "autonomous-multi-agent-rag-architectures-enterprise-llm",
-    title: "Autonomous Multi-Agent RAG Architectures: Scaling Enterprise LLM Workflows Beyond Basic Vector Search",
-    subtitle: "Why naive vector search fails in production and how multi-agent routing with semantic graph indexing achieves 99.4% precision.",
-    excerpt: "Discover how to architect autonomous AI agents with hierarchical planning, hybrid vector-graph indexing, and automated validation gates for enterprise operations.",
-    coverImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
-    category: "AI & Autonomous Agents",
-    author: {
-      name: "Ananya M.",
-      role: "Head of AI & NLP, Divanex",
-      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80"
-    },
-    publishedAt: "2026-08-10",
-    readTime: "9 min read",
-    featured: false,
-    status: "published",
-    views: 3250,
-    likes: 219,
-    tags: ["AI Agents", "RAG Pipelines", "DeepSeek R1", "Vector Databases", "Python FastAPI"],
-    tableOfContents: [
-      { id: "the-limits-of-naive-rag", title: "The Limits of Naive Vector RAG", level: 2 },
-      { id: "agentic-routing-architecture", title: "Hierarchical Multi-Agent Routing", level: 2 },
-      { id: "hybrid-vector-graph-index", title: "Hybrid Vector + Knowledge Graph Indexing", level: 2 },
-      { id: "eval-and-guardrails", title: "Automated Evaluation & Security Guardrails", level: 2 }
-    ],
-    content: `## The Limits of Naive Vector RAG
-
-Most tutorials show you how to chunk a PDF, store it in a vector database, and retrieve top-3 cosine similarity matches. In production enterprise environments, this fails because:
-
-* Complex queries require synthesis across multiple document sections.
-* Pure semantic embeddings lose exact keyword matches (like part numbers, invoice IDs, or legal clauses).
-* LLMs hallucinate when retrieved context is ambiguous or contradictory.
-
-To solve this, Divanex builds **Autonomous Multi-Agent RAG architectures** with dedicated retrieval, validation, and execution agents.`
+Drivers scan a QR code via the Evtor mobile app or tap their RFID card. The backend validates credit balance and transmits a signed \`RemoteStartTransaction\` command to the charger in under **350 milliseconds**.`
   },
   {
     id: "post-5",
-    slug: "replacing-sap-legacy-erp-modern-modular-nextjs-go",
-    title: "Replacing SAP & Legacy ERP with Modern Modular Next.js & Go Systems: The Zero-License Guide",
-    subtitle: "How mid-market enterprises are ditching $100K+ annual SAP/Oracle user fees in favor of tailored, proprietary ERP cockpits.",
-    excerpt: "A practical guide to replacing bloated legacy ERPs with high-performance modular architectures, real-time WMS barcode scanning, and automated accounting.",
-    coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
+    slug: "modernizing-industrial-manufacturing-shopfloor-erp-crm",
+    title: "Modernizing Industrial Manufacturing: Real-Time Shopfloor ERP, Barcode Tracking & Predictive Maintenance",
+    subtitle: "Digitizing precision CNC production and supply chain workflows for Magnus Partners and Parana Tool.",
+    excerpt: "Eliminate paper clipboards and blind spots with real-time machine telemetry, QR work-order travelers, and automated raw material replenishment workflows.",
+    coverImage: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80",
     category: "Enterprise ERP",
     author: {
       name: "Rajan S.",
       role: "Lead Solutions Architect, Divanex",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
     },
-    publishedAt: "2026-08-04",
+    publishedAt: "2026-08-27",
     readTime: "7 min read",
     featured: false,
     status: "published",
-    views: 2980,
-    likes: 194,
-    tags: ["ERP Systems", "Supply Chain", "Manufacturing MRP", "Next.js", "Go"],
+    views: 3740,
+    likes: 265,
+    tags: ["Industrial ERP", "Manufacturing", "Barcode Tracking", "Predictive Maintenance", "PostgreSQL"],
     tableOfContents: [
-      { id: "the-erp-licensing-tax", title: "The Legacy ERP Licensing Tax", level: 2 },
-      { id: "modular-micro-erp-design", title: "Modular Micro-ERP Architecture", level: 2 },
-      { id: "offline-first-wms", title: "Offline-First Mobile WMS with Barcode Scanning", level: 2 },
-      { id: "data-migration-strategy", title: "Zero-Downtime Data Migration from SAP/Tally", level: 2 }
+      { id: "the-paper-shopfloor-bottleneck", title: "The Paper-Driven Manufacturing Bottleneck", level: 2 },
+      { id: "qr-work-order-travelers", title: "Digital Work-Order Travelers & Barcode Scanning", level: 2 },
+      { id: "oee-machine-telemetry", title: "Overall Equipment Effectiveness (OEE) Telemetry", level: 2 },
+      { id: "predictive-tool-wear", title: "Predictive Tool Replacement & Maintenance Alerts", level: 2 }
     ],
-    content: `## The Legacy ERP Licensing Tax
+    content: `## The Paper-Driven Manufacturing Bottleneck
 
-Mid-market manufacturing and distribution companies frequently pay upwards of $80,000 to $150,000 annually in per-user seat licenses for legacy ERPs that are slow, clunky, and require months of expensive consultant hours for basic modifications.
+In precision tool manufacturing and heavy component engineering, relying on paper job cards causes severe visibility blackouts. Plant managers cannot answer basic operational questions:
+- *Which CNC machining center is currently running Part #4402?*
+- *What is the scrap rate on this morning's forging batch?*
+- *When will the raw alloy billets run out?*
 
-With modern web frameworks (Next.js 15, Go, PostgreSQL, ClickHouse), you can engineer a tailored enterprise ERP that your company owns 100%—with zero recurring user licenses.`
+For **Magnus Partners** and **Parana Tool**, Divanex built custom industrial ERP and shopfloor tracking platforms that replaced physical paper travelers with ruggedized tablet terminals.
+
+---
+
+## Digital Work-Order Travelers & Barcode Scanning
+
+Every production batch is assigned a unique 2D DataMatrix code:
+1. Operators scan the traveler before beginning turning, milling, grinding, or heat treatment.
+2. The terminal automatically checks material specs, CNC program versions, and operator calibration certifications.
+3. Good count, scrap count, and inspection measurements are logged immediately into the centralized PostgreSQL ledger.
+
+---
+
+## Overall Equipment Effectiveness (OEE) Telemetry
+
+OEE is calculated in real time using the three core industrial metrics:
+$$\\text{OEE} = \\text{Availability} \\times \\text{Performance} \\times \\text{Quality}$$
+
+Machine uptime status is collected via industrial IoT edge gateways, alerting shift supervisors the moment a spindle sits idle for more than 5 minutes.`
   },
   {
     id: "post-6",
-    slug: "zero-downtime-multi-region-kubernetes-failover-terraform",
-    title: "Zero-Downtime Multi-Region Kubernetes Failover with Terraform and Edge Anycast Routing",
-    subtitle: "Achieving true 99.999% availability by automating global failovers under 60 seconds with active-passive PostgreSQL streaming.",
-    excerpt: "Engineering mission-critical cloud infrastructure with Terraform IaC, AWS EKS multi-region clusters, and Cloudflare Anycast edge routing for zero-downtime resilience.",
-    coverImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
-    category: "Cloud & DevOps",
+    slug: "building-autonomous-enterprise-customer-support-llm-agents",
+    title: "Building Autonomous Enterprise Customer Support: Multi-Modal LLM Agents with Tool Calling & Human-in-the-Loop",
+    subtitle: "Resolving 78% of incoming enterprise tier-1 tickets with zero human intervention while preserving 98%+ CSAT.",
+    excerpt: "Architecting production LLM agent pipelines using LangGraph, structured JSON tool execution, semantic sentiment guards, and automated human escalation workflows.",
+    coverImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+    category: "AI & Autonomous Agents",
     author: {
-      name: "Karan P.",
-      role: "Principal Cloud & SRE Engineer, Divanex",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+      name: "Dr. Alistair Vance",
+      role: "Chief AI Architect, Divanex",
+      avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=200&q=80"
     },
-    publishedAt: "2026-07-28",
-    readTime: "8 min read",
-    featured: false,
-    status: "published",
-    views: 3110,
-    likes: 240,
-    tags: ["Kubernetes", "DevOps", "Terraform", "Cloudflare Anycast", "AWS EKS"],
-    tableOfContents: [
-      { id: "the-myth-of-single-region-high-availability", title: "The Myth of Single-Region High Availability", level: 2 },
-      { id: "terraform-multi-region-mesh", title: "Terraform Multi-Region Mesh Architecture", level: 2 },
-      { id: "database-cross-region-replication", title: "Cross-Region PostgreSQL Replication", level: 2 },
-      { id: "automated-failover-runbooks", title: "Under-60-Second Automated Failover Runbooks", level: 2 }
-    ],
-    content: `## The Myth of Single-Region High Availability
-
-When AWS us-east-1 suffers a major datacenter outage, hundreds of SaaS products and enterprise applications go offline simultaneously. Relying on multi-AZ (Availability Zone) deployments inside a single geographic region is insufficient for mission-critical banking, hospital, or high-concurrency SaaS platforms.
-
-Here is our blueprint for deploying **Active-Active and Active-Passive Multi-Region Kubernetes clusters with automated Cloudflare Anycast health check failover**.`
-  },
-  {
-    id: "post-7",
-    slug: "webrtc-mesh-real-time-telemedicine-video-streaming-go",
-    title: "Engineering Sub-100ms WebRTC Mesh Networks for HIPAA-Compliant Telemedicine & Clinical Video Streams",
-    subtitle: "How to build ultra-low-latency peer-to-peer and SFU video conferencing with end-to-end SRTP encryption and Pion Go.",
-    excerpt: "Architecting zero-latency WebRTC video infrastructure with Pion Go SFU relays, adaptive bitrate transcoding, and automated EHR clinical note transcription.",
-    coverImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
-    category: "Healthcare HMIS",
-    author: {
-      name: "Dr. Vikram M.",
-      role: "HealthTech & Clinical Infrastructure Architect, Divanex",
-      avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&q=80"
-    },
-    publishedAt: "2026-07-15",
+    publishedAt: "2026-08-22",
     readTime: "9 min read",
     featured: false,
     status: "published",
-    views: 2740,
-    likes: 188,
-    tags: ["WebRTC", "Telemedicine", "Pion Go", "HIPAA", "Video Streaming", "Sub-100ms"],
+    views: 4520,
+    likes: 367,
+    tags: ["AI Agents", "LLM", "Tool Calling", "Customer Support", "LangGraph", "Vector Search"],
     tableOfContents: [
-      { id: "the-latency-challenge", title: "The Sub-100ms Clinical Latency Challenge", level: 2 },
-      { id: "sfu-vs-mesh-topology", title: "Selective Forwarding Unit (SFU) vs Mesh Topology", level: 2 },
-      { id: "go-signaling-engine", title: "High-Throughput Go Signaling Server Architecture", level: 2 },
-      { id: "hipaa-encryption", title: "End-to-End SRTP/DTLS Clinical Encryption", level: 2 }
+      { id: "the-chatbot-failure-mode", title: "Why Traditional Chatbots Fail Enterprise Users", level: 2 },
+      { id: "agentic-state-machines", title: "Agentic State Machines with LangGraph", level: 2 },
+      { id: "deterministic-tool-calling", title: "Safe Tool Calling with Strict JSON Schemas", level: 2 },
+      { id: "human-in-the-loop", title: "Seamless Human Agent Escalation Triggers", level: 2 }
     ],
-    content: `## The Sub-100ms Clinical Latency Challenge
+    content: `## Why Traditional Chatbots Fail Enterprise Users
 
-In clinical remote surgeries and telemedicine consults, traditional HLS video buffering (with 4-8 second latency) is unusable. Physicians need instant real-time diagnostic synchronization, crystal-clear vital telemetry overlays, and sub-100ms bidirectional audiovisual streams.
+Rule-based decision trees and naive conversational bots frustrate customers because they cannot perform real actions: they cannot issue a refund, reschedule a flight, or verify a bank transaction.
 
----
-
-## Selective Forwarding Unit (SFU) vs Mesh Topology
-
-For 1-on-1 doctor-patient visits, **P2P WebRTC Mesh** minimizes cloud egress costs. For multi-specialist clinical tumor boards with 10+ participants, client uplink bandwidth quickly degrades. 
-
-To overcome this, Divanex deploys a dedicated **Go Pion SFU cluster** that receives one video stream per doctor and dynamically redistributes spatial-temporal layers (Simulcast VP9 / AV1) based on each participant's network bandwidth.
-
-\`\`\`go
-// Pion WebRTC SFU Track Forwarding Router in Go
-package main
-
-import (
-    "github.com/pion/webrtc/v3"
-)
-
-func routeClinicalMediaTrack(remoteTrack *webrtc.TrackRemote, peerConnections []*webrtc.PeerConnection) {
-    for _, peer := range peerConnections {
-        localTrack, err := webrtc.NewTrackLocalStaticRTP(
-            remoteTrack.Codec().RTPCodecCapability,
-            "clinical-telemetry-video",
-            "divanex-telehealth-session",
-        )
-        if err != nil {
-            continue
-        }
-        go func(t *webrtc.TrackLocalStaticRTP) {
-            buf := make([]byte, 1500)
-            for {
-                n, _, readErr := remoteTrack.Read(buf)
-                if readErr != nil {
-                    break
-                }
-                t.Write(buf[:n])
-            }
-        }(localTrack)
-    }
-}
-\`\`\`
+An **Autonomous AI Agent**, by contrast, possesses:
+- **Reasoning Loop:** Understands complex multi-step customer intent.
+- **Action Execution:** Calls verified API tools to read database records and perform transactional changes.
+- **Safety Boundary:** Strict guardrails preventing hallucinated commitments or policy violations.
 
 ---
 
-## End-to-End SRTP/DTLS Clinical Encryption
+## Agentic State Machines with LangGraph
 
-All media streams are strictly encapsulated using **DTLS 1.3** handshake exchange and **AES-256 SRTP encryption**, ensuring 100% HIPAA and ABDM consent artifact compliance without intermediate payload decryption on relay nodes.`
+We structure AI customer service agents as directed state graphs where each node represents a deterministic capability:
+1. **Classifier Node:** Detects intent (Billing dispute, Technical bug, Shipping delay).
+2. **Retrieval Node:** Fetches relevant customer profile and recent orders from CRM.
+3. **Execution Node:** Invokes verified internal microservice tools (e.g. \`issueRefund(orderId, amount)\`).
+4. **Guardrail Node:** Validates LLM response for tone, compliance, and PII masking before sending to the user.
+
+---
+
+## Seamless Human Agent Escalation Triggers
+
+If user sentiment drops below critical threshold, or if financial action exceeds $250, the agent automatically transfers the live chat session and complete reasoning scratchpad to a human operator in under 2 seconds.`
+  },
+  {
+    id: "post-7",
+    slug: "modern-hospital-hmis-architecture-abdm-hl7-fhir",
+    title: "Modern Hospital HMIS Architecture: ABDM Milestone 3 Compliance, HL7 FHIR v4 & Zero-Downtime EMR",
+    subtitle: "Engineering secure, paperless digital workflows for multi-specialty hospitals with Ayushman Bharat integration.",
+    excerpt: "A comprehensive architectural guide to building ABDM-certified healthcare information systems, LOINC/SNOMED diagnostic interfaces, and fast cloud PACS DICOM viewers.",
+    coverImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
+    category: "Healthcare HMIS",
+    author: {
+      name: "Pooja Sharma",
+      role: "HealthTech Compliance Lead, Divanex",
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80"
+    },
+    publishedAt: "2026-08-15",
+    readTime: "10 min read",
+    featured: false,
+    status: "published",
+    views: 3880,
+    likes: 279,
+    tags: ["Healthcare", "ABDM", "ABHA", "HL7 FHIR", "HMIS", "Data Privacy"],
+    tableOfContents: [
+      { id: "the-abdm-national-mandate", title: "The ABDM Digital Health Mandate", level: 2 },
+      { id: "hl7-fhir-bundle-architecture", title: "HL7 FHIR v4 Clinical Data Modeling", level: 2 },
+      { id: "automated-lis-interfacing", title: "Automated LIS Laboratory Interfacing (ASTM / HL7)", level: 2 },
+      { id: "browser-dicom-pacs-viewer", title: "Zero-Footprint Browser DICOM Imaging", level: 2 }
+    ],
+    content: `## The ABDM Digital Health Mandate
+
+Under India's Ayushman Bharat Digital Mission (ABDM), healthcare institutions must eliminate manual paper prescriptions and implement standardized, interoperable electronic health records.
+
+Divanex builds end-to-end ABDM M1, M2, and M3 compliant hospital platforms enabling:
+- Instant patient registration using **ABHA QR code scanning**.
+- Cryptographically signed electronic health records (EHR) pushed to national health lockers.
+- Consent-driven clinical data exchange between hospitals, clinics, and diagnostic labs.
+
+---
+
+## HL7 FHIR v4 Clinical Data Modeling
+
+All patient summaries, lab investigations, and discharge notes are represented as standard **HL7 FHIR v4 JSON resources** tagged with LOINC diagnostic test codes and SNOMED-CT clinical terminology.
+
+---
+
+## Zero-Footprint Browser DICOM Imaging
+
+By converting 500MB+ CT and MRI imaging files into edge-tiled WebP fragments, radiologists and consulting doctors can review 4K scans on tablet browsers with smooth pan-and-zoom in under 150ms.`
   },
   {
     id: "post-8",
-    slug: "nextjs-partial-prerendering-multi-vendor-marketplace-architecture",
-    title: "Building Sub-200ms Multi-Vendor E-Commerce Marketplaces with Next.js Partial Prerendering & Split Escrow",
-    subtitle: "How to handle 50,000+ simultaneous flash sale checkouts with optimistic UI updates and instant multi-vendor payouts.",
-    excerpt: "A comprehensive teardown of high-concurrency e-commerce architectures combining Next.js Partial Prerendering, edge Redis inventory locks, and automated split settlement.",
-    coverImage: "https://images.unsplash.com/photo-1556742049-0a67e557224f?auto=format&fit=crop&w=1200&q=80",
-    category: "Architecture & SaaS",
+    slug: "next-gen-fintech-payments-upi-mandates-escrow-split-settlement",
+    title: "Next-Gen FinTech Payments: UPI 2.0 Recurring Mandates, Escrow Split-Settlement & Instant Webhook Engines",
+    subtitle: "Handling $200M+ in annual gross transaction value with strict idempotency and zero double-spend risks.",
+    excerpt: "How to build bulletproof payment switches with Go microservices, automated UPI 2.0 mandate execution, escrow merchant split-settlements, and resilient webhook retries.",
+    coverImage: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&q=80",
+    category: "Fintech & Payments",
+    author: {
+      name: "Sameer Mehta",
+      role: "Principal FinTech Engineer, Divanex",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
+    },
+    publishedAt: "2026-08-09",
+    readTime: "8 min read",
+    featured: false,
+    status: "published",
+    views: 4190,
+    likes: 310,
+    tags: ["Fintech", "UPI 2.0", "Escrow Settlement", "Payment Gateway", "Go", "PostgreSQL"],
+    tableOfContents: [
+      { id: "the-fintech-reliability-problem", title: "The Zero-Tolerance Reliability Standard in Payments", level: 2 },
+      { id: "upi-2-autopay-architecture", title: "UPI 2.0 Recurring Mandate Switch", level: 2 },
+      { id: "multi-party-escrow-splits", title: "Automated Multi-Party Escrow Settlement", level: 2 },
+      { id: "webhook-resilience-circuit-breaker", title: "Idempotent Webhook Engine with Exponential Backoff", level: 2 }
+    ],
+    content: `## The Zero-Tolerance Reliability Standard in Payments
+
+In financial payment orchestration, network drops, bank server timeouts, and browser disconnects are ordinary occurrences. A payment switch must mathematically guarantee:
+- **Zero Double-Charges:** A user tapping "Pay" 3 times during network lag must only be charged once.
+- **Zero Ledger Discrepancies:** Debits and Credits must balance out perfectly to 0 cents.
+- **Immediate State Consistency:** Bank callback webhooks must update merchant and customer accounts atomically.
+
+---
+
+## Automated Multi-Party Escrow Settlement
+
+For marketplace platforms (e.g. food delivery, multi-vendor retail), a single customer payment of ₹1,000 must be programmatically split at settlement:
+- ₹850 to Merchant payout account.
+- ₹100 to Delivery Partner wallet.
+- ₹50 to Platform commission account.
+
+Our Go payment orchestration engine executes atomic multi-party ledger transfers with full audit trails.`
+  },
+  {
+    id: "post-9",
+    slug: "cutting-cloud-infrastructure-bills-kubernetes-spot-edge-caching",
+    title: "Cutting Cloud Infrastructure Bills by 65%: Kubernetes Spot Instances, Serverless Edge & Micro-Caching",
+    subtitle: "Practical strategies to dramatically reduce AWS & GCP compute costs without compromising 99.99% availability.",
+    excerpt: "Learn how we saved enterprise clients over $40,000/month by migrating static API responses to Cloudflare Edge Workers, rightsizing Kubernetes node pools, and automating spot drain.",
+    coverImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
+    category: "Cloud & DevOps",
     author: {
       name: "Rajan S.",
       role: "Lead Solutions Architect, Divanex",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
     },
-    publishedAt: "2026-07-02",
-    readTime: "8 min read",
+    publishedAt: "2026-07-30",
+    readTime: "7 min read",
     featured: false,
     status: "published",
-    views: 3410,
-    likes: 276,
-    tags: ["E-Commerce", "Marketplaces", "Next.js", "Partial Prerendering", "Split Escrow", "Redis"],
+    views: 3590,
+    likes: 240,
+    tags: ["Cloud Cost Optimization", "AWS", "Kubernetes", "Cloudflare Workers", "DevOps"],
     tableOfContents: [
-      { id: "the-marketplace-concurrency-problem", title: "The 50,000 TPS Marketplace Concurrency Problem", level: 2 },
-      { id: "partial-prerendering-mechanics", title: "Next.js Partial Prerendering (PPR) Architecture", level: 2 },
-      { id: "atomic-inventory-locks", title: "Atomic Redis Inventory Locks for Flash Sales", level: 2 },
-      { id: "automated-split-escrow", title: "Automated Multi-Vendor Split Escrow Payouts", level: 2 }
+      { id: "the-cloud-bill-crisis", title: "The Over-Provisioned Cloud Crisis", level: 2 },
+      { id: "spot-orchestration-karpenter", title: "Automated Spot Node Provisioning with Karpenter", level: 2 },
+      { id: "edge-micro-caching", title: "Sub-Second Micro-Caching at Edge Workers", level: 2 },
+      { id: "database-io-savings", title: "Eliminating Unnecessary Database IOPS Bills", level: 2 }
     ],
-    content: `## The 50,000 TPS Marketplace Concurrency Problem
+    content: `## The Over-Provisioned Cloud Crisis
 
-When thousands of buyers hit a multi-vendor marketplace during a flash drop, three major failure modes occur:
-1. **Database lock contention:** Multiple customers buying the last 5 inventory units simultaneously cause row lock timeouts.
-2. **Slow dynamic checkout pages:** Fetching dynamic vendor commissions, taxes, and shipping rates inflates Time to First Byte (TTFB) to >2,000ms.
-3. **Escrow reconciliation nightmares:** Manual calculation of platform commission versus vendor payout across split cart shipments.
+Most high-growth SaaS startups overpay for cloud infrastructure by 50% to 70% due to static over-provisioning and unoptimized database read workloads.
 
 ---
 
-## Next.js Partial Prerendering (PPR) Architecture
+## Automated Spot Node Provisioning with Karpenter
 
-With Next.js Partial Prerendering, the static product shell (images, descriptions, reviews, navigation) is served from global edge caches in under **25ms**, while dynamic real-time elements (inventory count, personalized discounts, cart state) stream via React Suspense:
-
-\`\`\`typescript
-// Partial Prerendering E-Commerce Product Experience
-export default function MarketplaceProductPage({ params }: { params: { sku: string } }) {
-  return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      {/* 1. Static Edge Shell (0ms TTFB) */}
-      <ProductStaticShell sku={params.sku} />
-      
-      {/* 2. Dynamic Streaming Inventory & Real-Time Split Pricing */}
-      <Suspense fallback={<PriceLoadingSkeleton />}>
-        <DynamicVendorLiveInventoryAndPricing sku={params.sku} />
-      </Suspense>
-    </div>
-  );
-}
-\`\`\`
+By implementing AWS Karpenter paired with mixed-instance spot fleets, non-critical worker microservices dynamically spin up on 70% discounted spot compute. If AWS issues a two-minute spot interruption notice, Karpenter drains pods gracefully onto reserve capacity without dropping a single active customer HTTP session.
 
 ---
 
-## Automated Multi-Vendor Split Escrow Payouts
+## Sub-Second Micro-Caching at Edge Workers
 
-When a customer checks out with items from 4 different vendors in a single cart, our payment engine breaks the total into atomic escrow allocations:
-* **Vendor A:** 78% of Item Total
-* **Vendor B:** 82% of Item Total
-* **Platform Fee:** Fixed 4.5% + $0.30
-* **Logistics Escrow:** Released only upon 3PL delivery confirmation webhook.
-
-This eliminates fraud, guarantees instant vendor confidence, and scales seamlessly to $10M+ GMV monthly volume.`
-  },
-  {
-    id: "post-9",
-    slug: "building-real-time-iot-telemetry-engine-clickhouse-kafka-go",
-    title: "Ingesting 1.2M Events/Sec: Real-Time Fleet IoT Telemetry Engine with Go, Apache Kafka, and ClickHouse",
-    subtitle: "Architectural blueprint for ingesting, querying, and visualizing millions of vehicle GPS pings with sub-50ms analytical latency.",
-    excerpt: "Learn how we engineered a high-throughput fleet telemetry pipeline capable of processing 1.2 million geospatial events per second using Go microservices, Kafka partitioning, and ClickHouse columnar storage.",
-    coverImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
-    category: "Cloud & DevOps",
-    author: {
-      name: "Vikram R.",
-      role: "Principal Cloud Infrastructure Architect, Divanex",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
-    },
-    publishedAt: "2026-06-20",
-    readTime: "9 min read",
-    featured: false,
-    status: "published",
-    views: 3890,
-    likes: 294,
-    tags: ["IoT", "Kafka", "ClickHouse", "Go", "Distributed Systems", "Telemetry"],
-    tableOfContents: [
-      { id: "the-high-throughput-telemetry-challenge", title: "The 1.2M Events/Sec Ingestion Challenge", level: 2 },
-      { id: "kafka-partitioning-strategy", title: "Zero-Loss Kafka Partitioning & Buffer Architecture", level: 2 },
-      { id: "clickhouse-columnar-storage", title: "ClickHouse AggregatingMergeTree Table Optimization", level: 2 },
-      { id: "live-geospatial-querying", title: "Sub-50ms Geospatial GeoJSON Polygon Queries", level: 2 }
-    ],
-    content: `## The 1.2M Events/Sec Ingestion Challenge
-
-Fleet management and smart vehicle platforms generate continuous streams of high-frequency GPS, engine diagnostics (OBD-II), fuel temperature, and speed telematics. Traditional relational databases crumble under this write velocity due to transaction log lock contention and B-Tree index rebalancing.
-
-To sustain continuous **1.2 million events per second write throughput** while supporting sub-50ms fleet analytics dashboards, we implemented a three-tier architecture:
-
-1. **Edge Ingestion Gateway (Go):** Stateless WebSocket and MQTT listener clusters terminating connections and parsing binary protocol buffers.
-2. **Distributed Message Backbone (Apache Kafka):** 24-partition topic cluster grouped by \`device_region_id\` with LZ4 compression.
-3. **Columnar Analytical Store (ClickHouse):** Sharded \`ReplicatedReplacingMergeTree\` cluster with memory buffers.
-
----
-
-## Zero-Loss Kafka Partitioning & Buffer Architecture
-
-The Go ingestion microservice batches incoming telemetry frames in memory buffers for 100ms before publishing vectorized payloads to Kafka:
-
-\`\`\`go
-package main
-
-import (
-    "context"
-    "time"
-    "github.com/segmentio/kafka-go"
-)
-
-type TelemetryBatcher struct {
-    writer *kafka.Writer
-    buffer chan kafka.Message
-}
-
-func (b *TelemetryBatcher) FlushLoop(ctx context.Context) {
-    ticker := time.NewTicker(100 * time.Millisecond)
-    defer ticker.Stop()
-    var batch []kafka.Message
-
-    for {
-        select {
-        case msg := <-b.buffer:
-            batch = append(batch, msg)
-            if len(batch) >= 5000 {
-                _ = b.writer.WriteMessages(ctx, batch...)
-                batch = batch[:0]
-            }
-        case <-ticker.C:
-            if len(batch) > 0 {
-                _ = b.writer.WriteMessages(ctx, batch...)
-                batch = batch[:0]
-            }
-        case <-ctx.Done():
-            return
-        }
-    }
-}
-\`\`\`
-
----
-
-## ClickHouse AggregatingMergeTree Table Optimization
-
-ClickHouse stores data column-by-column on disk, enabling up to 90% compression ratios and multi-gigabyte per second sequential scan speeds:
-
-\`\`\`sql
-CREATE TABLE default.vehicle_telemetry_raw (
-    tenant_id UUID,
-    vehicle_id LowCardinality(String),
-    timestamp DateTime64(3, 'UTC'),
-    latitude Float64,
-    longitude Float64,
-    speed_kmh Float32,
-    fuel_level_pct UInt8,
-    engine_temp_c Int16
-) ENGINE = ReplicatedReplacingMergeTree('/clickhouse/tables/{shard}/telemetry', '{replica}')
-PARTITION BY toYYYYMM(timestamp)
-ORDER BY (tenant_id, vehicle_id, timestamp);
-\`\`\`
-
-This architecture powers live geofencing alerts, idle-time analytics, and route playback across 45,000 active commercial trucks with zero server strain.`
+Caching semi-dynamic REST API endpoints (e.g. homepage banners, category trees, product reviews) for just **3 seconds** absorbs 80% of backend traffic surges during marketing promotions, shrinking server CPU load by over 60%.`
   },
   {
     id: "post-10",
-    slug: "autonomous-ai-agents-langgraph-rag-enterprise-knowledge-base",
-    title: "Engineering Multi-Agent Autonomous RAG Workflows with LangGraph, pgvector, and Hybrid Semantic Search",
-    subtitle: "How to orchestrate self-correcting AI reasoning loops for querying 500,000+ unstructured corporate compliance documents with zero hallucinations.",
-    excerpt: "A deep technical breakdown of constructing deterministic enterprise agent networks with cyclical execution graphs, recursive re-ranking, and pgvector embeddings.",
-    coverImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
-    category: "AI & Autonomous Agents",
+    slug: "flutter-vs-react-native-2026-benchmarking-120fps-ui",
+    title: "Flutter vs React Native in 2026: Benchmarking 120 FPS UI, Native Hardware Access & App Startup Performance",
+    subtitle: "An exhaustive performance breakdown across 500,000 active devices comparing Impeller vs React Native New Architecture.",
+    excerpt: "We benchmarked both frameworks on boot time, frame drops during complex list animations, BLE device communication, and background geolocation battery drain.",
+    coverImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80",
+    category: "Mobile Engineering",
     author: {
-      name: "Kunal M.",
-      role: "Head of AI Engineering, Divanex",
+      name: "Sameer Mehta",
+      role: "Principal Mobile Architect, Divanex",
       avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
     },
-    publishedAt: "2026-06-11",
-    readTime: "10 min read",
+    publishedAt: "2026-07-20",
+    readTime: "8 min read",
     featured: false,
     status: "published",
-    views: 4520,
-    likes: 388,
-    tags: ["AI Agents", "LangGraph", "RAG", "pgvector", "Embeddings", "LLMs"],
+    views: 4780,
+    likes: 382,
+    tags: ["React Native", "Flutter", "Mobile Architecture", "Performance", "iOS & Android"],
     tableOfContents: [
-      { id: "the-enterprise-rag-hallucination-wall", title: "The Enterprise RAG Hallucination Wall", level: 2 },
-      { id: "langgraph-cyclical-state-machine", title: "LangGraph Cyclical State Machine Architecture", level: 2 },
-      { id: "hybrid-search-reciprocal-rank-fusion", title: "Hybrid Search with Reciprocal Rank Fusion (RRF)", level: 2 },
-      { id: "self-correcting-evaluator-nodes", title: "Self-Correcting Verification Nodes", level: 2 }
+      { id: "the-mobile-battleground-2026", title: "The Cross-Platform Landscape in 2026", level: 2 },
+      { id: "ui-rendering-impeller-vs-fabric", title: "Impeller Engine vs React Native Fabric Renderer", level: 2 },
+      { id: "battery-and-memory-benchmarks", title: "Real-World Memory & Battery Drain Benchmarks", level: 2 },
+      { id: "the-divanex-framework-decision-matrix", title: "The Divanex Framework Decision Matrix", level: 2 }
     ],
-    content: `## The Enterprise RAG Hallucination Wall
+    content: `## The Cross-Platform Landscape in 2026
 
-Basic Retrieval-Augmented Generation (RAG)—where queries are embedded, searched via top-k cosine similarity, and dumped into an LLM context prompt—fails catastrophically on enterprise legal contracts, financial audits, and technical compliance manuals.
+Both Flutter (with its custom Vulkan/Metal **Impeller** rendering engine) and React Native (with TurboModules and Fabric New Architecture) have evolved dramatically.
 
-Common failure points include:
-1. **Context Fragmentation:** The relevant answer spans multiple non-contiguous table paragraphs.
-2. **Missing Negative Confirmation:** The model invents plausible facts when the documentation does not state the answer.
-3. **Stale Semantic Retrieval:** Pure vector search misses exact SKU codes, clause numbers, and acronyms.
+At Divanex, having built dozens of consumer and enterprise apps across food delivery, IoT charging, and fintech, we ran extensive real-world performance benchmarks across flagship and budget Android devices.
 
 ---
 
-## LangGraph Cyclical State Machine Architecture
+## Impeller Engine vs React Native Fabric Renderer
 
-To guarantee deterministic, auditable responses, we model the AI workflow as a **cyclical directed graph** with state validation checkpoints:
-
-\`\`\`typescript
-import { StateGraph, END } from "@langchain/langgraph";
-
-interface AgentGraphState {
-  userQuery: string;
-  retrievedDocuments: Array<{ id: string; text: string; score: number }>;
-  isContextSufficient: boolean;
-  refinedQuery?: string;
-  generatedAnswer?: string;
-  hallucinationScore: number;
-}
-
-// Instantiate Cyclical Workflow Graph
-const workflow = new StateGraph<AgentGraphState>({
-  channels: {
-    userQuery: null,
-    retrievedDocuments: null,
-    isContextSufficient: null,
-    refinedQuery: null,
-    generatedAnswer: null,
-    hallucinationScore: null,
-  }
-});
-
-// Define Autonomous Nodes
-workflow.addNode("retrieve_hybrid", retrieveHybridDocumentsNode);
-workflow.addNode("grade_relevance", gradeDocumentRelevanceNode);
-workflow.addNode("rewrite_query", rewriteAmbiguousQueryNode);
-workflow.addNode("synthesize_answer", synthesizeVerifiedAnswerNode);
-workflow.addNode("hallucination_guard", auditHallucinationScoreNode);
-
-// Define Conditional Routing
-workflow.addConditionalEdges("grade_relevance", (state) => {
-  return state.isContextSufficient ? "synthesize_answer" : "rewrite_query";
-});
-
-workflow.addEdge("rewrite_query", "retrieve_hybrid");
-workflow.addConditionalEdges("hallucination_guard", (state) => {
-  return state.hallucinationScore < 0.05 ? END : "synthesize_answer";
-});
-\`\`\`
+- **Flutter (Impeller):** Delivers silky smooth 120Hz refresh rates with virtually zero shader compilation stutter. Ideal for custom graphics, charting, and highly branded canvas animations.
+- **React Native (Fabric + Bridgeless):** Leverages native platform UI widgets with instant TypeScript-to-C++ JSI bindings. Ideal for deep platform ecosystem integrations and code-sharing with Next.js web codebases.
 
 ---
 
-## Hybrid Search with Reciprocal Rank Fusion (RRF) in PostgreSQL pgvector
+## The Divanex Framework Decision Matrix
 
-We combine dense HNSW vector embeddings (OpenAI \`text-embedding-3-large\`) with sparse full-text BM25 indexes using PostgreSQL \`pgvector\` and Reciprocal Rank Fusion (RRF):
-
-\`\`\`sql
--- Hybrid Vector + Full-Text RRF Query
-WITH semantic_search AS (
-  SELECT id, content, RANK() OVER (ORDER BY embedding <=> $1) as rank
-  FROM enterprise_knowledge_chunks
-  WHERE tenant_id = $2
-  LIMIT 20
-),
-keyword_search AS (
-  SELECT id, content, RANK() OVER (ORDER BY ts_rank(text_search_vector, plainto_tsquery('english', $3)) DESC) as rank
-  FROM enterprise_knowledge_chunks
-  WHERE tenant_id = $2 AND text_search_vector @@ plainto_tsquery('english', $3)
-  LIMIT 20
-)
-SELECT 
-  COALESCE(s.id, k.id) as chunk_id,
-  COALESCE(s.content, k.content) as content,
-  (COALESCE(1.0 / (60 + s.rank), 0.0) + COALESCE(1.0 / (60 + k.rank), 0.0)) as rrf_score
-FROM semantic_search s
-FULL OUTER JOIN keyword_search k ON s.id = k.id
-ORDER BY rrf_score DESC
-LIMIT 8;
-\`\`\`
-
-This guarantees sub-second, 100% cited answers backed by mathematical clause references.`
+- **Choose React Native:** When you need shared business logic with web (Next.js), rich OTA updates via Expo, or extensive third-party native SDKs (e.g. specialized payment POS terminals).
+- **Choose Flutter:** When pixel-perfect design parity between iOS and Android is paramount, or when building high-performance 2D floorplans and telemetry dashboards.`
   }
 ];

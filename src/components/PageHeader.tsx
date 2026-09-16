@@ -87,15 +87,15 @@ export default function PageHeader({ route, tokens }: PageHeaderProps) {
                 href={content.actionHref || "/contact"}
                 className="btn-futuristic-primary text-xs sm:text-sm !py-3 !px-6 !rounded-xl"
               >
-                <span>{content.actionLabel || "Discuss Project Cost"}</span>
+                <span>{content.actionLabel || "Start a Project"}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
               <Link
-                href="/contact"
+                href="/portfolio"
                 className="btn-futuristic-glass text-xs sm:text-sm !py-3 !px-6 !rounded-xl font-bold"
               >
-                <span>Talk to Technical Lead</span>
+                <span>View Case Studies</span>
               </Link>
             </div>
           </div>

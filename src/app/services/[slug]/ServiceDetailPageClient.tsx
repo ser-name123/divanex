@@ -96,15 +96,15 @@ export default function ServiceDetailPageClient({ service, related = [] }: Props
                   href="/contact"
                   className="btn-futuristic-primary text-xs sm:text-sm !py-3 !px-6 !rounded-xl"
                 >
-                  <span>Discuss Service Scope</span>
+                  <span>Start a Project</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
 
                 <Link
-                  href="/contact"
+                  href="/portfolio"
                   className="btn-futuristic-glass text-xs sm:text-sm !py-3 !px-6 !rounded-xl font-bold"
                 >
-                  <span>Talk to Technical Lead</span>
+                  <span>View Case Studies</span>
                 </Link>
               </div>
             </div>

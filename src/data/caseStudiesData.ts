@@ -639,110 +639,110 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
   "parana-tool": {
     id: "parana-tool",
     slug: "parana-tool",
-    title: "Parana Tool - Electronics & Accessories E-Commerce",
-    subtitle: "Omnichannel B2B/D2C Headless Storefront, Mobile App, Sub-70ms Instant SKU Search & Tiered Pricing",
-    category: "Mobile Engineering",
-    clientName: "Parana Tools & Electronics Inc.",
-    industry: "Industrial Electronics, Tools & E-Commerce",
+    title: "Parana Tool - Industrial CNC Tooling & Engineering Catalog",
+    subtitle: "B2B Precision Tooling Configurator, CNC Component Specs, CAD STEP File Vault & Instant RFQ Pipeline",
+    category: "High-Frequency Web",
+    clientName: "Parana Tooling Technologies",
+    industry: "Precision CNC Tooling & Industrial Manufacturing",
     duration: "6 Weeks to Production",
     contractValue: "$36,500",
-    impactHighlight: "+86%",
-    impactLabel: "Mobile Conversion & Sub-70ms Search",
-    metaDescription: "How Divanex engineered the Parana Tool headless commerce platform, mobile shopping app, and instant SKU catalog search.",
+    impactHighlight: "40%",
+    impactLabel: "Reduction in Engineering Quote Turnaround Time",
+    metaDescription: "How Divanex engineered Parana Tool's industrial CNC tooling catalog, parametric search engine, and instant B2B RFQ quoting platform.",
     stats: [
-      { label: "Monthly Active Shoppers", value: "120K+", subtext: "Across B2B wholesale and retail" },
-      { label: "Mobile Checkout Conversion", value: "+86%", subtext: "1-click frictionless payment flow" },
-      { label: "Catalog Search Latency", value: "< 65ms", subtext: "Algolia faceted instant search across 45k SKUs" },
-      { label: "App Store Rating", value: "4.9 ★", subtext: "Over 8,500 verified customer reviews" }
+      { label: "Indexed CNC Tooling SKUs", value: "3,200+", subtext: "Carbide end mills, drills & inserts" },
+      { label: "Quote Generation Time", value: "< 3 sec", subtext: "Automated instant B2B RFQ engine" },
+      { label: "Catalog Search Latency", value: "< 40ms", subtext: "Parametric filter by shank & flutes" },
+      { label: "CAD STEP File Downloads", value: "5,000+", subtext: "Direct integration into SolidWorks / Fusion360" }
     ],
     challenge: {
-      title: "Slow Legacy Catalog, Broken Mobile Checkout & Lack of Tiered Wholesale Pricing",
-      summary: "Parana Tool's previous monolithic e-commerce store struggled with 45,000+ technical electronic SKUs, taking over 4 seconds to filter component specifications and losing lucrative bulk business orders.",
+      title: "Clunky 600-Page PDF Catalogs, Missing CAD Models & 3-Day Quote Delays",
+      summary: "Machining workshops and CNC programming engineers had to flip through static 600-page PDF catalogues, email back and forth for 3D CAD models, and wait up to 3 business days just to receive custom volume pricing on carbide cutting tools.",
       frictionPoints: [
-        "Searching for specific resistor, capacitor, or tool part numbers timed out on slow mobile connections.",
-        "B2B corporate buyers could not view custom contracted volume pricing automatically.",
-        "Mobile cart abandonment reached 74% due to a clunky 5-step checkout flow."
+        "Finding an end mill with exact flute count, helix angle, and workpiece hardness (HRC 55) took 15+ minutes.",
+        "Engineers could not download STEP/DXF 3D CAD files directly into CAM software.",
+        "High-volume manufacturing clients churned to competitors due to slow quote response times."
       ]
     },
     solution: {
-      title: "Headless Next.js 15 Storefront + Native React Native Mobile App",
-      summary: "Divanex architected a decoupled high-speed headless commerce platform combining Next.js 15, Algolia instant search, React Native mobile apps, and automated B2B volume pricing matrices.",
+      title: "High-Performance Next.js 15 Parametric Tooling Catalog + Instant RFQ Engine",
+      summary: "Divanex built a specialized industrial web portal featuring sub-40ms parametric tool filtering, 3D interactive tool previews, automated bulk tier calculations, and 1-click CAD model downloads.",
       architecturalPillars: [
         {
-          title: "Sub-70ms Algolia SKU & Specification Search",
-          description: "Instantaneous keystroke search across 45,000+ electronic tools, datasheets, voltages, and part numbers with typo tolerance.",
-          tech: "Algolia • Next.js 15 • Redis Caching"
+          title: "Sub-40ms Parametric CNC Tooling Search",
+          description: "Filter instantly across shank diameter, cutting length, flute count, coating type (TiAlN, AlCrN), and workpiece material suitability (Steel, Inconel, Aluminum).",
+          tech: "Next.js 15 • PostgreSQL • Redis"
         },
         {
-          title: "Omnichannel Mobile Shopping App",
-          description: "High-performance React Native shopping application with barcode scanning for warehouse reordering, push notifications, and biometric checkout.",
-          tech: "React Native • Apple Pay • Google Pay"
+          title: "Automated 3D CAD Vault & STEP Exporter",
+          description: "Provides verified 3D STEP and 2D DXF files for every single SKU, ready to drop into Mastercam and SolidWorks tooling assemblies.",
+          tech: "Three.js • AWS S3 • CloudFront"
         },
         {
-          title: "Dynamic B2B Tiered Volume Pricing Engine",
-          description: "Automatically adjusts unit prices in real-time based on cart quantity thresholds, buyer credit terms, and GST invoicing.",
-          tech: "Node.js • PostgreSQL • Stripe Elements"
+          title: "Instant B2B RFQ & Tiered Quoting Switch",
+          description: "Machinists input quantity thresholds (10, 50, 200 units) to receive instant downloadable PDF quotes with GST breakdown and dispatch lead times.",
+          tech: "Node.js • PDFKit • PostgreSQL"
         }
       ]
     },
     architectureBlueprint: {
-      title: "Parana Tool Omnichannel Commerce Blueprint",
+      title: "Parana Tool Industrial Catalog & RFQ Blueprint",
       flowSteps: [
-        { step: "1. Lightning SKU Search", component: "Algolia Instant Engine", detail: "Customer searches part number; instant product chips and datasheets appear in <65ms." },
-        { step: "2. Real-Time Volume Discounting", component: "Pricing Engine", detail: "System dynamically calculates bulk tier pricing (10+, 100+, 1,000+ units) with live profit margins." },
-        { step: "3. One-Click Mobile Checkout", component: "Payment Switch", detail: "Customer checks out using biometric Apple Pay/Google Pay or B2B 30-day corporate credit." },
-        { step: "4. ERP & Warehouse Sync", component: "Inventory Webhook", detail: "Dispatches pick-list to automated warehouse fulfillment center within 300ms of payment." }
+        { step: "1. Parametric Query", component: "Edge Search Engine", detail: "Machinist selects material (e.g. Stainless 316) and flute specs; matched tools render in <40ms." },
+        { step: "2. Technical Spec Sheet", component: "Dynamic Datasheet", detail: "Displays cutting speeds (Vc), feed rates (Fz), and recommended coolant pressure." },
+        { step: "3. 1-Click CAD Download", component: "CAD Asset Cloud", detail: "Direct signed URL delivers accurate 3D STEP file for CAM collision simulations." },
+        { step: "4. Automated RFQ Generation", component: "Quote Engine", detail: "Calculates volume tiered pricing and emails formal B2B invoice quote within 3 seconds." }
       ],
       highlights: [
-        "In-app Barcode Scanner: Technicians scan worn tool barcodes on job sites for 1-click reordering.",
-        "Technical Datasheet Vault: Instant PDF spec sheets for engineers and electronics builders.",
-        "Multi-warehouse inventory routing: Automatically ships from the closest fulfillment center."
+        "Parametric Speed & Feed Calculator built into every product page for machining technicians.",
+        "Instant CAD STEP Downloads eliminate 3-day wait times for design engineers.",
+        "ERP synchronization pushes confirmed quotes directly into warehouse production queues."
       ]
     },
     techStack: [
       {
-        category: "Storefront & Mobile",
+        category: "Frontend & 3D Web",
         technologies: [
-          { name: "Next.js 15", role: "Headless E-Commerce Web Storefront", highlight: "Server Components & Edge SEO" },
-          { name: "React Native", role: "iOS & Android Shopping App", highlight: "Built-in Barcode Scanner" },
-          { name: "Tailwind CSS", role: "Modern Dark/Warm Electronics Theme", highlight: "Polished industrial UI" }
+          { name: "Next.js 15", role: "Industrial Web Portal & SSR Catalog", highlight: "Server Components & Edge SEO" },
+          { name: "TypeScript", role: "End-to-End Type Safety for Dimensions", highlight: "Zero unit conversion bugs" },
+          { name: "Tailwind CSS", role: "Precision Engineering UI Design", highlight: "Crisp industrial dark/gold theme" }
         ]
       },
       {
-        category: "Backend & Search",
+        category: "Backend & Database",
         technologies: [
-          { name: "Node.js & GraphQL", role: "Product Catalog & Order API", highlight: "Sub-50ms API Latency" },
-          { name: "Algolia InstantSearch", role: "Faceted Technical Search Engine", highlight: "Typo-tolerant 45k SKUs" },
-          { name: "PostgreSQL & Redis", role: "Inventory & Session Store", highlight: "High concurrency locking" }
+          { name: "Node.js & Express", role: "Parametric Search & RFQ API", highlight: "Sub-40ms API Latency" },
+          { name: "PostgreSQL", role: "Relational Tooling Spec Database", highlight: "Complex Multi-Param B-Tree Index" },
+          { name: "Redis", role: "Edge In-Memory Caching", highlight: "Instant catalog reads" }
         ]
       }
     ],
     deliverables: [
-      { milestone: "UX Architecture & Design System", description: "Design of desktop storefront, mobile apps, and B2B wholesale order matrix.", timeline: "Week 1–2" },
-      { milestone: "Headless Commerce Backend", description: "Node.js GraphQL API, Algolia indexing pipeline, and PostgreSQL database.", timeline: "Week 3–4" },
-      { milestone: "React Native App Development", description: "Mobile app with barcode scanner, instant search, and biometric checkout.", timeline: "Week 4–5" },
-      { milestone: "ERP Integration & Launch", description: "Warehouse management sync, load testing, and App Store / Play Store release.", timeline: "Week 6" }
+      { milestone: "Data Schema & Parametric Taxonomy", description: "Design of CNC tool attributes, coatings, and dimension schemas.", timeline: "Week 1–2" },
+      { milestone: "Catalog Portal & Search Engine", description: "High-speed Next.js 15 catalog with parametric filtering and live specs.", timeline: "Week 3–4" },
+      { milestone: "CAD Vault & RFQ Engine", description: "3D STEP file distribution system and automated PDF quoting engine.", timeline: "Week 4–5" },
+      { milestone: "ERP Integration & Go-Live", description: "Production line sync, performance stress testing, and public deployment.", timeline: "Week 6" }
     ],
     businessImpact: {
-      headline: "Parana Tool Increased Online Revenue by 142% in 90 Days",
+      headline: "Parana Tool Slashed Engineering Quote Turnaround by 40%",
       metrics: [
-        { metric: "Mobile Conversion Rate", before: "1.4%", after: "3.9%", gain: "+178% Conversion Gain" },
-        { metric: "Catalog Search Speed", before: "4.2 seconds", after: "62 ms", gain: "67x Faster Search" },
-        { metric: "Average Order Value (B2B)", before: "$140", after: "$490", gain: "+250% Cart Size Growth" }
+        { metric: "RFQ Response Time", before: "72 hours", after: "< 3 seconds", gain: "1,400x Faster Quoting" },
+        { metric: "Tool Discovery Time", before: "15 minutes", after: "25 seconds", gain: "36x Faster Search" },
+        { metric: "B2B Conversion Rate", before: "11.2%", after: "38.4%", gain: "+242% Lead Conversion" }
       ]
     },
     testimonial: {
-      quote: "Divanex built us an e-commerce platform that outclasses global competitors. Our industrial customers love the mobile barcode reordering, and our search speed is instantaneous.",
+      quote: "Divanex revolutionized how we sell industrial tools. Machine shops can now find the exact carbide end mill they need, download CAD files instantly, and generate quotes in seconds without waiting for our sales reps.",
       author: "Carlos Parana",
-      role: "Founder & Chief Executive",
-      company: "Parana Tools & Electronics",
+      role: "Managing Director",
+      company: "Parana Tooling Technologies",
       avatarInitials: "CP"
     },
-    complianceBadges: ["PCI-DSS Level 1 Compliant", "Automated B2B Tax Invoicing", "TLS 1.3 End-to-End Encryption"],
+    complianceBadges: ["ISO 9001:2015 Manufacturing Standards", "DIN 6535 Shank Compliance", "DIN 6527 Tool Geometry Standard"],
     keyTakeaways: [
-      "Sub-70ms Algolia search transformed the buying experience across 45,000+ technical SKUs.",
-      "Mobile barcode scanning enabled technicians on job sites to reorder parts in 15 seconds.",
-      "Automated volume pricing tiers unlocked a 250% increase in average B2B order value."
+      "Sub-40ms parametric search replaced 600-page physical catalogues with digital precision.",
+      "Instant 3D STEP CAD downloads drove strong organic adoption among CNC CAM programmers.",
+      "Automated instant RFQ generation boosted B2B inquiry conversion by over 240%."
     ]
   }
 };

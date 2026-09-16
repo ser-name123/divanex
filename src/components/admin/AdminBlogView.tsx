@@ -540,12 +540,17 @@ export default function AdminBlogView({ initialPosts }: AdminBlogViewProps) {
                     onChange={(e) => setFormCategory(e.target.value as BlogPost["category"])}
                     className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-300 text-slate-800 font-bold focus:outline-none focus:border-sky-500 focus:bg-white text-xs cursor-pointer"
                   >
-                    <option value="Architecture & SaaS">Architecture & SaaS</option>
-                    <option value="Healthcare HMIS">Healthcare HMIS</option>
+                    <option value="Food Delivery & Logistics">Food Delivery & Logistics</option>
+                    <option value="PropTech & SaaS">PropTech & SaaS</option>
+                    <option value="E-Commerce & Retail">E-Commerce & Retail</option>
+                    <option value="IoT & Smart Mobility">IoT & Smart Mobility</option>
                     <option value="Enterprise ERP">Enterprise ERP</option>
-                    <option value="Fintech & Security">Fintech & Security</option>
                     <option value="AI & Autonomous Agents">AI & Autonomous Agents</option>
+                    <option value="Healthcare HMIS">Healthcare HMIS</option>
+                    <option value="Fintech & Payments">Fintech & Payments</option>
                     <option value="Cloud & DevOps">Cloud & DevOps</option>
+                    <option value="Mobile Engineering">Mobile Engineering</option>
+                    <option value="Architecture & SaaS">Architecture & SaaS</option>
                   </select>
                 </div>
 

@@ -13,11 +13,11 @@ const DEFAULT_HEADING = {
 };
 
 const DEFAULT_ITEMS = [
-    { title: "3.8x Average ROI", desc: "Clients recoup their full engineering investment within an average of 5.4 months post-launch through new ARR.", icon: DollarSign },
-    { title: "60% Faster Time to Market", desc: "Pre-tested architectural foundations cut engineering cycles from 9 months down to 10-12 weeks.", icon: Clock },
-    { title: "45% Cloud Hosting Savings", desc: "Serverless edge functions and Dockerized right-sizing dramatically reduce runaway AWS / GCP monthly bills.", icon: Zap },
-    { title: "99.999% Verified Uptime", desc: "Resilient automated failover configurations eliminate revenue loss from unexpected system outages.", icon: CheckCircle2 }
-  ];
+  { title: "3.8x Average ROI", desc: "Clients recoup their full engineering investment within an average of 5.4 months post-launch through new ARR.", icon: DollarSign },
+  { title: "60% Faster Time to Market", desc: "Pre-tested architectural foundations cut engineering cycles from 9 months down to 10-12 weeks.", icon: Clock },
+  { title: "High-Availability Reliability", desc: "Resilient automated failover configurations protect against unexpected system outages.", icon: CheckCircle2 },
+  { title: "Direct Engineer Access", desc: "Collaborate directly on Slack with the senior engineers building your platform — zero account manager delays.", icon: Zap }
+];
 
 export default function ClientRoiAnalysis() {
   const { heading, items: metrics } = useSection("portfolio/roi", {

@@ -98,17 +98,16 @@ export default function TechDetailPageClient({ tech }: TechDetailPageClientProps
                 href="/contact"
                 className="btn-futuristic-primary !py-3 !px-6 text-xs sm:text-sm font-bold flex items-center gap-2 !rounded-xl shadow-md shadow-sky-600/20"
               >
-                <Calendar className="w-4 h-4" />
-                <span>Schedule Architecture Review</span>
+                <span>Start a Project</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
               <Link
-                href="/contact"
+                href="/portfolio"
                 className="px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:border-sky-300 hover:text-sky-700 hover:bg-sky-50/50 shadow-2xs transition-all flex items-center gap-2"
               >
                 <Zap className="w-4 h-4 text-sky-600" />
-                <span>Discuss Project Cost</span>
+                <span>View Case Studies</span>
               </Link>
             </div>
           </div>

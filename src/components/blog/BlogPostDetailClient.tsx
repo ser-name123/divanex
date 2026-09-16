@@ -180,21 +180,17 @@ export default function BlogPostDetailClient({ post, relatedPosts }: BlogPostDet
                   <img
                     src={post.author.avatar}
                     alt={post.author.name}
-                    className="w-11 h-11 rounded-2xl object-cover border-2 border-sky-200 shadow-2xs"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80";
+                    }}
+                    className="w-11 h-11 rounded-2xl object-cover border-2 border-sky-200 shadow-sm"
                   />
                   <div>
-                    <h4 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                    <h3 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
                       <span>{post.author.name}</span>
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-sky-100 text-sky-800 border border-sky-200">
-                        <ShieldCheck className="w-3 h-3 text-sky-600" />
-                        Verified Architect
-                      </span>
-                    </h4>
-                    <div className="flex items-center gap-2 text-[11px] text-slate-500 font-medium mt-0.5">
-                      <span>{post.author.role}</span>
-                      <span>•</span>
-                      <span>{post.publishedAt}</span>
-                    </div>
+                      <ShieldCheck className="w-4 h-4 text-sky-600" />
+                    </h3>
+                    <p className="text-xs text-slate-500 font-medium">{post.author.role}</p>
                   </div>
                 </div>
 
@@ -266,6 +262,9 @@ export default function BlogPostDetailClient({ post, relatedPosts }: BlogPostDet
                 <img
                   src={post.coverImage}
                   alt={post.title}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=1200&q=80";
+                  }}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none" />
@@ -476,14 +475,14 @@ export default function BlogPostDetailClient({ post, relatedPosts }: BlogPostDet
                   href="/contact"
                   className="btn-futuristic-primary w-full text-xs !py-3 flex items-center justify-center gap-2 !rounded-xl text-center font-bold shadow-md shadow-sky-500/20"
                 >
-                  <span>Discuss Project Scope & Cost</span>
+                  <span>Start a Project</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/portfolio"
                   className="block text-center text-xs font-bold text-sky-700 hover:text-sky-900 transition-colors pt-1"
                 >
-                  Or Book 30-Min Engineering Call →
+                  View Case Studies →
                 </Link>
               </div>
             </div>
@@ -524,6 +523,9 @@ export default function BlogPostDetailClient({ post, relatedPosts }: BlogPostDet
                       <img
                         src={rel.coverImage}
                         alt={rel.title}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=1200&q=80";
+                        }}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>

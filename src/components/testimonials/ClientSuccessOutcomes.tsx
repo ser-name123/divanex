@@ -31,8 +31,8 @@ const DEFAULT_ITEMS = [
       company: "FinPulse Global",
       before: "Fragile monolithic payment code with frequent cart drop-offs.",
       after: "Fault-tolerant Next.js & Stripe multi-currency checkout engine.",
-      stat: "99.999% SLA",
-      statDetail: "$12M+ processed in first 90 days"
+      stat: "Zero Downtime",
+      statDetail: "Consistent reliable payment flows"
     }
   ];
 

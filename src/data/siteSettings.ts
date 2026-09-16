@@ -83,12 +83,12 @@ export const SEO_MANAGED_ROUTES = [
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   siteName: "Divanex",
-  siteUrl: "https://divanextechnologies.com",
+  siteUrl: "https://divanex.vercel.app",
   defaultTitle:
     "Divanex | Enterprise Software Engineering, Custom SaaS & AI Solutions",
   titleTemplate: "%s | Divanex",
   defaultDescription:
-    "Divanex delivers elite enterprise software engineering: multi-tenant SaaS platforms, autonomous AI agent architectures, cross-platform mobile apps, cloud DevOps, and compounding SEO growth engines with a 99.999% SLA uptime.",
+    "Divanex delivers custom software, AI & SaaS solutions: scalable web platforms, autonomous AI agents, cross-platform mobile apps, cloud DevOps, and digital growth systems built for scaling businesses.",
   keywords: [
     "Divanex",
     "Enterprise Software Engineering",
@@ -133,9 +133,9 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   pages: {
     "/": {
       title:
-        "Divanex | Enterprise Software Engineering, Custom SaaS & AI Solutions",
+        "Divanex | Custom Software, AI & SaaS Solutions Built for Growing Businesses",
       description:
-        "Enterprise SaaS platforms, autonomous AI agents, mobile apps and cloud infrastructure, engineered end-to-end with 100% code ownership and a 99.999% uptime SLA.",
+        "We design and build scalable web platforms, mobile apps, SaaS products and AI solutions—from product strategy to production deployment with 100% code ownership.",
     },
     "/services": {
       title: "Software Engineering & Digital Solutions Services",

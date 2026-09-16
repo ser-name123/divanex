@@ -134,60 +134,60 @@ export const servicesData: ServiceItem[] = [
   },
   {
     id: "saas-development",
-    title: "SaaS Development",
-    tagline: "Custom Cloud Solutions & Multi-tenant Architecture",
+    title: "Build a SaaS Product",
+    tagline: "Launch your multi-tenant SaaS platform with subscriptions & billing",
     description:
-      "We engineer enterprise-ready Software-as-a-Service platforms built for global scale, rapid subscriber onboarding, and subscription billing automation with 99.99% uptime.",
+      "Launch your multi-tenant SaaS platform with automated Stripe subscriptions, metered usage billing, subscriber analytics, and scalable cloud architecture.",
     iconName: "Layers",
     color: "#3a5296",
     gradient: "from-blue-600/20 via-blue-500/10 to-transparent",
     features: [
-      "Custom Cloud Solutions & Microservices",
-      "Multi-tenant Database & Tenant Isolation",
-      "Scalable Web Applications & Auto-scaling",
-      "Stripe/Razorpay Billing & Metered Usage",
-      "Role-Based Access Control (RBAC)",
-      "Real-time Analytics & Customer Portals"
+      "Multi-Tenant Setup with 100% Customer Data Isolation",
+      "Automated Stripe & Razorpay Recurring Billing",
+      "Self-Serve Customer Onboarding & User Management",
+      "Real-Time Usage Metering & Tiered Subscription Plans",
+      "Role-Based Access Control (RBAC) & Team Invites",
+      "Executive Analytics Cockpit & Churn Telemetry"
     ],
     deliverables: ["Full SaaS Codebase", "API Documentation", "Cloud Deployment Scripts", "Admin Super-Dashboard"],
     idealFor: "Startups & Enterprises launching recurring revenue software products"
   },
   {
     id: "web-app-development",
-    title: "Web & App Development",
-    tagline: "Cross-platform Mobile Apps & High-Performance Websites",
+    title: "Web & Mobile App Development",
+    tagline: "iOS and Android apps, web portals & custom dashboards",
     description:
-      "Crafting hyper-fast, responsive web applications and native-feel mobile applications for iOS and Android with single codebase efficiency and silky smooth animations.",
+      "iOS and Android apps with real-time features, secure payment checkout, GPS maps, push notifications, and fast, responsive web applications.",
     iconName: "Smartphone",
     color: "#189a91",
     gradient: "from-cyan-500/20 via-teal-500/10 to-transparent",
     features: [
-      "Cross-platform Mobile Apps (iOS / Android)",
-      "Progressive Web Apps (PWA) with Offline Mode",
-      "High-Performance Custom Websites (Next.js / SSR)",
-      "Native Device Hardware Integration (Camera, GPS, Push)",
-      "App Store & Google Play Store Submission",
-      "Headless CMS & Dynamic Content Architecture"
+      "Cross-Platform Mobile Apps (iOS & Android Single Codebase)",
+      "Progressive Web Apps (PWA) with Offline Data Sync",
+      "High-Performance Custom Web Portals & Dashboards",
+      "Push Notifications, Camera & GPS Hardware APIs",
+      "App Store & Google Play Store Submission Support",
+      "Secure User Authentication, Checkout & Payment Gateways"
     ],
     deliverables: ["iOS & Android Builds", "SEO Optimized Web App", "Source Code & Assets", "Store Submission Support"],
     idealFor: "Brands seeking unified web + mobile presence with blistering performance"
   },
   {
     id: "ai-solutions-automation",
-    title: "AI Solutions & Automation",
-    tagline: "AI pointed at a specific job, not a demo",
+    title: "Automate Your Business",
+    tagline: "Connect existing tools & eliminate repetitive workflows with AI",
     description:
-      "Agents that read your own documents and answer from them, support that handles the repetitive half of the queue, and automations that move data between systems nobody wanted to integrate. Grounded in your data, with the answer traceable to its source.",
+      "Connect your existing tools and automate repetitive workflows with custom AI assistants, smart document processing, and automated API pipelines.",
     iconName: "Cpu",
     color: "#5c9556",
     gradient: "from-emerald-500/20 via-teal-500/10 to-transparent",
     features: [
-      "Custom LLM Integration & Fine-Tuning (OpenAI/Anthropic)",
-      "Smart RAG Chatbots Trained on Private Company Data",
-      "Automated Business Process & Workflow Pipelines",
-      "Predictive Data Analytics & Customer Churn Modeling",
-      "Intelligent Document Processing & OCR Extraction",
-      "Autonomous Voice & AI Support Agents"
+      "Custom AI Chatbots Trained on Private Company Data & SOPs",
+      "Automated Data Sync Across CRM, Email, Spreadsheets & ERP",
+      "Intelligent Document Processing & OCR Data Extraction",
+      "Automated Customer Support Triage & Ticket Resolution",
+      "Predictive Business Analytics & Customer Churn Modeling",
+      "Cut 50%+ Manual Hours on Repetitive Operational Tasks"
     ],
     deliverables: ["Custom AI Agent", "Vector Database Indexing", "Webhook Automation", "Integration SDK"],
     idealFor: "Companies aiming to reduce human operational hours by 60%+ using AI"

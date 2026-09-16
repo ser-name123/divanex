@@ -53,8 +53,8 @@ const DEFAULT_ITEMS = [
         "Multi-cloud Terraform (AWS, GCP, Cloudflare)",
         "Zero-trust security & SOC2 audit readiness",
         "Dedicated senior engineering pod with daily Slack",
-        "99.999% uptime guarantee with 24/7 telemetry",
-        "Direct architect phone & emergency line"
+        "High availability architecture with 24/7 telemetry",
+        "Direct architect communication & sprint alignment"
       ],
       highlight: false
     }
@@ -128,7 +128,7 @@ export default function ServicesPricingTiers() {
                       : "bg-slate-900 hover:bg-sky-600 text-white border border-slate-900 hover:border-sky-600 shadow-sm"
                   }`}
                 >
-                  <span>Enquire About This Tier</span>
+                  <span>Start a Project</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

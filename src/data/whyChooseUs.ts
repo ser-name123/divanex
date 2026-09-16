@@ -11,48 +11,81 @@ export interface WhyPillar {
 
 export const whyChoosePillars: WhyPillar[] = [
   {
-    id: "end-to-end",
-    title: "One Team, Start to Finish",
-    subtitle: "Design, backend, mobile and infrastructure under one roof",
+    id: "engineering-experience",
+    title: "10+ Years Engineering Experience",
+    subtitle: "Senior full-stack, mobile & cloud architects leading every build",
     description:
-      "You do not end up coordinating a design shop, a backend contractor and a DevOps freelancer who blame each other when something breaks. The same group that draws the screens writes the queries and runs the deployment.",
-    iconName: "Compass",
-    badge: "One accountable team",
-    metrics: "No hand-offs",
+      "Every project is engineered directly by seasoned developers who have shipped production systems at scale. No junior handoffs or learning curves on your budget.",
+    iconName: "Award",
+    badge: "Senior Engineers",
+    metrics: "10+ Years Exp",
     color: "#0f7670"
   },
   {
-    id: "cutting-edge-tech",
-    title: "Written, Not Assembled",
-    subtitle: "No page builders, no bought themes, no plugin towers",
+    id: "source-code-ownership",
+    title: "100% Source Code Ownership",
+    subtitle: "Day-1 repository access & infrastructure in your name",
     description:
-      "Everything is written for your problem, on stacks we can still support in three years. That is slower to start than dragging blocks around, and far cheaper the first time you need something the template never anticipated.",
-    iconName: "Code2",
-    badge: "Custom built",
-    metrics: "Yours to change",
+      "You receive 100% intellectual property transfer, full Git repository access, and cloud hosting accounts created in your name from day one. Zero vendor lock-in.",
+    iconName: "ShieldCheck",
+    badge: "100% IP Transfer",
+    metrics: "Day-1 Rights",
     color: "#189a91"
   },
   {
-    id: "agile-fast",
-    title: "You See It Every Two Weeks",
-    subtitle: "A staging link you can click, not a status report",
+    id: "dedicated-team",
+    title: "Dedicated Development Team",
+    subtitle: "Direct Slack communication with your core engineering pod",
     description:
-      "Every fortnight there is a URL with the current build on it and a walkthrough from whoever built it. If the direction is wrong you find out in week two, not in month four when changing it is expensive.",
+      "A focused development squad dedicated exclusively to your sprints. You collaborate directly with the engineers writing your code, not non-technical account managers.",
+    iconName: "UserCheck",
+    badge: "Dedicated Pod",
+    metrics: "Direct Slack",
+    color: "#000838"
+  },
+  {
+    id: "weekly-staging-demos",
+    title: "Weekly Staging & Demos",
+    subtitle: "Clickable test environments & interactive video walkthroughs",
+    description:
+      "Every week you receive a live staging URL and video walkthrough of newly completed features. If anything needs adjustment, we catch it immediately.",
     iconName: "Zap",
-    badge: "Visible progress",
-    metrics: "Every 2 weeks",
+    badge: "Visible Progress",
+    metrics: "Weekly Demos",
     color: "#5c9556"
   },
   {
-    id: "dedicated-support",
-    title: "We Are Still Here After Launch",
-    subtitle: "Monitoring, patches and a number that a person answers",
+    id: "nda-ip-protection",
+    title: "NDA & IP Protection",
+    subtitle: "Legally binding non-disclosure & strict security compliance",
     description:
-      "Launch is when the real bugs arrive. We watch the logs, apply security updates, and you message the engineers directly rather than opening a ticket and waiting to be triaged.",
-    iconName: "ShieldCheck",
-    badge: "Support that answers",
-    metrics: "Direct to engineers",
-    color: "#000838"
+      "We execute comprehensive bilateral NDAs, enforce strict client data isolation, and follow standard OWASP security benchmarks across all production environments.",
+    iconName: "Lock",
+    badge: "Legally Binding",
+    metrics: "Strict NDA",
+    color: "#0f7670"
+  },
+  {
+    id: "post-launch-support",
+    title: "Post-Launch Support & Hypercare",
+    subtitle: "24/7 uptime monitoring, security updates & fast bug fixes",
+    description:
+      "We stand behind our code after launch. You get dedicated hypercare, continuous uptime monitoring, security patches, and rapid bug remediation when real users arrive.",
+    iconName: "CheckCircle2",
+    badge: "Guaranteed SLA",
+    metrics: "Post-Launch",
+    color: "#189a91"
+  },
+  {
+    id: "web-mobile-ai-one-team",
+    title: "Web + Mobile + AI Under One Team",
+    subtitle: "Next.js, Flutter / React Native & AI RAG workflows in one pod",
+    description:
+      "No more coordinating separate agencies that blame each other. Web applications, iOS/Android mobile apps, and custom AI agents engineered under one roof.",
+    iconName: "Layers",
+    badge: "Unified Stack",
+    metrics: "Web + Mobile + AI",
+    color: "#5c9556"
   }
 ];
 

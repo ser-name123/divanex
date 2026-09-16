@@ -45,7 +45,7 @@ function withDefaults(partial: Partial<SiteSettings> | null | undefined): SiteSe
   return {
     ...DEFAULT_SITE_SETTINGS,
     ...partial,
-    // A trailing slash here would produce "https://divanextechnologies.com//services".
+    // A trailing slash would produce "https://example.com//services".
     siteUrl: normalizeUrl(partial.siteUrl) || DEFAULT_SITE_SETTINGS.siteUrl,
     keywords: Array.isArray(partial.keywords) ? partial.keywords : DEFAULT_SITE_SETTINGS.keywords,
     socialProfiles: Array.isArray(partial.socialProfiles)
@@ -69,6 +69,30 @@ function normalizeUrl(value: unknown): string {
   } catch {
     return "";
   }
+}
+
+/**
+ * Where this deployment is actually reachable.
+ *
+ * `og:image` is an absolute URL, so a link preview is fetched from whatever
+ * host this resolves to — not from the page the link points at. When the two
+ * disagree, the title and description still appear (they are read straight out
+ * of the page) and only the image silently fails, which is exactly how this
+ * shipped: the stored URL was a domain that answered 500 while the site itself
+ * was served from somewhere else.
+ *
+ * So the environment wins over the stored setting. A preview deployment, a
+ * staging host and production each declare their own origin and none of them
+ * can inherit a canonical URL that is wrong for them.
+ */
+function deploymentUrl(): string {
+  const explicit = normalizeUrl(process.env.NEXT_PUBLIC_SITE_URL);
+  if (explicit) return explicit;
+
+  // Set automatically on Vercel, so a fresh deploy has working previews with
+  // no configuration at all.
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
+  return vercel ? normalizeUrl(`https://${vercel}`) : "";
 }
 
 /**
@@ -120,6 +144,12 @@ async function loadSiteSettings(): Promise<SiteSettings> {
   }
 
   value = await withSharedContactDetails(value);
+
+  // Applied here rather than inside withDefaults, because not every path above
+  // goes through it: a database that is unreachable, or that holds no row yet,
+  // leaves the seed untouched, and that branch needs the override just as much.
+  const fromEnv = deploymentUrl();
+  if (fromEnv && fromEnv !== value.siteUrl) value = { ...value, siteUrl: fromEnv };
 
   globalThis.__DIVANEX_SITE_SETTINGS__ = { value, fetchedAt: Date.now() };
   return value;

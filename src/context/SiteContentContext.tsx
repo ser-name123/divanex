@@ -67,7 +67,8 @@ export function usePageContent(): PageContent {
     faqHeading: { ...DEFAULT_PAGE_CONTENT.faqHeading, ...(pages.faqHeading || {}) },
     engagementHeading: { ...DEFAULT_PAGE_CONTENT.engagementHeading, ...(pages.engagementHeading || {}) },
     securityHeading: { ...DEFAULT_PAGE_CONTENT.securityHeading, ...(pages.securityHeading || {}) },
-    cadenceHeading: { ...DEFAULT_PAGE_CONTENT.cadenceHeading, ...(pages.cadenceHeading || {}) },
+    headers: { ...DEFAULT_PAGE_CONTENT.headers, ...(pages.headers || {}) },
+    ctaOverrides: { ...DEFAULT_PAGE_CONTENT.ctaOverrides, ...(pages.ctaOverrides || {}) },
     ctaBanner: { ...DEFAULT_PAGE_CONTENT.ctaBanner, ...(pages.ctaBanner || {}) },
   };
 }

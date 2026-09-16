@@ -14,13 +14,13 @@
 /coverage
 
 # next.js
-/.next/
 /out/
-# custom distDir set in next.config.ts — the glob covers any NEXT_DIST_DIR
-# name, because a build output that slipped past this once carried Supabase
-# fetch-cache entries, complete with project ref and response cookies.
-/.next-*/
-/.build/
+# Build output, under any NEXT_DIST_DIR name. The globs are deliberately wide:
+# these directories hold the fetch cache, which carries Supabase project refs
+# and response cookies, and a directory named just outside a narrower pattern
+# has already turned up untracked twice (.next-c1, then .next_dev).
+/.next*/
+/.build*/
 
 # production
 /build

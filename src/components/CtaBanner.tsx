@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Calendar, MessageCircle, ShieldCheck, Sparkles, Zap } from "lucide-react";
+import { ArrowRight, Briefcase, MessageCircle, ShieldCheck, Sparkles, Zap } from "lucide-react";
 import { usePageContent } from "@/context/SiteContentContext";
 import { useSiteConfig } from "@/context/SiteConfigContext";
 import RichText from "@/components/RichText";
@@ -69,7 +69,7 @@ export default function CtaBanner({
               href={banner.secondaryHref}
               className="btn-futuristic-amber text-sm sm:text-base !py-3.5 !px-7 !rounded-2xl"
             >
-              <Calendar className="w-4 h-4 text-amber-600" />
+              <Briefcase className="w-4 h-4 text-amber-600" />
               <span>{banner.secondaryLabel}</span>
             </Link>
 
