@@ -127,7 +127,7 @@ export default function AdminOverviewView({
           </div>
 
           <div className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-            99.999% SLA
+            99.9% SLA
           </div>
 
           <div className="flex items-center justify-between pt-2.5 text-xs font-mono">

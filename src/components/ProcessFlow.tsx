@@ -36,6 +36,13 @@ export default function ProcessFlow() {
           <p className="text-slate-600 text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl mx-auto font-normal">
             <RichText inline value={heading.description} />
           </p>
+
+          <div className="pt-1 flex items-center justify-center">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-100/90 border border-slate-200 text-[11.5px] font-medium text-slate-600">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              Typical 10-Week MVP Roadmap • Enterprise Systems & Multi-Module Platforms Scale by Sprint
+            </span>
+          </div>
         </div>
 
         {/* ======================================================== */}
@@ -122,7 +129,7 @@ export default function ProcessFlow() {
                 </span>
                 <span className="text-xs font-mono font-semibold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 flex items-center gap-1">
                   <Activity className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>CADENCE: {activeStep.duration}</span>
+                  <span>TYPICAL MVP CADENCE: {activeStep.duration}</span>
                 </span>
               </div>
 

@@ -59,7 +59,7 @@ export default function AdminLogsView({ logs, onClearLogs }: AdminLogsProps) {
           </div>
           <div>
             <div className="text-slate-900 font-bold text-sm font-sans">Zero Security Incidents</div>
-            <div className="text-slate-500 text-[10px] font-sans">SOC-2 Type II Continuous Audit</div>
+            <div className="text-slate-500 text-[10px] font-sans">SOC 2–Aligned Security Audits</div>
           </div>
         </div>
 

@@ -53,8 +53,8 @@ const DEFAULT_ITEMS = [
       description: "Engineered from the ground up to comply with the most stringent global healthcare, fintech, and data sovereignty compliance mandates.",
       points: [
         "HIPAA & ABDM Health ID compliance ready",
-        "PCI-DSS Level 1 tokenized payment gateways",
-        "ISO 27001 Information Security Management",
+        "PCI-DSS–aware tokenized payment gateways",
+        "ISO 27001–Aligned Information Security Controls",
         "GDPR & CCPA strict right-to-be-forgotten"
       ]
     },

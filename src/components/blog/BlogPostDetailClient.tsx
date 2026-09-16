@@ -153,12 +153,8 @@ export default function BlogPostDetailClient({ post, relatedPosts }: BlogPostDet
                   <span>ARCHITECTURAL CASE STUDY</span>
                 </span>
                 <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-slate-100 text-slate-700 border border-slate-200 flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-slate-500" />
+                  <Clock className="w-3.5 h-3.5 text-sky-600" />
                   <span>{post.readTime}</span>
-                </span>
-                <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-slate-100 text-slate-700 border border-slate-200 flex items-center gap-1.5">
-                  <Eye className="w-3.5 h-3.5 text-slate-500" />
-                  <span>{post.views.toLocaleString()} Reads</span>
                 </span>
               </div>
 
@@ -475,7 +471,7 @@ export default function BlogPostDetailClient({ post, relatedPosts }: BlogPostDet
                   href="/contact"
                   className="btn-futuristic-primary w-full text-xs !py-3 flex items-center justify-center gap-2 !rounded-xl text-center font-bold shadow-md shadow-sky-500/20"
                 >
-                  <span>Start a Project</span>
+                  <span>Book a Consultation</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
                 <Link

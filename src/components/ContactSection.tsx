@@ -22,6 +22,8 @@ export default function ContactSection() {
     email: "",
     phone: "",
     service: "",
+    budget: "",
+    timeline: "",
     message: ""
   });
 
@@ -369,8 +371,47 @@ export default function ContactSection() {
                     <option value="Web & App Development">Cross-Platform Mobile & Web Apps</option>
                     <option value="Cloud & DevOps Automation">Cloud Architecture & DevOps</option>
                     <option value="UI/UX Design Engineering">UI/UX Design & Brand Systems</option>
-                    <option value="Cybersecurity & Compliance">Cybersecurity & SOC2 Compliance</option>
+                    <option value="Cybersecurity & Compliance">Cybersecurity & SOC 2 Alignment</option>
                     <option value="Other Custom Solution">Other Custom Enterprise Solution</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-slate-700">
+                    Estimated Project Budget <span className="text-slate-400 font-normal">(Optional)</span>
+                  </label>
+                  <select
+                    name="budget"
+                    value={formData.budget}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-sky-500 focus:bg-white transition-all"
+                  >
+                    <option value="">Select Estimated Budget</option>
+                    <option value="Under $5,000">Under $5,000 (MVP Discovery & Build)</option>
+                    <option value="$5,000 - $15,000">$5,000 – $15,000 (Growth Engine / Core App)</option>
+                    <option value="$15,000 - $30,000">$15,000 – $30,000 (Scale & Enterprise Platform)</option>
+                    <option value="$30,000+">$30,000+ (Full Multi-Module System)</option>
+                    <option value="Not sure / Need estimation">Not sure / Need estimation</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-slate-700">
+                    Expected Timeline <span className="text-slate-400 font-normal">(Optional)</span>
+                  </label>
+                  <select
+                    name="timeline"
+                    value={formData.timeline}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-sky-500 focus:bg-white transition-all"
+                  >
+                    <option value="">Select Expected Timeline</option>
+                    <option value="ASAP (Immediate Sprint)">ASAP (Immediate Sprint)</option>
+                    <option value="1 - 3 months">1 – 3 months (Standard MVP)</option>
+                    <option value="3 - 6 months">3 – 6 months (Comprehensive Build)</option>
+                    <option value="Planning & scoping stage">Planning & scoping stage</option>
                   </select>
                 </div>
               </div>

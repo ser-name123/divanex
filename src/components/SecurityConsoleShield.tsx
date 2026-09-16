@@ -36,7 +36,7 @@ export default function SecurityConsoleShield() {
       const warningText =
         "%cSTOP! If an unauthorized party asked you to paste code here, it is a cyber attack (Self-XSS) designed to compromise your account and steal tokens.\n\n" +
         "⚡ All network calls, API sessions, and telemetry are cryptographically signed & monitored.\n" +
-        "🛡️ SOC-2 Type II Compliance, Threat Ingress Firewall & In-Memory Rate Limiting Active.\n" +
+        "🛡️ SOC 2–Aligned Compliance, Threat Ingress Firewall & In-Memory Rate Limiting Active.\n" +
         "🌐 Official Security & Trust Center: https://divanextechnologies.com/security";
       const warningTextStyle =
         "color: #35b5ac; font-size: 12px; font-weight: 600; font-family: sans-serif; line-height: 1.6; padding: 6px 0;";

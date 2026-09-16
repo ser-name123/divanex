@@ -969,7 +969,7 @@ export const techDetailsRecord: Record<string, TechDetailData> = {
       }
     ],
     benchmarks: [
-      { metric: "Vector Search Latency", divanexApproach: "6ms (HNSW Indexed)", legacyAlternative: "120ms (Flat Scan)", benefit: "20x Faster Vector Retrieval" },
+      { metric: "Vector Search Latency", divanexApproach: "Sub-20ms (Target: HNSW Indexed)", legacyAlternative: "120ms (Flat Scan)", benefit: "Low-Latency Semantic Search" },
       { metric: "Tenant Data Isolation", divanexApproach: "100% Kernel-Enforced RLS", legacyAlternative: "Application-Level WHERE clauses", benefit: "Zero Data Leak Risk" },
       { metric: "Read Throughput", divanexApproach: "25,000+ QPS (Replica Pool)", legacyAlternative: "Single Node Bottleneck", benefit: "Effortless Read Scaling" },
       { metric: "Data Durability", divanexApproach: "Point-in-Time Recovery + Multi-AZ", legacyAlternative: "Daily SQL Dump Files", benefit: "Zero Data Loss Guarantee" }
@@ -1071,7 +1071,7 @@ export const techDetailsRecord: Record<string, TechDetailData> = {
       {
         title: "Enterprise RAG & Knowledge Bases",
         tag: "Retrieval",
-        description: "Grounds AI responses in your company's proprietary documents, manuals, and databases with zero hallucination.",
+        description: "Grounds AI responses in your company's proprietary documents, manuals, and databases with citation-backed accuracy.",
         highlights: ["Hybrid keyword + vector semantic search", "Source citation and page reference links", "Dynamic access control filtering by user role"]
       },
       {
@@ -1233,7 +1233,7 @@ export function getTechDetailBySlug(
       {
         title: "Enterprise Compliance & Audit Readiness",
         tag: "Security",
-        description: `Engineered from day zero to satisfy strict enterprise data security, HIPAA, GDPR, and SOC 2 Type II controls.`,
+        description: `Engineered from day zero to satisfy strict enterprise data security, HIPAA, GDPR, and SOC 2–aligned security practices.`,
         highlights: ["End-to-end TLS 1.3 encryption in transit", "Granular role-based access control (RBAC)", "Immutable audit logging of sensitive actions"]
       }
     ],

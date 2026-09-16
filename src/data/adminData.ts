@@ -271,7 +271,7 @@ export const initialAdminServices: AdminServiceConfig[] = [
     scalePrice: "$8,500 - $14,000",
     enterprisePrice: "$16,000 - $30,000+",
     sprintDuration: "4 - 12 Weeks",
-    slaUptime: "99.999%",
+    slaUptime: "99.9%",
     leadCountThisMonth: 12
   },
   {
@@ -331,7 +331,7 @@ export const initialAdminServices: AdminServiceConfig[] = [
     scalePrice: "$7,500 - $13,000",
     enterprisePrice: "$15,000 - $28,000+",
     sprintDuration: "2 - 6 Weeks",
-    slaUptime: "99.999%",
+    slaUptime: "99.9%",
     leadCountThisMonth: 7
   }
 ];

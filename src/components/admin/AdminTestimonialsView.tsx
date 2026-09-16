@@ -221,7 +221,7 @@ export default function AdminTestimonialsView() {
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
           </div>
           <div className="text-2xl font-bold text-emerald-700">Clutch / G2</div>
-          <span className="text-[10px] text-emerald-700 font-bold">SOC2 / ISO Audited</span>
+          <span className="text-[10px] text-emerald-700 font-bold">SOC 2 / ISO Aligned</span>
         </div>
 
         <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-2xs">

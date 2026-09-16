@@ -14,7 +14,7 @@ export default async function Page() {
     "@context": "https://schema.org",
     "@type": "AboutPage",
     "name": "Divanex Enterprise Cybersecurity & Compliance Standards",
-    "description": "Comprehensive documentation of Divanex's zero-trust architecture, automated SAST/DAST pipelines, SOC 2 Type II controls, and HIPAA data isolation.",
+    "description": "Comprehensive documentation of Divanex's zero-trust architecture, automated SAST/DAST pipelines, SOC 2–aligned security practices, and HIPAA data isolation.",
     "url": `${settings.siteUrl}/security`,
     "mainEntity": {
       "@type": "Organization",
@@ -23,8 +23,8 @@ export default async function Page() {
       "knowsAbout": [
         "Zero-Trust Network Perimeters",
         "OWASP Top 10 Automated Defenses",
-        "SOC 2 Type II Compliance",
-        "HIPAA Data Privacy Safeguards",
+        "SOC 2–Aligned Compliance",
+        "HIPAA-Ready Data Privacy Safeguards",
         "ISO/IEC 27001 Information Security",
         "AES-256 GCM & TLS 1.3 Encryption",
       ],

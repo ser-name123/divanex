@@ -73,30 +73,42 @@ function ProjectLaptopMockup({ project }: { project: PortfolioProject }) {
           </div>
         </div>
 
-        {/* Center & Right Hero Brand Showcase */}
+        {/* Center & Right Hero Brand & Rider Tracking Showcase */}
         <div className="flex-1 pl-3 sm:pl-4 flex flex-col justify-between h-full py-0.5 relative z-10">
           <div className="space-y-1">
             <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/20 backdrop-blur-xs border border-white/30 text-[8px] sm:text-[9px] font-bold text-white shadow-xs">
-              <Flame className="w-2.5 h-2.5 text-amber-300 fill-amber-300" />
-              <span>Hyperlocal Food Delivery</span>
+              <Bike className="w-2.5 h-2.5 text-amber-300" />
+              <span>Live Rider Tracking HUD</span>
             </div>
-            <h4 className="text-lg sm:text-xl font-black text-white tracking-wider drop-shadow-sm leading-tight">
-              FYNITO
+            <h4 className="text-base sm:text-lg font-black text-white tracking-wider drop-shadow-sm leading-tight">
+              FYNITO FOODS
             </h4>
-            <p className="text-[8px] sm:text-[9px] text-rose-100 font-medium leading-tight line-clamp-2">
-              On-demand food ordering with live rider GPS tracking &amp; instant checkout.
+            <p className="text-[8px] sm:text-[9px] text-rose-100 font-medium leading-tight">
+              Hyperlocal food delivery &amp; real-time rider dispatch engine.
             </p>
           </div>
 
+          {/* Live Dispatch Mini HUD Card */}
+          <div className="bg-slate-950/80 rounded-lg p-1.5 border border-white/20 space-y-1">
+            <div className="flex items-center justify-between text-[7px] text-white font-bold">
+              <span className="flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                Rider: Rajesh K.
+              </span>
+              <span className="text-amber-300">4.9 ★</span>
+            </div>
+            <div className="flex items-center justify-between text-[6px] text-slate-300">
+              <span>Status: On the way 🛵</span>
+              <span className="font-mono text-emerald-300">1.2 km away</span>
+            </div>
+          </div>
+
           {/* Key Metrics Pills */}
-          <div className="flex flex-wrap gap-1 pt-1">
-            <div className="px-2 py-0.5 rounded-md bg-slate-950/80 backdrop-blur-xs border border-white/20 text-[7px] sm:text-[8px] font-bold text-white flex items-center gap-1 shadow-sm">
-              <Clock className="w-2.5 h-2.5 text-emerald-400" />
-              <span>&lt;24m Avg. ETA</span>
-            </div>
-            <div className="px-2 py-0.5 rounded-md bg-white/95 text-rose-700 text-[7px] sm:text-[8px] font-black shadow-sm">
-              450K+ Orders
-            </div>
+          <div className="flex flex-wrap items-center justify-between gap-1 pt-0.5 text-[7px] font-bold">
+            <span className="px-2 py-0.5 rounded bg-white text-rose-700 font-black shadow-xs">
+              &lt;24m Avg. ETA
+            </span>
+            <span className="text-rose-100">Live GPS Sync</span>
           </div>
         </div>
       </div>
@@ -232,8 +244,8 @@ function ProjectLaptopMockup({ project }: { project: PortfolioProject }) {
 
         {/* Bottom Banner */}
         <div className="flex items-center justify-between text-[8px] text-slate-400 bg-slate-900/80 px-2 py-0.5 rounded border border-slate-800">
-          <span>Sub-60ms Edge Speed</span>
-          <span className="font-bold text-emerald-400">₹380 Cr+ Inquiries Generated</span>
+          <span>Sub-1s Fast Reporting</span>
+          <span className="font-bold text-emerald-400">₹25 Cr+ Portfolio Monitored</span>
         </div>
       </div>
     );
@@ -306,47 +318,72 @@ function ProjectLaptopMockup({ project }: { project: PortfolioProject }) {
 
   if (project.id === "magnus-partners") {
     return (
-      <div className="w-full h-full bg-gradient-to-br from-[#061d28] via-[#0a2e3f] to-[#04151e] text-white flex flex-col justify-between p-3 sm:p-3.5 relative select-none overflow-hidden font-sans border border-cyan-900/40">
-        {/* Top Header */}
-        <div className="flex items-center justify-between pb-1.5 border-b border-cyan-900/60">
-          <div className="flex items-center gap-1.5">
-            <HeartPulse className="w-4 h-4 text-cyan-400" />
-            <span className="font-black text-xs sm:text-sm text-white tracking-wider">MAGNUS PARTNERS</span>
-          </div>
-          <span className="text-[8px] font-extrabold px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">
-            HIPAA Verified
-          </span>
-        </div>
+      <div className="w-full h-full bg-gradient-to-br from-[#041c28] via-[#082a3c] to-[#02131c] text-white flex items-center justify-between p-3 sm:p-4 relative select-none overflow-hidden font-sans border border-cyan-900/40">
+        <div className="absolute right-1/4 top-0 w-32 h-32 rounded-full bg-cyan-500/15 blur-2xl pointer-events-none" />
 
-        {/* Center Clinical Solutions Showcase */}
-        <div className="my-auto space-y-1.5">
-          <div className="text-xs sm:text-sm font-extrabold text-cyan-100 leading-snug">
-            Collaborating for Stronger Healthcare Solutions
-          </div>
-          <p className="text-[8px] sm:text-[9px] text-slate-300 leading-tight">
-            Through partnerships, we create robust, innovative, and resilient healthcare services.
-          </p>
-
-          <div className="grid grid-cols-2 gap-1.5 pt-0.5">
-            <div className="bg-slate-900/90 rounded p-1.5 border border-cyan-800/60 space-y-0.5">
-              <div className="text-[8px] font-extrabold text-cyan-300 flex items-center gap-1">
-                <Activity className="w-2.5 h-2.5" /> DICOM PACS
-              </div>
-              <div className="text-[7px] text-slate-300">&lt;140ms Encrypted Imaging</div>
+        {/* Left Side: Clinical Portal Info */}
+        <div className="flex-1 pr-2.5 flex flex-col justify-between h-full py-0.5 relative z-10">
+          <div className="space-y-1">
+            <div className="flex items-center gap-1.5">
+              <HeartPulse className="w-4 h-4 text-cyan-400 animate-pulse" />
+              <h4 className="font-black text-xs sm:text-sm text-cyan-300 tracking-wider">HealthPulse / Magnus</h4>
+              <span className="text-[7px] font-bold px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+                HIPAA-Ready
+              </span>
             </div>
-            <div className="bg-slate-900/90 rounded p-1.5 border border-cyan-800/60 space-y-0.5">
-              <div className="text-[8px] font-extrabold text-cyan-300 flex items-center gap-1">
-                <ShieldCheck className="w-2.5 h-2.5" /> HL7 FHIR v4
-              </div>
-              <div className="text-[7px] text-slate-300">Unified Clinical Pipeline</div>
+            <div className="text-[10px] sm:text-[11px] font-extrabold text-cyan-100 leading-tight">
+              Clinical HMIS &amp; Patient Portal
+            </div>
+            <p className="text-[8px] text-slate-300 leading-tight">
+              Doctor scheduling, digital prescriptions &amp; encrypted EHR sync.
+            </p>
+          </div>
+
+          {/* OPD Schedule Card */}
+          <div className="bg-slate-900/90 rounded-lg p-1.5 border border-cyan-800/60 space-y-1">
+            <div className="flex items-center justify-between text-[8px]">
+              <span className="text-cyan-300 font-bold">Dr. Michael Vance</span>
+              <span className="text-emerald-400 font-bold text-[7px] bg-emerald-950 px-1 rounded">OPD LIVE</span>
+            </div>
+            <div className="flex items-center justify-between text-[7px] text-slate-300">
+              <span>Cardiology • Rm 304</span>
+              <span className="font-mono text-cyan-300">Token #18</span>
             </div>
           </div>
+
+          <div className="flex items-center justify-between text-[7px] text-slate-400 font-mono">
+            <span>HL7 FHIR v4 Pipelines</span>
+            <span className="text-cyan-300 font-bold">&lt;200ms EHR Sync</span>
+          </div>
         </div>
 
-        {/* Bottom Status */}
-        <div className="flex items-center justify-between text-[8px] text-slate-300 bg-slate-900/90 px-2 py-0.5 rounded border border-cyan-900/60">
-          <span>50+ Partner Hospital Networks</span>
-          <span className="font-bold text-cyan-300">100% HIPAA &amp; ABDM Compliant</span>
+        {/* Right Side: Floating Patient Mobile App */}
+        <div className="w-[92px] sm:w-[106px] h-[138px] sm:h-[152px] bg-slate-950 rounded-[14px] border-[2px] border-cyan-500/40 p-1.5 shadow-2xl flex flex-col justify-between shrink-0 transform -rotate-1 hover:rotate-0 transition-transform duration-300 relative z-10">
+          <div className="w-5 h-1.5 bg-slate-800 rounded-full mx-auto" />
+
+          <div className="flex items-center justify-between text-[7px] text-cyan-300 font-bold px-0.5">
+            <span>Patient EHR</span>
+            <span className="text-emerald-400">● Stable</span>
+          </div>
+
+          {/* Vitals HUD */}
+          <div className="bg-slate-900 rounded-lg p-1.5 border border-cyan-950 space-y-0.5">
+            <div className="flex justify-between items-center text-[7px]">
+              <span className="text-slate-400">Heart Rate</span>
+              <span className="font-black text-rose-400">72 bpm</span>
+            </div>
+            <div className="flex justify-between items-center text-[7px]">
+              <span className="text-slate-400">BP Pulse</span>
+              <span className="font-bold text-cyan-300">120/80</span>
+            </div>
+            <div className="text-[6px] text-slate-400 truncate pt-0.5 border-t border-slate-800">
+              Lab: CBC Panel • Normal
+            </div>
+          </div>
+
+          <div className="w-full py-0.5 rounded bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-black text-[7px] text-center shadow-xs">
+            Digital Prescription
+          </div>
         </div>
       </div>
     );
@@ -479,7 +516,7 @@ export default function PortfolioSection({ isHome = false, items }: PortfolioSec
   }, [portfolioProjects, activeCategory, searchQuery]);
 
   return (
-    <section id="portfolio" className="relative py-16 lg:py-24 bg-[#f8fafc] text-slate-900 overflow-hidden border-t border-slate-200">
+    <section id="portfolio" className="relative py-12 lg:py-16 bg-[#f8fafc] text-slate-900 overflow-hidden border-t border-slate-200">
       {/* Background Subtle Grid Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] [background-size:24px_24px] opacity-35 pointer-events-none" />
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-100/40 rounded-full blur-3xl pointer-events-none" />
@@ -616,9 +653,9 @@ export default function PortfolioSection({ isHome = false, items }: PortfolioSec
                 {/* Impact Metric & Read Study CTA */}
                 <div className="flex items-center justify-between pt-1">
                   <div className="flex items-center gap-1.5 text-xs font-bold text-[#0f7670] bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-300">
-                    <TrendingUp className="w-3.5 h-3.5 text-[#0f7670]" />
-                    <span>{project.impactMetric}</span>
-                    <span className="text-[10px] text-slate-600 font-medium">Impact</span>
+                    <TrendingUp className="w-3.5 h-3.5 text-[#0f7670] shrink-0" />
+                    <span className="font-mono">{project.impactMetric}</span>
+                    <span className="text-[10px] text-slate-600 font-medium max-w-[130px] truncate">{project.impactLabel || "Verified"}</span>
                   </div>
 
                   <Link

@@ -11,6 +11,7 @@ import GlobalRatingsStrip from "@/components/GlobalRatingsStrip";
 import PartnerTicker from "@/components/PartnerTicker";
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import CodeOwnershipSection from "@/components/CodeOwnershipSection";
 import ProcessFlow from "@/components/ProcessFlow";
 import TechStackGrid from "@/components/TechStackGrid";
 import PortfolioSection from "@/components/PortfolioSection";
@@ -66,6 +67,9 @@ export default function HomePageClient({
 
         {/* Section 5: Why Choose Divanex */}
         <WhyChooseUs />
+
+        {/* Section 5.5: 100% Code & Asset Ownership Guarantee */}
+        <CodeOwnershipSection />
 
         {/* Section 6: How We Work (5-Step Process Flow) */}
         <ProcessFlow />

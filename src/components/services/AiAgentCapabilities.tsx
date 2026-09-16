@@ -24,9 +24,9 @@ const DEFAULT_ITEMS = [
       badge: "Autonomous Execution"
     },
     {
-      title: "Zero-Hallucination Guardrails",
+      title: "Grounded AI & Hallucination Mitigation",
       desc: "Multi-layered citation verification and strict prompt guardrails ensuring AI responses are grounded strictly in your proprietary documentation.",
-      badge: "100% Grounded"
+      badge: "Citation-Backed"
     },
     {
       title: "Fine-Tuning & Open-Source LLMs",

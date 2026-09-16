@@ -195,10 +195,10 @@ export default function AdminHeader({
             <span className="font-bold">Supabase: Connected</span>
           </div>
 
-          {/* 99.999% SLA Indicator Pill */}
+          {/* 99.9% SLA Indicator Pill */}
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-mono shadow-2xs">
             <Activity className="w-3.5 h-3.5 text-emerald-600" />
-            <span className="font-bold">99.999% SLA</span>
+            <span className="font-bold">99.9% SLA</span>
           </div>
 
           {/* Notifications Button with Inline Drawer */}

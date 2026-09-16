@@ -732,7 +732,7 @@ function AdminLoginWizard() {
           <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-slate-500">
             <span className="flex items-center gap-1.5 text-slate-600 font-medium">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-              <span>SOC-2 TYPE II AUDITED</span>
+              <span>SOC 2–ALIGNED ARCHITECTURE</span>
             </span>
             <span className="text-slate-500 font-medium">IP LOGGING ACTIVE</span>
           </div>

@@ -20,7 +20,7 @@ const DEFAULT_HEADING = {
 
 const DEFAULT_ITEMS = [
     { name: "FinTech & Payments", stat: "$420M+", label: "Transaction Volume Processed", icon: DollarSign },
-    { name: "HealthTech & Telehealth", stat: "180k+", label: "Active HIPAA Consultations", icon: Activity },
+    { name: "HealthTech & Telehealth", stat: "180k+", label: "Patient Consultations & Telehealth", icon: Activity },
     { name: "E-Commerce & Retail", stat: "+280%", label: "Conversion Rate Uplift", icon: ShoppingCart },
     { name: "Supply Chain & Logistics", stat: "99.99%", label: "GPS Telemetry Tracking Uptime", icon: Truck }
   ];

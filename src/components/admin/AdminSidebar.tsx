@@ -64,7 +64,7 @@ export default function AdminSidebar({
       id: "services",
       label: "Services Catalog",
       icon: Layers,
-      badge: "22 Live",
+      badge: "24 Live",
       badgeColor: "bg-slate-100 text-slate-700 border border-slate-300 font-bold"
     },
     {
@@ -298,7 +298,7 @@ export default function AdminSidebar({
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-1.5 pl-1.5" title="SOC2 Verified Operator">
+            <div className="flex items-center gap-1.5 pl-1.5" title="Security-Verified Operator">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
             </div>
           </div>

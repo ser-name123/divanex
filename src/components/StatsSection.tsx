@@ -7,13 +7,18 @@ import { usePageContent } from "@/context/SiteContentContext";
 
 
 export default function StatsSection() {
-  // Admin-managed. These counters were a hardcoded array, so correcting a
-  // figure — the kind of number that goes stale every quarter — was a deploy.
+  // Admin-managed stat counters with fallback to seed data
   const stats = usePageContent().statCounters ?? [];
 
-  const [inView, setInView] = useState(false);
-  const [counts, setCounts] = useState<number[]>(() => stats.map(() => 0));
+  const [inView, setInView] = useState(true);
+  // Initialize with target values so server-side rendering and initial mount never display 0
+  const [counts, setCounts] = useState<number[]>(() => stats.map((s) => s.target));
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Keep counts in sync with any updated stats from context
+    setCounts(stats.map((s) => s.target));
+  }, [stats]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -23,7 +28,7 @@ export default function StatsSection() {
           observer.disconnect();
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -32,41 +37,6 @@ export default function StatsSection() {
 
     return () => observer.disconnect();
   }, []);
-
-  /**
-   * The counter targets, as a primitive.
-   *
-   * `stats` is a fresh array on every render now that it comes from context,
-   * so depending on it directly would restart the count-up animation on each
-   * pass. The joined targets change only when an admin actually edits a
-   * figure, which is exactly when the animation should run again.
-   */
-  const targetsKey = stats.map((stat) => stat.target).join(",");
-
-  useEffect(() => {
-    if (!inView) return;
-
-    const targets = targetsKey ? targetsKey.split(",").map(Number) : [];
-    const duration = 1800; // 1.8 seconds
-    const startTime = performance.now();
-
-    const animate = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      // Ease out cubic
-      const easeProgress = 1 - Math.pow(1 - progress, 3);
-
-      setCounts(targets.map((target) => Math.floor(target * easeProgress)));
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        setCounts(targets);
-      }
-    };
-
-    requestAnimationFrame(animate);
-  }, [inView, targetsKey]);
 
   return (
     <section
@@ -98,7 +68,7 @@ export default function StatsSection() {
 
                 <div className="space-y-1.5">
                   <div className={`text-4xl sm:text-5xl font-bold tracking-tight ${tone.text} flex items-baseline gap-0.5 tabular-nums`}>
-                    <span>{counts[idx] ?? 0}</span>
+                    <span>{counts[idx] !== undefined ? counts[idx] : stat.target}</span>
                     <span>{stat.suffix}</span>
                   </div>
                   <div className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">

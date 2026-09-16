@@ -335,13 +335,9 @@ export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClien
                   <Flame className="w-4 h-4 text-sky-600 animate-pulse" />
                   <span>FEATURED ARCHITECTURAL BLUEPRINT</span>
                 </span>
-                <span className="text-xs font-bold text-slate-500 flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5 text-slate-400" />
+                <span className="text-xs font-bold text-slate-500 flex items-center gap-1 font-mono">
+                  <Clock className="w-3.5 h-3.5 text-sky-600" />
                   <span>{featuredPost.readTime}</span>
-                </span>
-                <span className="text-xs font-bold text-slate-500 flex items-center gap-1">
-                  <Eye className="w-3.5 h-3.5 text-slate-400" />
-                  <span>{featuredPost.views.toLocaleString()} reads</span>
                 </span>
               </div>
 
@@ -512,9 +508,9 @@ export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClien
                           <Calendar className="w-3.5 h-3.5 text-slate-400" />
                           <span>{post.publishedAt}</span>
                         </span>
-                        <span className="flex items-center gap-1 text-slate-400 font-mono text-[11px]">
-                          <Eye className="w-3.5 h-3.5" />
-                          <span>{post.views.toLocaleString()}</span>
+                        <span className="flex items-center gap-1 text-slate-500 font-mono text-[11px]">
+                          <Clock className="w-3.5 h-3.5 text-sky-600" />
+                          <span>{post.readTime}</span>
                         </span>
                       </div>
 
@@ -643,7 +639,7 @@ export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClien
             },
             {
               title: "Core Banking & FinTech",
-              desc: "Double-entry general ledgers, sub-second payment gateways, and PCI-DSS compliance.",
+              desc: "Double-entry general ledgers, sub-second payment gateways, and PCI-DSS–aware workflows.",
               tag: "Fintech"
             },
             {

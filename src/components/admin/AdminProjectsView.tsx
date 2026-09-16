@@ -49,7 +49,7 @@ const DEFAULT_MILESTONES_BY_CATEGORY: Record<string, string[]> = {
     "Vector Embedding Pipeline (pgvector)",
     "Autonomous Multi-Agent Router & Tooling",
     "Retrieval Augmented Generation (RAG) Cache",
-    "Strict Anti-Hallucination Guardrails",
+    "Citation-Based AI Guardrails",
     "Model Inference Latency Benchmarks <50ms"
   ],
   "Web & Mobile Apps": [
@@ -399,7 +399,7 @@ export default function AdminProjectsView({
           <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-purple-400 to-indigo-500 rounded-t-2xl pointer-events-none" />
           <div className="text-[10px] font-mono text-slate-500 uppercase font-bold">Contractual SLA Uptime</div>
           <div className="text-xl sm:text-2xl font-bold text-slate-900 font-mono mt-1">
-            99.999% SLA
+            99.9% SLA
           </div>
           <div className="text-xs font-mono text-purple-700 mt-1 flex items-center gap-1 font-semibold">
             <Activity className="w-3.5 h-3.5 text-purple-600" /> High-Availability Cluster
@@ -724,7 +724,7 @@ export default function AdminProjectsView({
             <div className="flex items-center gap-2 pt-1">
               <input
                 type="text"
-                placeholder="Add custom milestone (e.g. SAML SSO Integration / SOC2 Compliance)..."
+                placeholder="Add custom milestone (e.g. SAML SSO Integration / SOC 2 Alignment)..."
                 value={customMilestoneDraft}
                 onChange={(e) => setCustomMilestoneDraft(e.target.value)}
                 onKeyDown={(e) => {

@@ -111,7 +111,7 @@ const ADMIN_OPERATORS = [
     name: "Elena Rostova",
     email: "elena@divanextechnologies.com",
     role: "Compliance Auditor",
-    dept: "SOC2 & Security",
+    dept: "Cloud & Security",
     mfa: "TOTP Duo",
     lastActive: "3 hours ago",
     avatar: "ER"
@@ -448,7 +448,7 @@ export default function AdminSettingsView() {
                 </div>
               </div>
               <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-purple-50 text-purple-700 border border-purple-200 font-bold">
-                SOC2 Active
+                Security Active
               </span>
             </div>
 

@@ -32,7 +32,7 @@ export default function HomeBlogSection({ posts: incoming }: { posts?: BlogPost[
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-sky-500/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10 space-y-6 sm:space-y-8">
+      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10 space-y-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200 pb-4 sm:pb-6">
@@ -110,8 +110,8 @@ export default function HomeBlogSection({ posts: incoming }: { posts?: BlogPost[
                     </span>
                     <span>•</span>
                     <span className="flex items-center gap-1 text-slate-500">
-                      <Eye className="w-3.5 h-3.5 text-sky-500" />
-                      {post.views.toLocaleString()} reads
+                      <Clock className="w-3.5 h-3.5 text-sky-600" />
+                      {post.readTime}
                     </span>
                   </div>
 
@@ -197,7 +197,7 @@ export default function HomeBlogSection({ posts: incoming }: { posts?: BlogPost[
               href="/contact"
               className="px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 hover:text-sky-700 border border-slate-200 font-bold text-xs sm:text-sm transition-all shadow-2xs flex items-center gap-1.5"
             >
-              <span>Start a Project →</span>
+              <span>Book a Consultation →</span>
             </Link>
           </div>
         </div>

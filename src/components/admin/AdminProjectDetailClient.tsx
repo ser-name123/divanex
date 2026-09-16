@@ -1742,7 +1742,7 @@ export default function AdminProjectDetailClient({ projectId }: Props) {
                   Live Deployment Environments & Deliverables
                 </span>
                 <span className="text-emerald-700 font-bold flex items-center gap-1">
-                  <Activity className="w-3.5 h-3.5 text-emerald-600" /> 99.999% SLA Operational
+                  <Activity className="w-3.5 h-3.5 text-emerald-600" /> 99.9% SLA Operational
                 </span>
               </div>
 

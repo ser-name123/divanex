@@ -11,11 +11,11 @@ export interface WhyPillar {
 
 export const whyChoosePillars: WhyPillar[] = [
   {
-    id: "engineering-experience",
-    title: "10+ Years Engineering Experience",
-    subtitle: "Senior full-stack, mobile & cloud architects leading every build",
+    id: "senior-engineering-team",
+    title: "Senior Engineering Team",
+    subtitle: "Seasoned architects & full-stack leads on every project",
     description:
-      "Every project is engineered directly by seasoned developers who have shipped production systems at scale. No junior handoffs or learning curves on your budget.",
+      "Every project is engineered directly by experienced developers who have shipped production systems at scale. Zero junior handoffs, zero outsourced code, and no learning curves on your budget.",
     iconName: "Award",
     badge: "Senior Engineers",
     metrics: "10+ Years Exp",
@@ -23,32 +23,32 @@ export const whyChoosePillars: WhyPillar[] = [
   },
   {
     id: "source-code-ownership",
-    title: "100% Source Code Ownership",
-    subtitle: "Day-1 repository access & infrastructure in your name",
+    title: "100% Source-Code & IP Ownership",
+    subtitle: "Day-1 Git repository transfer & cloud infrastructure in your name",
     description:
-      "You receive 100% intellectual property transfer, full Git repository access, and cloud hosting accounts created in your name from day one. Zero vendor lock-in.",
+      "You receive complete intellectual property rights, direct Git organization access, and cloud hosting accounts created in your name from day one. Zero vendor lock-in.",
     iconName: "ShieldCheck",
     badge: "100% IP Transfer",
     metrics: "Day-1 Rights",
     color: "#189a91"
   },
   {
-    id: "dedicated-team",
-    title: "Dedicated Development Team",
-    subtitle: "Direct Slack communication with your core engineering pod",
+    id: "direct-communication",
+    title: "Direct Communication & Dedicated Pod",
+    subtitle: "Direct Slack / Teams access with your core engineering pod",
     description:
-      "A focused development squad dedicated exclusively to your sprints. You collaborate directly with the engineers writing your code, not non-technical account managers.",
-    iconName: "UserCheck",
+      "Collaborate directly with the engineers writing your code in your private Slack/Teams channels. Fast feedback, transparent technical answers, and no non-technical middleman telephone games.",
+    iconName: "Users",
     badge: "Dedicated Pod",
     metrics: "Direct Slack",
-    color: "#000838"
+    color: "#0f7670"
   },
   {
     id: "weekly-staging-demos",
     title: "Weekly Staging & Demos",
     subtitle: "Clickable test environments & interactive video walkthroughs",
     description:
-      "Every week you receive a live staging URL and video walkthrough of newly completed features. If anything needs adjustment, we catch it immediately.",
+      "Every week you receive a live staging URL and video walkthrough of newly completed features. If anything needs adjustment, we catch and refine it immediately.",
     iconName: "Zap",
     badge: "Visible Progress",
     metrics: "Weekly Demos",
@@ -59,11 +59,11 @@ export const whyChoosePillars: WhyPillar[] = [
     title: "NDA & IP Protection",
     subtitle: "Legally binding non-disclosure & strict security compliance",
     description:
-      "We execute comprehensive bilateral NDAs, enforce strict client data isolation, and follow standard OWASP security benchmarks across all production environments.",
+      "We execute comprehensive bilateral NDAs, enforce strict client data isolation, and follow standard OWASP Top 10 and ISO 27001 security benchmarks across all production environments.",
     iconName: "Lock",
     badge: "Legally Binding",
     metrics: "Strict NDA",
-    color: "#0f7670"
+    color: "#000838"
   },
   {
     id: "post-launch-support",
@@ -74,17 +74,39 @@ export const whyChoosePillars: WhyPillar[] = [
     iconName: "CheckCircle2",
     badge: "Guaranteed SLA",
     metrics: "Post-Launch",
-    color: "#189a91"
+    color: "#5c9556"
   },
   {
-    id: "web-mobile-ai-one-team",
+    id: "unified-stack",
     title: "Web + Mobile + AI Under One Team",
     subtitle: "Next.js, Flutter / React Native & AI RAG workflows in one pod",
     description:
-      "No more coordinating separate agencies that blame each other. Web applications, iOS/Android mobile apps, and custom AI agents engineered under one roof.",
+      "No more coordinating separate agencies that blame each other. Web applications, iOS/Android mobile apps, and custom AI agents engineered together under one roof.",
     iconName: "Layers",
     badge: "Unified Stack",
-    metrics: "Web + Mobile + AI",
+    metrics: "Full-Stack Pod",
+    color: "#0f7670"
+  },
+  {
+    id: "modern-architecture",
+    title: "Modern Architecture & Performance",
+    subtitle: "Production Next.js 15, FastAPI, React Native & PostgreSQL",
+    description:
+      "We build exclusively with high-performance, maintainable frameworks designed for sub-second global latency, strict type-safety, and horizontal scalability.",
+    iconName: "Cpu",
+    badge: "Production Stack",
+    metrics: "Sub-Second TTFB",
+    color: "#189a91"
+  },
+  {
+    id: "predictable-pricing",
+    title: "Predictable Milestones & Transparent Pricing",
+    subtitle: "Transparent fixed-sprint budgets with zero surprise fee traps",
+    description:
+      "Clear milestone deliverables, transparent pricing tiers, and payments tied directly to verified staging releases. No hidden change-order fees or runaway billing surprises.",
+    iconName: "TrendingUp",
+    badge: "Zero Surprises",
+    metrics: "Milestone SLA",
     color: "#5c9556"
   }
 ];

@@ -39,7 +39,7 @@ const DEFAULT_ITEMS = [
       icon: ShieldCheck,
       challenge: "Secure multi-hospital clinical consultation exchange with zero patient health information leakage.",
       solution: "HL7 FHIR v4 data pipeline, PostgreSQL row-level security, and encrypted DICOM radiology viewer.",
-      metrics: "50+ hospital networks, 100% HIPAA compliant."
+      metrics: "50+ hospital networks, HIPAA-Ready Architecture architecture."
     }
   ];
 

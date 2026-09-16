@@ -20,6 +20,7 @@ interface ContactBody {
   phone?: unknown;
   service?: unknown;
   budget?: unknown;
+  timeline?: unknown;
   message?: unknown;
 }
 
@@ -40,6 +41,7 @@ export async function POST(request: Request) {
     const service = cleanString(body.service, 160);
     const phone = cleanString(body.phone, 40);
     const budget = cleanString(body.budget, 60);
+    const timeline = cleanString(body.timeline, 60);
     const message = cleanText(body.message, 5000);
 
     // Threat signature inspection
@@ -48,6 +50,8 @@ export async function POST(request: Request) {
       containsThreatSignature(email) ||
       containsThreatSignature(service) ||
       containsThreatSignature(phone) ||
+      containsThreatSignature(budget) ||
+      containsThreatSignature(timeline) ||
       containsThreatSignature(message)
     ) {
       return badRequest("Security alert: Malicious characters or payload signatures detected.");
@@ -92,7 +96,8 @@ export async function POST(request: Request) {
         { label: "Email", value: email },
         { label: "Phone", value: phone },
         { label: "Service", value: service },
-        { label: "Budget", value: budget || "Not specified" },
+        { label: "Estimated Budget", value: budget || "Not specified" },
+        { label: "Expected Timeline", value: timeline || "Not specified" },
         { label: "Message", value: message, wide: true },
       ],
     });

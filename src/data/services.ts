@@ -67,7 +67,7 @@ export const servicesData: ServiceItem[] = [
       "Automated KYC/AML Verification with Facial Biometrics & OCR",
       "Lending & Micro-Finance Engine with Automated Credit Scoring",
       "Multi-Gateway Payment Switch (Stripe, UPI, Razorpay, Swift)",
-      "PCI-DSS Level 1 & SOC-2 Compliant Encryption Architecture"
+      "PCI-DSS–Aware Payment Architecture & SOC-2 Compliant Encryption Architecture"
     ],
     deliverables: ["Double-Entry Ledger Engine", "KYC Automated Pipeline", "Payment Gateway Switch", "Security Audit Package"],
     idealFor: "Neo-Banks, NBFCs, Lending Platforms, Forex Brokers & Payment Gateways"
@@ -269,7 +269,7 @@ export const servicesData: ServiceItem[] = [
       "Full SAST/DAST Penetration Testing (Web, Mobile & API)",
       "Zero-Trust IAM, MFA & Role-Based Access Control (RBAC)",
       "Cloud Security Posture Management (CSPM) & Cloudflare WAF",
-      "SOC-2 Type II, ISO 27001 & GDPR Regulatory Fast-Tracking",
+      "SOC 2–Aligned, ISO 27001 & GDPR Regulatory Fast-Tracking",
       "Real-time SIEM Threat Intelligence & Automated Anomaly Blocking",
       "Disaster Recovery, Automated Backups & Incident Response Runbooks"
     ],
@@ -361,7 +361,7 @@ export const servicesData: ServiceItem[] = [
     title: "Generative AI & Agentic Fabric",
     tagline: "Multi-Actor LangGraph Agents, RAG Pipelines & LLM Fine-Tuning",
     description:
-      "Autonomous AI workforce systems capable of multi-step reasoning, tool execution, enterprise data vector indexing, and zero-hallucination contextual customer copilot workflows.",
+      "Autonomous AI workforce systems capable of multi-step reasoning, tool execution, enterprise data vector indexing, and grounded, citation-backed customer copilot workflows.",
     iconName: "Sparkles",
     color: "#2e3e7e",
     gradient: "from-purple-600/20 via-fuchsia-500/10 to-transparent",
@@ -370,7 +370,7 @@ export const servicesData: ServiceItem[] = [
       "Private Vector Database Indexing (pgvector, Pinecone, Qdrant)",
       "Custom Model Fine-Tuning & Quantized On-Premise Weights (vLLM)",
       "Multimodal Vision, Audio & Document Understanding Pipelines",
-      "Strict Anti-Hallucination Guardrails & PII Redaction Proxy",
+      "Grounded AI Guardrails & PII Redaction Proxy",
       "Automated Tool Calling, SQL Querying & External API Invocations"
     ],
     deliverables: ["Custom Agentic AI Engine", "Private Vector Indexing Pipeline", "Guardrails Proxy", "Full SDK & Webhooks"],

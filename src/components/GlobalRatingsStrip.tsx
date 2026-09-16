@@ -20,7 +20,7 @@ export default function GlobalRatingsStrip() {
   ];
 
   return (
-    <section className="relative py-6 bg-white/95 backdrop-blur-xl border-y border-slate-200/90 shadow-2xs overflow-hidden select-none">
+    <section className="relative py-4 sm:py-5 bg-white/95 backdrop-blur-xl border-y border-slate-200/90 shadow-2xs overflow-hidden select-none">
       <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6">

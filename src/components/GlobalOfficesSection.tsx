@@ -91,7 +91,7 @@ export default function GlobalOfficesSection() {
       country: "India",
       city: "Jaipur, Rajasthan",
       isoCode: "IN",
-      roleBadge: "Global HQ & Core R&D",
+      roleBadge: "Global Engineering HQ & Core R&D",
       accentColor: "teal",
       tagline: "Primary Engineering Hub & Architecture Lab",
       address: "Office 104, Vaishali Tower 2nd, Nursery Circle, Vaishali Nagar, Jaipur 302021",
@@ -110,9 +110,9 @@ export default function GlobalOfficesSection() {
       country: "Hong Kong",
       city: "Tsuen Wan, New Territories",
       isoCode: "HK",
-      roleBadge: "APAC Regional Hub",
+      roleBadge: "APAC Client Coverage Hub",
       accentColor: "sky",
-      tagline: "Asia-Pacific Gateway & FinTech Ingress",
+      tagline: "Asia-Pacific Client Coverage & Ingress",
       address: "FLAT/RM E (36) 3/F Superluck Industrial Centre Phase 2, 57 Sha Tsui Rd, Tsuen Wan",
       timeZoneName: "Hong Kong Time",
       timeZoneOffset: "HKT (UTC+8:00)",
@@ -129,9 +129,9 @@ export default function GlobalOfficesSection() {
       country: "United Arab Emirates",
       city: "Dubai Media City",
       isoCode: "AE",
-      roleBadge: "MENA Enterprise Desk",
+      roleBadge: "MENA Client Coverage Desk",
       accentColor: "amber",
-      tagline: "Middle East & GCC Enterprise Solutions",
+      tagline: "Middle East & GCC Client Coverage",
       address: "Building C8, Dubai Media City, Dubai, United Arab Emirates",
       timeZoneName: "Gulf Standard Time",
       timeZoneOffset: "GST (UTC+4:00)",
@@ -148,9 +148,9 @@ export default function GlobalOfficesSection() {
       country: "Canada",
       city: "Newmarket, Greater Toronto",
       isoCode: "CA",
-      roleBadge: "North America Client Hub",
+      roleBadge: "North America Client Coverage",
       accentColor: "rose",
-      tagline: "Americas Client Relations & Discovery",
+      tagline: "Americas Client Relations & Timezone Support",
       address: "105 Sawmill Valley Dr, Newmarket, ON L3X 1S4, Canada",
       timeZoneName: "Eastern Standard Time",
       timeZoneOffset: "EST (UTC-5:00)",
@@ -251,13 +251,13 @@ export default function GlobalOfficesSection() {
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono font-bold text-sky-800 shadow-2xs">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
               <Globe className="w-3.5 h-3.5 text-sky-600" />
-              <span>WHERE WE WORK FROM</span>
+              <span>GLOBAL TIMEZONE OVERLAP // CLIENT COVERAGE</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#000838] tracking-tight">
-              Our Offices, and the Hours You Can Reach Them
+              Global Client Coverage & Regional Desks
             </h2>
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
-              Engineering runs out of Jaipur, with client-facing hours held across three time zones so an overlap with your working day always exists.
+              Primary engineering runs out of our Jaipur HQ, with dedicated client coverage and active timezone overlap across APAC, the Middle East, and North America.
             </p>
           </div>
 

@@ -16,7 +16,7 @@ export default async function Page() {
     "@context": "https://schema.org",
     "@type": "HowTo",
     "name": "Divanex 5-Stage Agile Software Development Process",
-    "description": "Our systematic engineering lifecycle: Discovery, UI/UX Systems Architecture, Sprint Engineering, Quantum QA & OWASP Audits, and Zero-Downtime Launch with Hypercare.",
+    "description": "Our systematic engineering lifecycle: Discovery, UI/UX Systems Architecture, Sprint Engineering, Security, QA & Performance Testing, and Zero-Downtime Launch with Hypercare.",
     "totalTime": "P10W",
     "step": processSteps.map((step, idx) => ({
       "@type": "HowToStep",

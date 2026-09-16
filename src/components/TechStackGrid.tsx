@@ -54,7 +54,8 @@ const HOMEPAGE_CORE_PILLARS: CorePillar[] = [
     items: [
       { name: "React", slug: "reactjs", desc: "Component architecture & interactive SPAs", iconText: "⚛️", badge: "v19" },
       { name: "Next.js", slug: "nextjs", desc: "Server-side rendering & sub-second page loads", iconText: "▲", badge: "v15 App Router" },
-      { name: "Flutter", slug: "flutter-dart", desc: "Cross-platform iOS & Android native apps", iconText: "💙", badge: "60fps Native" }
+      { name: "React Native", slug: "react-native-expo", desc: "Cross-platform iOS & Android mobile apps", iconText: "📱", badge: "SDK 52" },
+      { name: "Flutter", slug: "flutter-dart", desc: "High-performance native mobile apps", iconText: "💙", badge: "60fps Native" }
     ]
   },
   {
@@ -65,7 +66,8 @@ const HOMEPAGE_CORE_PILLARS: CorePillar[] = [
     items: [
       { name: "Node.js", slug: "nodejs-nestjs", desc: "High-concurrency async event loops", iconText: "🟢", badge: "v22 LTS" },
       { name: "Laravel", slug: "laravel", desc: "Enterprise business logic, queues & APIs", iconText: "🔴", badge: "v11 / 12" },
-      { name: "Python / FastAPI", slug: "python-fastapi-django", desc: "High-throughput APIs & data pipelines", iconText: "🐍", badge: "Async REST" }
+      { name: "Python / FastAPI", slug: "python-fastapi-django", desc: "High-throughput APIs & data pipelines", iconText: "🐍", badge: "Async REST" },
+      { name: "Golang (Go)", slug: "golang", desc: "Low-latency high-scale microservices", iconText: "🔵", badge: "v1.23+" }
     ]
   },
   {
@@ -75,6 +77,8 @@ const HOMEPAGE_CORE_PILLARS: CorePillar[] = [
     accentColor: "emerald",
     items: [
       { name: "PostgreSQL", slug: "postgresql-pgvector", desc: "Row-Level Security, JSONB & pgvector", iconText: "🐘", badge: "v16 Enterprise" },
+      { name: "Redis", slug: "redis-dragonfly", desc: "Sub-millisecond in-memory cache & Pub/Sub", iconText: "🔴", badge: "v7.4+ Cache" },
+      { name: "MongoDB", slug: "mongodb-atlas", desc: "Document database for catalogs & flexible JSON", iconText: "🍃", badge: "v8.0 Atlas" },
       { name: "MySQL", slug: "mysql", desc: "High-performance transactional SQL storage", iconText: "🐬", badge: "v8.0 InnoDB" }
     ]
   },
@@ -264,7 +268,7 @@ export default function TechStackGrid({ isHome = false, items }: TechStackGridPr
                   href="/contact"
                   className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-slate-900 text-xs sm:text-sm font-semibold border border-slate-200 text-center transition-all cursor-pointer"
                 >
-                  Start a Project →
+                  Book a Consultation →
                 </Link>
               </div>
             </div>

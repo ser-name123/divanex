@@ -22,7 +22,7 @@ export default function FAQSection() {
 
   return (
     <section id="faqs" className="relative py-8 lg:py-10 bg-slate-50/50 overflow-hidden">
-      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
+      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         {/* Section Header */}
         <div className="reveal-init text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-xs font-bold text-sky-800 shadow-xs">

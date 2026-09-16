@@ -63,15 +63,15 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
   announcementEnabled: true,
   announcementPill: "TAKING NEW PROJECTS",
   announcementText: "Build slots are open this quarter for SaaS products, custom ERP rollouts and AI automation work",
-  announcementLinkText: "Start a Project →",
+  announcementLinkText: "Book a Consultation →",
   announcementLinkUrl: "/contact",
 
   heroEyebrow: "Custom Software, AI Systems & Cloud Platforms • Built in Jaipur, Shipped Worldwide",
   heroHeadlineMain: "Custom Software, AI & SaaS Solutions",
   heroHeadlineHighlight: "Built for Growing Businesses",
   heroSubhead:
-    "We design and build scalable web platforms, mobile apps, SaaS products and AI solutions—from product strategy to production deployment.",
-  heroCtaQuoteText: "Start a Project",
+    "Engineering across 5 core disciplines: Custom SaaS, AI & Automation, Web & Mobile Apps, Enterprise Business Software, and Healthcare / ERP / Marketplace Systems.",
+  heroCtaQuoteText: "Book a Consultation",
   heroCtaConsultText: "View Case Studies",
 
   contactEmail: "business@divanextechnologies.com",

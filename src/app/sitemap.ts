@@ -38,6 +38,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/testimonials", priority: 0.7, changeFrequency: "monthly" as const },
     { path: "/faqs", priority: 0.7, changeFrequency: "monthly" as const },
     { path: "/security", priority: 0.6, changeFrequency: "monthly" as const },
+    { path: "/privacy", priority: 0.5, changeFrequency: "monthly" as const },
+    { path: "/terms", priority: 0.5, changeFrequency: "monthly" as const },
+    { path: "/cookies", priority: 0.4, changeFrequency: "monthly" as const },
+    { path: "/nda", priority: 0.6, changeFrequency: "monthly" as const },
+    { path: "/refund-policy", priority: 0.5, changeFrequency: "monthly" as const },
   ];
 
   // Published posts only: a draft in the sitemap is a 404 or a thin page.

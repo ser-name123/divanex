@@ -193,7 +193,7 @@ export async function sendChatVerificationOtpEmail({
 
             <div class="features-box">
               <strong>✨ What you get upon verification:</strong><br>
-              • Instant answers regarding our 22 core engineering services.<br>
+              • Instant answers regarding our 24 core engineering capabilities.<br>
               • Live architectural estimates & tech stack consultation.<br>
               • Direct 1-click takeover by our Senior Technical Leads.
             </div>

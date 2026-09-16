@@ -287,7 +287,7 @@ export default function Testimonials({ isHome = false, items }: TestimonialsProp
               href="/testimonials"
               className="btn-futuristic-primary text-xs sm:text-sm !py-3 !px-6 !rounded-xl"
             >
-              <span>View All Reviews ({testimonialsData.length}+ Verified Client Endorsements)</span>
+              <span>View All Client Reviews ({testimonialsData.length} Case Testimonials)</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -297,20 +297,19 @@ export default function Testimonials({ isHome = false, items }: TestimonialsProp
         <div className="mt-16 text-center">
           <div className="inline-flex flex-wrap items-center justify-center gap-6 sm:gap-8 px-8 py-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-700 font-medium shadow-2xs">
             <span className="flex items-center gap-2">
-              <span className="text-amber-600 font-bold">★ 4.9/5</span> on Clutch.co & G2
+              <span className="text-amber-600 font-bold">★ 5.0 Rating</span> on Upwork & Direct Hires
             </span>
             <span className="hidden sm:inline text-slate-300">•</span>
             <span className="flex items-center gap-2">
-              <span className="text-emerald-700 font-bold">99.2%</span> Sprint On-Time SLA
+              <span className="text-emerald-700 font-bold">100%</span> Code Ownership Handover
             </span>
             <span className="hidden sm:inline text-slate-300">•</span>
             <span className="flex items-center gap-2">
-              <span className="text-sky-700 font-bold">100%</span> Verified Enterprise Leaders
+              <span className="text-sky-700 font-bold">Bi-Weekly</span> Interactive Staging Demos
             </span>
             <span className="hidden sm:inline text-slate-300">•</span>
             <span className="flex items-center gap-2">
-              <Globe2 className="w-4 h-4 text-purple-600" />
-              <span>15+ Global Countries</span>
+              <span className="text-purple-700 font-bold">NDA & IP</span> Protected
             </span>
           </div>
         </div>

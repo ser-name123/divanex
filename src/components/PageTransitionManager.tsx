@@ -81,7 +81,7 @@ export default function PageTransitionManager() {
 
   return (
     <>
-      {/* 1. Top High-Precision Quantum Laser Bar */}
+      {/* 1. Top Progress Bar */}
       <div className="fixed top-0 left-0 right-0 z-[999999] pointer-events-none h-[3px] bg-slate-200/60">
         <div
           className="h-full bg-gradient-to-r from-[#0f7670] via-[#189a91] to-[#5c9556] transition-all duration-300 ease-out shadow-[0_1px_8px_rgba(15,118,112,0.4)] relative"

@@ -260,8 +260,8 @@ export default function Footer() {
         {/* 3. COMPREHENSIVE 5-COLUMN ENTERPRISE NAVIGATION MATRIX */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-5 xl:gap-6 pb-8 border-b border-slate-200">
           
-          {/* Column 1: Brand DNA, Mission, Direct Comms (3 Cols) */}
-          <div className="lg:col-span-3 space-y-4">
+          {/* Column 1: Brand DNA, Mission, Direct Comms (4 Cols) */}
+          <div className="lg:col-span-4 space-y-4">
             <Link href="/" className="inline-flex items-center group" aria-label="Divanex Technologies — home">
               <Image
                 src="/divanex-logo.png"
@@ -393,7 +393,7 @@ export default function Footer() {
                 className="px-3 py-1.5 rounded-xl bg-sky-50 border border-sky-200 text-sky-700 hover:text-white hover:bg-sky-600 hover:border-sky-600 text-xs font-mono font-semibold flex items-center gap-1.5 transition-all shadow-xs"
               >
                 <Zap className="w-3.5 h-3.5 text-sky-600" />
-                <span>Discuss ROI</span>
+                <span>Book a Consultation</span>
               </Link>
             </div>
           </div>
@@ -486,16 +486,17 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Jump Routing Anchors */}
-          <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] text-slate-600">
-            {bottomLinks.map((link) => (
-              <span key={link.id} className="inline-flex items-center gap-4">
-                <Link href={link.href} className="hover:text-sky-600 transition-colors">
+          {/* Quick Jump Legal Routing Anchors */}
+          <div className="flex flex-wrap items-center justify-center gap-3 text-[11px] text-slate-600">
+            {bottomLinks.map((link, idx) => (
+              <span key={link.id} className="inline-flex items-center gap-3">
+                <Link href={link.href} className="hover:text-sky-600 transition-colors font-medium">
                   {link.label}
                 </Link>
-                <span>•</span>
+                {idx < bottomLinks.length - 1 && <span className="text-slate-400">•</span>}
               </span>
             ))}
+            <span className="text-slate-400">•</span>
             <Link href="/admin" className="text-slate-600 hover:text-sky-600 transition-colors inline-flex items-center gap-1 font-semibold">
               <span>Admin Console</span>
               <span className="text-[10px] px-1.5 py-0.2 rounded bg-sky-100 border border-sky-300 text-sky-700">PRO</span>

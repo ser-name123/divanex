@@ -370,55 +370,110 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
   const getServiceBadge = (id: string) => {
     switch (id) {
       case "hospital-healthcare-management":
-        return "HL7 FHIR / ABDM";
+        return "CLINIC & HMIS WORKFLOWS";
       case "enterprise-erp-systems":
-        return "MODULAR MRP-II";
+        return "INVENTORY & GST BILLING";
       case "fintech-banking-solutions":
-        return "PCI-DSS LEVEL 1";
+        return "PAYMENT RAILS & LEDGERS";
       case "custom-crm-automation":
-        return "WHATSAPP CTI";
+        return "WHATSAPP & SALES LEADS";
       case "ecommerce-marketplace-platforms":
-        return "SPLIT ESCROW";
+        return "MULTI-VENDOR COMMERCE";
       case "edtech-learning-management":
-        return "WEBRTC LIVE";
+        return "STUDENT LMS & CLASSROOM";
       case "saas-development":
-        return "MULTI-TENANT RLS";
+        return "MULTI-TENANT & BILLING";
       case "web-app-development":
-        return "NEXT.JS & REACT NATIVE";
+        return "WEB & MOBILE APPS";
       case "ai-solutions-automation":
-        return "140+ TOK/SEC RAG";
+        return "AI WORKFLOW AUTOMATION";
       case "seo-digital-growth":
-        return "CORE WEB VITALS 98+";
+        return "HIGH-CONVERSION SPEED";
       case "ui-ux-design":
-        return "FIGMA DESIGN TOKENS";
+        return "FIGMA TO PRODUCTION UI";
       case "cloud-devops":
-        return "ZERO-DOWNTIME K8S";
+        return "HIGH-AVAILABILITY CLOUD";
       case "cybersecurity-compliance":
-        return "ZERO-TRUST / SOC-2";
+        return "DATA PRIVACY SAFEGUARDS";
       case "real-estate-proptech":
-        return "RESO / MLS / 3D";
+        return "PROPERTY CRM & 3D TOURS";
       case "logistics-fleet-telematics":
-        return "OBD-II & GPS MESH";
+        return "LIVE GPS FLEET TRACKING";
       case "iot-embedded-telemetry":
-        return "MQTT & CLICKHOUSE";
+        return "HARDWARE & SENSOR IOT";
       case "headless-cms-media":
-        return "SUB-50MS EDGE TTFB";
+        return "FAST MEDIA & CMS HUB";
       case "generative-ai-agentic-fabric":
-        return "LANGGRAPH / vLLM";
+        return "AI AGENTS & RAG PIPELINES";
       case "restaurant-pos-hospitality":
-        return "OFFLINE-FIRST POS";
+        return "OFFLINE-FIRST RESTAURANT POS";
       case "web3-defi-blockchain":
-        return "AUDITED CONTRACTS";
+        return "DEFI & ASSET LEDGERS";
       case "data-engineering-bi-analytics":
-        return "PETABYTE DATA LAKES";
+        return "EXECUTIVE BI DASHBOARDS";
       case "legaltech-contract-automation":
-        return "AI REDLINE & E-SIGN";
+        return "CONTRACT AI & E-SIGN";
       case "ar-vr-spatial-computing":
-        return "VISIONOS / WEBXR 3D";
+        return "3D PRODUCT CONFIGURATOR";
       case "energytech-smart-grid":
-        return "OCPP 2.0.1 / SMART GRID";
+        return "EV CHARGING & TELEMETRY";
       default:
         return "ENTERPRISE READY";
+    }
+  };
+
+  const getServiceTechStack = (id: string) => {
+    switch (id) {
+      case "ai-solutions-automation":
+        return "OpenAI • Claude • LangGraph • RAG • FastAPI";
+      case "generative-ai-agentic-fabric":
+        return "DeepSeek • Claude • Python FastAPI • RAG • Vector DB";
+      case "saas-development":
+        return "Next.js 15 • Stripe Subscriptions • PostgreSQL • AWS";
+      case "web-app-development":
+        return "Next.js 15 • React Native • TypeScript • Tailwind";
+      case "hospital-healthcare-management":
+        return "Next.js • React Native • Node.js • PostgreSQL • HIPAA Vault";
+      case "enterprise-erp-systems":
+        return "Next.js • Node.js • PostgreSQL • Barcode SDK";
+      case "fintech-banking-solutions":
+        return "Next.js • Go / Node.js • PostgreSQL • Stripe / Razorpay";
+      case "custom-crm-automation":
+        return "Next.js • WhatsApp Cloud API • Node.js • Webhooks";
+      case "ecommerce-marketplace-platforms":
+        return "Next.js • Stripe Escrow • Algolia • PostgreSQL";
+      case "edtech-learning-management":
+        return "React • WebRTC Live • Node.js • PostgreSQL";
+      case "real-estate-proptech":
+        return "Next.js • Three.js 3D • Mapbox • WhatsApp API";
+      case "logistics-fleet-telematics":
+        return "React Native • WebSockets • Redis • Node.js";
+      case "iot-embedded-telemetry":
+        return "Node.js • MQTT Broker • TimescaleDB • Docker";
+      case "restaurant-pos-hospitality":
+        return "Electron • SQLite Offline • Next.js • Cloud Sync";
+      case "cloud-devops":
+        return "AWS • GCP • Docker • GitHub Actions CI/CD";
+      case "cybersecurity-compliance":
+        return "Zero-Trust IAM • SAST/DAST • Cloudflare • Vault";
+      case "data-engineering-bi-analytics":
+        return "Python • PostgreSQL • Apache Kafka • PowerBI";
+      case "legaltech-contract-automation":
+        return "Next.js • Document AI • PDFKit • Digital Signatures";
+      case "ar-vr-spatial-computing":
+        return "Three.js • WebGL • Canvas • WebXR";
+      case "energytech-smart-grid":
+        return "OCPP 2.0.1 • WebSockets • TimescaleDB • React Native";
+      case "seo-digital-growth":
+        return "Next.js ISR • Edge Cache • Core Web Vitals • Schema.org";
+      case "ui-ux-design":
+        return "Figma • Design Tokens • Tailwind CSS • Micro-animations";
+      case "headless-cms-media":
+        return "Next.js • Sanity / Strapi • Cloudflare CDN";
+      case "web3-defi-blockchain":
+        return "Solidity • Ethers.js • Node.js • WebSockets";
+      default:
+        return "React • Next.js • Node.js • PostgreSQL";
     }
   };
 
@@ -457,7 +512,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
             <span className="w-2 h-2 rounded-full bg-sky-500 animate-ping"></span>
             <Layers className="w-3.5 h-3.5 text-sky-600" />
             <span className="tracking-wider uppercase">
-              {isHome ? "WHAT WE BUILD // CORE DOMAINS & PLATFORMS" : "WHAT WE BUILD // 22 PRACTICE AREAS"}
+              {isHome ? "WHAT WE BUILD // CORE CAPABILITIES" : "WHAT WE BUILD // 24 ENGINEERING CAPABILITIES"}
             </span>
           </div>
 
@@ -553,7 +608,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
                   )}
                 </div>
                 <div className="flex items-center justify-between text-[11px] text-slate-500 font-mono px-2 pt-1.5">
-                  <span>Showing {filteredServices.length} of {services.length} Specialized Engineering Tracks</span>
+                  <span>Showing {filteredServices.length} of {services.length} Engineering Capabilities</span>
                   {searchQuery && <span>Filter Active</span>}
                 </div>
               </div>
@@ -656,7 +711,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
         )}
 
         {/* ======================================================== */}
-        {/* HOMEPAGE ONLY: EXPANDED 22+ SERVICES DISCOVERY PORTAL    */}
+        {/* HOMEPAGE ONLY: EXPANDED 24 SERVICES DISCOVERY PORTAL     */}
         {/* ======================================================== */}
         {isHome && (
           <div className="reveal-init mt-12 rounded-3xl p-6 sm:p-8 bg-white border border-slate-200 shadow-sm relative overflow-hidden transition-all duration-300">
@@ -680,14 +735,14 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
                   href="/services"
                   className="btn-futuristic-primary w-full sm:w-auto text-xs sm:text-sm !py-3.5 !px-6 !rounded-xl"
                 >
-                  <span>View All 22+ Specialized Services</span>
+                  <span>View All 24 Engineering Capabilities</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/contact"
                   className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-slate-900 text-xs sm:text-sm font-semibold border border-slate-200 text-center transition-all cursor-pointer"
                 >
-                  Start a Project →
+                  Book a Consultation →
                 </Link>
               </div>
             </div>
@@ -695,7 +750,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
         )}
 
         {/* ======================================================== */}
-        {/* SERVICES PAGE VIEW: ALL 22 SERVICES DYNAMIC GRID        */}
+        {/* SERVICES PAGE VIEW: ALL 24 SERVICES DYNAMIC GRID         */}
         {/* ======================================================== */}
         {!isHome && (
           <div className="mt-12">
@@ -756,23 +811,23 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
                           <Link
                             href={`/services/${svc.id}`}
                             onClick={(e) => e.stopPropagation()}
-                            className="text-lg sm:text-xl font-semibold text-slate-900 group-hover:text-sky-700 transition-colors inline-flex items-center gap-1.5"
+                            className="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-sky-700 transition-colors inline-flex items-center gap-1.5"
                           >
                             <span>{svc.title}</span>
                             <ArrowRight className="w-4 h-4 text-sky-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all shrink-0" />
                           </Link>
-                          <p className="text-xs text-sky-700 font-mono font-semibold mt-1 line-clamp-1">
+                          <p className="text-xs text-sky-800 font-semibold mt-1 line-clamp-1">
                             {svc.tagline}
                           </p>
                         </div>
 
                         {/* Description */}
-                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-5 font-normal line-clamp-3 relative z-10">
+                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-normal line-clamp-3 relative z-10">
                           {svc.description}
                         </p>
 
                         {/* Key Features List */}
-                        <div className="space-y-2 mb-6 relative z-10">
+                        <div className="space-y-2 mb-4 relative z-10">
                           {svc.features.slice(0, 3).map((feat, fIdx) => (
                             <div key={fIdx} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
                               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
@@ -780,10 +835,18 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
                             </div>
                           ))}
                         </div>
+
+                        {/* Technology Strip */}
+                        <div className="pt-3 pb-2 border-t border-slate-100 relative z-10 mb-2">
+                          <div className="text-[11px] font-mono flex items-center gap-1.5 truncate">
+                            <span className="text-slate-400 font-medium shrink-0">Powered by:</span>
+                            <span className="text-slate-700 font-bold truncate">{getServiceTechStack(svc.id)}</span>
+                          </div>
+                        </div>
                       </div>
 
                       {/* Card Footer: Ideal For & Navigation Button */}
-                      <div className="pt-4 border-t border-slate-100 relative z-10 flex items-center justify-between gap-2">
+                      <div className="pt-3 border-t border-slate-100 relative z-10 flex items-center justify-between gap-2">
                         <span className="text-[11px] text-slate-500 font-mono truncate max-w-[140px]">
                           {svc.idealFor.split(",")[0]}
                         </span>
@@ -793,7 +856,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
                           onClick={(e) => e.stopPropagation()}
                           className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-50 hover:bg-sky-50 text-xs font-bold text-slate-800 hover:text-sky-800 border border-slate-200 hover:border-sky-300 group-hover:border-sky-300 transition-all shadow-xs group-hover:translate-x-0.5"
                         >
-                          <span>Specs & Stack</span>
+                          <span>Explore Solutions</span>
                           <ArrowRight className="w-3.5 h-3.5 text-sky-600" />
                         </Link>
                       </div>

@@ -82,8 +82,8 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
     headerStats: [
       {
         label: "Architecture Uptime",
-        value: "99.999%",
-        detail: "Enterprise SLA Availability",
+        value: "99.9%+",
+        detail: "High Availability Infrastructure",
         color: "text-emerald-400"
       },
       {
@@ -303,7 +303,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       metrics: [
         { label: "MRR Growth", val: "+320%" },
         { label: "Query Latency", val: "18ms" },
-        { label: "System Availability", val: "99.999%" }
+        { label: "System Availability", val: "99.9%+" }
       ]
     },
     pricingTiers: [
@@ -345,7 +345,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
           "Custom Go microservices + event streaming",
           "SAML 2.0 / Okta enterprise identity SSO",
           "Terraform multi-cloud infrastructure",
-          "99.999% contractual uptime SLA",
+          "99.9%+ contractual uptime SLA",
           "Dedicated senior engineering squad"
         ]
       }
@@ -685,7 +685,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       {
         label: "Context Accuracy",
         value: "99.4%",
-        detail: "Zero Hallucination Guardrails",
+        detail: "Citation-Based Guardrails",
         color: "text-cyan-400"
       },
       {
@@ -1566,13 +1566,13 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
     badge: "HIGH-AVAILABILITY CLOUD // ZERO-DOWNTIME SCALE",
     title: "Cloud DevOps & Kubernetes Infrastructure &",
     titleHighlight: "Site Reliability Engineering",
-    tagline: "Terraform IaC, Kubernetes (EKS/GKE) Auto-scaling, Blue/Green CI/CD, and 99.999% SLA",
+    tagline: "Terraform IaC, Kubernetes (EKS/GKE) Auto-scaling, Blue/Green CI/CD, and 99.9%+ SLA",
     metaDescription:
       "Enterprise Cloud DevOps & SRE: automated Terraform infrastructure, Kubernetes container auto-scaling, zero-downtime CI/CD deployment pipelines, and 24/7 telemetry monitoring.",
     headerStats: [
       {
         label: "Availability SLA",
-        value: "99.999%",
+        value: "99.9%+",
         detail: "Under 5 Mins Downtime/Year",
         color: "text-emerald-400"
       },
@@ -1791,7 +1791,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       solution:
         "Migrated monolith to AWS EKS with Kubernetes HPA, Graviton ARM instances, and Cloudflare edge caching.",
       metrics: [
-        { label: "Uptime Across 18 Months", val: "99.999%" },
+        { label: "Uptime Across 18 Months", val: "99.9%+" },
         { label: "AWS Bill Reduction", val: "-42%" },
         { label: "Deploy Time", val: "3.5 Mins" }
       ]
@@ -1835,7 +1835,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
           "Multi-region active-active or active-passive failover",
           "HashiCorp Vault enterprise secret management",
           "FinOps compute audit cutting cloud spend by 30%+",
-          "Contractual 99.999% uptime SLA guarantee",
+          "Contractual 99.9%+ uptime SLA guarantee",
           "Dedicated senior cloud architect access"
         ]
       }
@@ -2136,7 +2136,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
           "Automated insurance EDI 837 claim settlement pipelines",
           "Custom ERP integration for centralized pharmaceutical procurement",
           "Dedicated on-premise or private cloud multi-region deployment",
-          "24/7 Priority SRE support with 99.999% uptime guarantee"
+          "24/7 Priority SRE support with 99.9%+ uptime guarantee"
         ]
       }
     ],
@@ -2487,8 +2487,8 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       },
       {
         label: "Transaction Concurrency",
-        value: "25,000 TPS",
-        detail: "High-Throughput Go/Rust Microservices",
+        value: "High Concurrency",
+        detail: "Target Architecture Benchmark (<50ms)",
         color: "text-amber-600"
       }
     ],
@@ -2623,7 +2623,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       },
       {
         category: "Compliance & Security",
-        items: ["PCI-DSS Level 1 Hardening", "SOC-2 Type II", "mTLS 1.3", "Hardware Security Modules (HSM)"]
+        items: ["PCI-DSS–Aware Payment Architecture Hardening", "SOC 2–Aligned", "mTLS 1.3", "Hardware Security Modules (HSM)"]
       }
     ],
     sprintPhases: [
@@ -2672,7 +2672,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       {
         title: "Security Hardening & VAPT Audit Dossier",
         format: "Security Assessment Report",
-        desc: "Penetration test report, threat modeling diagrams, and PCI-DSS compliance verification."
+        desc: "Penetration test report, threat modeling diagrams, and PCI-DSS–aware workflows verification."
       },
       {
         title: "Disaster Recovery & Key Management Runbooks",
@@ -2735,7 +2735,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
           "e-NACH / recurring auto-debit collection and late fee dunning",
           "Multi-currency cross-border remittance engine with FX rates",
           "Direct core banking integration (ISO 20022 / Open Banking APIs)",
-          "Multi-region active-active cloud deployment with 99.999% uptime SLA",
+          "Multi-region active-active cloud deployment with 99.9%+ uptime SLA",
           "Dedicated fintech architect and compliance auditing support"
         ]
       }
@@ -3635,7 +3635,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
           "Advanced credit-based semester grading and automated transcript validation",
           "High-capacity live streaming infrastructure for 10,000+ concurrent students",
           "University research paper repository and plagiarism detection pipeline",
-          "Dedicated high-availability cloud cluster with 99.999% uptime SLA",
+          "Dedicated high-availability cloud cluster with 99.9%+ uptime SLA",
           "Custom legacy database migration and on-site faculty training"
         ]
       }
@@ -3671,7 +3671,7 @@ servicesData.forEach((svc: ServiceItem) => {
       tagline: svc.tagline,
       metaDescription: svc.description,
       headerStats: [
-        { label: "Architecture SLA", value: "99.999%", detail: "High-Availability Guarantee", color: "text-blue-400" },
+        { label: "Architecture SLA", value: "99.9%+", detail: "High-Availability Guarantee", color: "text-blue-400" },
         { label: "Deployment Velocity", value: "4-8 Wks", detail: "Sprint Delivery Cadence", color: "text-emerald-400" },
         { label: "Concurrency Scale", value: "100k+", detail: "Simultaneous Active Sessions", color: "text-cyan-400" },
         { label: "Client Satisfaction", value: "4.9/5", detail: "Verified Clutch Score", color: "text-amber-400" }
@@ -3783,7 +3783,7 @@ servicesData.forEach((svc: ServiceItem) => {
         metrics: [
           { label: "Latency Reduction", val: "85%" },
           { label: "Operational ROI", val: "+320%" },
-          { label: "Uptime Verified", val: "99.999%" }
+          { label: "Uptime Verified", val: "99.9%+" }
         ]
       },
       pricingTiers: [
@@ -3812,7 +3812,7 @@ servicesData.forEach((svc: ServiceItem) => {
             "Dedicated high-throughput database read replicas",
             "Native iOS & Android mobile applications",
             "Custom ERP/CRM legacy database synchronization",
-            "SOC-2 Type II, HIPAA, and ISO 27001 audit support",
+            "SOC 2–Aligned, HIPAA, and ISO 27001 audit support",
             "1-year 24/7 dedicated engineering SLA support"
           ]
         }

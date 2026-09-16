@@ -170,7 +170,7 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
       {
         "icon": null,
         "title": "Security & SLAs",
-        "desc": "OWASP compliance, SOC2 adherence, and uptime guarantees."
+        "desc": "OWASP compliance, SOC 2 alignment, and uptime guarantees."
       },
       {
         "icon": null,
@@ -311,7 +311,7 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
         "icon": null,
         "challenge": "Handling 25,000 transactions/second with zero race conditions and strict double-entry ledger verification.",
         "solution": "Engineered Go microservices backed by PostgreSQL serializable isolation and Redis distributed redlocks.",
-        "metrics": "99.999% ledger accuracy, <18ms transaction finality."
+        "metrics": "Zero-drift double-entry ledger, sub-50ms transaction latency."
       },
       {
         "slug": "neurochat-ai",
@@ -320,7 +320,7 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
         "icon": null,
         "challenge": "HIPAA-compliant private vector search across 500k+ clinical research papers with zero data leakage.",
         "solution": "Isolated self-hosted Qdrant vector cluster, encrypted embedding pipelines, and strict role-based access control (RBAC).",
-        "metrics": "94.2% diagnostic retrieval relevance, 100% HIPAA compliant."
+        "metrics": "94.2% diagnostic retrieval relevance, HIPAA-Ready Architecture architecture."
       },
       {
         "slug": "supply-chain-telemetry",
@@ -393,7 +393,7 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
       {
         "name": "HealthTech & Telehealth",
         "stat": "180k+",
-        "label": "Active HIPAA Consultations",
+        "label": "Patient Consultations & Telehealth",
         "icon": null
       },
       {
@@ -434,7 +434,7 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
         "icon": null
       },
       {
-        "title": "99.999% Verified Uptime",
+        "title": "99.9%+ Target Availability",
         "desc": "Resilient automated failover configurations eliminate revenue loss from unexpected system outages.",
         "icon": null
       }
@@ -677,8 +677,8 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
         "description": "Engineered from the ground up to comply with the most stringent global healthcare, fintech, and data sovereignty compliance mandates.",
         "points": [
           "HIPAA & ABDM Health ID compliance ready",
-          "PCI-DSS Level 1 tokenized payment gateways",
-          "ISO 27001 Information Security Management",
+          "PCI-DSS–aware tokenized payment gateways",
+          "ISO 27001–Aligned Information Security Controls",
           "GDPR & CCPA strict right-to-be-forgotten"
         ]
       },
@@ -715,9 +715,9 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
         "badge": "Autonomous Execution"
       },
       {
-        "title": "Zero-Hallucination Guardrails",
+        "title": "Grounded AI & Hallucination Mitigation",
         "desc": "Multi-layered citation verification and strict prompt guardrails ensuring AI responses are grounded strictly in your proprietary documentation.",
-        "badge": "100% Grounded"
+        "badge": "Citation-Backed"
       },
       {
         "title": "Fine-Tuning & Open-Source LLMs",
@@ -823,16 +823,16 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
     },
     "items": [
       {
-        "name": "MVP Launchpad",
+        "name": "MVP Discovery & Build",
         "cadence": "3-4 Weeks",
         "price": "From $2,800",
-        "target": "Early-Stage Startups & Validations",
+        "target": "Early-Stage Startups & Core Flow Validations",
         "features": [
-          "Full-stack Next.js or React Native build",
-          "Authentication & basic database models",
+          "Scoped core feature build (1-2 primary user journeys)",
+          "Full-stack Next.js web app or React Native MVP",
+          "Authentication, relational database & API models",
           "Stripe or Razorpay payment setup",
-          "Cloud deployment on Vercel / Supabase",
-          "100% intellectual property transfer"
+          "Cloud deployment & 100% source code ownership"
         ],
         "highlight": false
       },
@@ -859,7 +859,7 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
           "Multi-cloud Terraform (AWS, GCP, Cloudflare)",
           "Zero-trust security & SOC2 audit readiness",
           "Dedicated senior engineering pod with daily Slack",
-          "99.999% uptime guarantee with 24/7 telemetry",
+          "99.9%+ high-availability cloud architecture with 24/7 telemetry",
           "Direct architect phone & emergency line"
         ],
         "highlight": false
@@ -1232,7 +1232,7 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
         "company": "FinPulse Global",
         "before": "Fragile monolithic payment code with frequent cart drop-offs.",
         "after": "Fault-tolerant Next.js & Stripe multi-currency checkout engine.",
-        "stat": "99.999% SLA",
+        "stat": "High Availability SLA",
         "statDetail": "$12M+ processed in first 90 days"
       }
     ]

@@ -17,16 +17,16 @@ const DEFAULT_HEADING = {
 
 const DEFAULT_ITEMS = [
     {
-      name: "MVP Launchpad",
+      name: "MVP Discovery & Build",
       cadence: "3-4 Weeks",
       price: "From $2,800",
-      target: "Early-Stage Startups & Validations",
+      target: "Early-Stage Startups & Core Flow Validations",
       features: [
-        "Full-stack Next.js or React Native build",
-        "Authentication & basic database models",
+        "Scoped core feature build (1-2 primary user journeys)",
+        "Full-stack Next.js web app or React Native MVP",
+        "Authentication, relational database & API models",
         "Stripe or Razorpay payment setup",
-        "Cloud deployment on Vercel / Supabase",
-        "100% intellectual property transfer"
+        "Cloud deployment & 100% source code ownership"
       ],
       highlight: false
     },
@@ -128,7 +128,7 @@ export default function ServicesPricingTiers() {
                       : "bg-slate-900 hover:bg-sky-600 text-white border border-slate-900 hover:border-sky-600 shadow-sm"
                   }`}
                 >
-                  <span>Start a Project</span>
+                  <span>Book a Consultation</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

@@ -79,6 +79,11 @@ export const SEO_MANAGED_ROUTES = [
   { path: "/faqs", label: "FAQs" },
   { path: "/contact", label: "Contact" },
   { path: "/security", label: "Security" },
+  { path: "/privacy", label: "Privacy Policy" },
+  { path: "/terms", label: "Terms of Service" },
+  { path: "/cookies", label: "Cookie Policy" },
+  { path: "/nda", label: "NDA & IP Ownership" },
+  { path: "/refund-policy", label: "Refund Policy" },
 ] as const;
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
@@ -88,7 +93,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     "Divanex | Enterprise Software Engineering, Custom SaaS & AI Solutions",
   titleTemplate: "%s | Divanex",
   defaultDescription:
-    "Divanex delivers custom software, AI & SaaS solutions: scalable web platforms, autonomous AI agents, cross-platform mobile apps, cloud DevOps, and digital growth systems built for scaling businesses.",
+    "Divanex delivers specialized software engineering across 5 core disciplines: Custom SaaS, AI & Automation, Web & Mobile Apps, Enterprise Business Software, and Healthcare / ERP / Marketplace Systems with 100% code ownership.",
   keywords: [
     "Divanex",
     "Enterprise Software Engineering",
@@ -140,7 +145,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     "/services": {
       title: "Software Engineering & Digital Solutions Services",
       description:
-        "Explore 22+ enterprise software services: SaaS platforms, AI agents, mobile apps, ERP, healthcare HMIS and fintech systems with milestone delivery and published SLAs.",
+        "Explore 24 engineering capabilities: SaaS platforms, AI agents, mobile apps, ERP, healthcare HMIS and fintech systems with milestone delivery and dedicated engineering.",
     },
     "/why-us": {
       title: "Why Choose Divanex | 100% Code Ownership & Senior Engineering Pods",
@@ -186,6 +191,31 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
       title: "Enterprise Security Posture & Compliance | SOC 2 & Zero Trust",
       description:
         "Zero-trust network architecture, OWASP Top 10 automated CI/CD defenses, SOC 2 Type II, HIPAA, ISO 27001 readiness, and real-time threat telemetry.",
+    },
+    "/privacy": {
+      title: "Privacy Policy | Enterprise Data Protection & Zero Monetization",
+      description:
+        "Clear documentation of Divanex's data privacy commitments: zero sale of client data, AES-256 encryption, strict Row-Level Security, and GDPR/CCPA compliance.",
+    },
+    "/terms": {
+      title: "Terms of Service | Client Engineering Engagement Agreement",
+      description:
+        "Client service agreement, milestone deliverable framework, 100% intellectual property transfer, and warranty hypercare terms.",
+    },
+    "/cookies": {
+      title: "Cookie Policy | Essential Storage & Privacy Telemetry",
+      description:
+        "Transparent disclosure of essential session storage and privacy-focused performance telemetry with zero third-party cross-site advertising trackers.",
+    },
+    "/nda": {
+      title: "NDA & Code Ownership Guarantee | 100% IP Assignment",
+      description:
+        "Bilateral NDA protection, Day-1 Git organization transfer, direct cloud infrastructure accounts, and comprehensive intellectual property handover.",
+    },
+    "/refund-policy": {
+      title: "Refund, Cancellation & Milestone Policy | Agile Governance",
+      description:
+        "Clear sprint milestone acceptance criteria, deposit terms, phase exit protocols, and 60-day post-launch warranty hypercare.",
     },
   },
 };

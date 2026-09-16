@@ -235,7 +235,7 @@ export function generateAiBotResponse(
   ) {
     if (isHinglishOrHindi) {
       return {
-        text: `🏥 Healthcare aur Hospital Management Systems me hum 100% HIPAA aur ABDM compliant software provide karte hain, ${firstName}.\n\nIsme OPD/IPD management, Doctor appointment scheduling, Lab diagnostics PACS/DICOM integration, Pharmacy billing aur Patient mobile apps shamil hain.\n\nAapko clinic ke liye chahiye ya multi-specialty hospital ke liye?`,
+        text: `🏥 Healthcare aur Hospital Management Systems me hum HIPAA aur ABDM–ready architecture software provide karte hain, ${firstName}.\n\nIsme OPD/IPD management, Doctor appointment scheduling, Lab diagnostics PACS/DICOM integration, Pharmacy billing aur Patient mobile apps shamil hain.\n\nAapko clinic ke liye chahiye ya multi-specialty hospital ke liye?`,
         quickReplies: [
           { id: "qr_hmis_demo_hi", label: "🖥️ Live HMIS Demo Dekhein", payload: "Mujhe hospital management system ka live demo dekhna hai." },
           { id: "qr_hmis_cost_hi", label: "📊 Healthcare Project Estimate", payload: "Hospital HMIS software ka kitna kharcha aayega?" },
@@ -245,7 +245,7 @@ export function generateAiBotResponse(
     }
 
     return {
-      text: `🏥 We engineer enterprise-grade healthcare ecosystems, ${firstName}!\n\nOur Hospital & Healthcare Management suite is custom-tailored for clinics and hospital networks with OPD/IPD flows, OT/ICU bed occupancy HUD, Doctor appointments, DICOM/PACS lab diagnostics, and 100% HIPAA & ABDM compliance.\n\nAre you looking to build software for a multi-specialty hospital, diagnostic chain, or a telehealth startup?`,
+      text: `🏥 We engineer enterprise-grade healthcare ecosystems, ${firstName}!\n\nOur Hospital & Healthcare Management suite is custom-tailored for clinics and hospital networks with OPD/IPD flows, OT/ICU bed occupancy HUD, Doctor appointments, DICOM/PACS lab diagnostics, and HIPAA & ABDM–ready architecture.\n\nAre you looking to build software for a multi-specialty hospital, diagnostic chain, or a telehealth startup?`,
       quickReplies: [
         { id: "qr_hmis_demo_en", label: "🖥️ Request Live HMIS Demo", payload: "I would like to see a live HMIS demo." },
         { id: "qr_hmis_cost_en", label: "📊 Healthcare Project Estimate", payload: "What is the estimated budget for a hospital management system?" },
@@ -310,7 +310,7 @@ export function generateAiBotResponse(
     }
 
     return {
-      text: `🤖 We engineer autonomous AI agents and private enterprise RAG systems, ${firstName}!\n\nInstead of simple wrappers, we build multi-actor agent workflows (using LangGraph, CrewAI, and vLLM) that can reason, query private databases, execute API tools, and automate real operational tasks with strict anti-hallucination guardrails.\n\nWhat specific business process or workflow are you aiming to automate with AI?`,
+      text: `🤖 We engineer autonomous AI agents and private enterprise RAG systems, ${firstName}!\n\nInstead of simple wrappers, we build multi-actor agent workflows (using LangGraph, CrewAI, and vLLM) that can reason, query private databases, execute API tools, and automate real operational tasks with grounded citation-based guardrails.\n\nWhat specific business process or workflow are you aiming to automate with AI?`,
       quickReplies: [
         { id: "qr_ai_agent_en", label: "🚀 Custom Autonomous AI Agent", payload: "I want to build an autonomous agent for internal operations." },
         { id: "qr_ai_rag_en", label: "📚 Private Enterprise RAG", payload: "How does private company document RAG work?" },

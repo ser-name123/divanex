@@ -7,7 +7,7 @@ export default function PartnerTicker() {
   const partners = content.partners ?? [];
 
   return (
-    <section className="relative py-8 overflow-hidden bg-gradient-to-r from-[#f8fafc] via-[#f1f5f9] to-[#f8fafc] border-y border-slate-200/90 shadow-inner">
+    <section className="relative py-5 sm:py-6 overflow-hidden bg-gradient-to-r from-[#f8fafc] via-[#f1f5f9] to-[#f8fafc] border-y border-slate-200/90 shadow-inner">
       {/* Background Ambient Mesh Light Glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-32 bg-[#0f7670]/8 rounded-full blur-3xl" />
@@ -22,7 +22,7 @@ export default function PartnerTicker() {
       </div>
 
       {/* Header Eyebrow */}
-      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 mb-5 text-center relative z-10">
+      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 mb-4 text-center relative z-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur-sm border border-slate-200/90 shadow-2xs">
           <span className="w-1.5 h-1.5 rounded-full bg-[#5c9556] animate-pulse" />
           <p className="text-[11px] uppercase tracking-[0.2em] font-mono font-bold text-slate-600">

@@ -98,7 +98,7 @@ export default function TechDetailPageClient({ tech }: TechDetailPageClientProps
                 href="/contact"
                 className="btn-futuristic-primary !py-3 !px-6 text-xs sm:text-sm font-bold flex items-center gap-2 !rounded-xl shadow-md shadow-sky-600/20"
               >
-                <span>Start a Project</span>
+                <span>Book a Consultation</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 

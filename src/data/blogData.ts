@@ -54,7 +54,7 @@ export const initialBlogPosts: BlogPost[] = [
     category: "Food Delivery & Logistics",
     author: {
       name: "Rajan S.",
-      role: "Lead Solutions Architect, Divanex",
+      role: "Lead Systems Architect, Divanex",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
     },
     publishedAt: "2026-09-14",
@@ -143,8 +143,8 @@ Continuously polling GPS on mobile devices burns rider batteries in under 4 hour
     coverImage: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=1200&q=80",
     category: "PropTech & SaaS",
     author: {
-      name: "Vikram Malhotra",
-      role: "Principal Systems Engineer, Divanex",
+      name: "Bharat S.",
+      role: "Principal Solutions Architect, Divanex",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
     },
     publishedAt: "2026-09-10",
@@ -220,8 +220,8 @@ By integrating UPI 2.0 Recurring Mandates and payment webhooks, Our PG automated
     coverImage: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1200&q=80",
     category: "E-Commerce & Retail",
     author: {
-      name: "Pooja Sharma",
-      role: "Head of Digital Commerce, Divanex",
+      name: "Divanex Digital Commerce Pod",
+      role: "E-Commerce & Cloud Architecture, Divanex",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80"
     },
     publishedAt: "2026-09-06",
@@ -273,8 +273,8 @@ During festival flash sales, 500 customers might attempt to buy the last 10 unit
     coverImage: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=1200&q=80",
     category: "IoT & Smart Mobility",
     author: {
-      name: "Vikram Malhotra",
-      role: "Principal Systems Engineer, Divanex",
+      name: "Bharat S.",
+      role: "Principal Solutions Architect, Divanex",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
     },
     publishedAt: "2026-09-01",
@@ -346,7 +346,7 @@ Drivers scan a QR code via the Evtor mobile app or tap their RFID card. The back
     category: "Enterprise ERP",
     author: {
       name: "Rajan S.",
-      role: "Lead Solutions Architect, Divanex",
+      role: "Lead Systems Architect, Divanex",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
     },
     publishedAt: "2026-08-27",
@@ -398,8 +398,8 @@ Machine uptime status is collected via industrial IoT edge gateways, alerting sh
     coverImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
     category: "AI & Autonomous Agents",
     author: {
-      name: "Dr. Alistair Vance",
-      role: "Chief AI Architect, Divanex",
+      name: "Bharat S.",
+      role: "Principal Solutions Architect, Divanex",
       avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=200&q=80"
     },
     publishedAt: "2026-08-22",
@@ -449,8 +449,8 @@ If user sentiment drops below critical threshold, or if financial action exceeds
     coverImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
     category: "Healthcare HMIS",
     author: {
-      name: "Pooja Sharma",
-      role: "HealthTech Compliance Lead, Divanex",
+      name: "Divanex HealthTech Pod",
+      role: "HealthTech Systems & Compliance, Divanex",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80"
     },
     publishedAt: "2026-08-15",
@@ -496,8 +496,8 @@ By converting 500MB+ CT and MRI imaging files into edge-tiled WebP fragments, ra
     coverImage: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&q=80",
     category: "Fintech & Payments",
     author: {
-      name: "Sameer Mehta",
-      role: "Principal FinTech Engineer, Divanex",
+      name: "Rajan S.",
+      role: "Lead Systems Architect, Divanex",
       avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
     },
     publishedAt: "2026-08-09",
@@ -540,8 +540,8 @@ Our Go payment orchestration engine executes atomic multi-party ledger transfers
     coverImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
     category: "Cloud & DevOps",
     author: {
-      name: "Rajan S.",
-      role: "Lead Solutions Architect, Divanex",
+      name: "Divanex Cloud & DevOps Pod",
+      role: "Infrastructure & Site Reliability, Divanex",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
     },
     publishedAt: "2026-07-30",
@@ -582,7 +582,7 @@ Caching semi-dynamic REST API endpoints (e.g. homepage banners, category trees, 
     coverImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80",
     category: "Mobile Engineering",
     author: {
-      name: "Sameer Mehta",
+      name: "Bharat S.",
       role: "Principal Mobile Architect, Divanex",
       avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
     },

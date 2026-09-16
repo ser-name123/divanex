@@ -3,42 +3,27 @@
 import Link from "next/link";
 import { usePageContent } from "@/context/SiteContentContext";
 import { Icon } from "@/lib/iconRegistry";
-import { ShieldCheck, CheckCircle2, XCircle, ArrowRight, Award, Lock, Users, Zap, Check, Sparkles, Layers } from "lucide-react";
+import { ShieldCheck, CheckCircle2, ArrowRight, Sparkles, Layers } from "lucide-react";
 import RichText from "@/components/RichText";
 
 const QUICK_PROOF_POINTS = [
-  "10+ Years Engineering Experience",
-  "100% Source Code Ownership",
-  "Dedicated Development Team",
-  "Weekly Staging & Demos",
-  "NDA & IP Protection",
-  "Post-Launch Support",
-  "Web + Mobile + AI Under One Team"
+  "Senior Engineering Team",
+  "Transparent Milestones",
+  "Full Source-Code Ownership",
+  "Modern Architecture",
+  "Direct Communication",
+  "Post-Launch Support"
 ];
 
 export default function WhyChooseUs() {
-  // Admin-managed: the pillars, the comparison table and every heading here
-  // were literals, so a positioning change meant editing this component.
   const content = usePageContent();
   const heading = content.whyUsHeading || {
-    eyebrow: "REAL PROOF // WHY COMPANIES CHOOSE DIVANEX",
-    title: "Why Companies Choose",
+    eyebrow: "WHY CLIENTS WORK WITH DIVANEX",
+    title: "Why Clients Work With",
     highlight: "Divanex",
-    description: "Real engineering experience, verifiable weekly milestones, and 100% intellectual property protection—without agency bloat or junior handoffs."
+    description: "Senior engineering talent, transparent sprint milestones, 100% source-code ownership, modern architecture, direct communication, and dedicated post-launch support."
   };
   const pillars = content.whyUsPillars ?? [];
-  const comparison = content.whyUsComparison ?? [];
-  const comparisonHeading = content.comparisonHeading || {
-    eyebrow: "MARKET BENCHMARK AUDIT",
-    title: "Us, an Agency, or a Freelancer",
-    description: "All three can work. Here is where each one tends to struggle, so you can judge which trade-off suits your project."
-  };
-  const columns = content.comparisonColumns || {
-    feature: "What you are comparing",
-    divanex: "Working with us",
-    traditional: "A traditional agency",
-    freelancers: "A solo freelancer"
-  };
 
   return (
     <section id="why-us" className="relative py-12 lg:py-16 bg-white overflow-hidden">
@@ -61,7 +46,7 @@ export default function WhyChooseUs() {
           </p>
         </div>
 
-        {/* 7-Point Real Proof Checklist Banner */}
+        {/* 6-Point Professional Proof Checklist Banner */}
         <div className="reveal-init mt-8 sm:mt-10 rounded-2xl bg-gradient-to-r from-sky-50/70 via-white to-emerald-50/60 border border-sky-200/90 p-4 sm:p-5 shadow-xs">
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 text-xs sm:text-[13px] font-bold text-slate-800 font-mono">
             {QUICK_PROOF_POINTS.map((pt, i) => (
@@ -73,12 +58,12 @@ export default function WhyChooseUs() {
           </div>
         </div>
 
-        {/* 7 Concrete Pillars Grid */}
-        <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-7">
+        {/* 6 Concrete Client-First Pillars Grid (2x3 on desktop) */}
+        <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
           {pillars.map((pillar, idx) => (
             <div
               key={pillar.id}
-              className={`reveal-init reveal-delay-${(idx % 4) + 1} bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 hover:border-sky-300 flex flex-col justify-between space-y-5 relative overflow-hidden group shadow-sm hover:shadow-xl hover:shadow-sky-950/5 transition-all duration-300`}
+              className={`reveal-init reveal-delay-${(idx % 3) + 1} bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 hover:border-sky-300 flex flex-col justify-between space-y-5 relative overflow-hidden group shadow-sm hover:shadow-xl hover:shadow-sky-950/5 transition-all duration-300`}
             >
               {/* Subtle top accent bar */}
               <div
@@ -120,77 +105,35 @@ export default function WhyChooseUs() {
           ))}
         </div>
 
-        {/* ======================================================== */}
-        {/* HIGH-TECH COMPARISON MATRIX - LIGHT THEME */}
-        {/* ======================================================== */}
-        <div className="reveal-init reveal-delay-2 mt-12 sm:mt-14 rounded-3xl border border-slate-200 overflow-hidden shadow-sm bg-white">
-          <div className="p-6 sm:p-8 border-b border-slate-200 bg-slate-50/70 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                <span className="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-800">
-                  {comparisonHeading.eyebrow}
-                </span>
-              </div>
-              <h3 className="text-xl sm:text-2xl font-semibold text-slate-900">
-                {comparisonHeading.title}
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1 font-normal">
-                {comparisonHeading.description}
-              </p>
-            </div>
-
-            <Link
-              href="/contact"
-              className="btn-futuristic-primary !py-2.5 !px-5 text-xs sm:text-sm shrink-0 font-sans font-semibold !rounded-xl"
-            >
-              <span>Start a Project</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+        {/* Bottom Professional Action Bar */}
+        <div className="reveal-init mt-10 rounded-2xl p-5 sm:p-6 bg-slate-50/80 border border-slate-200/90 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="space-y-1 text-center sm:text-left">
+            <h4 className="text-sm sm:text-base font-bold text-slate-900 flex items-center justify-center sm:justify-start gap-2">
+              <Sparkles className="w-4 h-4 text-[#0f7670]" />
+              <span>Senior Engineers • Direct Access • Zero Middleman Overhead</span>
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-600">
+              Every build is led by full-stack architects with weekly staging demos and full repository access.
+            </p>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs sm:text-sm border-collapse min-w-[700px]">
-              <thead className="bg-slate-50 text-slate-600 uppercase tracking-wider text-[11px] border-b border-slate-200 font-mono">
-                <tr>
-                  <th className="py-4 px-6 font-semibold w-[22%]">{columns.feature}</th>
-                  <th className="py-4 px-6 font-semibold text-sky-900 bg-sky-50/80 border-x border-sky-200/80 w-[32%]">
-                    {columns.divanex}
-                  </th>
-                  <th className="py-4 px-6 font-medium text-slate-600 w-[23%]">{columns.traditional}</th>
-                  <th className="py-4 px-6 font-medium text-slate-600 w-[23%]">{columns.freelancers}</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-200/80 text-slate-700">
-                {comparison.map((row, index) => (
-                  <tr key={index} className="hover:bg-slate-50/60 transition-colors">
-                    <td className="py-4 px-6 font-semibold text-slate-900 font-sans">{row.feature}</td>
-                    <td className="py-4 px-6 font-medium text-sky-950 bg-sky-50/40 border-x border-sky-200/80 font-sans">
-                      <div className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                        <RichText inline value={row.divanex} />
-                      </div>
-                    </td>
-                    <td className="py-4 px-6 text-slate-600 font-sans font-normal">
-                      <div className="flex items-start gap-2.5">
-                        <XCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
-                        <RichText inline value={row.traditional} />
-                      </div>
-                    </td>
-                    <td className="py-4 px-6 text-slate-600 font-sans font-normal">
-                      <div className="flex items-start gap-2.5">
-                        <XCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                        <RichText inline value={row.freelancers} />
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="flex items-center gap-3 shrink-0">
+            <Link
+              href="/contact"
+              className="btn-futuristic-primary !py-2.5 !px-5 text-xs sm:text-sm font-semibold !rounded-xl"
+            >
+              <span>Book a Consultation</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/portfolio"
+              className="px-4 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-xs sm:text-sm font-semibold border border-slate-200 transition-all cursor-pointer"
+            >
+              View Case Studies
+            </Link>
           </div>
         </div>
       </div>
     </section>
   );
 }
-
