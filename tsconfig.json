@@ -68,9 +68,7 @@
     ".buildv5/types/**/*.ts",
     ".buildv5/dev/types/**/*.ts",
     ".buildv6/types/**/*.ts",
-    ".buildv6/dev/types/**/*.ts",
-    ".next-final/types/**/*.ts",
-    ".next-final/dev/types/**/*.ts"
+    ".buildv6/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

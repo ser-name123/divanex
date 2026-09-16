@@ -42,47 +42,47 @@ export default function HeroSection({ onOpenConsultation: _onOpenConsultation }:
   const capabilities = [
     {
       id: "ai",
-      title: "Autonomous AI & Neural Fabric",
-      subtitle: "Custom AI Agents, RAG Pipelines & Automated Workflows",
+      title: "AI That Does Actual Work",
+      subtitle: "Agents that read your documents, answer customers and file the result",
       icon: Bot,
       color: "from-teal-500 to-emerald-600",
       accent: "#0f7670",
-      badge: "AI 4.0 READY",
-      stats: "99.8% Precision • Sub-50ms TTFT",
-      techs: ["OpenAI GPT-4o", "Claude 3.5", "LangChain", "FastAPI"],
+      badge: "AI & AUTOMATION",
+      stats: "Answers in under a second • Runs on your data",
+      techs: ["DeepSeek", "GPT-4o", "FastAPI", "LangChain"],
     },
     {
       id: "cloud",
-      title: "High-Scale SaaS & Web Platforms",
-      subtitle: "Multi-Tenant Serverless Engines with Global CDN Edge",
+      title: "SaaS Products Built to Scale",
+      subtitle: "One codebase serving many customers, each one properly walled off",
       icon: Globe2,
       color: "from-sky-500 to-blue-600",
       accent: "#189a91",
-      badge: "ZERO COLD START",
-      stats: "310+ Edge POPs • 99.99% Uptime",
-      techs: ["Next.js 15", "React 19", "PostgreSQL", "Stripe"],
+      badge: "MULTI-TENANT",
+      stats: "Fast from anywhere • Tenant data kept separate",
+      techs: ["Next.js 15", "PostgreSQL RLS", "Docker", "Stripe"],
     },
     {
       id: "mobile",
-      title: "Cross-Platform Mobile Apps",
-      subtitle: "Silky 120 FPS Fluid iOS & Android Apps with Offline Sync",
+      title: "Mobile Apps People Keep Open",
+      subtitle: "One build for iOS and Android that still works without signal",
       icon: Smartphone,
       color: "from-emerald-500 to-teal-600",
       accent: "#5c9556",
-      badge: "PROMOTION NATIVE",
-      stats: "120 FPS • CRDT Offline Sync",
-      techs: ["Flutter", "React Native", "Swift", "SQLite"],
+      badge: "IOS & ANDROID",
+      stats: "Smooth scrolling • Works offline, syncs later",
+      techs: ["React Native", "Flutter", "Swift", "WebSockets"],
     },
     {
       id: "enterprise",
-      title: "Enterprise ERP & Security Vault",
-      subtitle: "Hospital HMIS, Modular ERPs, RBAC & SOC-2 Compliance",
+      title: "Hospital and ERP Systems",
+      subtitle: "Patient records, inventory, billing and ledgers that have to balance",
       icon: ShieldCheck,
       color: "from-blue-600 to-indigo-700",
       accent: "#000838",
-      badge: "BANK-GRADE AES-256",
-      stats: "SOC-2 Type II • HIPAA Verified",
-      techs: ["Microservices", "Docker / K8s", "GraphQL", "Redis"],
+      badge: "REGULATED WORK",
+      stats: "Built to ABDM and HIPAA rules • Audited access",
+      techs: ["Microservices", "PostgreSQL", "Redis", "GraphQL"],
     },
   ];
 
@@ -297,7 +297,7 @@ export default function HeroSection({ onOpenConsultation: _onOpenConsultation }:
 
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#000838] hover:bg-[#0f7670] text-white text-xs font-bold transition-all shadow-sm shrink-0"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-[#0f7670] to-[#5c9556] hover:from-[#0d645f] hover:to-[#4e8149] text-white text-xs font-bold transition-all shadow-md shadow-[#0f7670]/20 hover:shadow-[#0f7670]/30 hover:scale-[1.02] active:scale-[0.98] shrink-0 cursor-pointer"
               >
                 <span>Discuss Project</span>
                 <ArrowRight className="w-3.5 h-3.5" />

@@ -80,15 +80,15 @@ export default function Testimonials({ isHome = false, items }: TestimonialsProp
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-xs font-bold text-sky-800 shadow-xs">
             <MessageSquareQuote className="w-3.5 h-3.5 text-sky-600" />
             <span className="uppercase tracking-wider">
-              {isHome ? "SOCIAL PROOF // 6 FEATURED REVIEWS" : `SOCIAL PROOF // ${testimonialsData.length}+ VERIFIED ENTERPRISE REVIEWS`}
+              {isHome ? "IN THEIR WORDS // SIX REVIEWS" : `IN THEIR WORDS // ${testimonialsData.length}+ REVIEWS`}
             </span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 tracking-tight">
-            Trusted by Founders, CTOs &{" "}
-            <span className="gradient-text font-semibold">Global Product Leaders</span>
+            What It Is Like to{" "}
+            <span className="gradient-text font-semibold">Work With Us</span>
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto font-normal">
-            Verified engineering reviews and measurable business outcomes from CTOs, venture-backed founders, and technical leaders who built and scaled their software systems with Divanex.
+            Founders and technical leads describing how the project actually went — where we were quick, where things got difficult, and what shipped in the end.
           </p>
         </div>
 

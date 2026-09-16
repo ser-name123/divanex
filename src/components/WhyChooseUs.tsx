@@ -10,23 +10,23 @@ export default function WhyChooseUs() {
   // were literals, so a positioning change meant editing this component.
   const content = usePageContent();
   const heading = content.whyUsHeading || {
-    eyebrow: "ADVANTAGE ENGINE // ENTERPRISE ASSURANCE",
-    title: "Engineered for Velocity.",
-    highlight: "Zero Compromise.",
-    description: "Traditional agencies move slow and lock you in. We give you a dedicated high-caliber engineering team with 100% code ownership."
+    eyebrow: "ENGINEERING BENCHMARK // ZERO COMPROMISE",
+    title: "Engineered for High Velocity &",
+    highlight: "Guaranteed Scalability",
+    description: "We eliminate the bottlenecks of slow agency bureaucracies and fragmented freelance contractors. Experience true senior engineering squads delivering clean code with 100% Day-1 IP transfer."
   };
   const pillars = content.whyUsPillars ?? [];
   const comparison = content.whyUsComparison ?? [];
   const comparisonHeading = content.comparisonHeading || {
     eyebrow: "MARKET BENCHMARK AUDIT",
-    title: "The Divanex Standard vs. The Legacy Market",
-    description: "Compare engineering velocity, code ownership, transparency, and architectural quality head-to-head."
+    title: "Us, an Agency, or a Freelancer",
+    description: "All three can work. Here is where each one tends to struggle, so you can judge which trade-off suits your project."
   };
   const columns = content.comparisonColumns || {
-    feature: "Evaluation Vector",
-    divanex: "Divanex (Modern Standard)",
-    traditional: "Traditional Agency",
-    freelancers: "Freelancers / Gig Market"
+    feature: "What you are comparing",
+    divanex: "Working with us",
+    traditional: "A traditional agency",
+    freelancers: "A solo freelancer"
   };
 
   return (

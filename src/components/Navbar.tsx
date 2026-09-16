@@ -140,31 +140,32 @@ export default function Navbar({ onOpenConsultation: _onOpenConsultation }: Navb
               </button>
 
               {/* ------------------------------------------------------------- */}
-              {/* ADVANCED MEGA MENU POPOVER CARD */}
+              {/* ADVANCED MEGA MENU POPOVER CARD (LIGHT THEME) */}
               {/* ------------------------------------------------------------- */}
               {moreDropdownOpen && (
-                <div className="absolute right-0 top-full pt-2 w-[820px] 2xl:w-[860px] animate-fadeIn z-50 pointer-events-auto">
-                  <div className="bg-white/98 backdrop-blur-2xl rounded-3xl border border-slate-200/90 shadow-2xl shadow-slate-900/15 p-6 lg:p-7 relative overflow-hidden space-y-6">
+                <div className="absolute right-0 top-full pt-2.5 w-[920px] 2xl:w-[960px] animate-fadeIn z-50 pointer-events-auto">
+                  <div className="bg-white/98 backdrop-blur-2xl rounded-3xl border border-slate-200/90 shadow-2xl shadow-slate-900/10 p-6 lg:p-7 relative overflow-hidden space-y-5">
+                    {/* Top Gradient Accent Strip */}
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0f7670] via-[#189a91] to-[#5c9556]" />
+                    
                     {/* Ambient Radial Accent */}
-                    <div className="absolute -top-16 -right-16 w-80 h-80 bg-sky-400/10 rounded-full blur-3xl pointer-events-none" />
+                    <div className="absolute -top-16 -right-16 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl pointer-events-none" />
 
                     {/* 3-Column Mega Grid */}
-                    <div className="grid grid-cols-12 gap-6 relative z-10">
+                    <div className="grid grid-cols-12 gap-5 relative z-10 items-stretch">
                       
-                      {/* Mega-menu columns, in the order the admin console lists
-                          them. The hardcoded columns this replaced could not be
-                          renamed or reordered without a deploy. */}
+                      {/* Mega-menu columns (4 Cols each) */}
                       {megaGroups.map((group) => (
-                        <div key={group.id} className="col-span-4 space-y-3">
+                        <div key={group.id} className="col-span-4 space-y-3 flex flex-col">
                           <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-                            <Sparkles className="w-3.5 h-3.5 text-sky-600 shrink-0" />
-                            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#0f7670]" />
+                            <span className="text-[10.5px] font-mono font-bold uppercase tracking-wider text-slate-500">
                               {group.eyebrow ? `${group.eyebrow} // ` : ""}
                               {group.title}
                             </span>
                           </div>
 
-                          <div className="space-y-1.5">
+                          <div className="space-y-2 flex-1">
                             {group.links.map((item) => {
                               const isActive = pathname === item.href;
                               return (
@@ -172,39 +173,37 @@ export default function Navbar({ onOpenConsultation: _onOpenConsultation }: Navb
                                   key={item.id}
                                   href={item.href}
                                   onClick={() => setMoreDropdownOpen(false)}
-                                  className={`flex items-start gap-3 p-2.5 rounded-2xl transition-all border group ${
+                                  className={`flex items-start gap-3 p-3 rounded-2xl transition-all border group ${
                                     isActive
-                                      ? "bg-sky-50 text-sky-900 border-sky-200"
-                                      : "bg-transparent hover:bg-sky-50/70 text-slate-800 border-transparent hover:border-sky-200/80"
+                                      ? "bg-emerald-50/80 text-emerald-950 border-emerald-300/80 shadow-xs"
+                                      : "bg-slate-50/70 hover:bg-white text-slate-800 border-slate-200/70 hover:border-[#0f7670]/40 hover:shadow-md hover:shadow-[#0f7670]/5"
                                   }`}
                                 >
                                   <div
-                                    className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 border ${
+                                    className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 border ${
                                       isActive
-                                        ? "bg-sky-600 border-sky-600 shadow-sm"
-                                        : "bg-sky-50 border-sky-200/80 shadow-2xs group-hover:bg-white group-hover:border-sky-300 group-hover:scale-105"
+                                        ? "bg-[#0f7670] text-white border-[#0f7670] shadow-sm"
+                                        : "bg-white border-slate-200/80 shadow-2xs text-[#0f7670] group-hover:bg-[#0f7670] group-hover:text-white group-hover:border-[#0f7670] group-hover:scale-105"
                                     }`}
                                   >
                                     <Icon
                                       name={item.icon}
-                                      className={`w-5 h-5 shrink-0 transition-colors duration-200 ${
-                                        isActive ? "text-white" : "text-sky-600 group-hover:text-sky-700"
-                                      }`}
+                                      className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:scale-110"
                                     />
                                   </div>
 
                                   <div className="flex-1 min-w-0">
-                                    <div className="flex items-center justify-between gap-1">
-                                      <span className="text-xs font-bold text-slate-900 group-hover:text-sky-700 transition-colors">
+                                    <div className="flex items-center justify-between gap-1 mb-0.5">
+                                      <span className="text-[12.5px] font-bold text-slate-900 group-hover:text-[#0f7670] transition-colors leading-snug">
                                         {item.label}
                                       </span>
                                       {item.badge && (
-                                        <span className="text-[9px] font-mono font-bold uppercase px-1.5 py-0.5 rounded-md bg-slate-100 text-slate-500 border border-slate-200 shrink-0">
+                                        <span className="text-[8.5px] font-mono font-bold uppercase px-1.5 py-0.5 rounded-md bg-emerald-50 text-[#385d36] border border-emerald-200/80 shrink-0 whitespace-nowrap">
                                           {item.badge}
                                         </span>
                                       )}
                                     </div>
-                                    <p className="text-[11px] text-slate-500 leading-tight mt-0.5 font-medium line-clamp-2">
+                                    <p className="text-[11px] text-slate-500 leading-snug font-medium line-clamp-2 group-hover:text-slate-600 transition-colors">
                                       <RichText inline value={item.description} />
                                     </p>
                                   </div>
@@ -215,35 +214,44 @@ export default function Navbar({ onOpenConsultation: _onOpenConsultation }: Navb
                         </div>
                       ))}
 
-                      {/* Column 3: Featured Architecture Advisory Spotlight (4 Cols) */}
-                      <div className="col-span-4 bg-gradient-to-br from-sky-50 via-white to-blue-50/90 border border-sky-200/90 rounded-2xl p-5 flex flex-col justify-between space-y-4 shadow-sm">
-                        <div className="space-y-2.5">
-                          <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-sky-100 text-sky-800 border border-sky-200 inline-flex items-center gap-1 shadow-2xs">
-                            <Sparkles className="w-3 h-3 text-sky-600" />
+                      {/* Column 3: Featured Architecture Advisory Spotlight (LIGHT THEME) */}
+                      <div className="col-span-4 rounded-2xl p-5 bg-gradient-to-br from-[#f0f9f8] via-white to-[#f4faf3] border border-[#0f7670]/25 shadow-sm relative overflow-hidden flex flex-col justify-between space-y-4">
+                        {/* Background Ambient Glow */}
+                        <div className="absolute -top-10 -right-10 w-36 h-36 bg-[#5c9556]/15 rounded-full blur-2xl pointer-events-none" />
+
+                        <div className="space-y-2 relative z-10">
+                          <span className="px-2.5 py-1 rounded-full text-[9.5px] font-mono font-bold bg-[#0f7670]/10 text-[#0f7670] border border-[#0f7670]/20 inline-flex items-center gap-1.5">
+                            <Sparkles className="w-3 h-3 text-[#5c9556]" />
                             <span>SOLUTIONS ARCHITECTURE</span>
                           </span>
 
-                          <h4 className="text-sm font-extrabold text-slate-900 leading-snug">
-                            {header.megaMenuPromoTitle}
+                          <h4 className="text-sm font-extrabold text-[#000838] leading-snug pt-1">
+                            {header.megaMenuPromoTitle || "Book a Free Architecture Review"}
                           </h4>
 
-                          <p className="text-[11px] text-slate-600 leading-relaxed font-medium">
-                            <RichText inline value={header.megaMenuPromoText} />
+                          <p className="text-[11.5px] text-slate-600 leading-relaxed font-normal">
+                            <RichText
+                              inline
+                              value={
+                                header.megaMenuPromoText ||
+                                "45-minute deep-dive with a senior solutions architect. Feasibility, schema, stack & delivery roadmap."
+                              }
+                            />
                           </p>
                         </div>
 
-                        <div className="space-y-2 pt-2 border-t border-sky-100">
-                          <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-emerald-700">
-                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                            <span>2 Review Slots Available Today</span>
+                        <div className="space-y-2.5 pt-2 border-t border-slate-200/80 relative z-10">
+                          <div className="flex items-center gap-1.5 text-[10.5px] font-mono font-bold text-[#385d36]">
+                            <span className="w-2 h-2 rounded-full bg-[#5c9556] animate-pulse" />
+                            <span>2 Review Slots Open Today</span>
                           </div>
 
                           <Link
-                            href={header.megaMenuPromoCtaHref}
+                            href={header.megaMenuPromoCtaHref || "/contact"}
                             onClick={() => setMoreDropdownOpen(false)}
-                            className="btn-futuristic-primary w-full !py-2.5 text-xs font-bold flex items-center justify-center gap-1.5 !rounded-xl shadow-xs"
+                            className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#0f7670] to-[#5c9556] hover:from-[#0d645f] hover:to-[#4e8149] text-white font-bold text-xs font-mono flex items-center justify-center gap-2 shadow-md shadow-[#0f7670]/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                           >
-                            <span>{header.megaMenuPromoCtaLabel}</span>
+                            <span>{header.megaMenuPromoCtaLabel || "Book Free Consultation"}</span>
                             <ArrowRight className="w-3.5 h-3.5" />
                           </Link>
                         </div>
@@ -251,39 +259,31 @@ export default function Navbar({ onOpenConsultation: _onOpenConsultation }: Navb
                     </div>
 
                     {/* Bottom Status & Quick Utilities Strip */}
-                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 relative z-10">
+                    <div className="pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 relative z-10">
                       <div className="flex items-center gap-2 font-mono text-[11px]">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                        <span className="text-slate-700 font-bold">{header.megaMenuStatusText}</span>
-                        <span className="text-slate-400">{`// ${header.megaMenuStatusDetail}`}</span>
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="text-slate-800 font-bold">{header.megaMenuStatusText || "ALL SYSTEMS PRODUCTION READY"}</span>
+                        <span className="text-slate-400">{`// ${header.megaMenuStatusDetail || "99.99% SLA"}`}</span>
                       </div>
 
-                      <div className="flex items-center gap-3.5 text-xs font-bold">
-                        {quickLinks.map((link, index) =>
-                          // The last entry is rendered as the accented button.
-                          index === quickLinks.length - 1 ? (
-                            <Link
-                              key={link.id}
-                              href={link.href}
-                              onClick={() => setMoreDropdownOpen(false)}
-                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white font-bold shadow-xs hover:shadow-md transition-all duration-200 hover:scale-[1.02] cursor-pointer"
-                            >
-                              <Icon name={link.icon} className="w-3.5 h-3.5" />
-                              <span>{link.label}</span>
-                              <ArrowRight className="w-3 h-3" />
-                            </Link>
-                          ) : (
-                            <Link
-                              key={link.id}
-                              href={link.href}
-                              onClick={() => setMoreDropdownOpen(false)}
-                              className="text-slate-600 hover:text-sky-700 transition-colors flex items-center gap-1"
-                            >
-                              <span>{link.label}</span>
-                              <ArrowUpRight className="w-3 h-3 text-slate-400" />
-                            </Link>
-                          )
-                        )}
+                      <div className="flex items-center gap-3 text-xs font-bold">
+                        <Link
+                          href="/contact"
+                          onClick={() => setMoreDropdownOpen(false)}
+                          className="text-slate-600 hover:text-[#0f7670] transition-colors flex items-center gap-1 text-[11.5px] font-mono"
+                        >
+                          <span>WhatsApp Fast Support</span>
+                          <ArrowUpRight className="w-3 h-3 text-slate-400" />
+                        </Link>
+
+                        <Link
+                          href="/portfolio"
+                          onClick={() => setMoreDropdownOpen(false)}
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#0f7670] to-[#5c9556] hover:from-[#0d645f] hover:to-[#4e8149] text-white font-mono text-xs font-bold shadow-xs hover:shadow-md transition-all duration-200 hover:scale-[1.02] cursor-pointer"
+                        >
+                          <span>Case Studies</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </Link>
                       </div>
                     </div>
                   </div>

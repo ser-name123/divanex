@@ -12,32 +12,32 @@ import {
 
 /** What this section was written with. A stored record replaces it field by field. */
 const DEFAULT_HEADING = {
-  "eyebrow": "100% CODE SOVEREIGNTY",
-  "title": "Our Code",
-  "highlight": "Ownership Manifesto",
-  "description": "Many traditional agencies trap clients by hosting apps on their internal servers or using proprietary CMSs. At Divanex, you own 100% of everything we build."
+  "eyebrow": "OWNERSHIP // NO STRINGS",
+  "title": "You Own It,",
+  "highlight": "Not Us",
+  "description": "Plenty of agencies keep the code on their servers, or build on something only they understand. It is a quiet way of making sure you cannot leave. Nothing here works like that."
 };
 
 const DEFAULT_ITEMS = [
     {
       icon: GitBranch,
-      title: "Direct Git Repository Transfer",
-      desc: "All source code is committed directly to your GitHub/GitLab organization from Day 1. You hold the master keys at all times."
+      title: "The Repository Is Yours From Week One",
+      desc: "Code goes into your GitHub organisation from the first commit, not handed over at the end. You can read it, clone it, or bring in another team at any point without asking us.",
     },
     {
       icon: Lock,
-      title: "Zero Proprietary Lock-In",
-      desc: "We write clean, standard, idiomatic code without proprietary frameworks or black-box libraries. Any competent engineering team can pick it up immediately."
+      title: "Nothing Only We Can Maintain",
+      desc: "Standard frameworks, ordinary patterns, comments where the reasoning is not obvious. Any competent developer should be able to open it and get to work without a handover call.",
     },
     {
       icon: Key,
-      title: "Root Infrastructure Access",
-      desc: "Cloud accounts (AWS, GCP, Vercel, Supabase) are created under your organization. We deploy via your permissions, not our agency servers."
+      title: "The Cloud Accounts Are In Your Name",
+      desc: "AWS, Vercel, Supabase — all created under your organisation with us added as collaborators. Remove our access and everything keeps running.",
     },
     {
       icon: FileCheck,
-      title: "Signed Legal Assignment",
-      desc: "Full intellectual property assignment contracts legally transferring all copyright, patents, and trade secrets to your legal entity upon payment."
+      title: "Put In Writing, Not Just Promised",
+      desc: "The contract assigns copyright and everything else to your company on payment. If it is not written down it does not count, so we write it down.",
     }
   ];
 

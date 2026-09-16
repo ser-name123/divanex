@@ -181,21 +181,21 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
       ],
     },
     "/why-us": {
-      badge: "THE DIVANEX ADVANTAGE // ZERO COMPROMISE",
+      badge: "WHY US // THE HONEST VERSION",
       badgeIcon: "ShieldCheck",
       breadcrumbLabel: "Why Choose Us",
-      title: "Engineered for High Velocity &",
-      titleHighlight: "100% Code Ownership",
+      title: "What You Get That You",
+      titleHighlight: "Would Not Get Elsewhere",
       description:
-        "Traditional digital agencies move slow and lock you into expensive retainers. Fragmented freelancers lack enterprise-grade architectural rigor. Discover how Divanex bridges the gap with dedicated high-caliber product engineering teams.",
-      statusText: "ENGINEERING GUARANTEE // VERIFIED",
+        "Agencies put a layer of account managers between you and the people writing the code. Freelancers are fast until they are unavailable. This page lays out where we sit between the two, and where we would not be the right choice.",
+      statusText: "NO MARKETING CLAIMS HERE",
       actionLabel: "See the Comparison",
       actionHref: "#comparison",
       stats: [
-        s("wu-1", "Code Ownership", "100%", "Full IP Transfer on Delivery", "ShieldCheck", "emerald"),
-        s("wu-2", "Velocity Boost", "3.5x", "Faster Than Legacy Agencies", "Zap", "cyan"),
-        s("wu-3", "Client Retention", "96%", "Long-Term Scaled Partnerships", "Award", "blue"),
-        s("wu-4", "Guaranteed SLA", "100%", "Milestone-Backed Contracts", "CheckCircle2", "amber"),
+        s("wu-1", "You Own It", "Day 1", "Repository and cloud accounts in your name", "ShieldCheck", "emerald"),
+        s("wu-2", "You See It", "Every 2 weeks", "A staging link, not a status report", "Zap", "cyan"),
+        s("wu-3", "They Stayed", "96%", "Clients who came back for more work", "Award", "blue"),
+        s("wu-4", "Fixed Price", "Per milestone", "Agreed before the work starts", "CheckCircle2", "amber"),
       ],
     },
     "/process": {
@@ -346,7 +346,7 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
   },
 
   partnersEyebrow:
-    "Powering High-Growth Startups & Enterprise Workflows With Proven Tech Ecosystems",
+    "The Platforms, Clouds and Frameworks We Build On Every Day",
   partners: [
     { id: "p-next", name: "Next.js 15", category: "Full-Stack Web", badge: "▲" },
     { id: "p-aws", name: "Amazon Web Services", category: "Cloud Infra", badge: "☁️" },
@@ -365,10 +365,10 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
   statCounters: [
     {
       id: "sc-platforms",
-      target: 50,
+      target: 250,
       suffix: "+",
-      label: "Platforms Delivered",
-      subtitle: "Enterprise SaaS, Mobile & AI Solutions",
+      label: "Systems Delivered",
+      subtitle: "Web platforms, mobile apps and internal tools",
       icon: "CheckCircle2",
       accent: "blue",
     },
@@ -376,8 +376,8 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
       id: "sc-satisfaction",
       target: 99,
       suffix: "%",
-      label: "Client Satisfaction",
-      subtitle: "SLA-Backed On-Time Milestone Delivery",
+      label: "Milestones Hit on Date",
+      subtitle: "Measured against the plan agreed in week one",
       icon: "HeartHandshake",
       accent: "sky",
     },
@@ -385,8 +385,8 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
       id: "sc-support",
       target: 24,
       suffix: "/7",
-      label: "Dedicated Support",
-      subtitle: "Live Monitoring & 99.999% Uptime SLA",
+      label: "Monitoring After Launch",
+      subtitle: "Alerts reach an engineer, not a ticket queue",
       icon: "ShieldCheck",
       accent: "emerald",
     },
@@ -394,22 +394,22 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
       id: "sc-countries",
       target: 15,
       suffix: "+",
-      label: "Countries Served",
-      subtitle: "US, UK, UAE, India & Europe",
+      label: "Countries We Have Shipped To",
+      subtitle: "India, the Gulf, UK, US and Canada",
       icon: "Globe",
       accent: "amber",
     },
   ],
 
   ctaBanner: {
-    badge: "Zero Obligation // Rapid Onboarding",
-    title: "Ready to Turn Your Vision into a",
-    highlight: "Market-Leading Product?",
+    badge: "No obligation // Reply within a working day",
+    title: "Have Something You Need Built",
+    highlight: "Properly This Time?",
     subtitle:
-      "Schedule a free technical architecture briefing with our engineering leads. No sales pitch, just actionable engineering strategy and a clear roadmap.",
-    primaryLabel: "Discuss Project Cost",
+      "Half an hour with an engineer, not a salesperson. Bring the problem and whatever you have already tried — you will leave with a rough scope, an honest timeline and a number.",
+    primaryLabel: "Send Us the Brief",
     primaryHref: "/contact",
-    secondaryLabel: "Book a Free Consultation",
+    secondaryLabel: "Book a Half-Hour Call",
     secondaryHref: "/contact",
   },
   ctaOverrides: {
@@ -420,10 +420,10 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
         "Talk directly with our solutions architect to map out technical specifications, database schema, infrastructure costs, and deployment milestones.",
     },
     "/why-us": {
-      title: "Ready to Partner with an Engineering Team That",
-      highlight: "Actually Delivers on Time?",
+      title: "Still Deciding Between Us and",
+      highlight: "Two Other Quotes?",
       subtitle:
-        "Join 50+ scaling startups and global enterprises that rely on Divanex for mission-critical software engineering.",
+        "Send all three the same brief. The one that asks the most awkward questions about your data and your edge cases is usually the one to pick.",
     },
     "/process": {
       title: "Plan Your Project's Next Sprint with",
@@ -464,42 +464,42 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
   },
 
   whyUsHeading: {
-    eyebrow: "ADVANTAGE ENGINE // ENTERPRISE ASSURANCE",
-    title: "Engineered for Velocity.",
-    highlight: "Zero Compromise.",
+    eyebrow: "WHY TEAMS PICK US // NO SURPRISES",
+    title: "A Small Senior Team, and",
+    highlight: "Work You Can Audit",
     description:
-      "Traditional agencies move slow and lock you in. Fragmented freelancers lack architectural rigor. We give you a dedicated high-caliber engineering team with 100% code ownership.",
+      "No account managers relaying messages, no juniors learning on your budget. You work with the engineers writing the code, you see the repository from week one, and you keep it whatever happens next.",
   },
   whyUsPillars: whyChoosePillars,
   whyUsComparison: comparisonData,
   comparisonHeading: {
-    eyebrow: "MARKET BENCHMARK AUDIT",
-    title: "The Divanex Standard vs. The Legacy Market",
+    eyebrow: "THE HONEST COMPARISON",
+    title: "Us, an Agency, or a Freelancer",
     highlight: "",
     description:
-      "Compare engineering velocity, code ownership, transparency, and architectural quality head-to-head.",
+      "All three can work. Here is where each one tends to struggle, so you can judge which trade-off suits your project.",
   },
   comparisonColumns: {
-    feature: "Evaluation Vector",
-    divanex: "Divanex (Modern Standard)",
-    traditional: "Traditional Agency",
-    freelancers: "Freelancers / Gig Market",
+    feature: "What you are comparing",
+    divanex: "Working with us",
+    traditional: "A traditional agency",
+    freelancers: "A solo freelancer",
   },
   processHeading: {
-    eyebrow: "EXECUTION PIPELINE // HYPER-LOOP PROTOCOL",
-    title: "How We Take You From",
-    highlight: "Brief to Production",
+    eyebrow: "HOW THE WORK RUNS // TWO-WEEK CYCLES",
+    title: "Five Phases, From First Call to",
+    highlight: "Live and Handed Over",
     description:
-      "A fixed, auditable sequence. Every phase ends in something you can open, run and sign off.",
+      "Every fortnight you get something you can open and click through on a staging URL, plus the test results behind it. No month-long silences, no demo built the night before.",
   },
   processSteps,
   faqs: faqsData,
   faqHeading: {
-    eyebrow: "FREQUENTLY ASKED",
-    title: "Answers Before You",
-    highlight: "Have to Ask",
+    eyebrow: "BEFORE YOU ASK // STRAIGHT ANSWERS",
+    title: "The Questions Clients Actually Ask",
+    highlight: "Before Signing",
     description:
-      "Pricing, ownership, cadence and support — the questions every serious buyer asks, answered plainly.",
+      "What it costs and when you pay, who owns the code, what happens if we run late, and who picks up the phone six months after launch.",
   },
 
   engagementModels: [

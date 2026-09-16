@@ -251,13 +251,13 @@ export default function GlobalOfficesSection() {
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono font-bold text-sky-800 shadow-2xs">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
               <Globe className="w-3.5 h-3.5 text-sky-600" />
-              <span>GLOBAL PRESENCE & PHYSICAL HUBS</span>
+              <span>WHERE WE WORK FROM</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#000838] tracking-tight">
-              Worldwide Physical Offices & Regional Engineering Hubs
+              Our Offices, and the Hours You Can Reach Them
             </h2>
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
-              Operating across 4 continents and 3 time zones to provide 24/7 continuous delivery, sub-15 minute SLA response, and localized enterprise partnerships.
+              Engineering runs out of Jaipur, with client-facing hours held across three time zones so an overlap with your working day always exists.
             </p>
           </div>
 

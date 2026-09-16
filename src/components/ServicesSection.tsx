@@ -261,18 +261,18 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
         {/* Section Header with High-Contrast Badge */}
         <div className="reveal-init text-center max-w-4xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono font-bold text-sky-800 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-sky-600 animate-ping"></span>
-            <Sparkles className="w-3.5 h-3.5 text-sky-600" />
-            <span className="tracking-wider uppercase">ENTERPRISE ENGINEERING & DIGITAL CORE // ALL 22 CAPABILITIES</span>
+            <span className="w-2 h-2 rounded-full bg-[#5c9556] animate-ping"></span>
+            <Sparkles className="w-3.5 h-3.5 text-[#0f7670]" />
+            <span className="tracking-wider uppercase">WHAT WE BUILD // 22 PRACTICE AREAS</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-semibold tracking-tight text-slate-900 leading-tight">
-            High-Impact Tech & Enterprise Solutions Built for{" "}
-            <span className="gradient-text font-semibold">Uncompromising Scale</span>
+            The Systems Your Business Runs On,{" "}
+            <span className="gradient-text font-semibold">Built Properly</span>
           </h2>
 
           <p className="text-slate-600 text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl mx-auto font-normal">
-            From institutional Hospital Management (HMIS) and Modular Factory ERPs to high-throughput Fintech rails, Multi-Vendor Marketplaces, Autonomous AI Agents, Zero-Trust Cybersecurity, and Petabyte Data Lakes—we build mission-critical digital systems that power market leaders.
+            Hospital and clinic software, multi-tenant SaaS products, ERP and inventory platforms, payment and ledger engines, AI agents, mobile apps. If it has to stay up and stay correct, it is the kind of work we take on.
           </p>
 
           {/* Category Filter Pills & Search Bar (Rendered on /services or when viewing all) */}
@@ -401,7 +401,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
               </div>
 
               <p className="text-slate-600 text-sm leading-relaxed mb-6 relative z-10 font-medium">
-                Enterprise clinical suites for multi-specialty hospitals and clinics: automated OPD/IPD workflows, electronic health records (EHR), LIS machine interfacing, web DICOM radiology PACS, and pharmacy FEFO inventory.
+                For hospitals, clinic chains and diagnostic labs. Registration through discharge, prescriptions the pharmacy can read, lab and scan results attached to the right patient, and stock that reconciles at month end.
               </p>
 
               {/* Micro-Interactive Widget: Hospital Ward & Bed Occupancy Simulator */}
@@ -546,7 +546,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
               </div>
 
               <p className="text-slate-600 text-sm leading-relaxed mb-5 relative z-10 font-medium">
-                Custom modular ERP tailored for manufacturing plants and distributors: multi-location inventory, multi-level BOM explosion, double-entry financial ledger, and biometric HRMS.
+                For manufacturers and distributors who have outgrown spreadsheets and refuse to bend their process to packaged software. Stock across locations, production, purchase, accounts and payroll in one place.
               </p>
 
               <div
@@ -667,7 +667,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
               </p>
 
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-medium">
-                High-concurrency double-entry ledger engines, digital wallets, automated OCR KYC/AML pipelines, and multi-gateway payment switches.
+                Lending platforms, wallets and payment flows, sitting on a double-entry ledger that balances. Correctness and a full audit trail come before anything else here.
               </p>
 
               <div className="bg-slate-50 rounded-2xl p-3 mb-4 border border-slate-200 shadow-xs font-mono text-[11px]">
@@ -728,7 +728,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
               </p>
 
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-medium">
-                Zero-lead-leakage sales CRMs: Meta/Google webhook ingestion, shared WhatsApp Business inboxes, automated quotes, and field sales rep tracking.
+                Built around how your reps actually work — WhatsApp where the conversation already happens, quotes in a click, and field visits logged from the phone rather than typed up later.
               </p>
 
               <div className="bg-slate-50 rounded-2xl p-3 mb-4 border border-slate-200 shadow-xs font-mono text-[11px]">
@@ -789,7 +789,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
               </p>
 
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-medium">
-                Custom LLM integration, private vector DB knowledge retrieval, autonomous multi-agent task orchestration, and intelligent robotic document OCR.
+                Agents that read your own documents and answer from them, support that clears the repetitive half of the queue, and automations between systems nobody wanted to integrate.
               </p>
 
               <div className="bg-slate-50 rounded-2xl p-3 mb-4 border border-slate-200 shadow-xs font-mono text-[11px]">
@@ -943,15 +943,15 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
               {/* Header & Status Indicator */}
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
                 <div className="space-y-2">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-800 text-xs font-mono font-bold shadow-2xs">
-                    <Sparkles className="w-3.5 h-3.5 text-sky-600 animate-pulse" />
-                    <span>ALL 22 SPECIALIZED ENTERPRISE ENGINEERING DISCIPLINES</span>
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-[#385d36] text-xs font-mono font-bold shadow-2xs">
+                    <Sparkles className="w-3.5 h-3.5 text-[#5c9556] animate-pulse" />
+                    <span>EVERYTHING ELSE WE TAKE ON</span>
                   </div>
                   <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-slate-900">
-                    Explore Our Full 22 Engineering Capabilities
+                    The Other Areas We Work In
                   </h3>
                   <p className="text-slate-600 text-xs sm:text-sm font-normal max-w-2xl">
-                    Beyond our flagship systems, we engineer PropTech, Zero-Trust Cybersecurity, Industrial IoT, Headless CMS, Web3 Smart Contracts, Restaurant POS, and High-Speed Data Pipelines:
+                    Past the systems above, we also build for property, logistics, education, retail and manufacturing. Pick any of these to see the stack, the timeline and what a build usually involves:
                   </p>
                 </div>
 

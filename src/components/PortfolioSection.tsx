@@ -8,20 +8,413 @@ import {
   TrendingUp,
   ArrowRight,
   Search,
-  Sparkles,
   Layers,
-  Cpu,
   Smartphone,
-  Globe2,
-  CreditCard,
+  Globe,
+  Zap,
+  HeartPulse,
   ShoppingBag,
-  ExternalLink
+  Star,
+  Check,
+  Building,
+  Car,
+  Bike,
+  Truck,
+  ShieldCheck,
+  Activity,
+  Flame,
+  Clock,
+  Sparkles
 } from "lucide-react";
 
 interface PortfolioSectionProps {
   /** Admin-managed records. Falls back to the built-in seed. */
   items?: PortfolioProject[];
   isHome?: boolean;
+}
+
+/** High-fidelity, rich visual laptop screen preview for each client project */
+function ProjectLaptopMockup({ project }: { project: PortfolioProject }) {
+  if (project.id === "fynito") {
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-[#ff6080] via-[#ff3b65] to-[#de1748] text-white flex items-center justify-between p-3 sm:p-4 relative select-none overflow-hidden font-sans">
+        {/* Ambient Glow */}
+        <div className="absolute -left-6 -bottom-6 w-32 h-32 rounded-full bg-white/25 blur-xl pointer-events-none" />
+        <div className="absolute right-0 -top-6 w-28 h-28 rounded-full bg-rose-300/30 blur-xl pointer-events-none" />
+
+        {/* Left Floating Smartphone Mockup */}
+        <div className="w-[88px] sm:w-[102px] h-[138px] sm:h-[152px] bg-slate-950 rounded-[14px] border-[2px] border-white/60 p-1.5 shadow-2xl flex flex-col justify-between shrink-0 transform -rotate-3 hover:rotate-0 transition-transform duration-300 relative z-10">
+          <div className="w-5 h-1.5 bg-slate-800 rounded-full mx-auto" />
+          
+          <div className="flex items-center justify-between px-0.5">
+            <span className="text-[7px] font-black text-rose-400">FYNITO</span>
+            <span className="text-[6px] px-1 py-0.2 rounded-full bg-rose-500/50 text-white font-bold">24m</span>
+          </div>
+
+          {/* Food Card */}
+          <div className="bg-slate-900 rounded-md p-1 border border-slate-800 space-y-0.5">
+            <div className="h-8 rounded bg-gradient-to-tr from-amber-500/50 to-rose-500/50 flex items-center justify-center text-xs">
+              🍔
+            </div>
+            <div className="flex justify-between items-center text-[7px] font-bold text-white px-0.5">
+              <span>Gourmet Burger</span>
+              <span className="text-amber-400">4.9★</span>
+            </div>
+            <div className="flex justify-between items-center text-[6px] text-slate-300 px-0.5">
+              <span className="font-extrabold text-rose-300">₹249</span>
+              <span className="px-1 bg-rose-600 rounded text-white font-bold">+Add</span>
+            </div>
+          </div>
+
+          <div className="flex justify-around text-[6px] text-slate-400 pt-0.5 border-t border-slate-800">
+            <span className="text-rose-400 font-bold">Menu</span>
+            <span>Offers</span>
+            <span>Cart</span>
+          </div>
+        </div>
+
+        {/* Center & Right Hero Brand Showcase */}
+        <div className="flex-1 pl-3 sm:pl-4 flex flex-col justify-between h-full py-0.5 relative z-10">
+          <div className="space-y-1">
+            <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/20 backdrop-blur-xs border border-white/30 text-[8px] sm:text-[9px] font-bold text-white shadow-xs">
+              <Flame className="w-2.5 h-2.5 text-amber-300 fill-amber-300" />
+              <span>Hyperlocal Food Delivery</span>
+            </div>
+            <h4 className="text-lg sm:text-xl font-black text-white tracking-wider drop-shadow-sm leading-tight">
+              FYNITO
+            </h4>
+            <p className="text-[8px] sm:text-[9px] text-rose-100 font-medium leading-tight line-clamp-2">
+              On-demand food ordering with live rider GPS tracking &amp; instant checkout.
+            </p>
+          </div>
+
+          {/* Key Metrics Pills */}
+          <div className="flex flex-wrap gap-1 pt-1">
+            <div className="px-2 py-0.5 rounded-md bg-slate-950/80 backdrop-blur-xs border border-white/20 text-[7px] sm:text-[8px] font-bold text-white flex items-center gap-1 shadow-sm">
+              <Clock className="w-2.5 h-2.5 text-emerald-400" />
+              <span>&lt;24m Avg. ETA</span>
+            </div>
+            <div className="px-2 py-0.5 rounded-md bg-white/95 text-rose-700 text-[7px] sm:text-[8px] font-black shadow-sm">
+              450K+ Orders
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (project.id === "our-pg") {
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-[#f8fafc] via-[#edf2f7] to-[#e2e8f0] text-slate-900 flex items-center justify-between p-3 sm:p-4 relative select-none overflow-hidden font-sans">
+        {/* Background 3D Geometric Accents */}
+        <div className="absolute -right-8 -top-8 w-28 h-28 rounded-full bg-rose-500/15 blur-xl pointer-events-none" />
+        <div className="absolute -left-8 -bottom-8 w-32 h-32 rounded-full bg-blue-500/15 blur-xl pointer-events-none" />
+
+        {/* Left Side: 3D OurPG Box Brand */}
+        <div className="flex-1 pr-2.5 flex flex-col justify-between h-full py-0.5 relative z-10">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-700 via-indigo-800 to-slate-900 text-white flex items-center justify-center font-black text-xs shadow-md border border-blue-500/40">
+                PG
+              </div>
+              <div>
+                <div className="font-black text-sm sm:text-base text-slate-900 tracking-tight leading-none">OurPG</div>
+                <div className="text-[7px] sm:text-[8px] font-bold text-blue-700 uppercase tracking-wider">Management OS</div>
+              </div>
+            </div>
+            <p className="text-[8px] sm:text-[9px] text-slate-600 font-medium leading-tight">
+              Hostel, PG &amp; Coliving automation with automated invoicing &amp; room matrix.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-1 pt-1">
+            <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold text-[7px] sm:text-[8px]">
+              98.2% Auto-Rent
+            </span>
+            <span className="px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 border border-blue-300 font-bold text-[7px] sm:text-[8px]">
+              85,000+ Beds
+            </span>
+          </div>
+        </div>
+
+        {/* Right Side: Floating Tilted Phone with Bed Matrix */}
+        <div className="w-[92px] sm:w-[106px] h-[138px] sm:h-[152px] bg-slate-950 rounded-[14px] border-[2px] border-slate-700 p-1.5 shadow-2xl flex flex-col justify-between shrink-0 transform rotate-2 hover:rotate-0 transition-transform duration-300 relative z-10">
+          <div className="w-5 h-1.5 bg-slate-800 rounded-full mx-auto" />
+
+          <div className="flex items-center justify-between text-[7px] text-slate-300 font-bold px-0.5">
+            <span>Occupancy Matrix</span>
+            <span className="text-emerald-400">Floor 2</span>
+          </div>
+
+          {/* Matrix Grid */}
+          <div className="grid grid-cols-2 gap-1 my-0.5">
+            <div className="bg-slate-900 rounded p-1 border border-slate-800 text-center space-y-0.5">
+              <div className="text-[6px] text-slate-400">R201 • Bed A</div>
+              <div className="text-[6px] font-black px-1 py-0.2 rounded bg-emerald-500 text-slate-950">OCCUPIED</div>
+            </div>
+            <div className="bg-slate-900 rounded p-1 border border-slate-800 text-center space-y-0.5">
+              <div className="text-[6px] text-slate-400">R201 • Bed B</div>
+              <div className="text-[6px] font-black px-1 py-0.2 rounded bg-emerald-500 text-slate-950">OCCUPIED</div>
+            </div>
+            <div className="bg-slate-900 rounded p-1 border border-slate-800 text-center space-y-0.5">
+              <div className="text-[6px] text-slate-400">R202 • Bed A</div>
+              <div className="text-[6px] font-black px-1 py-0.2 rounded bg-blue-500 text-white">RESERVED</div>
+            </div>
+            <div className="bg-slate-900 rounded p-1 border border-slate-800 text-center space-y-0.5">
+              <div className="text-[6px] text-slate-400">R202 • Bed B</div>
+              <div className="text-[6px] font-bold px-1 py-0.2 rounded bg-slate-800 text-slate-300 border border-slate-700">VACANT</div>
+            </div>
+          </div>
+
+          <div className="text-[6px] text-center text-slate-400 bg-slate-900 py-0.5 rounded border border-slate-800">
+            Auto-Invoice: <strong className="text-emerald-400">Active</strong>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (project.id === "sm-supermoda") {
+    return (
+      <div className="w-full h-full bg-gradient-to-b from-[#090d16] via-[#0f172a] to-[#020617] text-white flex flex-col justify-between p-3 sm:p-3.5 relative select-none overflow-hidden font-sans border border-slate-800">
+        {/* Top Real Estate Navigation Bar */}
+        <div className="flex items-center justify-between pb-1.5 border-b border-slate-800">
+          <div className="flex items-center gap-1.5">
+            <span className="text-xs font-black tracking-widest text-emerald-400">SM</span>
+            <span className="text-[10px] sm:text-[11px] font-extrabold tracking-wider text-slate-100">REAL ESTATE</span>
+          </div>
+          <div className="flex items-center gap-2 text-[8px] text-slate-400">
+            <span className="text-emerald-400 font-bold">Buy</span>
+            <span>Off-Plan</span>
+            <span>Virtual Tour</span>
+          </div>
+        </div>
+
+        {/* Hero Skyline Banner */}
+        <div className="my-auto py-1 space-y-1">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-xs sm:text-sm font-black text-white tracking-wide">
+                New Homes For Generation
+              </div>
+              <p className="text-[8px] text-slate-400">Luxury developments in prime metropolitan hubs.</p>
+            </div>
+            <span className="text-[8px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+              OFF-PLAN LAUNCH
+            </span>
+          </div>
+
+          {/* Property Showcase Cards */}
+          <div className="grid grid-cols-2 gap-2 pt-1">
+            <div className="bg-slate-900/90 rounded-lg p-1.5 border border-slate-800 space-y-1 shadow-md">
+              <div className="h-8 rounded bg-gradient-to-r from-slate-800 to-slate-700 flex items-center justify-between px-1.5">
+                <span className="text-[8px] font-extrabold text-white">Sky Penthouse</span>
+                <span className="text-[7px] px-1 py-0.2 rounded bg-emerald-500/30 text-emerald-300 font-bold">3D Tour</span>
+              </div>
+              <div className="flex justify-between items-center text-[8px] px-0.5">
+                <span className="text-slate-400">Marina Bay</span>
+                <span className="font-black text-emerald-400">₹4.2 Cr</span>
+              </div>
+            </div>
+
+            <div className="bg-slate-900/90 rounded-lg p-1.5 border border-slate-800 space-y-1 shadow-md">
+              <div className="h-8 rounded bg-gradient-to-r from-slate-800 to-slate-700 flex items-center justify-between px-1.5">
+                <span className="text-[8px] font-extrabold text-white">Palm Villa</span>
+                <span className="text-[7px] px-1 py-0.2 rounded bg-emerald-500/30 text-emerald-300 font-bold">3D Tour</span>
+              </div>
+              <div className="flex justify-between items-center text-[8px] px-0.5">
+                <span className="text-slate-400">Oceanfront</span>
+                <span className="font-black text-emerald-400">₹8.5 Cr</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Banner */}
+        <div className="flex items-center justify-between text-[8px] text-slate-400 bg-slate-900/80 px-2 py-0.5 rounded border border-slate-800">
+          <span>Sub-60ms Edge Speed</span>
+          <span className="font-bold text-emerald-400">₹380 Cr+ Inquiries Generated</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (project.id === "evtor") {
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-[#042010] via-[#06381a] to-[#02180b] text-white flex items-center justify-between p-3 sm:p-4 relative select-none overflow-hidden font-sans border border-green-900/40">
+        <div className="absolute left-1/4 top-0 w-32 h-32 rounded-full bg-green-500/20 blur-2xl pointer-events-none" />
+
+        {/* Left Info & Vehicle Pills */}
+        <div className="flex-1 pr-2 flex flex-col justify-between h-full py-0.5 relative z-10">
+          <div className="space-y-1">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse shadow-sm shadow-green-400" />
+              <h4 className="font-black text-sm sm:text-base text-green-400 tracking-wider">EVtor</h4>
+              <span className="text-[9px] text-slate-300 font-bold">chargers</span>
+            </div>
+            <p className="text-[8px] sm:text-[9px] text-green-100 font-medium leading-tight">
+              Smart EV charging network &amp; OCPP 2.0.1 live telemetry.
+            </p>
+          </div>
+
+          {/* Vehicle Compatibility Pills */}
+          <div className="flex items-center gap-1.5 py-1">
+            <span className="p-1 rounded bg-green-950/80 border border-green-700/60 text-green-300 text-[8px] flex items-center gap-1">
+              <Car className="w-3 h-3" /> Cars
+            </span>
+            <span className="p-1 rounded bg-green-950/80 border border-green-700/60 text-green-300 text-[8px] flex items-center gap-1">
+              <Bike className="w-3 h-3" /> 2W
+            </span>
+            <span className="p-1 rounded bg-green-950/80 border border-green-700/60 text-green-300 text-[8px] flex items-center gap-1">
+              <Truck className="w-3 h-3" /> Fleets
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2 text-[8px]">
+            <span className="px-2 py-0.5 rounded bg-green-500 text-slate-950 font-black shadow-xs">
+              99.98% Uptime
+            </span>
+            <span className="text-green-200 font-bold">1,400+ Stations</span>
+          </div>
+        </div>
+
+        {/* Right Side: Charging Station Tower HUD */}
+        <div className="w-[96px] sm:w-[110px] h-[138px] sm:h-[152px] bg-slate-950 rounded-xl border-2 border-green-500/50 p-2 shadow-2xl flex flex-col justify-between shrink-0 relative z-10">
+          <div className="text-center space-y-0.5">
+            <span className="text-[8px] font-black text-green-400 block tracking-wider uppercase">Station #104</span>
+            <span className="text-[7px] text-slate-400">Highway Express DC</span>
+          </div>
+
+          {/* Station Visual */}
+          <div className="bg-slate-900 rounded-lg p-1.5 border border-green-900 text-center space-y-1">
+            <div className="w-7 h-7 mx-auto rounded-full bg-green-500/20 border border-green-400/50 flex items-center justify-center">
+              <Zap className="w-3.5 h-3.5 text-green-400 fill-green-400" />
+            </div>
+            <div className="text-[8px] font-black text-white">60 kW Fast DC</div>
+            <div className="text-[6px] text-emerald-300 font-bold bg-green-950 py-0.2 rounded">
+              SOCKET AVAILABLE
+            </div>
+          </div>
+
+          <div className="w-full py-0.5 rounded bg-green-500 text-slate-950 font-black text-[7px] text-center shadow-xs">
+            Scan QR to Charge
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (project.id === "magnus-partners") {
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-[#061d28] via-[#0a2e3f] to-[#04151e] text-white flex flex-col justify-between p-3 sm:p-3.5 relative select-none overflow-hidden font-sans border border-cyan-900/40">
+        {/* Top Header */}
+        <div className="flex items-center justify-between pb-1.5 border-b border-cyan-900/60">
+          <div className="flex items-center gap-1.5">
+            <HeartPulse className="w-4 h-4 text-cyan-400" />
+            <span className="font-black text-xs sm:text-sm text-white tracking-wider">MAGNUS PARTNERS</span>
+          </div>
+          <span className="text-[8px] font-extrabold px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">
+            HIPAA Verified
+          </span>
+        </div>
+
+        {/* Center Clinical Solutions Showcase */}
+        <div className="my-auto space-y-1.5">
+          <div className="text-xs sm:text-sm font-extrabold text-cyan-100 leading-snug">
+            Collaborating for Stronger Healthcare Solutions
+          </div>
+          <p className="text-[8px] sm:text-[9px] text-slate-300 leading-tight">
+            Through partnerships, we create robust, innovative, and resilient healthcare services.
+          </p>
+
+          <div className="grid grid-cols-2 gap-1.5 pt-0.5">
+            <div className="bg-slate-900/90 rounded p-1.5 border border-cyan-800/60 space-y-0.5">
+              <div className="text-[8px] font-extrabold text-cyan-300 flex items-center gap-1">
+                <Activity className="w-2.5 h-2.5" /> DICOM PACS
+              </div>
+              <div className="text-[7px] text-slate-300">&lt;140ms Encrypted Imaging</div>
+            </div>
+            <div className="bg-slate-900/90 rounded p-1.5 border border-cyan-800/60 space-y-0.5">
+              <div className="text-[8px] font-extrabold text-cyan-300 flex items-center gap-1">
+                <ShieldCheck className="w-2.5 h-2.5" /> HL7 FHIR v4
+              </div>
+              <div className="text-[7px] text-slate-300">Unified Clinical Pipeline</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Status */}
+        <div className="flex items-center justify-between text-[8px] text-slate-300 bg-slate-900/90 px-2 py-0.5 rounded border border-cyan-900/60">
+          <span>50+ Partner Hospital Networks</span>
+          <span className="font-bold text-cyan-300">100% HIPAA &amp; ABDM Compliant</span>
+        </div>
+      </div>
+    );
+  }
+
+  // Parana Tool (Default)
+  return (
+    <div className="w-full h-full bg-gradient-to-br from-[#12141a] via-[#1a1d26] to-[#0d0f14] text-white flex items-center justify-between p-3 sm:p-4 relative select-none overflow-hidden font-sans border border-amber-900/40">
+      {/* Background Glowing Warm Radial Orb */}
+      <div className="absolute right-6 top-1/2 -translate-y-1/2 w-28 h-28 rounded-full bg-gradient-to-tr from-amber-500/30 to-orange-500/30 blur-xl pointer-events-none" />
+
+      {/* Left Info */}
+      <div className="flex-1 pr-2 flex flex-col justify-between h-full py-0.5 relative z-10">
+        <div className="space-y-1">
+          <div className="flex items-center gap-1.5">
+            <ShoppingBag className="w-4 h-4 text-amber-400" />
+            <span className="font-black text-xs sm:text-sm text-white tracking-wide">Parana Tool</span>
+          </div>
+          <div className="text-[10px] sm:text-[11px] font-extrabold text-amber-200 leading-tight">
+            Design Products • Deliver Experience
+          </div>
+          <p className="text-[8px] text-slate-300 leading-tight">
+            Trusted E-Commerce Mobile Application &amp; B2B Wholesale Portal.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-1 pt-1">
+          <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-400/40 text-[8px] font-bold">
+            45,000+ SKUs
+          </span>
+          <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 text-[8px] font-bold">
+            4.9 ★ Rating
+          </span>
+        </div>
+
+        <div className="text-[8px] text-slate-400">
+          Sub-70ms Algolia SKU Instant Search
+        </div>
+      </div>
+
+      {/* Right Floating Phone */}
+      <div className="w-[92px] sm:w-[106px] h-[138px] sm:h-[152px] bg-slate-950 rounded-[14px] border-[2px] border-amber-500/40 p-1.5 shadow-2xl flex flex-col justify-between shrink-0 transform rotate-1 hover:rotate-0 transition-transform duration-300 relative z-10">
+        <div className="w-5 h-1.5 bg-slate-800 rounded-full mx-auto" />
+
+        <div className="bg-slate-900 rounded p-1 border border-slate-800 text-[7px] text-slate-400">
+          🔍 Search 45k+ Tools...
+        </div>
+
+        {/* Product Card */}
+        <div className="bg-slate-900 rounded-lg p-1.5 border border-slate-800 space-y-0.5">
+          <div className="h-7 rounded bg-gradient-to-tr from-amber-500/30 to-orange-500/30 flex items-center justify-center text-xs">
+            ⚡ 🔧
+          </div>
+          <div className="flex justify-between items-center text-[7px] font-bold text-white">
+            <span>Multimeter Pro</span>
+          </div>
+          <div className="flex justify-between items-center text-[6px]">
+            <span className="text-amber-400 font-black">$89.00</span>
+            <span className="text-emerald-400 font-bold">Bulk: $64</span>
+          </div>
+        </div>
+
+        <div className="w-full py-0.5 rounded bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black text-[7px] text-center shadow-xs">
+          1-Click Reorder
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function PortfolioSection({ isHome = false, items }: PortfolioSectionProps) {
@@ -31,12 +424,11 @@ export default function PortfolioSection({ isHome = false, items }: PortfolioSec
 
   const categories = [
     { id: "All", label: "All Projects", icon: Layers },
-    { id: "SaaS", label: "SaaS & Cloud", icon: Briefcase },
-    { id: "AI", label: "AI & Neural Agents", icon: Cpu },
     { id: "Mobile App", label: "Mobile Apps", icon: Smartphone },
-    { id: "Web Platform", label: "Web & IoT", icon: Globe2 },
+    { id: "Web Platform", label: "Web Platform", icon: Globe },
+    { id: "SaaS", label: "SaaS & Cloud", icon: Briefcase },
     { id: "E-Commerce", label: "E-Commerce", icon: ShoppingBag },
-    { id: "FinTech", label: "FinTech & Payments", icon: CreditCard },
+    { id: "Healthcare", label: "Healthcare", icon: HeartPulse },
   ];
 
   const filteredProjects = useMemo(() => {
@@ -44,56 +436,59 @@ export default function PortfolioSection({ isHome = false, items }: PortfolioSec
       const matchesCategory = activeCategory === "All" || p.category === activeCategory;
       const matchesSearch =
         searchQuery.trim() === "" ||
-        p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.tagline.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.techStack.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
+        (p.title && p.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (p.clientSubtitle && p.clientSubtitle.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (p.tagline && p.tagline.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (p.description && p.description.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (p.techStack && p.techStack.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()))) ||
+        (p.serviceTags && p.serviceTags.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase())));
       return matchesCategory && matchesSearch;
     });
-  }, [activeCategory, searchQuery]);
-
-  const displayedProjects = isHome ? filteredProjects.slice(0, 4) : filteredProjects;
+  }, [portfolioProjects, activeCategory, searchQuery]);
 
   return (
-    <section id="portfolio" className="relative py-8 lg:py-10 bg-white overflow-hidden border-t border-slate-200/80">
-      <div className="absolute inset-0 bg-cyber-grid opacity-30 pointer-events-none" />
-      <div className="glow-orb-blue w-[400px] h-[400px] top-1/4 -left-20 opacity-15"></div>
-      <div className="glow-orb-orange w-[350px] h-[350px] bottom-10 right-10 opacity-15"></div>
+    <section id="portfolio" className="relative py-16 lg:py-24 bg-[#f8fafc] text-slate-900 overflow-hidden border-t border-slate-200">
+      {/* Background Subtle Grid Pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] [background-size:24px_24px] opacity-35 pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-100/40 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-teal-100/40 rounded-full blur-3xl pointer-events-none" />
 
       <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         {/* Section Header */}
         <div className="reveal-init text-center max-w-4xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-xs font-semibold text-sky-700 shadow-2xs">
-            <Briefcase className="w-3.5 h-3.5 text-sky-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-300 text-xs font-bold text-[#0f7670] shadow-xs">
+            <Briefcase className="w-3.5 h-3.5 text-[#0f7670]" />
             <span className="uppercase tracking-wider">
-              {isHome ? "FEATURED DELIVERIES // 4 PROVEN CASE STUDIES" : `CASE STUDIES // ${portfolioProjects.length}+ PRODUCTION SYSTEMS`}
+              {isHome ? "FEATURED CLIENT WORK // 6 FLAGSHIP SYSTEMS" : `PRODUCTION DELIVERIES // ${portfolioProjects.length} VERIFIED SYSTEMS`}
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 tracking-tight">
-            Featured Projects We&apos;ve <span className="gradient-text font-semibold">Engineered & Scaled</span>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#000838] tracking-tight">
+            Client Case Studies &amp; <span className="gradient-text font-extrabold">Digital Platforms</span>
           </h2>
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto">
-            Explore our proven track record engineering custom multi-tenant SaaS platforms, autonomous AI agents, cross-platform mobile apps, and low-latency fintech web platforms that generate compounding ROI.
+
+          <p className="text-slate-700 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto font-medium">
+            Explore live production systems designed, engineered, and scaled by Divanex Technologies — spanning on-demand food delivery, coliving management, luxury real estate, connected EV charging networks, healthcare platforms, and industrial e-commerce.
           </p>
         </div>
 
         {/* Filter Controls & Search */}
-        <div className="reveal-init reveal-delay-1 mt-6 sm:mt-8 space-y-5">
-          {/* Search Bar (Only shown on full page) */}
+        <div className="reveal-init reveal-delay-1 mt-8 space-y-5">
+          {/* Search Bar */}
           {!isHome && (
             <div className="max-w-md mx-auto relative">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search case studies (e.g. Next.js, AI, Stripe, IoT, React Native)..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 shadow-xs transition-all"
+                placeholder="Search by client, technology, or industry..."
+                className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white border border-slate-300 text-xs sm:text-sm text-slate-900 placeholder-slate-500 focus:outline-hidden focus:border-[#0f7670] focus:ring-2 focus:ring-[#0f7670]/20 shadow-xs transition-all font-medium"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-700 cursor-pointer"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500 hover:text-slate-800 cursor-pointer font-bold"
                 >
                   Clear
                 </button>
@@ -115,17 +510,17 @@ export default function PortfolioSection({ isHome = false, items }: PortfolioSec
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all border cursor-pointer ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all border cursor-pointer ${
                     isSelected
-                      ? "bg-gradient-to-r from-sky-600 via-sky-700 to-blue-700 text-white border-sky-600 shadow-md shadow-sky-700/20 scale-105"
-                      : "bg-white border-slate-200 text-slate-700 hover:text-sky-700 hover:bg-sky-50/70 hover:border-sky-300 shadow-2xs"
+                      ? "bg-[#0f7670] text-white border-[#0f7670] shadow-md scale-105"
+                      : "bg-white border-slate-300 text-slate-800 hover:text-[#0f7670] hover:bg-emerald-50/60 hover:border-emerald-300 shadow-xs"
                   }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 ${isSelected ? "text-white" : "text-sky-600"}`} />
+                  <Icon className={`w-3.5 h-3.5 ${isSelected ? "text-white" : "text-[#0f7670]"}`} />
                   <span>{cat.label}</span>
                   <span
                     className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${
-                      isSelected ? "bg-white/25 text-white" : "bg-slate-100 text-slate-600 border border-slate-200/60"
+                      isSelected ? "bg-white/25 text-white" : "bg-slate-100 text-slate-700 border border-slate-200"
                     }`}
                   >
                     {count}
@@ -136,99 +531,132 @@ export default function PortfolioSection({ isHome = false, items }: PortfolioSec
           </div>
         </div>
 
-        {/* Projects Grid */}
-        <div className="reveal-init reveal-delay-2 mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-          {displayedProjects.map((project) => (
+        {/* 6-Card Portfolio Grid Styled in Crisp Light Theme */}
+        <div className="reveal-init reveal-delay-2 mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="bg-white rounded-3xl p-7 border border-slate-200 hover:border-sky-400 hover:shadow-xl hover:shadow-sky-900/5 flex flex-col justify-between space-y-6 group overflow-hidden relative shadow-xs transition-all duration-300"
+              className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-lg hover:shadow-2xl hover:border-[#0f7670]/60 flex flex-col justify-between space-y-5 group relative transition-all duration-300 hover:-translate-y-2 overflow-hidden"
             >
-              {/* Project Category Tag */}
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-700">
-                  {project.category}
-                </span>
+              {/* Subtle top-left ambient accent */}
+              <div className="absolute -top-3 -left-3 w-16 h-16 rounded-full bg-emerald-400/10 blur-md pointer-events-none" />
 
-                <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-300 px-3 py-1 rounded-full text-emerald-700 text-xs font-bold">
-                  <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>{project.impactMetric} {project.impactLabel}</span>
-                </div>
-              </div>
-
-              {/* Title & Description */}
-              <div className="space-y-3">
-                <Link href={`/portfolio/${project.id}`} className="block group/link">
-                  <h3 className="text-2xl font-bold text-slate-900 group-hover/link:text-sky-700 transition-colors flex items-center justify-between gap-2">
-                    <span>{project.title}</span>
-                    <ArrowRight className="w-5 h-5 text-sky-600 opacity-0 group-hover/link:opacity-100 group-hover/link:translate-x-1 transition-all shrink-0" />
+              {/* Card Header: Title & Subtitle */}
+              <div className="text-center relative z-10 space-y-1">
+                <Link href={`/portfolio/${project.id}`} className="group/link inline-block">
+                  <h3 className="text-2xl font-black text-[#000838] group-hover/link:text-[#0f7670] transition-colors tracking-tight">
+                    {project.title}
                   </h3>
                 </Link>
-                <p className="text-xs font-bold text-amber-700">
-                  {project.tagline}
-                </p>
-                <p className="text-sm text-slate-600 leading-relaxed font-normal">
-                  {project.description}
+                <p className="text-xs sm:text-sm font-bold text-[#0f7670] tracking-wider uppercase">
+                  {project.clientSubtitle || project.category}
                 </p>
               </div>
 
-              {/* Tech Stack Badges */}
-              <div className="space-y-3 pt-2">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
-                  Technologies Deployed:
+              {/* Laptop Device Mockup Preview Area */}
+              <div className="relative z-10 w-full pt-1 pb-2 flex flex-col items-center">
+                {/* Laptop Screen Bezel */}
+                <div className="w-full max-w-[390px] bg-slate-950 rounded-t-2xl border-[3.5px] border-slate-800 shadow-2xl p-1.5 sm:p-2 aspect-[16/10] flex items-center justify-center relative overflow-hidden">
+                  {/* Web Camera Dot */}
+                  <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-slate-700 rounded-full z-20" />
+                  
+                  {/* Laptop Display Content */}
+                  <div className="w-full h-full rounded-lg overflow-hidden relative">
+                    <ProjectLaptopMockup project={project} />
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {project.techStack.map((tech, i) => (
+
+                {/* Laptop Base Stand / Chin */}
+                <div className="w-[106%] max-w-[420px] h-3.5 sm:h-4 bg-gradient-to-b from-slate-700 to-slate-800 rounded-b-xl shadow-md border-t border-slate-600 relative flex items-center justify-center">
+                  <div className="w-14 sm:w-18 h-1 bg-slate-500 rounded-full" />
+                </div>
+              </div>
+
+              {/* Technical Description & Impact */}
+              <div className="space-y-3 relative z-10">
+                <p className="text-xs font-bold text-[#385d36] line-clamp-1">
+                  {project.tagline}
+                </p>
+                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed line-clamp-3 font-medium">
+                  {project.description}
+                </p>
+
+                {/* Impact Metric & Read Study CTA */}
+                <div className="flex items-center justify-between pt-1">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#0f7670] bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-300">
+                    <TrendingUp className="w-3.5 h-3.5 text-[#0f7670]" />
+                    <span>{project.impactMetric}</span>
+                    <span className="text-[10px] text-slate-600 font-medium">Impact</span>
+                  </div>
+
+                  <Link
+                    href={`/portfolio/${project.id}`}
+                    className="inline-flex items-center gap-1 text-xs font-bold text-[#0f7670] hover:text-[#000838] transition-colors group/btn"
+                  >
+                    <span>Read Study</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
+                  </Link>
+                </div>
+
+                {/* Tech Pills */}
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {(project.techStack || ["Next.js 15", "TypeScript"]).slice(0, 4).map((tech, idx) => (
                     <span
-                      key={i}
-                      className="text-xs font-mono font-semibold px-3 py-1 rounded-lg bg-slate-50 hover:bg-sky-50 border border-slate-200 hover:border-sky-300 text-slate-700 hover:text-sky-700 transition-colors shadow-2xs"
+                      key={idx}
+                      className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-800 border border-slate-300 shadow-2xs"
                     >
                       {tech}
                     </span>
                   ))}
+                  {project.techStack && project.techStack.length > 4 && (
+                    <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-300">
+                      +{project.techStack.length - 4}
+                    </span>
+                  )}
                 </div>
               </div>
 
-              {/* Bottom Project Metadata & Link */}
-              <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                <div className="text-xs text-slate-500 font-mono font-medium">
-                  Architecture SLA: <span className="font-bold text-emerald-700">99.999% Verified</span>
+              {/* Bottom Tags Bar with Vertical Separators Matching Exact Screenshot */}
+              <div className="pt-3.5 border-t border-slate-200 relative z-10">
+                <div className="flex items-center justify-center text-[11px] sm:text-xs font-bold text-[#0f7670] tracking-wide divide-x divide-slate-300">
+                  {(project.serviceTags && project.serviceTags.length > 0
+                    ? project.serviceTags
+                    : ["Mobile App", "Web Development", "UI/UX Design"]
+                  ).map((tag, idx) => (
+                    <span key={idx} className="px-2.5 first:pl-0 last:pr-0">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-                <Link
-                  href={`/portfolio/${project.id}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-sky-700 hover:text-sky-900 group/cta"
-                >
-                  <span>Read Case Study</span>
-                  <ArrowRight className="w-4 h-4 group-hover/cta:translate-x-1 transition-transform" />
-                </Link>
               </div>
             </div>
           ))}
         </div>
 
         {/* Empty Search State */}
-        {displayedProjects.length === 0 && (
-          <div className="mt-12 text-center py-16 bg-slate-50 rounded-3xl border border-dashed border-slate-300">
-            <p className="text-slate-600 font-medium text-sm">No case studies found matching &ldquo;{searchQuery}&rdquo;</p>
+        {filteredProjects.length === 0 && (
+          <div className="mt-12 text-center py-16 bg-white rounded-3xl border border-dashed border-slate-300">
+            <p className="text-slate-700 font-semibold text-sm">No client projects found matching &ldquo;{searchQuery}&rdquo;</p>
             <button
               onClick={() => {
                 setSearchQuery("");
                 setActiveCategory("All");
               }}
-              className="mt-4 px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-semibold hover:bg-sky-700 transition-colors cursor-pointer"
+              className="mt-4 px-4 py-2 rounded-xl bg-[#000838] text-white text-xs font-bold hover:bg-[#0f7670] transition-colors cursor-pointer"
             >
               Reset Filters
             </button>
           </div>
         )}
 
-        {/* Home Page "View All Case Studies" Redirection Button */}
+        {/* Home Page Call to Action */}
         {isHome && (
           <div className="mt-14 text-center reveal-init reveal-delay-3">
             <Link
               href="/portfolio"
               className="btn-futuristic-primary text-xs sm:text-sm !py-3 !px-6 !rounded-xl"
             >
-              <span>View All Case Studies ({portfolioProjects.length}+ Proven Deliveries)</span>
+              <span>Explore All Technical Case Studies &amp; Architecture Blueprints</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

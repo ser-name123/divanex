@@ -33,12 +33,12 @@ export default function GlobalRatingsStrip() {
             <div className="text-left">
               <div className="flex items-center gap-1.5">
                 <span className="text-xs font-mono font-bold tracking-wider text-[#000838] uppercase">
-                  VERIFIED CLIENT RATINGS
+                  WHERE CLIENTS REVIEW US
                 </span>
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#5c9556] animate-pulse" />
               </div>
               <p className="text-[11px] text-slate-500 font-medium">
-                Consistently Rated 4.7+ Across Top Global Tech Platforms
+                Public ratings on the platforms clients hire us through
               </p>
             </div>
           </div>

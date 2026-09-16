@@ -11,36 +11,36 @@ import {
 
 /** What this section was written with. A stored record replaces it field by field. */
 const DEFAULT_HEADING = {
-  "eyebrow": "COLLABORATION ARCHITECTURE",
-  "title": "Transparent",
-  "highlight": "Communication Protocols",
-  "description": "We work as an organic extension of your internal engineering leadership. Here is how we communicate every single day."
+  "eyebrow": "TALKING TO US // DAY TO DAY",
+  "title": "How You Will Actually",
+  "highlight": "Reach Us",
+  "description": "Most project problems are communication problems wearing a technical disguise. This is the arrangement we have settled on after a few of them."
 };
 
 const DEFAULT_ITEMS = [
     {
       icon: MessageSquare,
-      title: "Direct Slack Connect",
-      desc: "Real-time communication with the engineers actually writing your code. No middleman account managers playing telephone.",
-      badge: "Real-Time Chat"
+      title: "One Shared Channel",
+      desc: "A Slack or WhatsApp group with you and the engineers in it. No forwarding, no account manager summarising what a developer said.",
+      badge: "Direct to the team",
     },
     {
       icon: Video,
-      title: "Bi-Weekly Screen Share Demos",
-      desc: "Live walkthroughs of working staging builds every two weeks. You see tangible progress, test features, and guide development.",
-      badge: "Every 2 Weeks"
+      title: "A Call Every Two Weeks",
+      desc: "Half an hour, screen shared, current build open. You click through it yourself and tell us what feels wrong while it is still cheap to change.",
+      badge: "Every 2 weeks",
     },
     {
       icon: Globe2,
-      title: "Global Timezone Overlap",
-      desc: "Coordinated overlap with US (EST/PST), UK (GMT), UAE (GST), and India (IST) business hours to ensure same-day feedback cycles.",
-      badge: "4-6 Hours Overlap"
+      title: "Overlapping Hours",
+      desc: "We work Indian hours and hold the later part of the day for clients in the Gulf, UK and US. There is always a window where you can reach a person.",
+      badge: "Shared window daily",
     },
     {
       icon: Clock,
-      title: "Guaranteed Response SLAs",
-      desc: "Under 15-minute response times during active business hours for urgent staging queries, and same-day PR turnarounds.",
-      badge: "< 15 Mins SLA"
+      title: "Same-Day Replies In Working Hours",
+      desc: "Not fifteen minutes — we will not pretend to that. Within the working day, and within the hour if something is actually on fire.",
+      badge: "Same working day",
     }
   ];
 

@@ -28,6 +28,7 @@ import { accent } from "@/lib/accents";
 import { useNavigation } from "@/context/SiteContentContext";
 import { visibleGroups, visibleLinks } from "@/data/navigation";
 import RichText from "@/components/RichText";
+import GlobalOfficesSection from "@/components/GlobalOfficesSection";
 
 /**
  * Footer column widths. Tailwind only emits classes it can read in the source,
@@ -131,7 +132,9 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-slate-50 border-t border-slate-200/80 pt-10 lg:pt-14 pb-8 overflow-hidden text-slate-600 select-none">
+    <>
+      <GlobalOfficesSection />
+      <footer className="relative bg-slate-50 border-t border-slate-200/80 pt-10 lg:pt-14 pb-8 overflow-hidden text-slate-600 select-none">
       {/* Subtle grid and ambient lights */}
       <div className="absolute inset-0 bg-cyber-grid opacity-30 pointer-events-none" />
       <div className="glow-orb-blue w-[600px] h-[600px] -top-32 -left-32 opacity-15 pointer-events-none" />
@@ -520,5 +523,6 @@ export default function Footer() {
 
       </div>
     </footer>
+    </>
   );
 }

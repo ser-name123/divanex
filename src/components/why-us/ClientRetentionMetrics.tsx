@@ -6,32 +6,32 @@ import { HeartHandshake } from "lucide-react";
 
 /** What this section was written with. A stored record replaces it field by field. */
 const DEFAULT_HEADING = {
-  "eyebrow": "Partnership Longevity",
-  "title": "Client Retention &",
-  "highlight": "Partnership Loyalty",
-  "description": "Agencies focus on signing you; we focus on scaling you. Our high client retention rate is a direct outcome of disciplined software execution and honest collaboration."
+  "eyebrow": "WHAT HAPPENS AFTERWARDS",
+  "title": "Most Clients",
+  "highlight": "Come Back",
+  "description": "The honest measure of an engineering team is not the launch. It is whether anyone wants to work with them again once they have seen how the project really went."
 };
 
 const DEFAULT_ITEMS = [
     {
-      value: "96.2%",
-      label: "Annual Client Retention",
-      desc: "Percentage of founders who continue for version 2.0 or maintain ongoing infrastructure retainers."
+      value: "96%",
+      label: "Came back for more work",
+      desc: "A second phase, a new product, or an ongoing arrangement to keep the first one healthy.",
     },
     {
-      value: "18+ Mo",
-      label: "Average Partnership Tenure",
-      desc: "Our clients treat us as an embedded internal engineering department rather than an external agency."
+      value: "18+ mo",
+      label: "Typical length of a relationship",
+      desc: "Most engagements do not end at handover. They turn into a smaller, steadier amount of work.",
     },
     {
       value: "84%",
-      label: "Direct Referral Rate",
-      desc: "Over four out of five new enterprise contracts originate from direct founder-to-founder recommendations."
+      label: "Arrived through a recommendation",
+      desc: "Most new projects come from someone we already built for telling someone else.",
     },
     {
-      value: "0%",
-      label: "Code Held Hostage",
-      desc: "Strict policy of transparent daily commits ensuring you retain complete control of your tech assets at all times."
+      value: "0",
+      label: "Clients locked in",
+      desc: "Nobody stays because leaving would be difficult. The repository and the accounts are theirs the whole time.",
     }
   ];
 
@@ -75,7 +75,7 @@ export default function ClientRetentionMetrics() {
                 </p>
               </div>
               <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] font-mono font-bold text-slate-500">
-                VERIFIED COHORT DATA
+                OUR OWN CLIENT RECORDS
               </div>
             </div>
           ))}

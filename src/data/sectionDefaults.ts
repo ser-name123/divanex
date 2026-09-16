@@ -1304,193 +1304,193 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
   },
   "why-us/communication": {
     "heading": {
-      "eyebrow": "COLLABORATION ARCHITECTURE",
-      "title": "Transparent",
-      "highlight": "Communication Protocols",
-      "description": "We work as an organic extension of your internal engineering leadership. Here is how we communicate every single day."
+      "eyebrow": "TALKING TO US // DAY TO DAY",
+      "title": "How You Will Actually",
+      "highlight": "Reach Us",
+      "description": "Most project problems are communication problems wearing a technical disguise. This is the arrangement we have settled on after a few of them."
     },
     "items": [
       {
         "icon": null,
-        "title": "Direct Slack Connect",
-        "desc": "Real-time communication with the engineers actually writing your code. No middleman account managers playing telephone.",
-        "badge": "Real-Time Chat"
+        "title": "One Shared Channel",
+        "desc": "A Slack or WhatsApp group with you and the engineers in it. No forwarding, no account manager summarising what a developer said.",
+        "badge": "Direct to the team"
       },
       {
         "icon": null,
-        "title": "Bi-Weekly Screen Share Demos",
-        "desc": "Live walkthroughs of working staging builds every two weeks. You see tangible progress, test features, and guide development.",
-        "badge": "Every 2 Weeks"
+        "title": "A Call Every Two Weeks",
+        "desc": "Half an hour, screen shared, current build open. You click through it yourself and tell us what feels wrong while it is still cheap to change.",
+        "badge": "Every 2 weeks"
       },
       {
         "icon": null,
-        "title": "Global Timezone Overlap",
-        "desc": "Coordinated overlap with US (EST/PST), UK (GMT), UAE (GST), and India (IST) business hours to ensure same-day feedback cycles.",
-        "badge": "4-6 Hours Overlap"
+        "title": "Overlapping Hours",
+        "desc": "We work Indian hours and hold the later part of the day for clients in the Gulf, UK and US. There is always a window where you can reach a person.",
+        "badge": "Shared window daily"
       },
       {
         "icon": null,
-        "title": "Guaranteed Response SLAs",
-        "desc": "Under 15-minute response times during active business hours for urgent staging queries, and same-day PR turnarounds.",
-        "badge": "< 15 Mins SLA"
+        "title": "Same-Day Replies In Working Hours",
+        "desc": "Not fifteen minutes — we will not pretend to that. Within the working day, and within the hour if something is actually on fire.",
+        "badge": "Same working day"
       }
     ]
   },
   "why-us/comparison": {
     "heading": {
-      "eyebrow": "Market Benchmark Comparison",
-      "title": "How Divanex Outperforms the",
-      "highlight": "Alternatives",
-      "description": "Stop sacrificing velocity for quality or paying exorbitant legacy agency overhead. See why scaling businesses partner with Divanex."
+      "eyebrow": "THE HONEST COMPARISON",
+      "title": "Where Each Option",
+      "highlight": "Tends To Break",
+      "description": "A freelancer, an agency and us are three different trade-offs, and all three are sometimes the right answer. Here is what usually goes wrong with each so you can pick knowingly."
     },
     "items": [
       {
-        "vector": "Speed to Working MVP",
-        "freelancers": "Unpredictable (12-24 weeks)",
-        "agencies": "Slow bureaucratic (16-32 weeks)",
-        "divanex": "Fast agile sprints (4-8 weeks)"
+        "vector": "Time to something usable",
+        "freelancers": "Fast if they are free, unpredictable if not",
+        "agencies": "Four to eight months, much of it in planning",
+        "divanex": "Six to ten weeks for a first working version"
       },
       {
-        "vector": "Code & IP Ownership",
-        "freelancers": "Vague, risk of repo hostage",
-        "agencies": "Often proprietary framework lock-in",
-        "divanex": "100% immediate IP transfer on milestone"
+        "vector": "Who owns it afterwards",
+        "freelancers": "Usually you, if the repo and logins survive",
+        "agencies": "Their hosting, their framework, their terms",
+        "divanex": "Yours from week one, in your accounts"
       },
       {
-        "vector": "Architectural Caliber",
-        "freelancers": "Junior to mid-level shortcuts",
-        "agencies": "Delegated to low-cost junior interns",
-        "divanex": "Strict senior engineering & code reviews"
+        "vector": "Who writes it",
+        "freelancers": "One person, nobody reviewing them",
+        "agencies": "Whoever is free, often behind a manager",
+        "divanex": "The seniors you met, reviewing each other"
       },
       {
-        "vector": "Communication Protocol",
-        "freelancers": "Ghosting & timezone lag",
-        "agencies": "Account managers buffer engineers",
-        "divanex": "Direct Slack channel with tech leads"
+        "vector": "Getting hold of someone",
+        "freelancers": "Good until they take another contract",
+        "agencies": "Through an account manager, on their calendar",
+        "divanex": "Shared channel with the engineers"
       },
       {
-        "vector": "Pricing & Invoicing",
-        "freelancers": "Hourly scope-creep & unpredictability",
-        "agencies": "Hefty markups & $20k+/mo retainers",
-        "divanex": "Transparent milestone-gated flat pricing"
+        "vector": "How you are billed",
+        "freelancers": "Hourly, and the hours grow",
+        "agencies": "Large monthly retainer regardless of output",
+        "divanex": "Fixed per milestone, agreed in advance"
       },
       {
-        "vector": "Post-Launch Warranty",
-        "freelancers": "Disappears after payment",
-        "agencies": "Billable $250/hr maintenance tier",
-        "divanex": "30-day comprehensive zero-cost hypercare"
+        "vector": "Six months after launch",
+        "freelancers": "Often unreachable",
+        "agencies": "Billable hours and a ticket queue",
+        "divanex": "Same engineers, small monthly arrangement"
       }
     ]
   },
   "why-us/culture": {
     "heading": {
-      "eyebrow": "THE DIVANEX ENGINEERING BAR",
-      "title": "A High-Caliber",
-      "highlight": "Engineering Culture",
-      "description": "We treat software as an engineering discipline, not a creative experiment. We prioritize type-safety, maintainability, and clean architecture over flashy shortcuts that lead to technical debt."
+      "eyebrow": "HOW WE WORK // INSIDE THE TEAM",
+      "title": "Who Actually",
+      "highlight": "Writes Your Code",
+      "description": "Software is a craft with boring, unglamorous standards behind it. We would rather ship something maintainable in week nine than something impressive in week three that nobody can change afterwards."
     },
     "items": [
       {
-        "title": "Senior-Only Engineers",
-        "desc": "Zero junior bait-and-switch. Every team member working on your codebase has at least 5+ years of production SaaS and distributed systems experience."
+        "title": "The Same People You Met",
+        "desc": "The engineers in your first call are the ones on the project. Nobody gets swapped for a cheaper pair of hands once the contract is signed."
       },
       {
-        "title": "Radical Transparency",
-        "desc": "You have real-time access to our pull requests, code reviews, and project issue boards. If there is a roadblock, you know about it immediately."
+        "title": "You Can Look At Anything",
+        "desc": "Pull requests, review comments, the issue board — open to you throughout. When something is going badly you will see it in the same week we do."
       },
       {
-        "title": "Continuous Code Reviews",
-        "desc": "No code merges to staging without dual peer reviews checking for memory leaks, SQL indexing, OWASP vulnerabilities, and UX consistency."
+        "title": "Nothing Merges Unreviewed",
+        "desc": "Every change is read by a second engineer before it reaches staging. It slows us down slightly and it catches the bugs that are expensive later."
       }
     ]
   },
   "why-us/guarantees": {
     "heading": {
-      "eyebrow": "Zero Downside Commitment",
-      "title": "Institutional",
-      "highlight": "Risk Reversal Guarantees",
-      "description": "We eliminate the anxiety of outsourcing software development with legally enforceable warranties, IP escrow, and milestone-gated payment releases."
+      "eyebrow": "WHAT WE COMMIT TO",
+      "title": "What Happens",
+      "highlight": "If We Get It Wrong",
+      "description": "Anyone can promise things will go well. These are the commitments that only matter when they do not."
     },
     "items": [
       {
         "icon": null,
-        "title": "14-Day Sprint Milestone Guarantee",
-        "desc": "If our initial 14-day sprint deliverables do not meet the exact architectural specifications defined in our statement of work, we revise at zero additional cost until approved."
+        "title": "The First Milestone Is On Us If It Misses",
+        "desc": "If the first two-week block does not deliver what the scope said, we rework it at our cost until it does. You are not paying us to learn your domain."
       },
       {
         "icon": null,
-        "title": "Clean Source Code Escrow & IP Transfer",
-        "desc": "Every line of code, Docker file, and schema migration is committed directly to your enterprise GitHub repository under an unrestricted, non-exclusive intellectual property deed."
+        "title": "Delays That Are Ours, We Absorb",
+        "desc": "Late because we misjudged the work: we cover catching up. Late because scope changed or we were waiting on a decision: we will have said so in writing when it happened."
       },
       {
         "icon": null,
-        "title": "30-Day Zero-Cost Hypercare Warranty",
-        "desc": "Following production deployment, our engineering team provides 30 calendar days of comprehensive bug-fixing and configuration monitoring at no additional charge."
+        "title": "A Month Of Fixes After Launch, Free",
+        "desc": "The first month live is when the real bugs surface. Anything broken that we built gets fixed at no charge for thirty days, no argument about whose fault it is."
       },
       {
         "icon": null,
-        "title": "Fixed-Price Scope Lock Protection",
-        "desc": "Once an estimate and sprint specification is signed, you are protected against unexpected budget creep. If a feature takes longer than expected, we absorb the cost."
+        "title": "The Price Does Not Move On Its Own",
+        "desc": "Once a milestone is agreed the number is fixed. If something turns out harder than we thought, that is our misjudgement to absorb, not a change order you discover on the invoice."
       }
     ]
   },
   "why-us/ownership": {
     "heading": {
-      "eyebrow": "100% CODE SOVEREIGNTY",
-      "title": "Our Code",
-      "highlight": "Ownership Manifesto",
-      "description": "Many traditional agencies trap clients by hosting apps on their internal servers or using proprietary CMSs. At Divanex, you own 100% of everything we build."
+      "eyebrow": "OWNERSHIP // NO STRINGS",
+      "title": "You Own It,",
+      "highlight": "Not Us",
+      "description": "Plenty of agencies keep the code on their servers, or build on something only they understand. It is a quiet way of making sure you cannot leave. Nothing here works like that."
     },
     "items": [
       {
         "icon": null,
-        "title": "Direct Git Repository Transfer",
-        "desc": "All source code is committed directly to your GitHub/GitLab organization from Day 1. You hold the master keys at all times."
+        "title": "The Repository Is Yours From Week One",
+        "desc": "Code goes into your GitHub organisation from the first commit, not handed over at the end. You can read it, clone it, or bring in another team at any point without asking us."
       },
       {
         "icon": null,
-        "title": "Zero Proprietary Lock-In",
-        "desc": "We write clean, standard, idiomatic code without proprietary frameworks or black-box libraries. Any competent engineering team can pick it up immediately."
+        "title": "Nothing Only We Can Maintain",
+        "desc": "Standard frameworks, ordinary patterns, comments where the reasoning is not obvious. Any competent developer should be able to open it and get to work without a handover call."
       },
       {
         "icon": null,
-        "title": "Root Infrastructure Access",
-        "desc": "Cloud accounts (AWS, GCP, Vercel, Supabase) are created under your organization. We deploy via your permissions, not our agency servers."
+        "title": "The Cloud Accounts Are In Your Name",
+        "desc": "AWS, Vercel, Supabase — all created under your organisation with us added as collaborators. Remove our access and everything keeps running."
       },
       {
         "icon": null,
-        "title": "Signed Legal Assignment",
-        "desc": "Full intellectual property assignment contracts legally transferring all copyright, patents, and trade secrets to your legal entity upon payment."
+        "title": "Put In Writing, Not Just Promised",
+        "desc": "The contract assigns copyright and everything else to your company on payment. If it is not written down it does not count, so we write it down."
       }
     ]
   },
   "why-us/retention": {
     "heading": {
-      "eyebrow": "Partnership Longevity",
-      "title": "Client Retention &",
-      "highlight": "Partnership Loyalty",
-      "description": "Agencies focus on signing you; we focus on scaling you. Our high client retention rate is a direct outcome of disciplined software execution and honest collaboration."
+      "eyebrow": "WHAT HAPPENS AFTERWARDS",
+      "title": "Most Clients",
+      "highlight": "Come Back",
+      "description": "The honest measure of an engineering team is not the launch. It is whether anyone wants to work with them again once they have seen how the project really went."
     },
     "items": [
       {
-        "value": "96.2%",
-        "label": "Annual Client Retention",
-        "desc": "Percentage of founders who continue for version 2.0 or maintain ongoing infrastructure retainers."
+        "value": "96%",
+        "label": "Came back for more work",
+        "desc": "A second phase, a new product, or an ongoing arrangement to keep the first one healthy."
       },
       {
-        "value": "18+ Mo",
-        "label": "Average Partnership Tenure",
-        "desc": "Our clients treat us as an embedded internal engineering department rather than an external agency."
+        "value": "18+ mo",
+        "label": "Typical length of a relationship",
+        "desc": "Most engagements do not end at handover. They turn into a smaller, steadier amount of work."
       },
       {
         "value": "84%",
-        "label": "Direct Referral Rate",
-        "desc": "Over four out of five new enterprise contracts originate from direct founder-to-founder recommendations."
+        "label": "Arrived through a recommendation",
+        "desc": "Most new projects come from someone we already built for telling someone else."
       },
       {
-        "value": "0%",
-        "label": "Code Held Hostage",
-        "desc": "Strict policy of transparent daily commits ensuring you retain complete control of your tech assets at all times."
+        "value": "0",
+        "label": "Clients locked in",
+        "desc": "Nobody stays because leaving would be difficult. The repository and the accounts are theirs the whole time."
       }
     ]
   }

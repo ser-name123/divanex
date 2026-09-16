@@ -100,13 +100,13 @@ export default function ContactSection() {
         <div className="reveal-init text-center max-w-4xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-xs font-bold text-sky-800 shadow-xs">
             <Mail className="w-3.5 h-3.5 text-sky-600" />
-            <span>Ready to Build Something Incredible?</span>
+            <span>Tell us what you are building</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 tracking-tight">
-            Let&apos;s Discuss Your Project & <span className="gradient-text font-semibold">Build Together</span>
+            Start With a Conversation, <span className="gradient-text font-semibold">Not a Contract</span>
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto font-normal">
-            Fill out the technical inquiry form below to receive a detailed milestone proposal within 24 hours, or connect directly on WhatsApp Business for an immediate architectural consultation.
+            Send us a short note about the problem you are trying to solve. You will hear back from an engineer within a working day — with questions, a rough scope and a number, not a brochure.
           </p>
         </div>
 

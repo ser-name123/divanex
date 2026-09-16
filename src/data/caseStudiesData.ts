@@ -85,1042 +85,664 @@ export interface CaseStudy {
 }
 
 export const caseStudiesRecord: Record<string, CaseStudy> = {
-  "cloudscale-erp": {
-    id: "cloudscale-erp",
-    slug: "cloudscale-erp",
-    title: "CloudScale Multi-Tenant ERP",
-    subtitle: "Enterprise Workflow Automation & Global B2B Subscription Engine",
-    category: "SaaS Development",
-    clientName: "CloudScale Technologies Ltd.",
-    industry: "Enterprise SaaS & Supply Chain",
-    duration: "7 Weeks to Production",
-    contractValue: "$38,500",
-    impactHighlight: "+340%",
-    impactLabel: "Operational Efficiency Gain",
-    metaDescription: "How Divanex architected an institutional multi-tenant SaaS ERP platform with PostgreSQL row-level security, automated Stripe billing, and sub-second inventory sync.",
-    stats: [
-      { label: "B2B Tenant Scale", value: "4,200+", subtext: "Active Enterprise Orgs" },
-      { label: "Efficiency Gain", value: "+340%", subtext: "Automated Workflows" },
-      { label: "Ledger Accuracy", value: "99.999%", subtext: "Double-Entry Financials" },
-      { label: "P95 Query Latency", value: "14ms", subtext: "Optimized pgBouncer Pool" }
-    ],
-    challenge: {
-      title: "Monolithic Bottlenecks & Multi-Tenancy Data Bleed Risks",
-      summary: "CloudScale had accumulated a sprawling legacy monolithic stack that crashed whenever multiple B2B clients executed synchronized batch invoicing at the month-end close. Database deadlocks, cross-tenant data bleed risks, and slow report queries were causing severe customer churn.",
-      frictionPoints: [
-        "Inability to enforce strict isolated row-level tenant security across corporate accounts.",
-        "Monthly invoice generation taking over 6 hours with frequent database transaction timeouts.",
-        "Zero API flexibility for enterprise clients seeking custom webhook integrations and ERP exports.",
-        "High AWS infrastructure bills due to unoptimized EC2 compute instances running 24/7."
-      ]
-    },
-    solution: {
-      title: "Modular Next.js 16 + Sharded PostgreSQL Architecture",
-      summary: "Divanex re-engineered the platform from scratch using a modern modular architecture. We isolated tenant data via PostgreSQL Row-Level Security (RLS), offloaded heavy report generation to Redis-backed serverless worker queues, and introduced an ultra-fast Next.js React 19 interface.",
-      architecturalPillars: [
-        {
-          title: "Tenant Row-Level Security (RLS)",
-          description: "Cryptographically enforced schema partitioning ensuring zero cross-tenant data leakage under any condition.",
-          tech: "PostgreSQL 17 + Supabase / Prisma"
-        },
-        {
-          title: "Asynchronous Billing & Webhooks",
-          description: "Decoupled Stripe metered billing dispatcher capable of settling 10,000 corporate accounts in under 4 minutes.",
-          tech: "Redis BullMQ + AWS Lambda"
-        },
-        {
-          title: "Sub-Second Reactive Dashboard",
-          description: "Edge-cached server components with optimistic client-side updates for instantaneous navigation.",
-          tech: "Next.js 16 + React Server Components"
-        }
-      ]
-    },
-    architectureBlueprint: {
-      title: "Distributed Multi-Tenant Ingestion & Settlement Pipeline",
-      flowSteps: [
-        {
-          step: "01 Ingress Layer",
-          component: "Cloudflare Anycast WAF + Edge Caching",
-          detail: "Filters DDoS attack vectors, terminates TLS 1.3, and routes requests to nearest regional edge in <12ms."
-        },
-        {
-          step: "02 Application Tier",
-          component: "Next.js 16 App Router on Vercel Enterprise",
-          detail: "Validates JWT tokens, extracts tenant context, and renders SSR data with zero client bundle overhead."
-        },
-        {
-          step: "03 Event Dispatcher",
-          component: "Upstash Redis Queue & Webhook Engine",
-          detail: "Buffers high-frequency inventory mutations and batch dispatches invoices to accounting ledgers."
-        },
-        {
-          step: "04 Data Persistence",
-          component: "PostgreSQL Cluster with PgBouncer & RLS",
-          detail: "Enforces tenant-scoped connection pooling with automated read-replicas for analytics queries."
-        }
-      ],
-      highlights: [
-        "SOC-2 Type II compliant audit logging for every financial mutation.",
-        "Zero downtime rolling deployments via automated GitHub Actions CI/CD.",
-        "Automated PDF invoice generation and direct customer email dispatch."
-      ]
-    },
-    techStack: [
-      {
-        category: "Frontend & Interface",
-        technologies: [
-          { name: "Next.js 16", role: "SSR & Edge Routing", highlight: "100/100 CWV" },
-          { name: "React 19", role: "Concurrent UI Primitives", highlight: "Zero-Lag" },
-          { name: "Tailwind CSS v4", role: "High-Density Design System", highlight: "Fluid Scaling" },
-          { name: "Lucide Icons", role: "Micro-Visual Primitives", highlight: "SVG Tree-Shaken" }
-        ]
-      },
-      {
-        category: "Backend & Orchestration",
-        technologies: [
-          { name: "Node.js 22 LTS", role: "Runtime Engine", highlight: "Edge Compatible" },
-          { name: "Stripe API", role: "Metered Usage & Webhooks", highlight: "PCI-DSS Level 1" },
-          { name: "BullMQ / Redis", role: "Asynchronous Job Worker", highlight: "10k Jobs/min" }
-        ]
-      },
-      {
-        category: "Database & Security",
-        technologies: [
-          { name: "PostgreSQL 17", role: "Primary Relational Store", highlight: "Row-Level Sec" },
-          { name: "Supavisor / PgBouncer", role: "Connection Pooler", highlight: "<5ms Handshake" },
-          { name: "Cloudflare Turnstile", role: "Bot & Ingress Shield", highlight: "Zero Friction" }
-        ]
-      }
-    ],
-    deliverables: [
-      {
-        milestone: "Phase 1: Architecture & RLS Data Modeling",
-        description: "Designed normalized schema with isolated tenant keys, RBAC permissions, and migration scripts.",
-        timeline: "Week 1 - 2"
-      },
-      {
-        milestone: "Phase 2: Core Microservices & Stripe Billing",
-        description: "Engineered subscription lifecycle, invoice generation engine, and automated webhooks.",
-        timeline: "Week 3 - 4"
-      },
-      {
-        milestone: "Phase 3: High-Fi Dashboard & Reporting",
-        description: "Built responsive responsive command center with CSV exports, batch actions, and real-time inventory HUD.",
-        timeline: "Week 5 - 6"
-      },
-      {
-        milestone: "Phase 4: Load Testing & Production Handover",
-        description: "Simulated 50,000 concurrent user sessions with k6, completed security audit, and migrated DNS.",
-        timeline: "Week 7"
-      }
-    ],
-    businessImpact: {
-      headline: "Transforming Core Operations into a High-Growth Asset",
-      metrics: [
-        { metric: "Batch Invoicing Runtime", before: "360 mins", after: "3.8 mins", gain: "94x Faster" },
-        { metric: "Customer Onboarding Time", before: "14 days", after: "45 seconds", gain: "Instant Self-Serve" },
-        { metric: "Monthly AWS Infrastructure", before: "$4,200/mo", after: "$680/mo", gain: "84% Savings" },
-        { metric: "Annual Recurring Revenue", before: "$1.2M", after: "$4.1M", gain: "+241% Growth" }
-      ]
-    },
-    testimonial: {
-      quote: "Divanex did what our internal engineering team struggled with for a year. They delivered our entire multi-tenant SaaS revamp in 7 weeks flat. The codebase is clean, the performance is blistering, and our clients love the new experience.",
-      author: "Marcus Vance",
-      role: "Chief Technology Officer",
-      company: "CloudScale Technologies Ltd.",
-      avatarInitials: "MV"
-    }
-  },
-
-  "neurochat-ai": {
-    id: "neurochat-ai",
-    slug: "neurochat-ai",
-    title: "NeuroChat Autonomous AI Agent",
-    subtitle: "Enterprise RAG Intelligence & Contextual Financial Copilot",
-    category: "AI & Automation",
-    clientName: "NeuroChat FinTech AI",
-    industry: "Artificial Intelligence & Financial Advisory",
-    duration: "5 Weeks to Production",
-    contractValue: "$28,000",
-    impactHighlight: "88%",
-    impactLabel: "First-Touch Support Deflection",
-    metaDescription: "How Divanex built an enterprise RAG AI conversational agent with anti-hallucination guardrails, private vector search, and SOC-2 compliance.",
-    stats: [
-      { label: "First-Touch Resolution", value: "88%", subtext: "Automated Triage" },
-      { label: "Vector Search P95", value: "32ms", subtext: "pgvector HNSW Index" },
-      { label: "Hallucination Rate", value: "<0.1%", subtext: "Strict Guardrails" },
-      { label: "Monthly Conversations", value: "140k+", subtext: "Zero Down-time SLA" }
-    ],
-    challenge: {
-      title: "Scaling Client Advisory Without Ballooning Human Headcount",
-      summary: "NeuroChat was overwhelmed by complex client regulatory questions, market portfolio inquiries, and risk documentation requests. Generic LLMs hallucinated compliance data, and manual support reps could not keep up with surging user volume across multiple timezones.",
-      frictionPoints: [
-        "Generic LLM outputs produced inaccurate financial compliance terminology.",
-        "Lack of real-time grounding on proprietary 50,000-page institutional research archives.",
-        "Strict regulatory requirements requiring zero personal financial data leakage (PII/GLBA).",
-        "High latency in multi-turn conversation chains leading to high drop-off rates."
-      ]
-    },
-    solution: {
-      title: "Hybrid Retrieval Augmented Generation (RAG) Architecture",
-      summary: "Divanex engineered a closed-loop RAG pipeline that chunks, embeds, and indexes financial documentation into an optimized pgvector database. An autonomous router determines query intent, applies anti-hallucination guardrails, and streams citations in real time.",
-      architecturalPillars: [
-        {
-          title: "pgvector HNSW Indexing",
-          description: "High-dimensional vector embeddings with cosine similarity distance ranking delivering answers in under 40ms.",
-          tech: "PostgreSQL pgvector + OpenAI text-embedding-3"
-        },
-        {
-          title: "Deterministic Guardrail Filter",
-          description: "Dual-layer validation gate that checks output accuracy against ground truth documents before rendering.",
-          tech: "LangChain + Python FastAPI"
-        },
-        {
-          title: "Sub-50ms Streaming UI",
-          description: "WebSocket streaming interface that renders token-by-token with clickable source citations.",
-          tech: "Next.js 16 + Server-Sent Events (SSE)"
-        }
-      ]
-    },
-    architectureBlueprint: {
-      title: "Agentic Knowledge Retrieval & Anti-Hallucination Mesh",
-      flowSteps: [
-        {
-          step: "01 Ingestion & Chunking",
-          component: "Automated Document Parser (PDF/DOCX/HTML)",
-          detail: "Extracts semantic blocks, strips PII, and generates 512-token contextual vectors."
-        },
-        {
-          step: "02 Vector Persistence",
-          component: "Supabase pgvector Cluster",
-          detail: "Stores 1536-dimensional embeddings with hierarchical navigable small world (HNSW) indexing."
-        },
-        {
-          step: "03 Agentic Router",
-          component: "Claude 3.5 Sonnet / GPT-4o Orchestration",
-          detail: "Determines whether query is conversational, analytical, or requires live market quote lookup."
-        },
-        {
-          step: "04 Guardrail & Stream",
-          component: "Fact-Check Validator + SSE Channel",
-          detail: "Validates citations, verifies confidence score >92%, and streams response to client terminal."
-        }
-      ],
-      highlights: [
-        "100% data residency isolation with zero model training on customer data.",
-        "Interactive citations allowing users to view the exact source document snippet.",
-        "Human-in-the-loop escalation trigger for sensitive portfolio reallocations."
-      ]
-    },
-    techStack: [
-      {
-        category: "AI & Vector Search",
-        technologies: [
-          { name: "pgvector (PostgreSQL)", role: "High-Dimensional Vector Store", highlight: "<40ms Cosine Match" },
-          { name: "OpenAI Embeddings", role: "text-embedding-3-large", highlight: "1536 Dimensions" },
-          { name: "LangChain / LlamaIndex", role: "RAG Agent Pipeline", highlight: "Zero-Hallucination" }
-        ]
-      },
-      {
-        category: "Application & Streaming",
-        technologies: [
-          { name: "FastAPI / Python", role: "High-Concurrency Async API", highlight: "uvicorn Workers" },
-          { name: "Next.js 16", role: "Streaming Chatbot HUD", highlight: "SSE Real-time" },
-          { name: "Redis Caching", role: "Semantic Query Cache", highlight: "94% Hit Ratio" }
-        ]
-      }
-    ],
-    deliverables: [
-      {
-        milestone: "Phase 1: Knowledge Pipeline & Embedding",
-        description: "Parsed 50,000 institutional documents and generated high-accuracy vector index.",
-        timeline: "Week 1 - 2"
-      },
-      {
-        milestone: "Phase 2: Guardrail Engine & Routing Mesh",
-        description: "Implemented intent classification, citation generator, and PII anonymization gates.",
-        timeline: "Week 3"
-      },
-      {
-        milestone: "Phase 3: Real-Time Streaming Frontend",
-        description: "Built slick, responsive terminal chat UI with markdown support and source viewers.",
-        timeline: "Week 4"
-      },
-      {
-        milestone: "Phase 4: SOC2 Compliance & Production Rollout",
-        description: "Passed penetration tests, conducted red-teaming hallucination benchmarks, and launched live.",
-        timeline: "Week 5"
-      }
-    ],
-    businessImpact: {
-      headline: "Dramatic Cost Reductions & 24/7 Institutional Availability",
-      metrics: [
-        { metric: "Support Ticket Deflection", before: "12%", after: "88%", gain: "7.3x Improvement" },
-        { metric: "Response Time to Inquiries", before: "4 hours", after: "1.2 seconds", gain: "Instantaneous" },
-        { metric: "Customer Support Payroll", before: "$35,000/mo", after: "$6,500/mo", gain: "81% Savings" },
-        { metric: "Client CSAT Rating", before: "3.6 / 5.0", after: "4.9 / 5.0", gain: "+36% Increase" }
-      ]
-    },
-    testimonial: {
-      quote: "Our clients think we hired a 50-person research team overnight. The precision of the RAG assistant is uncanny—it cites real documents and never hallucinates. Divanex delivered world-class AI engineering in record time.",
-      author: "Elena Rostova",
-      role: "Head of AI Products",
-      company: "NeuroChat FinTech AI",
-      avatarInitials: "ER"
-    }
-  },
-
-  "healthpulse-go": {
-    id: "healthpulse-go",
-    slug: "healthpulse-go",
-    title: "HealthPulse Telehealth Suite",
-    subtitle: "HIPAA-Ready WebRTC Video Consultations & Prescription Logistics App",
+  "fynito": {
+    id: "fynito",
+    slug: "fynito",
+    title: "Fynito Food Delivery Ecosystem",
+    subtitle: "Hyperlocal Multi-Vendor Food Ordering, Rider Telemetry & Live Kitchen Dispatch",
     category: "Mobile Engineering",
-    clientName: "HealthPulse Global",
-    industry: "HealthTech & Telemedicine",
-    duration: "6 Weeks to App Store",
-    contractValue: "$34,000",
-    impactHighlight: "150K+",
-    impactLabel: "Verified Patient Consultations",
-    metaDescription: "How Divanex built a cross-platform React Native & WebRTC telemedicine platform with end-to-end encrypted video, electronic health records, and zero drop calls.",
-    stats: [
-      { label: "Active Consultations", value: "150K+", subtext: "Zero Dropped Calls" },
-      { label: "App Store Rating", value: "4.9 ★", subtext: "iOS & Android" },
-      { label: "HIPAA Compliance", value: "100%", subtext: "BAA Certified" },
-      { label: "Video Latency", value: "<85ms", subtext: "Peer-to-Peer Mesh" }
-    ],
-    challenge: {
-      title: "Unstable Video Connections & Stringent HIPAA Privacy Gates",
-      summary: "HealthPulse required a native iOS and Android mobile consultation experience that could connect rural patients on weak 3G/4G connections with top hospital physicians. Third-party video APIs were dropping 14% of calls, and sensitive medical health records were difficult to synchronize securely without violating HIPAA.",
-      frictionPoints: [
-        "14% call drop rate on low-bandwidth cellular connections.",
-        "Complex multi-device authentication with biometric FaceID / TouchID.",
-        "Strict HIPAA requirements prohibiting unencrypted storage of medical history or audio.",
-        "Laggy EHR synchronization during live consultations causing physician frustration."
-      ]
-    },
-    solution: {
-      title: "Adaptive WebRTC Mesh with Offline-First SQLite Sync",
-      summary: "Divanex architected a custom cross-platform React Native mobile app utilizing adaptive WebRTC signaling with selective forwarding units (SFU). Video bitrates scale down gracefully on poor cellular connections while preserving crystal-clear audio fidelity, accompanied by AES-256 encrypted local SQLite state.",
-      architecturalPillars: [
-        {
-          title: "Adaptive WebRTC Video Mesh",
-          description: "Dynamic bitrate scaling from 1080p down to 360p with audio packet redundancy ensuring zero dropped doctor appointments.",
-          tech: "WebRTC + LiveKit SFU Cluster"
-        },
-        {
-          title: "Encrypted Health Record Vault",
-          description: "SQLCipher database with device-level biometric encryption keys for patient prescriptions and lab reports.",
-          tech: "SQLCipher + Biometric Keychain"
-        },
-        {
-          title: "Automated E-Prescription Gateway",
-          description: "Direct integration with regional pharmacy networks for automated medicine delivery dispatch upon doctor signoff.",
-          tech: "REST Microservices + Surescripts API"
-        }
-      ]
-    },
-    architectureBlueprint: {
-      title: "End-to-End Encrypted Patient-Doctor Teleconsultation Topology",
-      flowSteps: [
-        {
-          step: "01 Biometric Handshake",
-          component: "Secure Enclave / FaceID Tokenizer",
-          detail: "Generates ephemeral cryptographic session tokens validated against central Auth0 HIPAA tenant."
-        },
-        {
-          step: "02 WebRTC Signaling",
-          component: "Global TURN/STUN Mesh via LiveKit",
-          detail: "Negotiates P2P video stream in <200ms with fallback to regional SFU relay nodes in Frankfurt & Mumbai."
-        },
-        {
-          step: "03 Synchronous Clinical Notes",
-          component: "Real-Time CRDT State Synchronizer",
-          detail: "Allows doctor to type prescription notes during call with sub-millisecond sync to patient screen."
-        },
-        {
-          step: "04 Pharmacy Fulfillment",
-          component: "E-Prescription Webhook Dispatcher",
-          detail: "Digitally signs prescription with doctor's cryptographic certificate and routes to fulfillment centers."
-        }
-      ],
-      highlights: [
-        "Zero video recording on servers—pure end-to-end ephemeral streaming.",
-        "Works smoothly even on rural 2G/3G mobile networks with adaptive audio priority.",
-        "Automated push notifications for medication reminders and follow-up slots."
-      ]
-    },
-    techStack: [
-      {
-        category: "Mobile & Real-Time Media",
-        technologies: [
-          { name: "React Native", role: "Cross-Platform Mobile Core", highlight: "60 FPS Native" },
-          { name: "WebRTC / LiveKit", role: "Encrypted Video Mesh", highlight: "<85ms Latency" },
-          { name: "SQLCipher", role: "Encrypted Local Storage", highlight: "AES-256-GCM" }
-        ]
-      },
-      {
-        category: "Backend & Pharmacy Integrations",
-        technologies: [
-          { name: "Node.js Microservices", role: "EHR Sync & Webhooks", highlight: "Zero Data Egress" },
-          { name: "PostgreSQL 17", role: "HIPAA Compliant DB", highlight: "Audit Trails" },
-          { name: "AWS HealthLake", role: "FHIR Standardized Data", highlight: "Interoperable" }
-        ]
-      }
-    ],
-    deliverables: [
-      {
-        milestone: "Phase 1: Compliance & Cryptographic Architecture",
-        description: "Formulated HIPAA security matrix, biometric keychain storage, and signed BAA agreements.",
-        timeline: "Week 1 - 2"
-      },
-      {
-        milestone: "Phase 2: WebRTC Video Core & Signaling Mesh",
-        description: "Deployed LiveKit SFU infrastructure and engineered adaptive bitrate fallbacks.",
-        timeline: "Week 3 - 4"
-      },
-      {
-        milestone: "Phase 3: Mobile UI, EHR & Prescriptions",
-        description: "Built slick mobile interface for iOS and Android with appointment calendar and digital signatures.",
-        timeline: "Week 5"
-      },
-      {
-        milestone: "Phase 4: Store Submission & Hypercare",
-        description: "Passed Apple App Store Review and Google Play Medical App Verification on first submission.",
-        timeline: "Week 6"
-      }
-    ],
-    businessImpact: {
-      headline: "Exponential Patient Growth and Unprecedented Clinical Reliability",
-      metrics: [
-        { metric: "Call Drop Rate", before: "14.2%", after: "0.04%", gain: "355x Improvement" },
-        { metric: "Patient Onboarding Speed", before: "8.5 mins", after: "45 seconds", gain: "11x Quicker" },
-        { metric: "Consultations Completed", before: "1,200/mo", after: "38,000/mo", gain: "31x Growth" },
-        { metric: "App Store User Rating", before: "3.2 ★", after: "4.9 ★", gain: "Category Leader" }
-      ]
-    },
-    testimonial: {
-      quote: "Building telemedicine apps is a legal and technical minefield. Divanex delivered a masterpiece. The video quality is flawless even when our doctors consult patients in remote regions, and the HIPAA audit passed without a single warning.",
-      author: "Dr. Alistair Finch",
-      role: "Chief Medical Officer",
-      company: "HealthPulse Global",
-      avatarInitials: "AF"
-    }
-  },
-
-  "apexfin-analytics": {
-    id: "apexfin-analytics",
-    slug: "apexfin-analytics",
-    title: "ApexFin Wealth Terminal",
-    subtitle: "Ultra-Low Latency Institutional Trading & Portfolio Analytics PWA",
-    category: "High-Frequency Web",
-    clientName: "ApexFin Capital Markets",
-    industry: "Quantitative Finance & Trading",
-    duration: "6 Weeks to Launch",
+    clientName: "Fynito Technologies Pvt. Ltd.",
+    industry: "Food Delivery & On-Demand Logistics",
+    duration: "8 Weeks to App Store & Play Store",
     contractValue: "$42,000",
-    impactHighlight: "< 85ms",
-    impactLabel: "Real-Time WebSocket Latency",
-    metaDescription: "How Divanex built a sub-100ms real-time trading dashboard streaming live market quotes, portfolio risk algorithms, and automated execution workflows.",
+    impactHighlight: "450K+",
+    impactLabel: "Orders Fulfilled with 99.8% SLA",
+    metaDescription: "How Divanex engineered Fynito's end-to-end food delivery mobile app ecosystem, real-time rider tracking, and ultra-fast checkout.",
     stats: [
-      { label: "WebSocket Latency", value: "<85ms", subtext: "Worldwide Anycast" },
-      { label: "Active AUM Managed", value: "$1.8B+", subtext: "Tracked Daily" },
-      { label: "Concurrent Tickers", value: "25,000", subtext: "Sub-Second Updates" },
-      { label: "Lighthouse Score", value: "100/100", subtext: "PWA Performance" }
+      { label: "Total Orders Delivered", value: "450K+", subtext: "Processed across 12 cities" },
+      { label: "Average Delivery Time", value: "24 min", subtext: "Optimized driver dispatch algorithms" },
+      { label: "Checkout Conversion Rate", value: "84.6%", subtext: "Sub-second 1-click payment flow" },
+      { label: "Real-Time Tracking Latency", value: "< 120ms", subtext: "WebSocket rider location updates" }
     ],
     challenge: {
-      title: "UI Freezes During Market High-Volatility Surges",
-      summary: "ApexFin's institutional wealth managers were trading on an outdated desktop application that choked when market volatility triggered thousands of price updates per second. UI threads froze, order confirmations lagged by seconds, and portfolio rebalancing calculations took minutes.",
+      title: "Peak Hour Concurrency Bottlenecks & High Rider Dispatch Latency",
+      summary: "Fynito's initial MVP suffered from frequent GPS sync drops during dinner rush hours, delayed order state transitions between kitchen POS and riders, and abandoned checkouts due to slow payment redirects.",
       frictionPoints: [
-        "Browser DOM thrashing and memory leaks when rendering 2,000 real-time pricing ticks per second.",
-        "Laggy order routing resulting in price slippage during macroeconomic interest rate releases.",
-        "Lack of mobile parity—portfolio managers could not monitor risk exposures outside the trading desk.",
-        "Heavy websocket connection overhead overloading backend gateway servers."
+        "GPS location packets from 2,000+ simultaneous delivery riders overloaded the legacy backend server.",
+        "Kitchen preparation status was out of sync with customer order views by up to 45 seconds.",
+        "Legacy payment gateway failures during lunch/dinner peak hours caused high customer churn."
       ]
     },
     solution: {
-      title: "Canvas-Accelerated Next.js 16 Trading Terminal",
-      summary: "Divanex engineered a modern WebAssembly and Canvas-accelerated charting terminal. Instead of rendering thousands of DOM nodes, price tickers update via high-speed WebGL canvas with delta-compression binary WebSockets, paired with Redis pub/sub clusters.",
+      title: "Real-Time Event-Driven Architecture with Native Mobile Apps",
+      summary: "Divanex redesigned Fynito from the ground up: building custom cross-platform React Native mobile apps for customers and riders, a high-throughput Node.js microservice cluster, and a live kitchen display web portal.",
       architecturalPillars: [
         {
-          title: "Binary WebSocket Stream",
-          description: "Protobuf-encoded binary market data reducing bandwidth overhead by 82% compared to JSON.",
-          tech: "Protobuf + WebSockets on Node.js"
+          title: "Socket.io & Redis Pub/Sub Rider Telemetry",
+          description: "Streams live rider coordinates with dead-reckoning smoothing, keeping mobile battery consumption minimal while updating customer maps every second.",
+          tech: "Socket.io • Redis • GeoJSON"
         },
         {
-          title: "Canvas-Rendered Orderbook",
-          description: "60 FPS hardware-accelerated market depth visualizer that eliminates DOM layout recalculations.",
-          tech: "HTML5 Canvas + WebGL 2.0"
+          title: "Distributed Order State Machine",
+          description: "Deterministic order lifecycle managing placed, accepted, cooking, picked up, and delivered states with idempotency keys preventing double-charges.",
+          tech: "Node.js • PostgreSQL Transactions"
         },
         {
-          title: "Edge Risk Calculation Engine",
-          description: "Monte Carlo portfolio risk modeling executing directly in WebAssembly inside the client browser.",
-          tech: "Rust + Wasm + Web Workers"
+          title: "Zero-Latency Multi-Gateway Switch",
+          description: "Smart fallback between UPI, cards, and digital wallets, achieving 99.7% payment success rate on first attempt.",
+          tech: "Stripe • Razorpay • UPI Deep-Links"
         }
       ]
     },
     architectureBlueprint: {
-      title: "Sub-Millisecond Market Ingestion & Execution Architecture",
+      title: "Fynito Live Order & Rider Telemetry Blueprint",
       flowSteps: [
-        {
-          step: "01 Market Data Ingestion",
-          component: "Direct FIX Protocol Feeds",
-          detail: "Connects to NASDAQ and LSE market gateways, serializing quotes into lightweight Protobuf packets."
-        },
-        {
-          step: "02 Event Fan-Out",
-          component: "Redis Enterprise Cluster (in-memory)",
-          detail: "Broadcasts price ticks to 50,000 concurrent institutional clients with <10ms internal hop."
-        },
-        {
-          step: "03 WebAssembly Risk Engine",
-          component: "Rust Wasm in Web Worker Thread",
-          detail: "Calculates Value-at-Risk (VaR) and beta exposures without blocking the main UI rendering thread."
-        },
-        {
-          step: "04 High-Speed Execution",
-          component: "Smart Order Routing Router",
-          detail: "Dispatches trade orders through encrypted mTLS VPC to prime broker clearinghouses."
-        }
+        { step: "1. Order Ingestion", component: "Customer Mobile App", detail: "Customer places order; signed payload validated via JWT and edge API gateway in <45ms." },
+        { step: "2. Kitchen Dispatch", component: "Partner Web Portal", detail: "Kitchen POS receives audio chime; kitchen accept updates PostgreSQL state machine instantly." },
+        { step: "3. Smart Rider Match", component: "Dispatch Engine", detail: "Geospatial proximity query matches nearest idle rider with lowest delivery route ETA." },
+        { step: "4. Live HUD Streaming", component: "WebSocket Broker", detail: "Rider GPS location broadcasted to customer app with map route interpolation." }
       ],
       highlights: [
-        "PWA installable on desktop and iPad with full offline portfolio snapshot cache.",
-        "Customizable multi-monitor trading layouts saved to user profile in milliseconds.",
-        "Audited by Ernst & Young for financial calculation precision."
+        "Zero dropped orders during 50,000 orders/day peak weekend spikes.",
+        "Offline-tolerant rider app with local SQLite caching when entering network dead zones.",
+        "Built-in merchant analytics dashboard tracking bestsellers, preparation times, and net revenue."
       ]
     },
     techStack: [
       {
-        category: "Real-Time Frontend & Canvas",
+        category: "Mobile & Frontend",
         technologies: [
-          { name: "Next.js 16 App Router", role: "PWA Container", highlight: "100/100 CWV" },
-          { name: "WebGL / HTML5 Canvas", role: "High-Frequency Charting", highlight: "60 FPS Smooth" },
-          { name: "WebAssembly (Rust)", role: "Client-Side Risk Engine", highlight: "Native Speed" }
+          { name: "React Native", role: "Customer & Rider iOS/Android Apps", highlight: "60 FPS Smooth Navigation" },
+          { name: "Next.js 15", role: "Merchant Portal & Admin Console", highlight: "Server-side Rendered HUD" },
+          { name: "Tailwind CSS", role: "Design System & UI Components", highlight: "Pixel-perfect mobile UI" }
         ]
       },
       {
-        category: "Backend & Gateway",
+        category: "Backend & Cloud",
         technologies: [
-          { name: "Node.js & Go", role: "Low-Latency Gateway", highlight: "<15ms Route" },
-          { name: "Redis Enterprise", role: "In-Memory Tick Cache", highlight: "Sub-millisecond" },
-          { name: "Protobuf (gRPC)", role: "Binary Serialization", highlight: "82% Less Bandwidth" }
+          { name: "Node.js & Express", role: "High-Throughput Order API", highlight: "Clustered Worker Threads" },
+          { name: "PostgreSQL", role: "Primary ACID Relational Database", highlight: "Strict Transaction Locks" },
+          { name: "Redis & Socket.io", role: "Live Rider Coordinates & Push", highlight: "Sub-50ms Pub/Sub" },
+          { name: "AWS ECS & S3", role: "Containerized Microservices", highlight: "Auto-scaling Container Cluster" }
         ]
       }
     ],
     deliverables: [
-      {
-        milestone: "Phase 1: Binary Protocol & Ingestion Pipeline",
-        description: "Engineered Protobuf WebSocket stream capable of broadcasting 50,000 ticks/sec.",
-        timeline: "Week 1 - 2"
-      },
-      {
-        milestone: "Phase 2: Canvas Charting & Orderbook",
-        description: "Built hardware-accelerated market depth charts with custom indicator builder.",
-        timeline: "Week 3 - 4"
-      },
-      {
-        milestone: "Phase 3: WebAssembly Risk Simulation",
-        description: "Compiled Rust Monte Carlo simulation engine into WebAssembly web worker.",
-        timeline: "Week 5"
-      },
-      {
-        milestone: "Phase 4: Multi-Monitor Layouts & PWA Launch",
-        description: "Added drag-and-drop dockable panels, completed stress testing, and deployed to hedge funds.",
-        timeline: "Week 6"
-      }
+      { milestone: "Discovery & UX Wireframes", description: "Design of customer app, rider app, and merchant tablet POS in Figma.", timeline: "Week 1–2" },
+      { milestone: "Core API & Live Telemetry", description: "Node.js microservices, PostgreSQL schema, and Socket.io GPS sync engine.", timeline: "Week 3–5" },
+      { milestone: "Mobile App Development", description: "React Native iOS & Android builds with live maps, push notifications, and payment gateways.", timeline: "Week 5–7" },
+      { milestone: "Production Launch & Stress Testing", description: "Load tested at 5,000 req/sec; deployed to Apple App Store & Google Play Store.", timeline: "Week 8" }
     ],
     businessImpact: {
-      headline: "Sub-Second Trading Advantage Delivering Millions in Alpha",
+      headline: "Fynito Scaled to 450,000+ Monthly Deliveries with 99.8% On-Time SLA",
       metrics: [
-        { metric: "Quote Update Latency", before: "1,200ms", after: "74ms", gain: "16x Faster" },
-        { metric: "CPU Usage During Volatility", before: "98% (Freezing)", after: "14%", gain: "85% Less Overhead" },
-        { metric: "Trade Execution Slippage", before: "1.4 bps", after: "0.1 bps", gain: "93% Reduction" },
-        { metric: "Platform User Retention", before: "68%", after: "97.4%", gain: "Industry Benchmark" }
+        { metric: "Peak Order Throughput", before: "180 orders/hr", after: "4,200 orders/hr", gain: "+2,230%" },
+        { metric: "Driver Matching Time", before: "90 seconds", after: "6.8 seconds", gain: "13.2x Faster" },
+        { metric: "Checkout Drop-off Rate", before: "38.5%", after: "7.2%", gain: "-81.3% Cart Abandonment" }
       ]
     },
     testimonial: {
-      quote: "Our traders live and die by latency. Divanex's Canvas-driven terminal eliminated all UI stutter even during violent market swings. We've scaled from managing $400M to $1.8B without adding a single backend server.",
-      author: "Julian Sterling",
+      quote: "Divanex didn't just build an app; they built the engine our whole business runs on. Our riders love the simplicity, and our order volume increased 10x without a single crash.",
+      author: "Vikram Malhotra",
+      role: "Co-Founder & COO",
+      company: "Fynito Technologies",
+      avatarInitials: "VM"
+    },
+    complianceBadges: ["PCI-DSS Level 1 Compliant", "ISO 27001 Certified Infrastructure", "End-to-End Encrypted Rider Telemetry"],
+    keyTakeaways: [
+      "Real-time geospatial dispatch reduced food delivery transit times by 32%.",
+      "Native fluid UI on both iOS and Android drove 4.8-star ratings across 30,000+ app reviews.",
+      "Scalable infrastructure handled Diwali and New Year rush spikes effortlessly."
+    ]
+  },
+
+  "our-pg": {
+    id: "our-pg",
+    slug: "our-pg",
+    title: "Our PG - Smart Coliving & PG Management OS",
+    subtitle: "Automated Rent Invoicing, Room Bed Allocation Grid, Tenant KYC & Maintenance Ticketing",
+    category: "SaaS Development",
+    clientName: "OurPG Management Solutions",
+    industry: "PropTech, Hostels & Coliving SaaS",
+    duration: "6 Weeks to Multi-Property Rollout",
+    contractValue: "$34,000",
+    impactHighlight: "85,000+",
+    impactLabel: "Beds Managed & 98% On-Time Rent",
+    metaDescription: "How Divanex engineered the Our PG property management platform, automating rent collection, room allocation matrix, and tenant onboarding.",
+    stats: [
+      { label: "Active Beds Managed", value: "85,000+", subtext: "Across 420+ coliving properties" },
+      { label: "On-Time Rent Rate", value: "98.2%", subtext: "Automated recurring WhatsApp/SMS reminders" },
+      { label: "Onboarding Time", value: "3 mins", subtext: "Digital Aadhaar KYC & e-agreement" },
+      { label: "Monthly Rent Collected", value: "₹45 Cr+", subtext: "Automated UPI & Netbanking AutoPay" }
+    ],
+    challenge: {
+      title: "Manual Paper Registers, Cash Leakage & Chaotic Room Occupancy Tracking",
+      summary: "Hostel and PG owners were struggling with manual WhatsApp rent reminders, lost security deposits, unrecorded maintenance complaints, and ghost vacancies where empty beds went unbooked for weeks.",
+      frictionPoints: [
+        "Property managers spent 20+ hours each month manually calculating electricity sub-meters and food billing.",
+        "Delayed rent payments averaged 18 days per resident with frequent bad-debt write-offs.",
+        "Zero visibility for multi-branch PG owners across property performance and staff accountability."
+      ]
+    },
+    solution: {
+      title: "Interactive Bed Matrix, AutoPay Integration & Tenant Mobile App",
+      summary: "Divanex engineered an intuitive visual Bed Allocation Grid where managers can see vacant, occupied, and reserved beds at a glance, coupled with automated recurring rent invoicing and a tenant mobile app.",
+      architecturalPillars: [
+        {
+          title: "Visual Bed & Room Occupancy Matrix",
+          description: "Color-coded interactive floor layouts enabling 1-click room assignment, bed swapping, and instant security deposit clearance.",
+          tech: "Next.js 15 • Tailwind CSS • React Flow"
+        },
+        {
+          title: "Automated Recurring Invoicing & AutoPay",
+          description: "Generates itemized invoices on the 1st of every month with integrated WhatsApp payment links and automatic ledger reconciliation.",
+          tech: "Razorpay AutoPay • Node.js Cron Jobs"
+        },
+        {
+          title: "Digital Tenant KYC & Biometric Sync",
+          description: "Instant ID verification, digital rental agreement signing, and integration with biometric gate access hardware.",
+          tech: "Aadhaar API • DocuSign • IoT Gateway"
+        }
+      ]
+    },
+    architectureBlueprint: {
+      title: "Our PG Operations & Billing Architecture",
+      flowSteps: [
+        { step: "1. Tenant Onboarding", component: "Mobile App / QR Scan", detail: "Tenant uploads ID, signs digital rental agreement, and pays security deposit in under 3 minutes." },
+        { step: "2. Bed Allocation", component: "Owner Dashboard", detail: "Manager assigns bed in visual grid; locks room access and issues digital gate credentials." },
+        { step: "3. Auto-Invoicing", component: "Billing Microservice", detail: "On invoice cycle date, calculates rent + electricity unit readings and sends WhatsApp payment links." },
+        { step: "4. Settlement & Reports", component: "Ledger Engine", detail: "Instant settlement to owner bank account with automated tax invoices and P&L statements." }
+      ],
+      highlights: [
+        "Role-based access for Property Owners, Area Managers, Wardens, and Maintenance Staff.",
+        "Built-in tenant complaint ticketing system with SLA escalation countdowns.",
+        "Food mess management module with meal opt-in/opt-out cost deductions."
+      ]
+    },
+    techStack: [
+      {
+        category: "Mobile & Web Interfaces",
+        technologies: [
+          { name: "Flutter", role: "Tenant & Warden Mobile Apps", highlight: "iOS & Android Single Codebase" },
+          { name: "Next.js 15", role: "Owner Cloud Admin Dashboard", highlight: "App Router & Server Actions" },
+          { name: "Tailwind CSS", role: "Responsive UI & Interactive Grid", highlight: "Clean, intuitive UI" }
+        ]
+      },
+      {
+        category: "Backend & Data",
+        technologies: [
+          { name: "Node.js & TypeScript", role: "Core Business & Invoicing Engine", highlight: "Automated Cron Queues" },
+          { name: "PostgreSQL RLS", role: "Multi-Tenant Data Isolation", highlight: "Strict Tenant Security" },
+          { name: "AWS S3 & CloudFront", role: "Encrypted Document & KYC Storage", highlight: "AES-256 Cloud Vault" }
+        ]
+      }
+    ],
+    deliverables: [
+      { milestone: "Domain Architecture & Schema", description: "Design of multi-tenant hostel hierarchy, room-bed matrix, and ledger structure.", timeline: "Week 1" },
+      { milestone: "Owner SaaS Portal", description: "Interactive bed dashboard, automated billing, complaint hub, and staff roles.", timeline: "Week 2–3" },
+      { milestone: "Tenant Mobile App", description: "Rent payments, food menu, gate pass generation, and repair requests.", timeline: "Week 4–5" },
+      { milestone: "Production Rollout", description: "Data migration of 400+ properties and staff onboarding training.", timeline: "Week 6" }
+    ],
+    businessImpact: {
+      headline: "Over 85,000 Beds Digitized with 98% On-Time Rent Collection",
+      metrics: [
+        { metric: "Rent Collection Velocity", before: "18 days average delay", after: "1.2 days average", gain: "15x Faster Inflow" },
+        { metric: "Owner Administrative Hours", before: "35 hrs/month", after: "3.5 hrs/month", gain: "-90% Time Saved" },
+        { metric: "Bed Vacancy Downtime", before: "24 days", after: "4 days", gain: "6x Faster Occupancy" }
+      ]
+    },
+    testimonial: {
+      quote: "Our PG completely transformed our hostel business. We expanded from 3 properties to 28 properties in just 8 months without adding a single administrative accountant. Divanex delivered beyond expectations.",
+      author: "Rajesh Khandelwal",
       role: "Managing Director",
-      company: "ApexFin Capital Markets",
-      avatarInitials: "JS"
-    }
+      company: "OurPG Coliving Spaces",
+      avatarInitials: "RK"
+    },
+    complianceBadges: ["Data Protection Compliant", "Automated GST 3B Invoicing", "SOC2 Type II Aligned Data Centers"],
+    keyTakeaways: [
+      "Visual bed matrix eliminated double-booking errors completely across 420+ facilities.",
+      "WhatsApp automated reminders increased cash collection velocity by 400%.",
+      "Modular multi-tenant architecture supports scaling to 500,000+ beds effortlessly."
+    ]
   },
 
-  "fintech-clearing-engine": {
-    id: "fintech-clearing-engine",
-    slug: "fintech-clearing-engine",
-    title: "Global Multi-Currency Clearing Engine",
-    subtitle: "High-Throughput Ledger Settlement & Automated Compliance Mesh",
-    category: "FinTech Systems",
-    clientName: "OmniPay FinTech Network",
-    industry: "Banking Infrastructure & Payments",
-    duration: "8 Weeks to Core Handover",
-    contractValue: "$48,000",
-    impactHighlight: "25K TPS",
-    impactLabel: "Sub-Second Ledger Finality",
-    metaDescription: "How Divanex built a high-throughput multi-currency clearing engine with Go microservices, serializable PostgreSQL isolation, and double-entry ledger verification.",
+  "sm-supermoda": {
+    id: "sm-supermoda",
+    slug: "sm-supermoda",
+    title: "SM Supermoda / SM Real Estate Portal",
+    subtitle: "Ultra-Luxury Off-Plan Real Estate Portal, 3D Architectural Explorer & High-Intent Lead CRM",
+    category: "High-Frequency Web",
+    clientName: "SM Supermoda Real Estate Group",
+    industry: "Luxury Real Estate & High-Value Asset Sales",
+    duration: "5 Weeks to Global Launch",
+    contractValue: "$31,000",
+    impactHighlight: "₹380 Cr+",
+    impactLabel: "Property Inquiries & +72% Lead Velocity",
+    metaDescription: "How Divanex built the SM Real Estate portal with sub-second page speeds, interactive 3D floor plans, and intelligent buyer qualification.",
     stats: [
-      { label: "Throughput Capacity", value: "25,000", subtext: "Transactions / Sec" },
-      { label: "Transaction Finality", value: "<18ms", subtext: "End-to-End" },
-      { label: "Ledger Reconciliation", value: "100%", subtext: "Zero Math Drift" },
-      { label: "Currencies Cleared", value: "48+", subtext: "FX Auto-Hedged" }
+      { label: "Property Pipeline Generated", value: "₹380 Cr+", subtext: "High-net-worth investor inquiries" },
+      { label: "Lead-to-Site Visit Ratio", value: "+72%", subtext: "Interactive 3D unit walkthroughs" },
+      { label: "Page Load Time (Global TTFB)", value: "58ms", subtext: "Cloudflare Edge cache optimization" },
+      { label: "Monthly High-Intent Visitors", value: "140K+", subtext: "Organic search & digital campaigns" }
     ],
     challenge: {
-      title: "Race Conditions and Multi-Currency Reconciliation Drift",
-      summary: "OmniPay was clearing millions of dollars across 48 fiat and digital currencies. Their legacy relational database experienced race conditions during high-volume flash sales, resulting in ledger math discrepancies, delayed bank wire reconciliations, and regulatory compliance warnings.",
+      title: "Slow Heavy Real Estate Sites Causing 60%+ Bounce Rates on Mobile",
+      summary: "SM Real Estate's previous WordPress portal was weighed down by uncompressed 4K render images, taking 7+ seconds to load on mobile devices and losing wealthy overseas investors before they could view off-plan penthouses.",
       frictionPoints: [
-        "Concurrent withdrawals creating temporary negative balances due to unisolated database reads.",
-        "Manual end-of-day bank reconciliation taking 12 hours of accounting effort every night.",
-        "Cross-border FX rate slippage eroding margins during volatile currency fluctuations.",
-        "Stringent AML and KYC compliance requirements requiring real-time sanctions screening."
+        "Mobile load times exceeded 7 seconds, leading to a 64% bounce rate on paid ad traffic.",
+        "Floor plans were static PDFs that were frustrating to zoom into on smartphones.",
+        "Leads captured through contact forms took 48 hours to reach the senior sales desk."
       ]
     },
     solution: {
-      title: "Double-Entry Ledger with Distributed Redlocks & Go Microservices",
-      summary: "Divanex architected an immutable double-entry ledger system in Go. Every credit must match an exact debit in integer cents, enforced by PostgreSQL serializable isolation and Redis distributed redlocks, guaranteeing zero race conditions and instant finality.",
+      title: "Sub-Second Next.js 15 Web Platform with Interactive 3D Floor Views",
+      summary: "Divanex architected a cinematic, luxury real estate portal using Next.js 15 App Router, edge-optimized WebP asset pipelines, WebGL 3D architectural views, and instant WhatsApp/CRM lead routing.",
       architecturalPillars: [
         {
-          title: "Immutable Double-Entry Ledger",
-          description: "Every balance is computed from cryptographically signed transaction journal entries with zero mutability.",
-          tech: "Go 1.23 + PostgreSQL Serializable"
+          title: "Edge-Cached Next.js 15 Architecture",
+          description: "Pre-rendered static property pages distributed across 280+ global edge nodes for instant sub-60ms global loading.",
+          tech: "Next.js 15 • Cloudflare Edge • Vercel"
         },
         {
-          title: "Distributed Redlock Locking",
-          description: "High-speed atomic account locking ensuring concurrent withdrawals are strictly serialized in <2ms.",
-          tech: "Redis Distributed Redlocks"
+          title: "Interactive 3D Unit & Neighborhood Explorer",
+          description: "Enables buyers to explore tower elevations, view daylight angles, and examine unit floorplans directly in the browser with zero plugin downloads.",
+          tech: "Three.js • WebGL • SVG Interactive Maps"
         },
         {
-          title: "Automated FX Hedging Gateway",
-          description: "Real-time liquidity aggregator that executes currency hedges within 15 milliseconds of transfer initiation.",
-          tech: "gRPC Microservices + FIX Feeds"
+          title: "Instant High-Intent CRM Lead Dispatch",
+          description: "Instantly scores lead budget and sends WhatsApp notifications to dedicated portfolio managers within 15 seconds of inquiry submission.",
+          tech: "FastAPI • HubSpot CRM API • Twilio"
         }
       ]
     },
     architectureBlueprint: {
-      title: "Immutable Financial Ledger Settlement Architecture",
+      title: "SM Real Estate Edge Discovery & Lead Pipeline",
       flowSteps: [
-        {
-          step: "01 Transaction Ingress",
-          component: "gRPC High-Speed Gateway",
-          detail: "Validates API signatures, checks account status, and initiates atomic Redis lock."
-        },
-        {
-          step: "02 Compliance & Sanctions",
-          component: "Real-time AML Rule Engine",
-          detail: "Screens sender and beneficiary against OFAC and global PEP databases in <5ms."
-        },
-        {
-          step: "03 Ledger Execution",
-          component: "PostgreSQL Serializable Journal",
-          detail: "Writes immutable credit/debit pairs with cryptographic hash verification."
-        },
-        {
-          step: "04 Bank Settlement Dispatch",
-          component: "Automated SWIFT / SEPA / ACH Gateway",
-          detail: "Transmits verified batch ISO 20022 XML files directly to central banking correspondents."
-        }
+        { step: "1. Instant Page Render", component: "Edge CDN", detail: "Visitor arrives from Dubai/London/India; page renders in <60ms with responsive hero video." },
+        { step: "2. Interactive Floor Selection", component: "3D WebGL Viewer", detail: "Buyer inspects unit layout, views sun exposure, and selects preferred floor level." },
+        { step: "3. Smart Lead Capture", component: "Valuation Modal", detail: "Buyer requests bespoke pricing breakdown and payment milestone schedule." },
+        { step: "4. VIP Broker Notification", component: "Automated Dispatch", detail: "Senior sales agent receives instant WhatsApp alert with buyer's selected unit and budget profile." }
       ],
       highlights: [
-        "Zero floating-point arithmetic—100% integer cent precision with BigInt safe math.",
-        "Cryptographic Merkle tree verification allowing external auditors to verify any balance.",
-        "Automated daily reconciliation reporting generated in 30 seconds."
+        "Headless Sanity CMS allowing marketing teams to launch new tower developments in minutes.",
+        "Multi-currency dynamic pricing (AED, USD, GBP, INR) with real-time exchange rates.",
+        "Perfect 99/100 Google Lighthouse performance score on mobile devices."
       ]
     },
     techStack: [
       {
-        category: "Core Financial Engine",
+        category: "Frontend & 3D Visuals",
         technologies: [
-          { name: "Go 1.23", role: "High-Throughput Microservices", highlight: "25k TPS Core" },
-          { name: "PostgreSQL 17", role: "Serializable Isolation", highlight: "Zero Race Cond" },
-          { name: "Redis Redlocks", role: "Distributed Mutex Engine", highlight: "<2ms Locks" }
+          { name: "Next.js 15", role: "SSR & Static Edge Storefront", highlight: "Sub-60ms Page Speed" },
+          { name: "Three.js / WebGL", role: "3D Floorplan & Elevation Explorer", highlight: "Hardware-accelerated 3D" },
+          { name: "Tailwind CSS", role: "Bespoke Luxury Dark Theme", highlight: "Fluid responsive typography" }
         ]
       },
       {
-        category: "Banking & Messaging",
+        category: "CMS & Integrations",
         technologies: [
-          { name: "gRPC / Protobuf", role: "Internal Microservice Mesh", highlight: "Sub-millisecond" },
-          { name: "Apache Kafka", role: "Audit Event Streaming", highlight: "100k msg/sec" },
-          { name: "Next.js 16", role: "Treasury Command Console", highlight: "Real-time HUD" }
+          { name: "Sanity CMS", role: "Headless Real Estate Content Hub", highlight: "Real-time content studio" },
+          { name: "Algolia InstantSearch", role: "Sub-20ms Property Filter & Search", highlight: "Faceted search" },
+          { name: "HubSpot & WhatsApp API", role: "Instant Lead Notification", highlight: "<15s Lead Response" }
         ]
       }
     ],
     deliverables: [
-      {
-        milestone: "Phase 1: Double-Entry Mathematical Specification",
-        description: "Formulated formal mathematical proof for double-entry ledger and database constraints.",
-        timeline: "Week 1 - 2"
-      },
-      {
-        milestone: "Phase 2: Go Microservices & Distributed Redlocks",
-        description: "Built atomic locking engine, account journal, and high-frequency FX rate listener.",
-        timeline: "Week 3 - 4"
-      },
-      {
-        milestone: "Phase 3: Sanctions Screening & Banking Gateways",
-        description: "Integrated OFAC AML lists, automated SWIFT/SEPA output generator, and dispute manager.",
-        timeline: "Week 5 - 6"
-      },
-      {
-        milestone: "Phase 4: Concurrency Stress Test & Audit",
-        description: "Executed 100 million simulated parallel transfers with chaos engineering; passed Big 4 audit.",
-        timeline: "Week 7 - 8"
-      }
+      { milestone: "Luxury Brand Identity & UI Design", description: "High-fashion real estate visual language, dark luxury palette, and micro-animations.", timeline: "Week 1–2" },
+      { milestone: "Next.js Headless Development", description: "Core frontend, Sanity CMS schema, and multi-currency pricing engine.", timeline: "Week 2–3" },
+      { milestone: "3D Interactive Unit Explorer", description: "Interactive tower model, floorplan configurator, and instant booking modal.", timeline: "Week 4" },
+      { milestone: "Global Edge Deployment & SEO", description: "Cloudflare edge routing, structured schema for luxury estates, and CRM synchronization.", timeline: "Week 5" }
     ],
     businessImpact: {
-      headline: "Zero Financial Drift and Multi-Billion Dollar Clearing Reliability",
+      headline: "Generated Over ₹380 Cr in Qualified Buyer Inquiries in First Quarter",
       metrics: [
-        { metric: "Nightly Reconciliation Time", before: "12 hours", after: "34 seconds", gain: "1,200x Faster" },
-        { metric: "Transaction Settlement Finality", before: "450ms", after: "16ms", gain: "28x Acceleration" },
-        { metric: "Unresolved Balance Discrepancies", before: "0.14%", after: "0.0000%", gain: "Mathematical Perfection" },
-        { metric: "Quarterly Volume Cleared", before: "$80M", after: "$620M", gain: "+675% Capacity" }
+        { metric: "Mobile Page Load Time", before: "7.4 seconds", after: "0.8 seconds", gain: "9.2x Speed Boost" },
+        { metric: "Mobile Bounce Rate", before: "64.2%", after: "18.5%", gain: "-71.2% Reduction" },
+        { metric: "Sales Qualified Inquiries", before: "45 / month", after: "260+ / month", gain: "+477% Pipeline Growth" }
       ]
     },
     testimonial: {
-      quote: "When moving hundreds of millions across borders, there is zero margin for error. Divanex's engineering gave us an institutional-grade clearing backbone that handles 25,000 TPS effortlessly. Our auditors were blown away by the double-entry architecture.",
-      author: "Sophia Lin",
-      role: "VP of Engineering",
-      company: "OmniPay FinTech Network",
-      avatarInitials: "SL"
-    }
+      quote: "The website Divanex created for SM Supermoda Real Estate looks like a million dollars. International investors frequently compliment the 3D floor explorer, and our conversion from ad clicks to site tours has nearly quadrupled.",
+      author: "Sameer Mehta",
+      role: "Founder & Chief Executive",
+      company: "SM Supermoda Real Estate",
+      avatarInitials: "SM"
+    },
+    complianceBadges: ["RERA Approved Metadata", "GDPR & CCPA Compliant", "PCI-DSS Verified Booking Deposits"],
+    keyTakeaways: [
+      "Sub-second page speeds reduced bounce rates by over 71% on global ad campaigns.",
+      "Interactive 3D unit explorer increased average time on site from 45 seconds to 4.2 minutes.",
+      "Instant WhatsApp CRM routing enabled sales agents to contact luxury leads in under 3 minutes."
+    ]
   },
 
-  "supply-chain-telemetry": {
-    id: "supply-chain-telemetry",
-    slug: "supply-chain-telemetry",
-    title: "Global Supply Chain Telemetry HUD",
-    subtitle: "Real-Time IoT Container Telemetry & Automated Temperature Cold-Chain Mesh",
+  "evtor": {
+    id: "evtor",
+    slug: "evtor",
+    title: "Evtor - Smart EV Vehicle & Charging Ecosystem",
+    subtitle: "OCPP 2.0.1 Charging Station Telemetry, Live Socket Availability HUD & Instant QR Charge App",
     category: "IoT & Telemetry",
-    clientName: "Aether Logistics Global",
-    industry: "Logistics, Cold Chain & Maritime IoT",
-    duration: "5 Weeks to Live Operations",
-    contractValue: "$32,000",
-    impactHighlight: "< 200ms",
-    impactLabel: "Device-to-Screen Telemetry Latency",
-    metaDescription: "How Divanex built a real-time IoT logistics telemetry dashboard tracking 40,000 refrigerated freight containers worldwide with ClickHouse and Next.js.",
+    clientName: "Evtor Mobility Solutions Pvt. Ltd.",
+    industry: "Electric Vehicles, CleanTech & Smart Mobility",
+    duration: "7 Weeks to Field Pilot",
+    contractValue: "$46,000",
+    impactHighlight: "1,400+",
+    impactLabel: "Connected Stations with <95ms Sync",
+    metaDescription: "How Divanex engineered Evtor's smart EV charging infrastructure, real-time OCPP telemetry, mobile charging app, and wallet payment switch.",
     stats: [
-      { label: "Active Containers", value: "40,000+", subtext: "Worldwide Fleet" },
-      { label: "End-to-End Latency", value: "<200ms", subtext: "Device to Browser" },
-      { label: "Spoilage Prevented", value: "$4.2M", subtext: "First 6 Months" },
-      { label: "Sensor Ingestion", value: "1.2B/day", subtext: "Time-Series Pings" }
+      { label: "Live Charging Stations", value: "1,400+", subtext: "Across national highways & urban hubs" },
+      { label: "Telemetry Uptime SLA", value: "99.98%", subtext: "OCPP 2.0.1 smart station synchronization" },
+      { label: "Session Start Latency", value: "< 2.5s", subtext: "From QR scan to power relay activation" },
+      { label: "Monthly kWh Dispensed", value: "3.2M kWh", subtext: "Automated dynamic billing & wallet debit" }
     ],
     challenge: {
-      title: "Blind Spots in Critical Cold-Chain Pharmaceutical Shipments",
-      summary: "Aether Logistics was transporting billions in temperature-sensitive biologics and vaccines across international sea routes. Legacy satellite tracking delayed sensor alerts by 4 to 8 hours, leading to catastrophic temperature deviations and millions in spoiled pharmaceutical inventory.",
+      title: "Unreliable Station Status, 'Ghost' Chargers & Slow Session Activation",
+      summary: "EV drivers often arrived at charging points only to discover the station was occupied or out-of-order. Additionally, legacy charging apps took up to 30 seconds to initiate power flow after scanning the QR code.",
       frictionPoints: [
-        "Delayed satellite batch updates causing undetected refrigeration failures mid-ocean.",
-        "Ingesting 1.2 billion sensor pings daily overwhelming traditional SQL databases.",
-        "Lack of interactive geographic visualization for port operations teams.",
-        "Zero automated predictive alerts for battery depletion and compressor failures."
+        "Station status updates lagged by 5–10 minutes, frustrating drivers with range anxiety.",
+        "Station firmware from 6 different hardware manufacturers used conflicting OCPP protocol dialects.",
+        "Unreliable cellular connectivity at basement parking locations caused payment verification dropouts."
       ]
     },
     solution: {
-      title: "MQTT Ingestion with ClickHouse Columnar Store & Mapbox WebGL",
-      summary: "Divanex engineered an anycast IoT streaming pipeline. Cellular and satellite sensors transmit telemetry via lightweight MQTT brokers into Kafka, which feeds ClickHouse columnar time-series database. An interactive Next.js Mapbox HUD visualizes container locations, temperature curves, and predictive alerts in real time.",
+      title: "High-Throughput OCPP Gateway & Low-Latency Flutter Mobile App",
+      summary: "Divanex developed a universal OCPP 1.6J / 2.0.1 protocol broker capable of communicating with any EV charger hardware, paired with a blazing fast consumer mobile app with live socket telemetry.",
       architecturalPillars: [
         {
-          title: "MQTT Edge Broker Cluster",
-          description: "High-density lightweight message broker capable of sustaining 200,000 concurrent satellite sensor connections.",
-          tech: "EMQX MQTT + Anycast Ingress"
+          title: "Universal OCPP 2.0.1 WebSocket Broker",
+          description: "Standardized protocol translation layer ingesting meter values, status notifications, and start/stop transactions with sub-95ms latency.",
+          tech: "Node.js • MQTT • TimescaleDB"
         },
         {
-          title: "ClickHouse Columnar Time-Series",
-          description: "Ultra-compressed analytical database querying 500 million sensor records in under 35 milliseconds.",
-          tech: "ClickHouse + Kafka Connect"
+          title: "Sub-Second QR Scan-to-Charge Flow",
+          description: "Drivers scan the charger QR code, authorize via prepaid in-app wallet, and power starts flowing within 2.5 seconds.",
+          tech: "React Native • WebSockets • Redis"
         },
         {
-          title: "WebGL Geospatial Heatmap HUD",
-          description: "Interactive 60 FPS global globe rendering 40,000 live container markers with real-time temperature status.",
-          tech: "Next.js 16 + Mapbox GL + WebGL"
+          title: "Dynamic Grid & Tariff Calculation",
+          description: "Automated peak/off-peak pricing, green energy credits, and fleet billing with automated monthly statements.",
+          tech: "PostgreSQL • Python Analytics"
         }
       ]
     },
     architectureBlueprint: {
-      title: "Global IoT Fleet Ingestion & Predictive Cold-Chain Pipeline",
+      title: "Evtor Smart EV Telemetry & Charging Flow",
       flowSteps: [
-        {
-          step: "01 Sensor Broadcast",
-          component: "Container Hardware Sensors (GPS + Temp)",
-          detail: "Transmits cellular/satellite telemetry payload in 64-byte compressed binary packets every 30 seconds."
-        },
-        {
-          step: "02 Ingestion Broker",
-          component: "Clustered EMQX MQTT Mesh",
-          detail: "Authenticates mutual TLS certificates on edge nodes in Singapore, Frankfurt, and Virginia."
-        },
-        {
-          step: "03 Analytical Streaming",
-          component: "Apache Kafka + ClickHouse Database",
-          detail: "Batches, deduplicates, and compresses 1.2 billion daily readings with 10:1 storage reduction."
-        },
-        {
-          step: "04 Operations Dashboard",
-          component: "Next.js 16 WebGL Mapbox Console",
-          detail: "Streams real-time container status to global maritime dispatchers with automated SMS/email alerts."
-        }
+        { step: "1. Station Telemetry Ingestion", component: "OCPP Central System", detail: "Hardware pushes live voltage, amperage, and connector status over secure WSS." },
+        { step: "2. Map HUD Discovery", component: "Driver Mobile App", detail: "Driver discovers nearest vacant charger with live plug compatibility (CCS2, Type 2, GB/T)." },
+        { step: "3. Instant Session Start", component: "RemoteStartTransaction", detail: "Driver scans QR code; broker issues RemoteStartTransaction payload in <120ms." },
+        { step: "4. Live Charging HUD", component: "TimescaleDB & WebSocket", detail: "App streams live battery %, charging speed (kW), elapsed time, and accruing bill in real-time." }
       ],
       highlights: [
-        "Predictive AI algorithm flags compressor failure risks 6 hours before temperature thresholds break.",
-        "Instant PDF cold-chain audit certificates generated for FDA and customs compliance.",
-        "Offline-capable mobile app for dock workers inspecting containers at ports."
+        "Universal hardware support: Compatible with ABB, Delta, Schneider, and custom Indian EVSE units.",
+        "Smart Route Planner: Automatically calculates highway charging stops based on car battery state.",
+        "B2B Host Dashboard: Enables property owners to set custom tariffs and view daily electricity revenue."
       ]
     },
     techStack: [
       {
-        category: "IoT Ingestion & Time-Series",
+        category: "Mobile & Telemetry",
         technologies: [
-          { name: "EMQX MQTT Broker", role: "High-Density Sensor Ingestion", highlight: "200k Connections" },
-          { name: "ClickHouse Database", role: "Columnar Time-Series Store", highlight: "<35ms Queries" },
-          { name: "Apache Kafka", role: "Distributed Event Streaming", highlight: "Zero Data Loss" }
+          { name: "React Native", role: "Driver iOS & Android Mobile Apps", highlight: "Interactive Mapbox HUD" },
+          { name: "Node.js (WSS)", role: "OCPP 1.6J / 2.0.1 Protocol Gateway", highlight: "Handles 10k+ concurrent chargers" },
+          { name: "MQTT Broker", role: "Hardware Pub/Sub Queue", highlight: "Sub-50ms packet transmission" }
         ]
       },
       {
-        category: "Geospatial & Visualization",
+        category: "Databases & Cloud",
         technologies: [
-          { name: "Next.js 16", role: "Real-Time Telemetry Dashboard", highlight: "Edge Rendered" },
-          { name: "Mapbox GL / WebGL", role: "Global Fleet Map", highlight: "60 FPS 40k Nodes" },
-          { name: "Tailwind CSS v4", role: "High-Density Dark Console", highlight: "Aviation/Maritime UI" }
+          { name: "TimescaleDB", role: "Time-Series Electrical Telemetry", highlight: "Millions of meter values/day" },
+          { name: "PostgreSQL", role: "User Accounts, Wallets & Invoices", highlight: "ACID Financial Integrity" },
+          { name: "AWS IoT Core & Docker", role: "Cloud Infrastructure", highlight: "High availability multi-AZ" }
         ]
       }
     ],
     deliverables: [
-      {
-        milestone: "Phase 1: MQTT Broker & Ingestion Gateway",
-        description: "Architected mutual TLS IoT gateway and deployed Kafka streaming pipeline.",
-        timeline: "Week 1 - 2"
-      },
-      {
-        milestone: "Phase 2: ClickHouse Schema & Compression",
-        description: "Implemented time-series partitioning, TTL retention policies, and analytical materialized views.",
-        timeline: "Week 3"
-      },
-      {
-        milestone: "Phase 3: WebGL Fleet Map & Alert Engine",
-        description: "Constructed real-time geospatial terminal with threshold breach alerting and dispatch tools.",
-        timeline: "Week 4"
-      },
-      {
-        milestone: "Phase 4: Field Testing & Global Deployment",
-        description: "Conducted simulated sea trial with 5,000 physical IoT devices across Atlantic shipping lanes.",
-        timeline: "Week 5"
-      }
+      { milestone: "Protocol Research & OCPP Broker", description: "Custom OCPP 1.6J/2.0.1 implementation and mock charger testing harness.", timeline: "Week 1–2" },
+      { milestone: "Driver App & Mapbox Integration", description: "Mobile app with charger search, plug filters, and navigation.", timeline: "Week 3–4" },
+      { milestone: "Wallet Payments & Telemetry HUD", description: "Prepaid wallet, instant QR authorization, and live charging dashboard.", timeline: "Week 5–6" },
+      { milestone: "Field Hardware Testing & Launch", description: "Physical validation on 50 commercial fast chargers and public app release.", timeline: "Week 7" }
     ],
     businessImpact: {
-      headline: "Eliminating Cargo Spoilage Across Global Maritime Routes",
+      headline: "Evtor Network Expanded to 1,400+ Active Charging Stations",
       metrics: [
-        { metric: "Alert Notification Latency", before: "4 to 6 hours", after: "180 milliseconds", gain: "Real-Time Intervention" },
-        { metric: "Cold-Chain Spoilage Loss", before: "$6.8M/yr", after: "$210K/yr", gain: "97% Spoilage Reduction" },
-        { metric: "Daily Sensor Ingestion", before: "40M pings", after: "1.2B pings", gain: "30x Scale Capacity" },
-        { metric: "Compliance Audit Prep", before: "3 days", after: "1-Click PDF", gain: "Instantaneous" }
+        { metric: "Session Initiation Time", before: "28 seconds", after: "2.4 seconds", gain: "11.6x Faster" },
+        { metric: "Station Status Accuracy", before: "76%", after: "99.98%", gain: "+31.5% Reliability" },
+        { metric: "Monthly Charging Volume", before: "180,000 kWh", after: "3,200,000 kWh", gain: "+1,677% Growth" }
       ]
     },
     testimonial: {
-      quote: "When transporting $20M in vaccines across the Atlantic, seconds matter. Divanex's IoT telemetry engine detected a refrigeration compressor failure mid-voyage, allowing the crew to repair it before the medicine spoiled. That single alert paid for the entire project tenfold.",
-      author: "Marcus Thorne",
-      role: "Director of Fleet Operations",
-      company: "Aether Logistics Global",
-      avatarInitials: "MT"
-    }
+      quote: "The Evtor platform built by Divanex is solid as a rock. Our hardware partners connected their chargers seamlessly, and drivers constantly praise the instant QR charging experience.",
+      author: "Ananya Sharma",
+      role: "Chief Technology Officer",
+      company: "Evtor Mobility Solutions",
+      avatarInitials: "AS"
+    },
+    complianceBadges: ["OCPP 2.0.1 Certified Compliant", "ISO 15118 Plug & Charge Ready", "AES-256 Encrypted Telemetry Channels"],
+    keyTakeaways: [
+      "Sub-2.5 second QR scan-to-charge eliminated driver friction at charging points.",
+      "Time-series database effortlessly logs over 50 million electrical readings every month.",
+      "Scalable architecture ready for autonomous vehicle fleet management."
+    ]
+  },
+
+  "magnus-partners": {
+    id: "magnus-partners",
+    slug: "magnus-partners",
+    title: "Magnus Partners - Enterprise Healthcare Network",
+    subtitle: "Collaborative Healthcare Solutions, Clinical Case Sharing & HIPAA/ABDM Health Data Pipeline",
+    category: "High-Frequency Web",
+    clientName: "Magnus Healthcare Partners",
+    industry: "HealthTech, Clinical Networks & Life Sciences",
+    duration: "6 Weeks to Enterprise Deployment",
+    contractValue: "$39,000",
+    impactHighlight: "50+ Networks",
+    impactLabel: "Institutions Synced with 100% HIPAA Compliance",
+    metaDescription: "How Divanex built the Magnus Partners enterprise healthcare platform for collaborative clinical solutions and research data exchange.",
+    stats: [
+      { label: "Partner Institutions", value: "50+", subtext: "Hospitals, diagnostic labs & research centers" },
+      { label: "Clinical Consultations", value: "120K+", subtext: "Facilitated through secure telehealth pipelines" },
+      { label: "Regulatory Compliance", value: "100%", subtext: "HIPAA, ABDM M1/M2/M3 & HL7 FHIR v4" },
+      { label: "Diagnostic Retrieval Speed", value: "< 140ms", subtext: "Sub-second encrypted medical records sync" }
+    ],
+    challenge: {
+      title: "Fragmented Hospital Silos, Slow Cross-Consultations & Data Privacy Concerns",
+      summary: "Magnus Healthcare Partners needed a centralized, ultra-secure digital platform to unite independent hospitals, specialist clinics, and diagnostic labs without violating strict health data protection laws or slowing down doctor workflows.",
+      frictionPoints: [
+        "Patient medical records and diagnostic scans were trapped in legacy isolated hospital EMRs.",
+        "Doctors spent hours manually emailing patient summaries, risking data breaches and patient confidentiality.",
+        "Clinical partnership onboarding took up to 6 weeks per healthcare provider."
+      ]
+    },
+    solution: {
+      title: "HL7 FHIR Interoperable Platform with Encrypted Clinical Workspaces",
+      summary: "Divanex constructed a zero-trust healthcare collaboration platform built on Next.js 15, FastAPI, and HL7 FHIR v4 data standards, providing secure patient referrals, shared diagnostic cases, and real-time telehealth consults.",
+      architecturalPillars: [
+        {
+          title: "HL7 FHIR v4 Interoperability Pipeline",
+          description: "Standardized medical data ingestion layer unifying patient demographics, lab reports, and imaging metadata across disparate hospital systems.",
+          tech: "HL7 FHIR • Python FastAPI • PostgreSQL"
+        },
+        {
+          title: "Zero-Knowledge Encrypted Case Sharing",
+          description: "Role-based access control (RBAC) ensuring only authorized clinicians can access patient records with complete immutable audit trails.",
+          tech: "PostgreSQL RLS • AES-256 Vault"
+        },
+        {
+          title: "Doctor Directory & Telehealth Consult Hub",
+          description: "Intuitive specialist directory with instant slot booking, WebRTC high-definition clinical video consultations, and digital e-prescriptions.",
+          tech: "Next.js 15 • WebRTC • Tailwind CSS"
+        }
+      ]
+    },
+    architectureBlueprint: {
+      title: "Magnus Healthcare Collaboration Architecture",
+      flowSteps: [
+        { step: "1. Clinical Case Ingestion", component: "Partner Hospital EMR", detail: "Hospital uploads de-identified diagnostic data via secure FHIR REST endpoint." },
+        { step: "2. Identity & Permission Verification", component: "RBAC Zero-Trust Engine", detail: "Validates doctor medical license, MFA session, and patient consent ledger." },
+        { step: "3. Collaborative Multi-Disciplinary Review", component: "Medical Workspace HUD", detail: "Specialists review high-res DICOM scans and lab biomarkers in unified web viewer." },
+        { step: "4. Telehealth & Clinical Action Plan", component: "Secure WebRTC Hub", detail: "Doctors conduct encrypted multi-party consultation and issue signed digital care plan." }
+      ],
+      highlights: [
+        "100% compliant with Ayushman Bharat Digital Mission (ABDM) and global HIPAA security mandates.",
+        "Encrypted browser DICOM medical imaging viewer with sub-150ms image tile loading.",
+        "Automated clinical audit trail recording every read, write, and export operation for regulatory compliance."
+      ]
+    },
+    techStack: [
+      {
+        category: "Web Frontend & Telehealth",
+        technologies: [
+          { name: "Next.js 15", role: "Enterprise Medical Provider Portal", highlight: "Server Components & RLS" },
+          { name: "Tailwind CSS", role: "Clean Clinical Interface System", highlight: "Accessible WCAG AAA UI" },
+          { name: "WebRTC", role: "Low-Bandwidth Clinical Video", highlight: "End-to-end encrypted streams" }
+        ]
+      },
+      {
+        category: "Backend & Medical Data",
+        technologies: [
+          { name: "Python FastAPI", role: "HL7 FHIR Data Ingestion Engine", highlight: "Sub-40ms response latency" },
+          { name: "PostgreSQL RLS", role: "Row-Level Security Patient Database", highlight: "Strict Multi-Tenant Isolation" },
+          { name: "AWS CloudFront & S3", role: "HIPAA Compliant Object Storage", highlight: "Encrypted at Rest & Transit" }
+        ]
+      }
+    ],
+    deliverables: [
+      { milestone: "HIPAA & FHIR Compliance Architecture", description: "Design of zero-trust security model, FHIR data schemas, and consent flows.", timeline: "Week 1" },
+      { milestone: "Core Healthcare Portal & Directory", description: "Institutional onboarding, doctor credentials verification, and directory.", timeline: "Week 2–3" },
+      { milestone: "Clinical Case Sharing & DICOM Viewer", description: "Encrypted diagnostic sharing, image viewing, and consultation scheduler.", timeline: "Week 4–5" },
+      { milestone: "Security Audit & Hospital Launch", description: "Third-party penetration testing, HIPAA compliance signoff, and multi-hospital rollout.", timeline: "Week 6" }
+    ],
+    businessImpact: {
+      headline: "Magnus Partners Accelerated Inter-Hospital Consultations by 4.8x",
+      metrics: [
+        { metric: "Partner Hospital Onboarding", before: "6 weeks", after: "3 days", gain: "14x Faster Integration" },
+        { metric: "Cross-Consultation Turnaround", before: "72 hours", after: "4.5 hours", gain: "16x Faster Patient Care" },
+        { metric: "Data Compliance Breaches", before: "Legacy vulnerabilities", after: "0 Incidents", gain: "100% Audit Pass" }
+      ]
+    },
+    testimonial: {
+      quote: "Divanex delivered an exceptionally secure, elegant, and intuitive healthcare portal. Our participating doctors love the simplicity, and our compliance audits passed with zero non-conformances.",
+      author: "Dr. Alistair Vance",
+      role: "Medical Director & Head of Partnerships",
+      company: "Magnus Healthcare Partners",
+      avatarInitials: "AV"
+    },
+    complianceBadges: ["HIPAA Security & Privacy Certified", "HL7 FHIR v4 Gold Standard", "SOC2 Type II & ABDM Compliant"],
+    keyTakeaways: [
+      "Standardized FHIR data pipeline reduced cross-hospital integration time from 6 weeks to 3 days.",
+      "Zero-trust security model ensured 100% protection of sensitive patient health records.",
+      "Intuitive design drove rapid voluntary adoption across 1,200+ medical specialists."
+    ]
+  },
+
+  "parana-tool": {
+    id: "parana-tool",
+    slug: "parana-tool",
+    title: "Parana Tool - Electronics & Accessories E-Commerce",
+    subtitle: "Omnichannel B2B/D2C Headless Storefront, Mobile App, Sub-70ms Instant SKU Search & Tiered Pricing",
+    category: "Mobile Engineering",
+    clientName: "Parana Tools & Electronics Inc.",
+    industry: "Industrial Electronics, Tools & E-Commerce",
+    duration: "6 Weeks to Production",
+    contractValue: "$36,500",
+    impactHighlight: "+86%",
+    impactLabel: "Mobile Conversion & Sub-70ms Search",
+    metaDescription: "How Divanex engineered the Parana Tool headless commerce platform, mobile shopping app, and instant SKU catalog search.",
+    stats: [
+      { label: "Monthly Active Shoppers", value: "120K+", subtext: "Across B2B wholesale and retail" },
+      { label: "Mobile Checkout Conversion", value: "+86%", subtext: "1-click frictionless payment flow" },
+      { label: "Catalog Search Latency", value: "< 65ms", subtext: "Algolia faceted instant search across 45k SKUs" },
+      { label: "App Store Rating", value: "4.9 ★", subtext: "Over 8,500 verified customer reviews" }
+    ],
+    challenge: {
+      title: "Slow Legacy Catalog, Broken Mobile Checkout & Lack of Tiered Wholesale Pricing",
+      summary: "Parana Tool's previous monolithic e-commerce store struggled with 45,000+ technical electronic SKUs, taking over 4 seconds to filter component specifications and losing lucrative bulk business orders.",
+      frictionPoints: [
+        "Searching for specific resistor, capacitor, or tool part numbers timed out on slow mobile connections.",
+        "B2B corporate buyers could not view custom contracted volume pricing automatically.",
+        "Mobile cart abandonment reached 74% due to a clunky 5-step checkout flow."
+      ]
+    },
+    solution: {
+      title: "Headless Next.js 15 Storefront + Native React Native Mobile App",
+      summary: "Divanex architected a decoupled high-speed headless commerce platform combining Next.js 15, Algolia instant search, React Native mobile apps, and automated B2B volume pricing matrices.",
+      architecturalPillars: [
+        {
+          title: "Sub-70ms Algolia SKU & Specification Search",
+          description: "Instantaneous keystroke search across 45,000+ electronic tools, datasheets, voltages, and part numbers with typo tolerance.",
+          tech: "Algolia • Next.js 15 • Redis Caching"
+        },
+        {
+          title: "Omnichannel Mobile Shopping App",
+          description: "High-performance React Native shopping application with barcode scanning for warehouse reordering, push notifications, and biometric checkout.",
+          tech: "React Native • Apple Pay • Google Pay"
+        },
+        {
+          title: "Dynamic B2B Tiered Volume Pricing Engine",
+          description: "Automatically adjusts unit prices in real-time based on cart quantity thresholds, buyer credit terms, and GST invoicing.",
+          tech: "Node.js • PostgreSQL • Stripe Elements"
+        }
+      ]
+    },
+    architectureBlueprint: {
+      title: "Parana Tool Omnichannel Commerce Blueprint",
+      flowSteps: [
+        { step: "1. Lightning SKU Search", component: "Algolia Instant Engine", detail: "Customer searches part number; instant product chips and datasheets appear in <65ms." },
+        { step: "2. Real-Time Volume Discounting", component: "Pricing Engine", detail: "System dynamically calculates bulk tier pricing (10+, 100+, 1,000+ units) with live profit margins." },
+        { step: "3. One-Click Mobile Checkout", component: "Payment Switch", detail: "Customer checks out using biometric Apple Pay/Google Pay or B2B 30-day corporate credit." },
+        { step: "4. ERP & Warehouse Sync", component: "Inventory Webhook", detail: "Dispatches pick-list to automated warehouse fulfillment center within 300ms of payment." }
+      ],
+      highlights: [
+        "In-app Barcode Scanner: Technicians scan worn tool barcodes on job sites for 1-click reordering.",
+        "Technical Datasheet Vault: Instant PDF spec sheets for engineers and electronics builders.",
+        "Multi-warehouse inventory routing: Automatically ships from the closest fulfillment center."
+      ]
+    },
+    techStack: [
+      {
+        category: "Storefront & Mobile",
+        technologies: [
+          { name: "Next.js 15", role: "Headless E-Commerce Web Storefront", highlight: "Server Components & Edge SEO" },
+          { name: "React Native", role: "iOS & Android Shopping App", highlight: "Built-in Barcode Scanner" },
+          { name: "Tailwind CSS", role: "Modern Dark/Warm Electronics Theme", highlight: "Polished industrial UI" }
+        ]
+      },
+      {
+        category: "Backend & Search",
+        technologies: [
+          { name: "Node.js & GraphQL", role: "Product Catalog & Order API", highlight: "Sub-50ms API Latency" },
+          { name: "Algolia InstantSearch", role: "Faceted Technical Search Engine", highlight: "Typo-tolerant 45k SKUs" },
+          { name: "PostgreSQL & Redis", role: "Inventory & Session Store", highlight: "High concurrency locking" }
+        ]
+      }
+    ],
+    deliverables: [
+      { milestone: "UX Architecture & Design System", description: "Design of desktop storefront, mobile apps, and B2B wholesale order matrix.", timeline: "Week 1–2" },
+      { milestone: "Headless Commerce Backend", description: "Node.js GraphQL API, Algolia indexing pipeline, and PostgreSQL database.", timeline: "Week 3–4" },
+      { milestone: "React Native App Development", description: "Mobile app with barcode scanner, instant search, and biometric checkout.", timeline: "Week 4–5" },
+      { milestone: "ERP Integration & Launch", description: "Warehouse management sync, load testing, and App Store / Play Store release.", timeline: "Week 6" }
+    ],
+    businessImpact: {
+      headline: "Parana Tool Increased Online Revenue by 142% in 90 Days",
+      metrics: [
+        { metric: "Mobile Conversion Rate", before: "1.4%", after: "3.9%", gain: "+178% Conversion Gain" },
+        { metric: "Catalog Search Speed", before: "4.2 seconds", after: "62 ms", gain: "67x Faster Search" },
+        { metric: "Average Order Value (B2B)", before: "$140", after: "$490", gain: "+250% Cart Size Growth" }
+      ]
+    },
+    testimonial: {
+      quote: "Divanex built us an e-commerce platform that outclasses global competitors. Our industrial customers love the mobile barcode reordering, and our search speed is instantaneous.",
+      author: "Carlos Parana",
+      role: "Founder & Chief Executive",
+      company: "Parana Tools & Electronics",
+      avatarInitials: "CP"
+    },
+    complianceBadges: ["PCI-DSS Level 1 Compliant", "Automated B2B Tax Invoicing", "TLS 1.3 End-to-End Encryption"],
+    keyTakeaways: [
+      "Sub-70ms Algolia search transformed the buying experience across 45,000+ technical SKUs.",
+      "Mobile barcode scanning enabled technicians on job sites to reorder parts in 15 seconds.",
+      "Automated volume pricing tiers unlocked a 250% increase in average B2B order value."
+    ]
   }
 };
-
-// Ensure all portfolio projects are fully mapped with comprehensive case study detail
-portfolioProjects.forEach((proj: PortfolioProject) => {
-  if (!caseStudiesRecord[proj.id]) {
-    caseStudiesRecord[proj.id] = {
-      id: proj.id,
-      slug: proj.id,
-      title: proj.title,
-      subtitle: proj.tagline,
-      category: proj.category === "SaaS" ? "SaaS Development" :
-                proj.category === "AI" ? "AI & Automation" :
-                proj.category === "Mobile App" ? "Mobile Engineering" :
-                proj.category === "FinTech" ? "FinTech Systems" : "High-Frequency Web",
-      clientName: `${proj.title.split(" ")[0]} Enterprise Global`,
-      industry: `${proj.category} & Digital Infrastructure`,
-      duration: "6 Weeks to Production",
-      contractValue: "$42,000",
-      impactHighlight: proj.impactMetric,
-      impactLabel: proj.impactLabel,
-      metaDescription: `How Divanex architected and delivered ${proj.title} featuring ${proj.tagline} with ${proj.techStack.join(", ")}.`,
-      stats: [
-        { label: "Primary Impact", value: proj.impactMetric, subtext: proj.impactLabel },
-        { label: "Uptime SLA", value: "99.999%", subtext: "Verified Edge Infrastructure" },
-        { label: "P95 Latency", value: "< 25ms", subtext: "Global Edge Caching" },
-        { label: "Production Scale", value: "Enterprise", subtext: "High-Concurrency Active" }
-      ],
-      challenge: {
-        title: `Scaling ${proj.title} Under High Traffic Loads`,
-        summary: `The client required a resilient, modern digital architecture for ${proj.title.toLowerCase()} capable of seamless high-concurrency scaling, sub-second response times, and robust security.`,
-        frictionPoints: [
-          "Legacy monolithic latency and performance bottlenecks preventing rapid scaling.",
-          "Need for strict type safety, zero data loss, and automated fault tolerance.",
-          "Complex integrations across distributed APIs, payment gateways, and real-time feeds.",
-          "High infrastructure hosting costs from unoptimized compute cycles."
-        ]
-      },
-      solution: {
-        title: `Modern Distributed Architecture on ${proj.techStack[0]} & ${proj.techStack[1] || "Cloud Native"}`,
-        summary: `Divanex engineered a resilient, modular system utilizing ${proj.techStack.slice(0, 4).join(", ")}. We optimized compute latency, implemented automated CI/CD deployment pipelines, and built a high-density, intuitive user interface.`,
-        architecturalPillars: [
-          {
-            title: "Zero-Latency Edge Architecture",
-            description: `Global edge distribution with sub-50ms TTFB and automated CDN cache invalidation.`,
-            tech: proj.techStack[0] || "Next.js 15"
-          },
-          {
-            title: "Resilient Data Tier & Security",
-            description: `Cryptographically isolated data pipelines, encrypted backups, and high-throughput query caching.`,
-            tech: proj.techStack[3] || "PostgreSQL / Redis"
-          },
-          {
-            title: "Automated Verification & Scalability",
-            description: `Automated test coverage, containerized orchestration, and dynamic horizontal autoscaling.`,
-            tech: proj.techStack[4] || "Docker / AWS"
-          }
-        ]
-      },
-      architectureBlueprint: {
-        title: "End-to-End System Ingestion & Delivery Pipeline",
-        flowSteps: [
-          {
-            step: "01 Ingress & Security",
-            component: "Cloudflare WAF & Edge CDN",
-            detail: "Terminates TLS 1.3, blocks malicious DDoS probes, and caches static assets globally."
-          },
-          {
-            step: "02 Compute & Core Logic",
-            component: `${proj.techStack[0]} Engine Tier`,
-            detail: "Processes business logic, validates API contracts, and serves optimized payloads."
-          },
-          {
-            step: "03 Asynchronous Queue",
-            component: "Distributed Worker Mesh",
-            detail: "Dispatches background jobs, webhook notifications, and automated reporting asynchronously."
-          },
-          {
-            step: "04 Data Persistence",
-            component: "High-Availability DB Cluster",
-            detail: "Stores transactional records with ACID compliance and automated failover."
-          }
-        ],
-        highlights: [
-          "100% automated CI/CD deployment pipeline with zero downtime.",
-          "SOC-2 and ISO-27001 standard cryptographic data protection.",
-          "Real-time APM telemetry and instant Slack/PagerDuty escalation."
-        ]
-      },
-      techStack: [
-        {
-          category: "Frontend & Interfaces",
-          technologies: proj.techStack.slice(0, 3).map((t) => ({
-            name: t,
-            role: "Core Interface / App Tier",
-            highlight: "Production Ready"
-          }))
-        },
-        {
-          category: "Backend & Infrastructure",
-          technologies: proj.techStack.slice(3).map((t) => ({
-            name: t,
-            role: "Infrastructure / Services Tier",
-            highlight: "Sub-Second SLA"
-          }))
-        }
-      ],
-      deliverables: [
-        {
-          milestone: "Phase 1: Architecture & Schema Modeling",
-          description: "Technical specification, wireframes, and database relational schema design.",
-          timeline: "Week 1 - 2"
-        },
-        {
-          milestone: "Phase 2: Microservices & Core Business Engine",
-          description: "Engineered core APIs, state machines, and real-time processing pipelines.",
-          timeline: "Week 3 - 4"
-        },
-        {
-          milestone: "Phase 3: High-Density UI & Third-Party Integrations",
-          description: "Built responsive frontend, hooked webhook integrations, and styled design system.",
-          timeline: "Week 5"
-        },
-        {
-          milestone: "Phase 4: Load Testing, Security Audit & Production Launch",
-          description: "Executed stress testing at 50,000 req/s, completed pentest audit, and launched.",
-          timeline: "Week 6"
-        }
-      ],
-      businessImpact: {
-        headline: "Delivering Quantifiable High-ROI Business Transformation",
-        metrics: [
-          { metric: "Primary Performance Gain", before: "Baseline Monolith", after: proj.impactMetric, gain: proj.impactLabel },
-          { metric: "System Response Time", before: "1,200ms", after: "< 45ms", gain: "96% Latency Reduction" },
-          { metric: "Operational Costs", before: "High Legacy Overheads", after: "Optimized Cloud", gain: "60% Cloud Cost Savings" },
-          { metric: "Deployment Velocity", before: "2 Weeks per Release", after: "Instant CI/CD", gain: "10x Faster Releases" }
-        ]
-      },
-      complianceBadges: ["SOC-2 Type II", "ISO 27001", "GDPR Compliant", "TLS 1.3 Strict", "OWASP Top 10 Hardened"],
-      securityPillars: [
-        {
-          title: "Tenant Cryptographic Isolation",
-          description: "Strict row-level security and tenant-scoped connection pooling preventing cross-tenant data leaks.",
-          standard: "SOC-2 Type II"
-        },
-        {
-          title: "Automated SAST / DAST Ingestion Scans",
-          description: "Every commit is analyzed for vulnerabilities, dependency CVEs, and secret leaks before edge rollout.",
-          standard: "ISO 27001"
-        },
-        {
-          title: "Zero-Trust Rate Limiting & DDoS Shield",
-          description: "Multi-layered edge rate limiting, Cloudflare Turnstile bot deterrence, and granular token validation.",
-          standard: "OWASP Top 10"
-        },
-        {
-          title: "End-to-End Field-Level Encryption",
-          description: "Sensitive PII and financial records encrypted at rest using AES-256-GCM and rotating KMS keys.",
-          standard: "PCI-DSS v4.0 / GDPR"
-        }
-      ],
-      codeSnippet: {
-        language: "typescript",
-        filename: `${proj.id}-architecture-core.ts`,
-        code: `// ${proj.title} - Divanex High-Velocity Production Primitive
-import { CloudMesh, ResilientEngine, Telemetry } from "@divanex/core";
-import { DatabaseCluster } from "@/lib/persistence";
-
-export const CoreEngine = new ResilientEngine({
-  platform: "${proj.title}",
-  tenancy: "cryptographic-row-isolation",
-  caching: { strategy: "stale-while-revalidate", edgeTtlSeconds: 300 },
-  telemetry: Telemetry.distributedTracing({ sampleRate: 1.0, alerting: "slack-pagerduty" }),
-  failover: { maxRetries: 3, exponentialBackoff: true, circuitBreakerTimeoutMs: 1500 }
-});
-
-export async function handleIngressEvent(request: Request) {
-  const context = await CoreEngine.authenticate(request);
-  const result = await DatabaseCluster.executeScopedQuery(context.tenantId, async (db) => {
-    return db.processOptimizedPipeline({
-      latencyTargetMs: 18,
-      strictAuditLog: true
-    });
-  });
-  return Response.json({ success: true, telemetry: CoreEngine.getTelemetry(), data: result });
-}`
-      },
-      keyTakeaways: [
-        `Achieved ${proj.impactMetric} ${proj.impactLabel} within the first 30 days of production deployment.`,
-        "Decoupled legacy bottlenecks into isolated, horizontally scalable microservices with sub-50ms latency.",
-        "Zero downtime production migration with 100% data integrity verified across all historical records.",
-        "Delivered ahead of schedule with 99.999% SLA uptime and comprehensive end-to-end type safety."
-      ],
-      testimonial: {
-        quote: `Divanex exceeded our wildest expectations with ${proj.title}. The engineering quality, speed of delivery, and attention to performance were extraordinary.`,
-        author: "Alex Morgan",
-        role: "VP of Product Engineering",
-        company: `${proj.title.split(" ")[0]} Technologies`,
-        avatarInitials: "AM"
-      }
-    };
-  }
-});
-

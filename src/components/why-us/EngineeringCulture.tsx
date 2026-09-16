@@ -6,24 +6,24 @@ import { Users } from "lucide-react";
 
 /** What this section was written with. A stored record replaces it field by field. */
 const DEFAULT_HEADING = {
-  "eyebrow": "THE DIVANEX ENGINEERING BAR",
-  "title": "A High-Caliber",
-  "highlight": "Engineering Culture",
-  "description": "We treat software as an engineering discipline, not a creative experiment. We prioritize type-safety, maintainability, and clean architecture over flashy shortcuts that lead to technical debt."
+  "eyebrow": "HOW WE WORK // INSIDE THE TEAM",
+  "title": "Who Actually",
+  "highlight": "Writes Your Code",
+  "description": "Software is a craft with boring, unglamorous standards behind it. We would rather ship something maintainable in week nine than something impressive in week three that nobody can change afterwards."
 };
 
 const DEFAULT_ITEMS = [
     {
-      title: "Senior-Only Engineers",
-      desc: "Zero junior bait-and-switch. Every team member working on your codebase has at least 5+ years of production SaaS and distributed systems experience."
+      title: "The Same People You Met",
+      desc: "The engineers in your first call are the ones on the project. Nobody gets swapped for a cheaper pair of hands once the contract is signed.",
     },
     {
-      title: "Radical Transparency",
-      desc: "You have real-time access to our pull requests, code reviews, and project issue boards. If there is a roadblock, you know about it immediately."
+      title: "You Can Look At Anything",
+      desc: "Pull requests, review comments, the issue board — open to you throughout. When something is going badly you will see it in the same week we do.",
     },
     {
-      title: "Continuous Code Reviews",
-      desc: "No code merges to staging without dual peer reviews checking for memory leaks, SQL indexing, OWASP vulnerabilities, and UX consistency."
+      title: "Nothing Merges Unreviewed",
+      desc: "Every change is read by a second engineer before it reaches staging. It slows us down slightly and it catches the bugs that are expensive later.",
     }
   ];
 
@@ -51,7 +51,7 @@ export default function EngineeringCulture() {
               <RichText inline value={heading.description} />
             </p>
             <div className="p-4 rounded-2xl bg-sky-50 border border-sky-200 text-xs font-mono font-bold text-sky-800 shadow-sm">
-              ✦ Average Engineering Tenure: 7.2 Years in High-Growth SaaS
+              ✦ The people on your project have been writing production software for 7+ years
             </div>
           </div>
 

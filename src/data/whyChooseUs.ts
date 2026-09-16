@@ -12,47 +12,47 @@ export interface WhyPillar {
 export const whyChoosePillars: WhyPillar[] = [
   {
     id: "end-to-end",
-    title: "Full-Cycle Digital Engineering",
-    subtitle: "From Inception & Design to Scaled Cloud Deployment",
+    title: "One Team, Start to Finish",
+    subtitle: "Design, backend, mobile and infrastructure under one roof",
     description:
-      "No more coordinating between disjointed design agencies, backend contractors, and marketing vendors. Divanex provides an elite cross-functional engineering squad that drives your product from concept to market leadership.",
+      "You do not end up coordinating a design shop, a backend contractor and a DevOps freelancer who blame each other when something breaks. The same group that draws the screens writes the queries and runs the deployment.",
     iconName: "Compass",
-    badge: "Full Cycle Delivery",
-    metrics: "1 Unified Partner",
-    color: "#3a5296"
+    badge: "One accountable team",
+    metrics: "No hand-offs",
+    color: "#0f7670"
   },
   {
     id: "cutting-edge-tech",
-    title: "Battle-Tested Modern Tech Stack",
-    subtitle: "Engineered on Next.js 15, TypeScript, FastAPI & PyTorch",
+    title: "Written, Not Assembled",
+    subtitle: "No page builders, no bought themes, no plugin towers",
     description:
-      "We avoid brittle legacy systems. Everything we build leverages modern, high-concurrency frameworks (Next.js, React 19, TypeScript, Python FastAPI, PostgreSQL, Docker) ensuring sub-second response times and enterprise durability.",
+      "Everything is written for your problem, on stacks we can still support in three years. That is slower to start than dragging blocks around, and far cheaper the first time you need something the template never anticipated.",
     iconName: "Code2",
-    badge: "Modern Architecture",
-    metrics: "Sub-100ms Latency",
+    badge: "Custom built",
+    metrics: "Yours to change",
     color: "#189a91"
   },
   {
     id: "agile-fast",
-    title: "High-Velocity Agile Sprints",
-    subtitle: "Two-Week Sprints with Transparent Client Milestones",
+    title: "You See It Every Two Weeks",
+    subtitle: "A staging link you can click, not a status report",
     description:
-      "Time-to-market is your greatest advantage. Our disciplined 2-week sprint cadence, transparent Git tracking, and weekly live demo milestones ensure your software launches on schedule with zero surprises.",
+      "Every fortnight there is a URL with the current build on it and a walkthrough from whoever built it. If the direction is wrong you find out in week two, not in month four when changing it is expensive.",
     iconName: "Zap",
-    badge: "Sprint Velocity",
-    metrics: "3x Faster Launch",
+    badge: "Visible progress",
+    metrics: "Every 2 weeks",
     color: "#5c9556"
   },
   {
     id: "dedicated-support",
-    title: "Enterprise SLA & 24/7 Support",
-    subtitle: "Direct Senior Architect Access & 99.999% Cloud Uptime",
+    title: "We Are Still Here After Launch",
+    subtitle: "Monitoring, patches and a number that a person answers",
     description:
-      "We treat your platform with mission-critical diligence. Every engagement includes a dedicated solutions architect, proactive telemetry monitoring, automated security patches, and SLA-guaranteed support.",
+      "Launch is when the real bugs arrive. We watch the logs, apply security updates, and you message the engineers directly rather than opening a ticket and waiting to be triaged.",
     iconName: "ShieldCheck",
-    badge: "Always-On Support",
-    metrics: "99.999% SLA Uptime",
-    color: "#5c9556"
+    badge: "Support that answers",
+    metrics: "Direct to engineers",
+    color: "#000838"
   }
 ];
 
@@ -65,27 +65,27 @@ export interface ComparisonRow {
 
 export const comparisonData: ComparisonRow[] = [
   {
-    feature: "Development Velocity",
-    divanex: "Rapid 2-week agile sprints with working staging builds",
-    traditional: "Slow, quarterly release cycles and lengthy delays",
-    freelancers: "Unpredictable hours & inconsistent timelines"
+    feature: "How often you see progress",
+    divanex: "A working staging link and a walkthrough every two weeks",
+    traditional: "Status decks for months, then a demo near the deadline",
+    freelancers: "Depends entirely on the week and how busy they are"
   },
   {
-    feature: "Modern AI & Tech Stack",
-    divanex: "Native LLM integration, Next.js 15 SSR, Serverless Edge",
-    traditional: "Legacy PHP, slow WordPress or rigid monoliths",
-    freelancers: "Limited to individual skillsets without peer review"
+    feature: "Who writes the code",
+    divanex: "The senior engineers you met in the first call",
+    traditional: "Whoever is on the bench, often juniors behind an account manager",
+    freelancers: "One person, with nobody reviewing their work"
   },
   {
-    feature: "Ownership of Code & IP",
-    divanex: "100% Client Ownership on Day 1 (Full Git & Cloud Transfer)",
-    traditional: "Complex licensing fees or proprietary agency locks",
-    freelancers: "Hostage code or missing documentation risks"
+    feature: "Who owns it at the end",
+    divanex: "You do, from day one — repository, cloud accounts and database",
+    traditional: "Licensing terms and hosting you cannot easily leave",
+    freelancers: "Usually yours, if the repository and credentials survive"
   },
   {
-    feature: "Ongoing Post-Launch SLA",
-    divanex: "24/7 Monitoring & Dedicated Maintenance Squad",
-    traditional: "Expensive retainer fees with slow ticket queues",
-    freelancers: "Often unavailable or unresponsive after handover"
+    feature: "What happens after launch",
+    divanex: "Monitoring, security patches and direct access to the engineers",
+    traditional: "A retainer and a ticket queue measured in days",
+    freelancers: "Often gone, or busy with the next client"
   }
 ];

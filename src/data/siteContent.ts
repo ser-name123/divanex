@@ -61,18 +61,18 @@ export interface SiteConfig {
 
 export const DEFAULT_SITE_CONFIG: SiteConfig = {
   announcementEnabled: true,
-  announcementPill: "SPRINT OPEN",
-  announcementText: "Q3 SaaS & AI Engineering Sprint Slots Open • 14-Day Delivery Guarantee",
-  announcementLinkText: "Reserve Slot →",
+  announcementPill: "TAKING NEW PROJECTS",
+  announcementText: "Build slots are open this quarter for SaaS products, custom ERP rollouts and AI automation work",
+  announcementLinkText: "Talk to an engineer →",
   announcementLinkUrl: "/contact",
 
-  heroEyebrow: "Next-Gen Digital Solutions & Cloud Architecture • SaaS & AI Specialized",
-  heroHeadlineMain: "Transforming Businesses with",
-  heroHeadlineHighlight: "Next-Gen Tech Solutions.",
+  heroEyebrow: "Custom Software, AI Systems & Cloud Platforms • Built in Jaipur, Shipped Worldwide",
+  heroHeadlineMain: "Software Built to Carry Your Business",
+  heroHeadlineHighlight: "Further Than It Has Gone Before.",
   heroSubhead:
-    "SaaS, Web, Mobile Apps, AI & Digital Marketing Solutions for Scaling Businesses. From conceptual system architecture to resilient global serverless deployment, we engineer digital engines that outperform.",
-  heroCtaQuoteText: "Get a Free Quote",
-  heroCtaConsultText: "Book a Free Consultation",
+    "We build the systems growing companies actually run on — multi-tenant SaaS products, hospital and ERP platforms, AI agents that do real work, and mobile apps your customers keep coming back to. Every line of it is yours from the first commit.",
+  heroCtaQuoteText: "Get a Project Quote",
+  heroCtaConsultText: "Talk to an Engineer",
 
   contactEmail: "business@divanextechnologies.com",
   supportEmail: "business@divanextechnologies.com",

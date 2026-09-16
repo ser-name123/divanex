@@ -39,15 +39,15 @@ export default function HomeBlogSection({ posts: incoming }: { posts?: BlogPost[
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-50 border border-sky-200 text-[11px] font-mono font-bold text-sky-800 shadow-2xs">
               <span className="w-2 h-2 rounded-full bg-sky-600 animate-pulse" />
               <BookOpen className="w-3.5 h-3.5 text-sky-600" />
-              <span>ENGINEERING DISPATCHES // PRODUCTION PAPERS</span>
+              <span>FROM THE WORKBENCH // WRITING</span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
-              Architectural Insights & <span className="gradient-text">Tech Case Studies</span>
+              Notes From Problems <span className="gradient-text">We Had to Solve</span>
             </h2>
 
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Deep engineering teardowns on PostgreSQL 16 multi-tenancy, ABDM hospital HMIS, double-entry banking ledgers, and autonomous multi-agent AI systems written by our principal architects.
+              Write-ups from real projects — multi-tenant database design, hospital data standards, keeping a financial ledger honest, getting AI agents to behave. Written by the people who did the work.
             </p>
           </div>
 

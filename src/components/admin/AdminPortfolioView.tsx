@@ -107,14 +107,18 @@ export default function AdminPortfolioView() {
     const projectToSave: PortfolioProject = {
       id: editingProject ? editingProject.id : (formData.id || `proj-${Date.now()}`),
       title: formData.title.trim(),
-      category: (formData.category as PortfolioProject["category"]) || "SaaS",
+      clientSubtitle: formData.clientSubtitle?.trim() || "Technology Solution",
+      category: (formData.category as PortfolioProject["category"]) || "Mobile App",
+      serviceTags: formData.serviceTags && formData.serviceTags.length > 0 ? formData.serviceTags : ["Mobile App", "Web Development", "UI/UX Design"],
       tagline: formData.tagline?.trim() || "Engineered for high performance",
       description: formData.description.trim(),
       impactMetric: formData.impactMetric?.trim() || "+100%",
       impactLabel: formData.impactLabel?.trim() || "Operational Gain",
       techStack: stackList.length > 0 ? stackList : ["Next.js", "TypeScript"],
       gradient: formData.gradient || "from-blue-600/30 via-indigo-900/20 to-slate-950",
-      imagePlaceholderColor: formData.imagePlaceholderColor || "bg-blue-600/20"
+      imagePlaceholderColor: formData.imagePlaceholderColor || "bg-blue-600/20",
+      themeColor: formData.themeColor || "#0284c7",
+      badgeBg: formData.badgeBg || "bg-sky-50 text-sky-700 border-sky-200"
     };
 
     let updatedList: PortfolioProject[];
@@ -131,7 +135,7 @@ export default function AdminPortfolioView() {
   };
 
   // Filter logic
-  const categories = ["all", "SaaS", "AI", "Mobile App", "Web Platform", "E-Commerce", "FinTech"];
+  const categories = ["all", "Mobile App", "Web Platform", "SaaS", "E-Commerce", "Healthcare", "AI", "FinTech"];
 
   const filteredProjects = projects.filter((p) => {
     const matchesCategory = selectedCategory === "all" || p.category === selectedCategory;
@@ -371,15 +375,18 @@ export default function AdminPortfolioView() {
                     Category *
                   </label>
                   <select
-                    value={formData.category || "SaaS"}
-                    onChange={(e) => setFormData({ ...formData, category: e.target.value as PortfolioProject["category"] })}
+                    value={formData.category || "Mobile App"}
+                    onChange={(e) =>
+                      setFormData({ ...formData, category: e.target.value as PortfolioProject["category"] })
+                    }
                     className="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-300 focus:bg-white focus:border-sky-500 text-slate-900 focus:outline-none"
                   >
-                    <option value="SaaS">SaaS</option>
-                    <option value="AI">AI</option>
                     <option value="Mobile App">Mobile App</option>
                     <option value="Web Platform">Web Platform</option>
+                    <option value="SaaS">SaaS</option>
                     <option value="E-Commerce">E-Commerce</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="AI">AI</option>
                     <option value="FinTech">FinTech</option>
                   </select>
                 </div>

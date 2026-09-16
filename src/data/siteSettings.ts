@@ -110,14 +110,12 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   legalName: "Divanex Technologies",
   logoUrl: "/brand-logo-icon.png",
   foundingYear: "2021",
-  contactEmail: "contact@divanextechnologies.com",
-  contactPhone: "+91 98765 43210",
-  // No street line or postcode: the published address is the city only.
-  // Empty fields are dropped from the markup rather than published blank.
-  streetAddress: "",
+  contactEmail: "business@divanextechnologies.com",
+  contactPhone: "+91-6375073511",
+  streetAddress: "Office 104, Vaishali Tower 2nd, Nursery Circle, Vaishali Nagar",
   addressLocality: "Jaipur",
   addressRegion: "Rajasthan",
-  postalCode: "",
+  postalCode: "302021",
   addressCountry: "IN",
   socialProfiles: [
     "https://linkedin.com/company/divanex",

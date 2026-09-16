@@ -104,10 +104,6 @@ export default function AdminHeader({
         return "Telemetry Overview & Agency KPIs";
       case "chats":
         return "Live AI & Human Support Command Center";
-      case "leads":
-        return "Inbound Leads & Client Inquiries CRM";
-      case "estimates":
-        return "Cost Estimator & Scope Submissions";
       case "services":
         return "Core Services Catalog & Pricing Controller";
       case "projects":

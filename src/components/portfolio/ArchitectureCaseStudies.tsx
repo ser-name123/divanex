@@ -15,31 +15,31 @@ const DEFAULT_HEADING = {
 
 const DEFAULT_ITEMS = [
     {
-      slug: "fintech-clearing-engine",
-      title: "FinTech Multi-Currency Clearing Engine",
-      sector: "FinTech & Payments",
+      slug: "fynito",
+      title: "Hyperlocal Real-Time Rider Telemetry HUD",
+      sector: "Food & Logistics",
       icon: Cpu,
-      challenge: "Handling 25,000 transactions/second with zero race conditions and strict double-entry ledger verification.",
-      solution: "Engineered Go microservices backed by PostgreSQL serializable isolation and Redis distributed redlocks.",
-      metrics: "99.999% ledger accuracy, <18ms transaction finality."
+      challenge: "Handling 2,000+ simultaneous live rider GPS streams and zero-latency kitchen order state transitions.",
+      solution: "Engineered Node.js worker clusters backed by Socket.io and Redis Pub/Sub geospatial clustering.",
+      metrics: "<120ms live map latency, 450K+ orders delivered."
     },
     {
-      slug: "neurochat-ai",
-      title: "Autonomous Healthcare RAG Diagnosis Assistant",
+      slug: "evtor",
+      title: "OCPP 2.0.1 Connected EV Telemetry Gateway",
+      sector: "IoT & Mobility",
+      icon: Server,
+      challenge: "Standardizing heterogeneous EV charging station firmware with sub-second QR charge session triggering.",
+      solution: "Universal OCPP 2.0.1 WebSocket broker ingesting real-time meter telemetry into TimescaleDB.",
+      metrics: "99.98% telemetry SLA, <2.5s QR charge flow."
+    },
+    {
+      slug: "magnus-partners",
+      title: "HIPAA & ABDM Clinical Case Sharing Pipeline",
       sector: "HealthTech & MedAI",
       icon: ShieldCheck,
-      challenge: "HIPAA-compliant private vector search across 500k+ clinical research papers with zero data leakage.",
-      solution: "Isolated self-hosted Qdrant vector cluster, encrypted embedding pipelines, and strict role-based access control (RBAC).",
-      metrics: "94.2% diagnostic retrieval relevance, 100% HIPAA compliant."
-    },
-    {
-      slug: "supply-chain-telemetry",
-      title: "Global Supply Chain Real-Time Telemetry HUD",
-      sector: "Logistics & IoT",
-      icon: Server,
-      challenge: "Streaming GPS and temperature telemetry from 40,000 active freight containers worldwide simultaneously.",
-      solution: "MQTT broker ingestion with Kafka event streaming feeding ClickHouse real-time database and Next.js WebSocket dashboards.",
-      metrics: "<200ms end-to-end device-to-screen latency."
+      challenge: "Secure multi-hospital clinical consultation exchange with zero patient health information leakage.",
+      solution: "HL7 FHIR v4 data pipeline, PostgreSQL row-level security, and encrypted DICOM radiology viewer.",
+      metrics: "50+ hospital networks, 100% HIPAA compliant."
     }
   ];
 

@@ -15,9 +15,9 @@ export const servicesData: ServiceItem[] = [
   {
     id: "hospital-healthcare-management",
     title: "Hospital & Healthcare Systems",
-    tagline: "Custom HMIS, EHR/EMR, Telemedicine & ABDM/HIPAA Compliance",
+    tagline: "Hospital and clinic software: records, OPD, pharmacy, billing",
     description:
-      "Enterprise healthcare software suites engineered for multi-specialty hospitals, clinic chains, and digital health startups. Featuring automated OPD/IPD flows, digital prescriptions, lab PACS integration, pharmacy inventory, and HIPAA/ABDM-compliant security.",
+      "Software for hospitals, clinic chains and diagnostic labs. Patient registration through discharge, prescriptions the pharmacy can actually read, lab and imaging results linked to the right file, and stock that reconciles. Built to ABDM and HIPAA rules where they apply.",
     iconName: "Stethoscope",
     color: "#0f7670",
     gradient: "from-sky-600/20 via-cyan-500/10 to-transparent",
@@ -35,9 +35,9 @@ export const servicesData: ServiceItem[] = [
   {
     id: "enterprise-erp-systems",
     title: "Enterprise ERP & Supply Chain",
-    tagline: "Custom Modular ERP, Multi-Warehouse Inventory & Finance Automation",
+    tagline: "ERP built around how you work, not the other way round",
     description:
-      "Scalable, zero-license-bloat ERP architectures tailored for manufacturing, supply chain logistics, retail networks, and corporate conglomerates. Unify accounting, inventory, HRMS, and supply chain into a single high-performance cockpit.",
+      "For manufacturers, distributors and retail chains who have outgrown spreadsheets and refuse to bend their process to fit packaged software. Stock across locations, production, purchase, accounts and payroll in one place, with no per-seat licence to renew.",
     iconName: "Briefcase",
     color: "#213473",
     gradient: "from-indigo-600/20 via-blue-500/10 to-transparent",
@@ -55,9 +55,9 @@ export const servicesData: ServiceItem[] = [
   {
     id: "fintech-banking-solutions",
     title: "Fintech & Digital Banking",
-    tagline: "Core Banking Engines, Neo-Bank Portals & Payment Rails",
+    tagline: "Ledgers that balance and payments that reconcile",
     description:
-      "Institutional-grade financial technology platforms built with distributed ledger precision, sub-50ms transaction processing, automated KYC/AML pipelines, and multi-rail payment gateway routing.",
+      "Lending platforms, wallets, payment flows and the double-entry ledger underneath them. The kind of work where an off-by-one paisa is a real incident, so correctness and a full audit trail come before everything else.",
     iconName: "Banknote",
     color: "#447541",
     gradient: "from-emerald-600/20 via-teal-500/10 to-transparent",
@@ -75,9 +75,9 @@ export const servicesData: ServiceItem[] = [
   {
     id: "custom-crm-automation",
     title: "Custom CRM & Sales Engines",
-    tagline: "Omnichannel Lead Ingestion, WhatsApp Bots & Revenue Operations",
+    tagline: "A CRM your sales team will actually open",
     description:
-      "High-velocity CRM software built for enterprise sales teams. Automate lead qualification, call recording, WhatsApp Business workflows, dynamic quotation generation, and field agent location tracking.",
+      "Most teams abandon the CRM because logging a call takes longer than making one. We build around how your reps really work — WhatsApp where the conversation already happens, quotes generated in a click, and field visits captured from the phone in their pocket.",
     iconName: "UserCheck",
     color: "#4a7c43",
     gradient: "from-orange-600/20 via-amber-500/10 to-transparent",
@@ -175,9 +175,9 @@ export const servicesData: ServiceItem[] = [
   {
     id: "ai-solutions-automation",
     title: "AI Solutions & Automation",
-    tagline: "AI/ML Integration, Smart Agents & Process Automation",
+    tagline: "AI pointed at a specific job, not a demo",
     description:
-      "Supercharge your operational efficiency with tailored LLM pipelines, autonomous AI customer agents, predictive analytics, and end-to-end robotic workflow automations.",
+      "Agents that read your own documents and answer from them, support that handles the repetitive half of the queue, and automations that move data between systems nobody wanted to integrate. Grounded in your data, with the answer traceable to its source.",
     iconName: "Cpu",
     color: "#5c9556",
     gradient: "from-emerald-500/20 via-teal-500/10 to-transparent",

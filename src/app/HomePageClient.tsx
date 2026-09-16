@@ -16,7 +16,6 @@ import TechStackGrid from "@/components/TechStackGrid";
 import PortfolioSection from "@/components/PortfolioSection";
 import StatsSection from "@/components/StatsSection";
 import Testimonials from "@/components/Testimonials";
-import GlobalOfficesSection from "@/components/GlobalOfficesSection";
 import HomeBlogSection from "@/components/HomeBlogSection";
 import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
@@ -83,10 +82,7 @@ export default function HomePageClient({
         {/* Section 10: Client Testimonials & Reviews */}
         <Testimonials isHome={true} items={testimonials} />
 
-        {/* Section 11: Global Offices & Regional Hubs (India, Hong Kong, Dubai, Canada) */}
-        <GlobalOfficesSection />
-
-        {/* Section 12: Engineering Blog & Technical Insights */}
+        {/* Section 11: Engineering Blog & Technical Insights */}
         <HomeBlogSection posts={posts} />
 
         {/* Section 13: Interactive FAQ Section */}

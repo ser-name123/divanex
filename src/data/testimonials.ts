@@ -852,44 +852,44 @@ export interface FAQItem {
 export const faqsData: FAQItem[] = [
   {
     id: "faq-1",
-    question: "How does Divanex ensure 99.999% uptime and high performance?",
+    question: "What does a project actually cost?",
     answer:
-      "We build on battle-tested architectures including Next.js 15, PostgreSQL with connection pooling, Redis in-memory caching, and multi-region Cloudflare Edge networks. Every platform undergoes automated load testing and stress simulations before deployment.",
-    category: "Architecture"
+      "It depends on scope, but we quote a fixed price per milestone rather than an open hourly meter, so you always know the number before work starts. Smaller products usually land in the low tens of lakhs; a full ERP or hospital system is more. Send us a short brief and you will get a real figure, not a range.",
+    category: "Pricing"
   },
   {
     id: "faq-2",
-    question: "Who owns the intellectual property (IP) and source code?",
+    question: "Who owns the code when we are done?",
     answer:
-      "You own 100% of all intellectual property, repository codebases, design assets, and cloud deployment scripts from Day 1. We provide clean, fully documented repositories with complete commercial transfer upon sprint completion.",
-    category: "Legal & IP"
+      "You do, and not only at the end — the repository is in your organisation from the first week, and the cloud accounts are in your name. If you decided tomorrow to continue with another team, you could hand them everything without asking us for anything.",
+    category: "Ownership"
   },
   {
     id: "faq-3",
-    question: "How do you handle scope changes during active development?",
+    question: "How long does it take?",
     answer:
-      "We work in agile, 2-week sprints with transparent Jira/GitHub project boards. New features can be swapped or reprioritized for upcoming sprints without contractual friction or hidden fees.",
-    category: "Process"
+      "A first usable version is typically six to ten weeks. Larger platforms run three to six months. The plan we agree in week one has dates on it, and you can check progress against them yourself every fortnight instead of taking our word for it.",
+    category: "Timelines"
   },
   {
     id: "faq-4",
-    question: "What compliance standards and security measures do you implement?",
+    question: "What if we want to change something halfway through?",
     answer:
-      "We adhere strictly to SOC-2 Type II, HIPAA, ISO 27001, and PCI-DSS guidelines. We implement field-level AES-256 encryption, zero-trust IAM policies, strict CORS/CSP headers, and automated SAST/DAST vulnerability scans.",
-    category: "Security"
+      "That is expected, and the two-week cycle exists partly for this. Swapping something out of an upcoming block costs nothing. Adding genuinely new scope changes the price, and we will say so plainly at the time rather than absorbing it quietly and running late.",
+    category: "Process"
   },
   {
     id: "faq-5",
-    question: "What is the typical timeline and cost for an enterprise MVP or full platform?",
+    question: "What happens if you miss a deadline?",
     answer:
-      "A production-grade MVP is typically delivered in 4 to 8 weeks, while full enterprise platforms range from 8 to 16 weeks depending on microservices scope. Use our interactive Cost Estimator for an instant itemized breakdown.",
-    category: "Pricing & Timelines"
+      "You will know before the date, not after it, because you are watching the same staging builds we are. If the delay is ours we absorb the cost of catching up. If it came from a change in scope or a decision we are waiting on, we will have flagged that in writing when it happened.",
+    category: "Process"
   },
   {
     id: "faq-6",
-    question: "Do you offer post-launch maintenance and 24/7 dedicated support?",
+    question: "Who do we talk to after launch?",
     answer:
-      "Yes. We offer dedicated SLA maintenance packages including 24/7 infrastructure monitoring, automated security patch rollouts, database optimization, and guaranteed 15-minute response times for critical incidents.",
+      "The engineers who built it. There is no ticket queue between you and them. For the first month after going live we watch the system closely, and after that most clients keep a small monthly arrangement for monitoring, security updates and small changes.",
     category: "Support"
   }
 ];

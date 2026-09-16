@@ -73,16 +73,16 @@ export default function TechStackGrid({ isHome = false, items }: TechStackGridPr
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border border-sky-200 text-xs font-mono font-bold text-sky-700 shadow-xs">
             <span className="w-2 h-2 rounded-full bg-sky-500 animate-ping"></span>
             <Terminal className="w-3.5 h-3.5 text-sky-600" />
-            <span className="tracking-wider uppercase">CORE STACK MATRIX // PRODUCTION HARDENED</span>
+            <span className="tracking-wider uppercase">OUR TOOLKIT // CHOSEN TO LAST</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] font-semibold tracking-tight text-slate-900">
-            Battle-Tested Technologies for{" "}
-            <span className="gradient-text font-semibold">Maximum Performance</span>
+            Boring Technology Choices,{" "}
+            <span className="gradient-text font-semibold">On Purpose</span>
           </h2>
 
           <p className="text-slate-600 text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
-            Zero bloat, type-safe integrity, sub-second latency, and horizontal scalability. We architect systems exclusively on modern, long-term durable frameworks including Next.js, Laravel, Headless CMS, and Cloud-Native AI primitives.
+            We pick frameworks that will still be maintained in five years and that any competent developer can pick up after us — Next.js, Laravel, PostgreSQL, React Native. Nothing exotic, nothing that locks you in.
           </p>
         </div>
 

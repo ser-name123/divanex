@@ -6,32 +6,32 @@ import { ShieldCheck, Lock, RefreshCw, Award, CheckCircle2 } from "lucide-react"
 
 /** What this section was written with. A stored record replaces it field by field. */
 const DEFAULT_HEADING = {
-  "eyebrow": "Zero Downside Commitment",
-  "title": "Institutional",
-  "highlight": "Risk Reversal Guarantees",
-  "description": "We eliminate the anxiety of outsourcing software development with legally enforceable warranties, IP escrow, and milestone-gated payment releases."
+  "eyebrow": "WHAT WE COMMIT TO",
+  "title": "What Happens",
+  "highlight": "If We Get It Wrong",
+  "description": "Anyone can promise things will go well. These are the commitments that only matter when they do not."
 };
 
 const DEFAULT_ITEMS = [
     {
       icon: ShieldCheck,
-      title: "14-Day Sprint Milestone Guarantee",
-      desc: "If our initial 14-day sprint deliverables do not meet the exact architectural specifications defined in our statement of work, we revise at zero additional cost until approved."
+      title: "The First Milestone Is On Us If It Misses",
+      desc: "If the first two-week block does not deliver what the scope said, we rework it at our cost until it does. You are not paying us to learn your domain.",
     },
     {
       icon: Lock,
-      title: "Clean Source Code Escrow & IP Transfer",
-      desc: "Every line of code, Docker file, and schema migration is committed directly to your enterprise GitHub repository under an unrestricted, non-exclusive intellectual property deed."
+      title: "Delays That Are Ours, We Absorb",
+      desc: "Late because we misjudged the work: we cover catching up. Late because scope changed or we were waiting on a decision: we will have said so in writing when it happened.",
     },
     {
       icon: RefreshCw,
-      title: "30-Day Zero-Cost Hypercare Warranty",
-      desc: "Following production deployment, our engineering team provides 30 calendar days of comprehensive bug-fixing and configuration monitoring at no additional charge."
+      title: "A Month Of Fixes After Launch, Free",
+      desc: "The first month live is when the real bugs surface. Anything broken that we built gets fixed at no charge for thirty days, no argument about whose fault it is.",
     },
     {
       icon: Award,
-      title: "Fixed-Price Scope Lock Protection",
-      desc: "Once an estimate and sprint specification is signed, you are protected against unexpected budget creep. If a feature takes longer than expected, we absorb the cost."
+      title: "The Price Does Not Move On Its Own",
+      desc: "Once a milestone is agreed the number is fixed. If something turns out harder than we thought, that is our misjudgement to absorb, not a change order you discover on the invoice.",
     }
   ];
 
@@ -79,7 +79,7 @@ export default function RiskReversalGuarantees() {
                   </p>
                   <div className="mt-4 flex items-center gap-2 text-xs font-mono font-semibold text-emerald-700">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>CONTRACTUALLY STIPULATED IN MASTER SERVICES AGREEMENT</span>
+                    <span>WRITTEN INTO THE CONTRACT, NOT JUST SAID</span>
                   </div>
                 </div>
               </div>

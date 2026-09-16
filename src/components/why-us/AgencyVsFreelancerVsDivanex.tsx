@@ -6,48 +6,48 @@ import { Check, X, Minus, Scale } from "lucide-react";
 
 /** What this section was written with. A stored record replaces it field by field. */
 const DEFAULT_HEADING = {
-  "eyebrow": "Market Benchmark Comparison",
-  "title": "How Divanex Outperforms the",
-  "highlight": "Alternatives",
-  "description": "Stop sacrificing velocity for quality or paying exorbitant legacy agency overhead. See why scaling businesses partner with Divanex."
+  "eyebrow": "THE HONEST COMPARISON",
+  "title": "Where Each Option",
+  "highlight": "Tends To Break",
+  "description": "A freelancer, an agency and us are three different trade-offs, and all three are sometimes the right answer. Here is what usually goes wrong with each so you can pick knowingly."
 };
 
 const DEFAULT_ITEMS = [
     {
-      vector: "Speed to Working MVP",
-      freelancers: "Unpredictable (12-24 weeks)",
-      agencies: "Slow bureaucratic (16-32 weeks)",
-      divanex: "Fast agile sprints (4-8 weeks)"
+      vector: "Time to something usable",
+      freelancers: "Fast if they are free, unpredictable if not",
+      agencies: "Four to eight months, much of it in planning",
+      divanex: "Six to ten weeks for a first working version",
     },
     {
-      vector: "Code & IP Ownership",
-      freelancers: "Vague, risk of repo hostage",
-      agencies: "Often proprietary framework lock-in",
-      divanex: "100% immediate IP transfer on milestone"
+      vector: "Who owns it afterwards",
+      freelancers: "Usually you, if the repo and logins survive",
+      agencies: "Their hosting, their framework, their terms",
+      divanex: "Yours from week one, in your accounts",
     },
     {
-      vector: "Architectural Caliber",
-      freelancers: "Junior to mid-level shortcuts",
-      agencies: "Delegated to low-cost junior interns",
-      divanex: "Strict senior engineering & code reviews"
+      vector: "Who writes it",
+      freelancers: "One person, nobody reviewing them",
+      agencies: "Whoever is free, often behind a manager",
+      divanex: "The seniors you met, reviewing each other",
     },
     {
-      vector: "Communication Protocol",
-      freelancers: "Ghosting & timezone lag",
-      agencies: "Account managers buffer engineers",
-      divanex: "Direct Slack channel with tech leads"
+      vector: "Getting hold of someone",
+      freelancers: "Good until they take another contract",
+      agencies: "Through an account manager, on their calendar",
+      divanex: "Shared channel with the engineers",
     },
     {
-      vector: "Pricing & Invoicing",
-      freelancers: "Hourly scope-creep & unpredictability",
-      agencies: "Hefty markups & $20k+/mo retainers",
-      divanex: "Transparent milestone-gated flat pricing"
+      vector: "How you are billed",
+      freelancers: "Hourly, and the hours grow",
+      agencies: "Large monthly retainer regardless of output",
+      divanex: "Fixed per milestone, agreed in advance",
     },
     {
-      vector: "Post-Launch Warranty",
-      freelancers: "Disappears after payment",
-      agencies: "Billable $250/hr maintenance tier",
-      divanex: "30-day comprehensive zero-cost hypercare"
+      vector: "Six months after launch",
+      freelancers: "Often unreachable",
+      agencies: "Billable hours and a ticket queue",
+      divanex: "Same engineers, small monthly arrangement",
     }
   ];
 
@@ -78,10 +78,10 @@ export default function AgencyVsFreelancerVsDivanex() {
         <div className="overflow-x-auto">
           <div className="min-w-[720px] rounded-2xl border border-slate-200 bg-white shadow-md overflow-hidden">
             <div className="grid grid-cols-4 p-5 bg-slate-50 border-b border-slate-200 text-xs font-mono tracking-wider uppercase">
-              <div className="text-slate-700 font-semibold">Evaluation Vector</div>
-              <div className="text-slate-600 font-medium text-center">Freelance Marketplaces</div>
-              <div className="text-slate-600 font-medium text-center">Traditional Agencies</div>
-              <div className="text-sky-900 font-semibold text-center bg-sky-50 py-1 rounded">Divanex Pods</div>
+              <div className="text-slate-700 font-semibold">What you are comparing</div>
+              <div className="text-slate-600 font-medium text-center">A solo freelancer</div>
+              <div className="text-slate-600 font-medium text-center">A traditional agency</div>
+              <div className="text-sky-900 font-semibold text-center bg-sky-50 py-1 rounded">Working with us</div>
             </div>
 
             <div className="divide-y divide-slate-100">
