@@ -400,6 +400,40 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
       }
     ]
   },
+  "footer/brand": {
+    "heading": {
+      "eyebrow": "Enterprise Standards:",
+      "title": "",
+      "highlight": "",
+      "description": "Edge Infrastructure: Next.js 16 + Cloudflare Tier 1"
+    },
+    "items": [
+      {
+        "kind": "business",
+        "label": "Business Inquiries",
+        "action": ""
+      },
+      {
+        "kind": "careers",
+        "label": "Job Applications / HR",
+        "action": "Apply"
+      },
+      {
+        "kind": "support",
+        "label": "Direct Support Call",
+        "action": "WhatsApp"
+      },
+      {
+        "kind": "newsletter-note",
+        "label": "Direct engineering digest • No third-party tracking",
+        "action": "TLS 1.3 Verified"
+      }
+    ],
+    "cta": {
+      "label": "Book a Consultation",
+      "href": "/contact"
+    }
+  },
   "footer/offices": {
     "heading": {
       "eyebrow": "GLOBAL TIMEZONE OVERLAP // CLIENT COVERAGE",

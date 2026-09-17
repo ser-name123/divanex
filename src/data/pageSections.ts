@@ -66,6 +66,7 @@ export const SECTION_REGISTRY: Array<{ id: string; page: string; label: string }
   { id: "blog/tags", page: "/blog", label: "Popular tags" },
 
   // Site-wide
+  { id: "footer/brand", page: "/", label: "Footer brand column" },
   { id: "footer/offices", page: "/", label: "Global offices (footer)" },
 
   // /services

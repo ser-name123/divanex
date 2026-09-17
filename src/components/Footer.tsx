@@ -28,6 +28,7 @@ import { accent } from "@/lib/accents";
 import { useNavigation } from "@/context/SiteContentContext";
 import { visibleGroups, visibleLinks } from "@/data/navigation";
 import RichText from "@/components/RichText";
+import { useSection } from "@/lib/useSection";
 import GlobalOfficesSection from "@/components/GlobalOfficesSection";
 
 /**
@@ -44,6 +45,33 @@ const COLUMN_SPAN: Record<number, string> = {
   6: "lg:col-span-6",
 };
 
+
+/** What this column was written with. A stored record replaces it field by field. */
+const DEFAULT_BRAND_HEADING = {
+  "eyebrow": "Enterprise Standards:",
+  "title": "",
+  "highlight": "",
+  "description": "Edge Infrastructure: Next.js 16 + Cloudflare Tier 1"
+};
+
+const DEFAULT_BRAND_ITEMS = [
+  { kind: "business", label: "Business Inquiries", action: "" },
+  { kind: "careers", label: "Job Applications / HR", action: "Apply" },
+  { kind: "support", label: "Direct Support Call", action: "WhatsApp" },
+  { kind: "newsletter-note", label: "Direct engineering digest • No third-party tracking", action: "TLS 1.3 Verified" }
+];
+
+const DEFAULT_BRAND_CTA = {
+  "label": "Book a Consultation",
+  "href": "/contact"
+};
+
+interface BrandItem extends Record<string, unknown> {
+  kind?: string;
+  label?: string;
+  action?: string;
+}
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const router = useRouter();
@@ -59,6 +87,24 @@ export default function Footer() {
   const siteConfig = useSiteConfig();
   const CONTACT_EMAIL = siteConfig.contactEmail;
   const CONTACT_PHONE = siteConfig.contactPhone;
+  const {
+    heading: brand,
+    items: brandItems,
+    cta: brandCta,
+  } = useSection<BrandItem>("footer/brand", {
+    heading: DEFAULT_BRAND_HEADING,
+    items: DEFAULT_BRAND_ITEMS,
+    cta: DEFAULT_BRAND_CTA,
+  });
+
+  /** A pill's copy, by the role it plays. Missing entries fall back to none. */
+  const pill = (kind: string): BrandItem =>
+    brandItems.find((item) => item.kind === kind) ?? {};
+
+  // Falls back to the business address: a careers address that is not
+  // configured should reach somebody rather than open an empty mail window.
+  const CAREERS_EMAIL = siteConfig.careersEmail || CONTACT_EMAIL;
+
   const WHATSAPP_LINK = `https://wa.me/${siteConfig.whatsappNumber.replace(/[^0-9]/g, "")}`;
 
   // Columns, the bottom strip, the newsletter copy and the trust badges are
@@ -194,8 +240,8 @@ export default function Footer() {
                     </p>
                   )}
                   <div className="text-[10px] text-slate-500 font-mono flex items-center justify-between px-2">
-                    <span>Direct engineering digest • No third-party tracking</span>
-                    <span className="text-sky-700 font-semibold">TLS 1.3 Verified</span>
+                    <span>{pill("newsletter-note").label}</span>
+                    <span className="text-sky-700 font-semibold">{pill("newsletter-note").action}</span>
                   </div>
               </form>
             </div>
@@ -232,7 +278,7 @@ export default function Footer() {
                 >
                   <Mail className="w-3.5 h-3.5 text-sky-600 shrink-0" />
                   <div className="flex flex-col text-left truncate">
-                    <span className="text-[10px] text-slate-400 font-mono font-medium">Business Inquiries</span>
+                    <span className="text-[10px] text-slate-400 font-mono font-medium">{pill("business").label}</span>
                     <span className="text-[11px] font-bold text-slate-900 truncate">{CONTACT_EMAIL}</span>
                   </div>
                 </a>
@@ -250,21 +296,21 @@ export default function Footer() {
               {/* Careers & Job Applications Email */}
               <div className="flex items-center justify-between p-2 rounded-xl bg-white border border-slate-200 hover:border-purple-300 transition-colors shadow-2xs">
                 <a
-                  href="mailto:hr@divanextechnologies.com"
+                  href={`mailto:${CAREERS_EMAIL}`}
                   className="flex items-center gap-2 text-slate-900 hover:text-purple-600 transition-colors truncate font-semibold"
                 >
                   <Mail className="w-3.5 h-3.5 text-purple-600 shrink-0" />
                   <div className="flex flex-col text-left truncate">
-                    <span className="text-[10px] text-slate-400 font-mono font-medium">Job Applications / HR</span>
-                    <span className="text-[11px] font-bold text-slate-900 truncate">hr@divanextechnologies.com</span>
+                    <span className="text-[10px] text-slate-400 font-mono font-medium">{pill("careers").label}</span>
+                    <span className="text-[11px] font-bold text-slate-900 truncate">{CAREERS_EMAIL}</span>
                   </div>
                 </a>
 
                 <a
-                  href="mailto:hr@divanextechnologies.com"
+                  href={`mailto:${CAREERS_EMAIL}`}
                   className="px-2 py-0.5 rounded bg-purple-50 hover:bg-purple-100 text-[10px] text-purple-700 border border-purple-200 font-bold uppercase transition-all shrink-0"
                 >
-                  Apply
+                  {pill("careers").action}
                 </a>
               </div>
 
@@ -276,7 +322,7 @@ export default function Footer() {
                 >
                   <MessageCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                   <div className="flex flex-col text-left truncate">
-                    <span className="text-[10px] text-slate-400 font-mono font-medium">Direct Support Call</span>
+                    <span className="text-[10px] text-slate-400 font-mono font-medium">{pill("support").label}</span>
                     <span className="text-[11px] font-bold text-slate-900">{CONTACT_PHONE}</span>
                   </div>
                 </a>
@@ -287,7 +333,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="px-2.5 py-1 rounded bg-emerald-50 hover:bg-emerald-600 hover:text-white text-[10.5px] text-emerald-700 border border-emerald-200 font-bold uppercase transition-all shrink-0"
                 >
-                  WhatsApp
+                  {pill("support").action}
                 </a>
               </div>
 
@@ -300,7 +346,7 @@ export default function Footer() {
               {/* Working Hours Pill */}
               <div className="flex items-center gap-2 p-2 rounded-xl bg-white border border-slate-200/60 text-slate-500 text-[10.5px]">
                 <Clock className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                <span>Mon–Fri: 10:00 AM – 08:00 PM (Sat–Sun: Closed)</span>
+                <span>{siteConfig.businessHours}</span>
               </div>
             </div>
 
@@ -334,11 +380,11 @@ export default function Footer() {
                 </svg>
               </a>
               <Link
-                href="/contact"
+                href={brandCta.href}
                 className="px-3 py-1.5 rounded-xl bg-sky-50 border border-sky-200 text-sky-700 hover:text-white hover:bg-sky-600 hover:border-sky-600 text-xs font-mono font-semibold flex items-center gap-1.5 transition-all shadow-xs"
               >
                 <Zap className="w-3.5 h-3.5 text-sky-600" />
-                <span>Book a Consultation</span>
+                <span>{brandCta.label}</span>
               </Link>
             </div>
           </div>
@@ -393,7 +439,7 @@ export default function Footer() {
           <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <span className="text-slate-900 font-bold text-[11px] tracking-wider uppercase flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-sky-600" />
-              <span>Enterprise Standards:</span>
+              <span>{brand.eyebrow}</span>
             </span>
             {(footer.badges ?? []).map((badge) => (
               <span
@@ -407,7 +453,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-2 text-[11px] text-slate-600">
             <Server className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Edge Infrastructure: Next.js 16 + Cloudflare Tier 1</span>
+            <span>{brand.description}</span>
           </div>
         </div>
 
