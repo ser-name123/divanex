@@ -66,24 +66,66 @@ function collect(dir, found = {}) {
     if (!entry.name.endsWith(".tsx")) continue;
 
     const source = fs.readFileSync(full, "utf8");
-    const call = /useSection\(\s*"([^"]+)"/.exec(source);
-    if (!call) continue;
 
-    const id = call[1];
-    const heading = readLiteral(source, "DEFAULT_HEADING");
-    const items = readLiteral(source, "DEFAULT_ITEMS");
-    const cta = readLiteral(source, "DEFAULT_CTA");
+    /**
+     * Every useSection call in the file, not just the first.
+     *
+     * A component may render two stored sections — a grid and the panel
+     * beside it — and reading only the first left the second invisible to the
+     * console, which then offered it as a section with no content.
+     *
+     * The constant names are read from the call rather than assumed, so a
+     * component can name them after what they hold.
+     */
+    let cursor = 0;
+    for (;;) {
+      const at = source.indexOf("useSection", cursor);
+      if (at === -1) break;
+      cursor = at + 10;
 
-    if (!heading) {
-      console.warn(`  ! ${id}: no readable DEFAULT_HEADING`);
-      continue;
+      // Only a call site: the import statement and any prose mentioning the
+      // hook also contain the word.
+      const after = source.slice(at + 10).match(/^s*([(<])/);
+      if (!after) continue;
+
+      const quote = source.indexOf('"', at);
+      if (quote === -1) break;
+      const idEnd = source.indexOf('"', quote + 1);
+      if (idEnd === -1) break;
+      const id = source.slice(quote + 1, idEnd);
+
+      // The options object starts at the first brace after the id.
+      const brace = source.indexOf("{", idEnd);
+      if (brace === -1) break;
+      const close = matchBracket(source, brace);
+      if (close === -1) break;
+      const options = source.slice(brace, close + 1);
+      cursor = close;
+
+      const named = (key) => {
+        const match = new RegExp(key + "\\s*:\\s*([A-Za-z_$][\\w$]*)").exec(options);
+        return match ? match[1] : undefined;
+      };
+
+      const headingName = named("heading");
+      const itemsName = named("items");
+      const ctaName = named("cta");
+
+      const heading = headingName ? readLiteral(source, headingName) : undefined;
+      const items = itemsName ? readLiteral(source, itemsName) : undefined;
+      const cta = ctaName ? readLiteral(source, ctaName) : undefined;
+
+      if (!heading) {
+        console.warn(`  ! ${id}: no readable heading constant`);
+        continue;
+      }
+
+      found[id] = {
+        heading,
+        items: Array.isArray(items) ? items : [],
+        ...(cta ? { cta } : {}),
+      };
     }
-
-    found[id] = {
-      heading,
-      items: Array.isArray(items) ? items : [],
-      ...(cta ? { cta } : {}),
-    };
   }
   return found;
 }

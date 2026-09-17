@@ -2,20 +2,37 @@
 
 import Link from "next/link";
 import { usePageContent } from "@/context/SiteContentContext";
+import { useSection } from "@/lib/useSection";
 import { Icon } from "@/lib/iconRegistry";
 import { ShieldCheck, CheckCircle2, ArrowRight, Sparkles, Layers } from "lucide-react";
 import RichText from "@/components/RichText";
 
-const QUICK_PROOF_POINTS = [
-  "Senior Engineering Team",
-  "Transparent Milestones",
-  "Full Source-Code Ownership",
-  "Modern Architecture",
-  "Direct Communication",
-  "Post-Launch Support"
+/** What this banner was written with. A stored record replaces it item by item. */
+const DEFAULT_PROOF_HEADING = {
+  "eyebrow": "",
+  "title": "",
+  "highlight": "",
+  "description": ""
+};
+
+const DEFAULT_PROOF_POINTS = [
+  { label: "Senior Engineering Team" },
+  { label: "Transparent Milestones" },
+  { label: "Full Source-Code Ownership" },
+  { label: "Modern Architecture" },
+  { label: "Direct Communication" },
+  { label: "Post-Launch Support" }
 ];
 
+interface ProofPoint extends Record<string, unknown> {
+  label?: string;
+}
+
 export default function WhyChooseUs() {
+  const { items: proofPoints } = useSection<ProofPoint>("home/why-proof", {
+    heading: DEFAULT_PROOF_HEADING,
+    items: DEFAULT_PROOF_POINTS,
+  });
   const content = usePageContent();
   const heading = content.whyUsHeading || {
     eyebrow: "WHY CLIENTS WORK WITH DIVANEX",
@@ -49,10 +66,10 @@ export default function WhyChooseUs() {
         {/* 6-Point Professional Proof Checklist Banner */}
         <div className="reveal-init mt-8 sm:mt-10 rounded-2xl bg-gradient-to-r from-sky-50/70 via-white to-emerald-50/60 border border-sky-200/90 p-4 sm:p-5 shadow-xs">
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 text-xs sm:text-[13px] font-bold text-slate-800 font-mono">
-            {QUICK_PROOF_POINTS.map((pt, i) => (
-              <span key={i} className="inline-flex items-center gap-1.5 text-emerald-800 bg-white/80 px-3 py-1 rounded-lg border border-emerald-200/70 shadow-2xs">
+            {proofPoints.map((point, i) => (
+              <span key={point.label || i} className="inline-flex items-center gap-1.5 text-emerald-800 bg-white/80 px-3 py-1 rounded-lg border border-emerald-200/70 shadow-2xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>{pt}</span>
+                <span>{point.label}</span>
               </span>
             ))}
           </div>

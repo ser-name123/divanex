@@ -73,6 +73,7 @@ import {
   ArrowRight,
   FileSignature,
   Gavel,
+  Palette,
   type LucideIcon,
 } from "lucide-react";
 
@@ -158,6 +159,7 @@ export const ICON_REGISTRY: Record<string, LucideIcon> = {
   ArrowRight,
   FileSignature,
   Gavel,
+  Palette,
 };
 
 /** Sorted names, for the icon picker in the admin console. */

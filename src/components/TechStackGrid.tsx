@@ -21,6 +21,8 @@ import {
   Globe2,
   ArrowUpRight
 } from "lucide-react";
+import { useSection } from "@/lib/useSection";
+import { Icon } from "@/lib/iconRegistry";
 
 interface TechStackGridProps {
   /** Admin-managed records. Falls back to the built-in seed. */
@@ -37,19 +39,33 @@ interface CoreTechItem {
   badge: string;
 }
 
-interface CorePillar {
+/**
+ * A home page technology pillar.
+ *
+ * The index signature is what lets `useSection` merge a stored record over one
+ * of these.
+ */
+interface CorePillar extends Record<string, unknown> {
   category: string;
   badge: string;
-  icon: React.ElementType;
+  iconName: string;
   accentColor: string;
   items: CoreTechItem[];
 }
 
-const HOMEPAGE_CORE_PILLARS: CorePillar[] = [
+/** What this section was written with. A stored record replaces it field by field. */
+const DEFAULT_PILLAR_HEADING = {
+  "eyebrow": "CORE TECHNOLOGY PILLARS",
+  "title": "What We Build On",
+  "highlight": "",
+  "description": ""
+};
+
+const DEFAULT_PILLARS: CorePillar[] = [
   {
     category: "Frontend",
     badge: "WEB & MOBILE UI",
-    icon: Code2,
+    iconName: "Code2",
     accentColor: "sky",
     items: [
       { name: "React", slug: "reactjs", desc: "Component architecture & interactive SPAs", iconText: "⚛️", badge: "v19" },
@@ -61,7 +77,7 @@ const HOMEPAGE_CORE_PILLARS: CorePillar[] = [
   {
     category: "Backend",
     badge: "API & MICROSERVICES",
-    icon: Server,
+    iconName: "Server",
     accentColor: "indigo",
     items: [
       { name: "Node.js", slug: "nodejs-nestjs", desc: "High-concurrency async event loops", iconText: "🟢", badge: "v22 LTS" },
@@ -73,7 +89,7 @@ const HOMEPAGE_CORE_PILLARS: CorePillar[] = [
   {
     category: "Database",
     badge: "ACID PERSISTENCE",
-    icon: Database,
+    iconName: "Database",
     accentColor: "emerald",
     items: [
       { name: "PostgreSQL", slug: "postgresql-pgvector", desc: "Row-Level Security, JSONB & pgvector", iconText: "🐘", badge: "v16 Enterprise" },
@@ -85,7 +101,7 @@ const HOMEPAGE_CORE_PILLARS: CorePillar[] = [
   {
     category: "AI & Automation",
     badge: "NEURAL & RAG",
-    icon: Cpu,
+    iconName: "Cpu",
     accentColor: "purple",
     items: [
       { name: "OpenAI", slug: "openai-gpt4", desc: "GPT-4o, reasoning models & embeddings", iconText: "🧠", badge: "API Integration" },
@@ -97,7 +113,7 @@ const HOMEPAGE_CORE_PILLARS: CorePillar[] = [
   {
     category: "Cloud & DevOps",
     badge: "ZERO-DOWNTIME",
-    icon: Cloud,
+    iconName: "Cloud",
     accentColor: "teal",
     items: [
       { name: "AWS", slug: "aws-cloud", desc: "Scalable cloud compute, EKS & S3 storage", iconText: "☁️", badge: "Enterprise Cloud" },
@@ -110,6 +126,11 @@ const HOMEPAGE_CORE_PILLARS: CorePillar[] = [
 
 export default function TechStackGrid({ isHome = false, items }: TechStackGridProps) {
   const techStackData = items ?? seedTechStack;
+  const { items: pillars } = useSection<CorePillar>("home/tech-pillars", {
+    heading: DEFAULT_PILLAR_HEADING,
+    items: DEFAULT_PILLARS,
+  });
+
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -173,8 +194,7 @@ export default function TechStackGrid({ isHome = false, items }: TechStackGridPr
         {/* ======================================================== */}
         {isHome && (
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {HOMEPAGE_CORE_PILLARS.map((pillar, pIdx) => {
-              const IconComponent = pillar.icon;
+            {pillars.map((pillar, pIdx) => {
               return (
                 <div
                   key={pIdx}
@@ -188,7 +208,7 @@ export default function TechStackGrid({ isHome = false, items }: TechStackGridPr
                     <div className="flex items-center justify-between gap-2 pb-4 mb-4 border-b border-slate-100">
                       <div className="flex items-center gap-2.5">
                         <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-slate-50 border border-slate-200 text-sky-700 shadow-2xs">
-                          <IconComponent className="w-4 h-4" />
+                          <Icon name={pillar.iconName} className="w-4 h-4" />
                         </div>
                         <h3 className="text-base font-bold text-slate-900">{pillar.category}</h3>
                       </div>

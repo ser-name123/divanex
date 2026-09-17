@@ -16,6 +16,92 @@ import type { SectionContent } from "@/data/pageSections";
 
 export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
 {
+  "blog/categories": {
+    "heading": {
+      "eyebrow": "",
+      "title": "",
+      "highlight": "",
+      "description": ""
+    },
+    "items": [
+      {
+        "label": "All"
+      },
+      {
+        "label": "Food Delivery & Logistics"
+      },
+      {
+        "label": "PropTech & SaaS"
+      },
+      {
+        "label": "E-Commerce & Retail"
+      },
+      {
+        "label": "IoT & Smart Mobility"
+      },
+      {
+        "label": "Enterprise ERP"
+      },
+      {
+        "label": "AI & Autonomous Agents"
+      },
+      {
+        "label": "Healthcare HMIS"
+      },
+      {
+        "label": "Fintech & Payments"
+      },
+      {
+        "label": "Cloud & DevOps"
+      },
+      {
+        "label": "Mobile Engineering"
+      }
+    ]
+  },
+  "blog/tags": {
+    "heading": {
+      "eyebrow": "",
+      "title": "",
+      "highlight": "",
+      "description": ""
+    },
+    "items": [
+      {
+        "label": "Hyperlocal Delivery"
+      },
+      {
+        "label": "PropTech"
+      },
+      {
+        "label": "E-Commerce"
+      },
+      {
+        "label": "EV Mobility"
+      },
+      {
+        "label": "Industrial ERP"
+      },
+      {
+        "label": "AI Agents"
+      },
+      {
+        "label": "Healthcare"
+      },
+      {
+        "label": "Fintech"
+      },
+      {
+        "label": "Cloud Cost Optimization"
+      },
+      {
+        "label": "React Native"
+      },
+      {
+        "label": "Flutter"
+      }
+    ]
+  },
   "contact/24-hours": {
     "heading": {
       "eyebrow": "Response Velocity",
@@ -311,6 +397,331 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
       {
         "title": "Zero Junior Account Manager Buffers",
         "desc": "You converse directly with the engineers and architects writing your code, eliminating misunderstandings and game-of-telephone delays."
+      }
+    ]
+  },
+  "footer/offices": {
+    "heading": {
+      "eyebrow": "GLOBAL TIMEZONE OVERLAP // CLIENT COVERAGE",
+      "title": "Global Client Coverage & Regional Desks",
+      "highlight": "",
+      "description": "Primary engineering runs out of our Jaipur HQ, with dedicated client coverage and active timezone overlap across APAC, the Middle East, and North America."
+    },
+    "items": [
+      {
+        "id": "india-hq",
+        "country": "India",
+        "city": "Jaipur, Rajasthan",
+        "isoCode": "IN",
+        "roleBadge": "Engineering HQ & Core R&D Lab",
+        "accentColor": "teal",
+        "tagline": "Primary Engineering Hub & Physical Headquarters",
+        "address": "Office 104, Vaishali Tower 2nd, Nursery Circle, Vaishali Nagar, Jaipur 302021",
+        "timeZoneName": "India Standard Time",
+        "timeZoneOffset": "IST (UTC+5:30)",
+        "timeZoneIana": "Asia/Kolkata",
+        "primaryPhone": "+91-6375073511",
+        "phoneRaw": "+916375073511",
+        "email": "business@divanextechnologies.com",
+        "whatsappNumber": "919571618625",
+        "mapQuery": "Vaishali Tower 2nd, Nursery Circle, Vaishali Nagar, Jaipur"
+      },
+      {
+        "id": "hong-kong",
+        "country": "Hong Kong",
+        "city": "Tsuen Wan, New Territories",
+        "isoCode": "HK",
+        "roleBadge": "APAC Client Coverage Desk",
+        "accentColor": "sky",
+        "tagline": "Asia-Pacific Regional Client Coverage",
+        "address": "FLAT/RM E (36) 3/F Superluck Industrial Centre Phase 2, 57 Sha Tsui Rd, Tsuen Wan",
+        "timeZoneName": "Hong Kong Time",
+        "timeZoneOffset": "HKT (UTC+8:00)",
+        "timeZoneIana": "Asia/Hong_Kong",
+        "primaryPhone": "+852-90270926",
+        "phoneRaw": "+85290270926",
+        "email": "business@divanextechnologies.com",
+        "whatsappNumber": "919571618625",
+        "mapQuery": "Superluck Industrial Centre Phase 2, Sha Tsui Road, Tsuen Wan, Hong Kong"
+      },
+      {
+        "id": "dubai-uae",
+        "country": "United Arab Emirates",
+        "city": "Dubai Media City",
+        "isoCode": "AE",
+        "roleBadge": "MENA Client Coverage Desk",
+        "accentColor": "amber",
+        "tagline": "Middle East & GCC Regional Client Coverage",
+        "address": "Building C8, Dubai Media City, Dubai, United Arab Emirates",
+        "timeZoneName": "Gulf Standard Time",
+        "timeZoneOffset": "GST (UTC+4:00)",
+        "timeZoneIana": "Asia/Dubai",
+        "primaryPhone": "+91-6375073511",
+        "phoneRaw": "+916375073511",
+        "email": "business@divanextechnologies.com",
+        "whatsappNumber": "919571618625",
+        "mapQuery": "Dubai Media City, Dubai, UAE"
+      },
+      {
+        "id": "canada",
+        "country": "Canada",
+        "city": "Newmarket, Greater Toronto",
+        "isoCode": "CA",
+        "roleBadge": "North America Client Coverage Desk",
+        "accentColor": "rose",
+        "tagline": "Americas Regional Client Coverage & Support",
+        "address": "105 Sawmill Valley Dr, Newmarket, ON L3X 1S4, Canada",
+        "timeZoneName": "Eastern Standard Time",
+        "timeZoneOffset": "EST (UTC-5:00)",
+        "timeZoneIana": "America/Toronto",
+        "primaryPhone": "+91-6375073511",
+        "phoneRaw": "+916375073511",
+        "email": "business@divanextechnologies.com",
+        "whatsappNumber": "919571618625",
+        "mapQuery": "105 Sawmill Valley Dr, Newmarket, ON, Canada"
+      }
+    ]
+  },
+  "home/core-services": {
+    "heading": {
+      "eyebrow": "CORE ENGINEERING CAPABILITIES",
+      "title": "Eight Practices We Build In",
+      "highlight": "",
+      "description": ""
+    },
+    "items": []
+  },
+  "home/ownership": {
+    "heading": {
+      "eyebrow": "DAY-1 CODE OWNERSHIP // ZERO VENDOR LOCK-IN",
+      "title": "You Own the Product.",
+      "highlight": "Not Us.",
+      "description": "From the first milestone, your Git repository, cloud accounts, database models, and design assets belong 100% to your company. No hostage code, no exit fees, and zero vendor lock-in."
+    },
+    "items": [
+      {
+        "iconName": "Code2",
+        "title": "100% Source Code",
+        "subtitle": "Zero proprietary lock-in",
+        "description": "Clean, modular, fully typed TypeScript, Python, or Go codebases. No encrypted libraries, no obfuscated logic.",
+        "tag": "Clean Code"
+      },
+      {
+        "iconName": "GitBranch",
+        "title": "Full Git Repository",
+        "subtitle": "Complete commit history",
+        "description": "Your organization owns the repository outright, with every branch, commit and pull request from day one.",
+        "tag": "Version Control"
+      },
+      {
+        "iconName": "Database",
+        "title": "Database & Schemas",
+        "subtitle": "Direct database access",
+        "description": "PostgreSQL schemas, migration scripts and automated seeders, handed over with root credentials.",
+        "tag": "Data Layer"
+      },
+      {
+        "iconName": "Cloud",
+        "title": "Cloud & Hosting Accounts",
+        "subtitle": "Your cloud, your billing",
+        "description": "AWS, GCP, Cloudflare or Vercel accounts provisioned in your company name and billed to you directly.",
+        "tag": "Infrastructure"
+      },
+      {
+        "iconName": "Palette",
+        "title": "Design Files & UI Systems",
+        "subtitle": "Tokenized Figma workspaces",
+        "description": "The complete Figma design system, component library and design tokens, transferred to your workspace.",
+        "tag": "Design System"
+      },
+      {
+        "iconName": "FileText",
+        "title": "Architecture & Documentation",
+        "subtitle": "Comprehensive runbooks",
+        "description": "OpenAPI specifications, architecture decision records and developer runbooks written to be handed over.",
+        "tag": "Documentation"
+      },
+      {
+        "iconName": "KeyRound",
+        "title": "Deployment & Credentials",
+        "subtitle": "Root administrative control",
+        "description": "Root API keys, DNS control, SSL certificates and production secrets, all under your administration.",
+        "tag": "Access Control"
+      }
+    ]
+  },
+  "home/ownership-panel": {
+    "heading": {
+      "eyebrow": "ZERO VENDOR LOCK-IN",
+      "title": "What You Receive on Day One",
+      "highlight": "Day-1 Transfer",
+      "description": "Traditional agencies often retain code in private repositories or charge exit fees. We hand you full ownership from the first milestone."
+    },
+    "items": [
+      {
+        "kind": "pill",
+        "title": "Mutual NDA & Direct IP Assignment",
+        "description": "Legally enforceable contract clauses guaranteeing complete IP ownership from milestone sign-off."
+      },
+      {
+        "kind": "callout",
+        "title": "",
+        "description": "Complete repository admin rights, direct cloud accounts, and 100% intellectual property transfer."
+      },
+      {
+        "kind": "deliverable",
+        "title": "Source Code",
+        "description": "Clean, modular, fully typed TypeScript / Python"
+      },
+      {
+        "kind": "deliverable",
+        "title": "Git Repository",
+        "description": "Full commit history transferred to your organization"
+      },
+      {
+        "kind": "deliverable",
+        "title": "Database",
+        "description": "PostgreSQL schemas, migrations & automated seeders"
+      },
+      {
+        "kind": "deliverable",
+        "title": "Cloud Accounts",
+        "description": "AWS / GCP / Vercel created directly in your name"
+      },
+      {
+        "kind": "deliverable",
+        "title": "Design Files",
+        "description": "Complete tokenized Figma design system & components"
+      },
+      {
+        "kind": "deliverable",
+        "title": "Documentation",
+        "description": "OpenAPI Swagger specs & developer runbooks"
+      },
+      {
+        "kind": "deliverable",
+        "title": "Deployment Access",
+        "description": "Root API keys, DNS, SSL & production secrets"
+      },
+      {
+        "kind": "metric",
+        "title": "100%",
+        "description": "IP Transfer",
+        "tone": "emerald"
+      },
+      {
+        "kind": "metric",
+        "title": "0%",
+        "description": "Vendor Lock",
+        "tone": "sky"
+      },
+      {
+        "kind": "metric",
+        "title": "30-Day",
+        "description": "Hypercare",
+        "tone": "teal"
+      }
+    ],
+    "cta": {
+      "label": "Book a Consultation with 100% IP Transfer",
+      "href": "/contact"
+    }
+  },
+  "home/ratings": {
+    "heading": {
+      "eyebrow": "WHERE CLIENTS REVIEW US",
+      "title": "",
+      "highlight": "",
+      "description": "Public ratings on the platforms clients hire us through"
+    },
+    "items": [
+      {
+        "kind": "platform",
+        "name": "Google",
+        "rating": "4.7",
+        "reviewCount": "120+",
+        "logoType": "google"
+      },
+      {
+        "kind": "platform",
+        "name": "Freelancer",
+        "rating": "4.7",
+        "reviewCount": "98+",
+        "logoType": "freelancer"
+      },
+      {
+        "kind": "platform",
+        "name": "Clutch",
+        "rating": "4.7",
+        "reviewCount": "45+",
+        "logoType": "clutch"
+      },
+      {
+        "kind": "platform",
+        "name": "Upwork",
+        "rating": "4.7",
+        "reviewCount": "150+",
+        "logoType": "upwork"
+      },
+      {
+        "kind": "platform",
+        "name": "Fiverr",
+        "rating": "4.7",
+        "reviewCount": "210+",
+        "logoType": "fiverr"
+      },
+      {
+        "kind": "badge",
+        "name": "GoodFirms",
+        "initials": "GF",
+        "subLabel": "Top Rated",
+        "markColor": "#2575fc",
+        "subColor": "#0f7670"
+      },
+      {
+        "kind": "badge",
+        "name": "TopDevelopers",
+        "initials": "TD",
+        "subLabel": "Best Web Dev",
+        "markColor": "#000838",
+        "subColor": "#5c9556"
+      }
+    ]
+  },
+  "home/tech-pillars": {
+    "heading": {
+      "eyebrow": "CORE TECHNOLOGY PILLARS",
+      "title": "What We Build On",
+      "highlight": "",
+      "description": ""
+    },
+    "items": []
+  },
+  "home/why-proof": {
+    "heading": {
+      "eyebrow": "",
+      "title": "",
+      "highlight": "",
+      "description": ""
+    },
+    "items": [
+      {
+        "label": "Senior Engineering Team"
+      },
+      {
+        "label": "Transparent Milestones"
+      },
+      {
+        "label": "Full Source-Code Ownership"
+      },
+      {
+        "label": "Modern Architecture"
+      },
+      {
+        "label": "Direct Communication"
+      },
+      {
+        "label": "Post-Launch Support"
       }
     ]
   },

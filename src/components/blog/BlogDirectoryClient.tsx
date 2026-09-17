@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import { useSection } from "@/lib/useSection";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BlogPost } from "@/data/blogData";
@@ -36,35 +37,58 @@ interface BlogDirectoryClientProps {
   initialPosts: BlogPost[];
 }
 
-const CATEGORIES = [
-  "All",
-  "Food Delivery & Logistics",
-  "PropTech & SaaS",
-  "E-Commerce & Retail",
-  "IoT & Smart Mobility",
-  "Enterprise ERP",
-  "AI & Autonomous Agents",
-  "Healthcare HMIS",
-  "Fintech & Payments",
-  "Cloud & DevOps",
-  "Mobile Engineering"
+/** What this directory was written with. A stored record replaces it item by item. */
+const DEFAULT_FILTER_HEADING = {
+  "eyebrow": "",
+  "title": "",
+  "highlight": "",
+  "description": ""
+};
+
+const DEFAULT_CATEGORIES = [
+  { label: "All" },
+  { label: "Food Delivery & Logistics" },
+  { label: "PropTech & SaaS" },
+  { label: "E-Commerce & Retail" },
+  { label: "IoT & Smart Mobility" },
+  { label: "Enterprise ERP" },
+  { label: "AI & Autonomous Agents" },
+  { label: "Healthcare HMIS" },
+  { label: "Fintech & Payments" },
+  { label: "Cloud & DevOps" },
+  { label: "Mobile Engineering" }
 ];
 
-const POPULAR_TAGS = [
-  "Hyperlocal Delivery",
-  "PropTech",
-  "E-Commerce",
-  "EV Mobility",
-  "Industrial ERP",
-  "AI Agents",
-  "Healthcare",
-  "Fintech",
-  "Cloud Cost Optimization",
-  "React Native",
-  "Flutter"
+const DEFAULT_TAGS = [
+  { label: "Hyperlocal Delivery" },
+  { label: "PropTech" },
+  { label: "E-Commerce" },
+  { label: "EV Mobility" },
+  { label: "Industrial ERP" },
+  { label: "AI Agents" },
+  { label: "Healthcare" },
+  { label: "Fintech" },
+  { label: "Cloud Cost Optimization" },
+  { label: "React Native" },
+  { label: "Flutter" }
 ];
+
+interface LabelItem extends Record<string, unknown> {
+  label?: string;
+}
 
 export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClientProps) {
+  const { items: categoryItems } = useSection<LabelItem>("blog/categories", {
+    heading: DEFAULT_FILTER_HEADING,
+    items: DEFAULT_CATEGORIES,
+  });
+  const { items: tagItems } = useSection<LabelItem>("blog/tags", {
+    heading: DEFAULT_FILTER_HEADING,
+    items: DEFAULT_TAGS,
+  });
+
+  const CATEGORIES = categoryItems.map((item) => item.label || "").filter(Boolean);
+  const POPULAR_TAGS = tagItems.map((item) => item.label || "").filter(Boolean);
   const router = useRouter();
   const [posts] = useState<BlogPost[]>(initialPosts);
   const [selectedCategory, setSelectedCategory] = useState("All");

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useSection } from "@/lib/useSection";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { servicesData, type ServiceItem } from "@/data/services";
@@ -37,7 +38,13 @@ import {
 } from "lucide-react";
 
 // The 8 Core Flagship Services showcased on the top-level / homepage (Business-Problem Oriented)
-interface CoreServiceItem {
+/**
+ * A home page service card.
+ *
+ * The index signature is what lets `useSection` merge a stored record over one
+ * of these: an operator can add a field the component does not read yet.
+ */
+interface CoreServiceItem extends Record<string, unknown> {
   id: string;
   slug: string;
   title: string;
@@ -45,7 +52,7 @@ interface CoreServiceItem {
   tagline: string;
   modulesSummary: string;
   description: string;
-  icon: React.ElementType;
+  iconName: string;
   modules: string[];
   features: string[];
   theme: {
@@ -58,7 +65,16 @@ interface CoreServiceItem {
   };
 }
 
-const CORE_SERVICES_LIST: CoreServiceItem[] = [
+
+/** What this section was written with. A stored record replaces it field by field. */
+const DEFAULT_CORE_HEADING = {
+  "eyebrow": "CORE ENGINEERING CAPABILITIES",
+  "title": "Eight Practices We Build In",
+  "highlight": "",
+  "description": ""
+};
+
+const DEFAULT_CORE_SERVICES: CoreServiceItem[] = [
   {
     id: "hospital-healthcare-management",
     slug: "hospital-healthcare-management",
@@ -68,7 +84,7 @@ const CORE_SERVICES_LIST: CoreServiceItem[] = [
     modulesSummary: "HMIS • Patient Portal • Doctor App • Lab • Pharmacy",
     description:
       "Modernize clinical workflows with automated electronic health records, doctor scheduling, integrated diagnostic lab workflows, and automated pharmacy inventory.",
-    icon: Stethoscope,
+    iconName: "Stethoscope",
     modules: ["HMIS & EMR", "Patient Portal", "Doctor App", "Lab / LIS", "Pharmacy POS", "Telehealth"],
     features: [
       "OPD/IPD patient flow, triage & digital prescriptions",
@@ -93,7 +109,7 @@ const CORE_SERVICES_LIST: CoreServiceItem[] = [
     modulesSummary: "Multi-tenant • Subscription • Billing • Analytics",
     description:
       "Launch your multi-tenant SaaS platform with automated Stripe subscriptions, metered usage billing, subscriber analytics, and scalable cloud architecture.",
-    icon: Layers,
+    iconName: "Layers",
     modules: ["Multi-tenant RLS", "Stripe Subscriptions", "Metered Billing", "Subscriber Analytics", "Admin Telemetry"],
     features: [
       "Multi-tenant setup with 100% customer data isolation",
@@ -118,7 +134,7 @@ const CORE_SERVICES_LIST: CoreServiceItem[] = [
     modulesSummary: "AI Agents • RAG • Document AI • Automation",
     description:
       "Connect your existing tools and automate repetitive workflows with custom AI assistants, smart document processing, vector search, and automated API pipelines.",
-    icon: Cpu,
+    iconName: "Cpu",
     modules: ["AI Agents", "RAG Pipelines", "Document AI / OCR", "Workflow Automation", "Custom LLM Integrations"],
     features: [
       "Custom AI assistants trained on your company data & SOPs",
@@ -143,7 +159,7 @@ const CORE_SERVICES_LIST: CoreServiceItem[] = [
     modulesSummary: "Buyer • Seller • Payments • Commission • Admin",
     description:
       "Launch high-converting online storefronts or multi-vendor marketplaces with sub-second product search, automated commission splits, escrow, and merchant dashboards.",
-    icon: ShoppingCart,
+    iconName: "ShoppingCart",
     modules: ["Buyer App", "Seller Portal", "Split Payments", "Commission Engine", "Superadmin Console"],
     features: [
       "Multi-vendor seller onboarding & automated commission splits",
@@ -168,7 +184,7 @@ const CORE_SERVICES_LIST: CoreServiceItem[] = [
     modulesSummary: "iOS • Android • GPS & Maps • Payments • Offline Sync",
     description:
       "iOS and Android apps with real-time features, secure payment checkout, live GPS maps, push notifications, and offline data synchronization.",
-    icon: Smartphone,
+    iconName: "Smartphone",
     modules: ["iOS & Android Apps", "Live GPS & Maps", "Biometric Auth", "In-App Payments", "Offline Data Sync"],
     features: [
       "Single codebase for Apple App Store & Google Play",
@@ -193,7 +209,7 @@ const CORE_SERVICES_LIST: CoreServiceItem[] = [
     modulesSummary: "Client Portals • Admin Tools • Dashboards • APIs • RBAC",
     description:
       "Transform your manual business operations into intuitive, lightning-fast web applications, self-serve customer portals, and interactive analytical dashboards.",
-    icon: Globe2,
+    iconName: "Globe2",
     modules: ["Client Portals", "Admin Consoles", "Real-Time Dashboards", "Role-Based RBAC", "REST/GraphQL APIs"],
     features: [
       "Custom customer portals, admin consoles & dashboards",
@@ -218,7 +234,7 @@ const CORE_SERVICES_LIST: CoreServiceItem[] = [
     modulesSummary: "Inventory • GST Billing • Production • Supply Chain • HR",
     description:
       "Replace messy spreadsheets and rigid off-the-shelf software with an ERP tailored to your exact business operations—without recurring per-user license fees.",
-    icon: Briefcase,
+    iconName: "Briefcase",
     modules: ["Multi-Warehouse Stock", "GST Invoicing", "Production & MRP", "Vendor Procurement", "Automated Payroll"],
     features: [
       "Multi-location warehouse inventory & barcode tracking",
@@ -243,7 +259,7 @@ const CORE_SERVICES_LIST: CoreServiceItem[] = [
     modulesSummary: "AWS • GCP • Docker Pods • Auto-Scaling • CI/CD",
     description:
       "Ensure your applications never crash under heavy traffic. We engineer auto-scaling cloud servers, automated CI/CD pipelines, 24/7 security, and reduce monthly cloud bills.",
-    icon: Cloud,
+    iconName: "Cloud",
     modules: ["AWS & GCP Setup", "Docker & Kubernetes", "Zero-Downtime CI/CD", "Automated Backups", "Cost Optimization"],
     features: [
       "Auto-scaling servers that handle traffic surges seamlessly",
@@ -308,6 +324,11 @@ interface ServicesSectionProps {
 export default function ServicesSection({ isHome = false, limit, items }: ServicesSectionProps) {
   const services = items && items.length > 0 ? items : servicesData;
   const router = useRouter();
+  const { items: coreServices } = useSection<CoreServiceItem>("home/core-services", {
+    heading: DEFAULT_CORE_HEADING,
+    items: DEFAULT_CORE_SERVICES,
+  });
+
   const [activeCategory, setActiveCategory] = useState<"all" | "enterprise" | "fintech_commerce" | "ai_cloud">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedService, setSelectedService] = useState<ServiceItem>(services[0]);
@@ -621,8 +642,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
         {/* ======================================================== */}
         {isHome && (
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {CORE_SERVICES_LIST.map((svc) => {
-              const IconComponent = svc.icon;
+            {coreServices.map((svc) => {
               return (
                 <div
                   key={svc.id}
@@ -636,7 +656,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
                     {/* Card Header: Icon + Domain Badge */}
                     <div className="flex items-center justify-between gap-2 mb-4 relative z-10">
                       <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border shadow-xs shrink-0 group-hover:scale-105 transition-all ${svc.theme.iconBg} ${svc.theme.iconColor}`}>
-                        <IconComponent className="w-6 h-6" />
+                        {getServiceIcon(svc.iconName)}
                       </div>
                       <span className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border transition-all truncate max-w-[170px] ${svc.theme.badgeClass}`}>
                         {svc.badge}

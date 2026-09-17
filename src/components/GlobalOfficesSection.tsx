@@ -18,14 +18,16 @@ import {
   ShieldCheck,
   Zap,
 } from "lucide-react";
+import { useSection } from "@/lib/useSection";
 
-interface OfficeLocation {
+interface OfficeLocation extends Record<string, unknown> {
   id: string;
   country: string;
   city: string;
   isoCode: string;
   roleBadge: string;
-  accentColor: "teal" | "sky" | "amber" | "rose";
+  /** One of teal, sky, amber or rose. A name outside that set falls back. */
+  accentColor: string;
   tagline: string;
   address: string;
   timeZoneName: string;
@@ -36,7 +38,6 @@ interface OfficeLocation {
   email: string;
   whatsappNumber?: string;
   mapQuery: string;
-  flagSvg: React.ReactNode;
 }
 
 // Clean Vector SVG Flags (Windows-compatible with zero emoji font dependency)
@@ -81,88 +82,108 @@ const FlagCanada = () => (
   </svg>
 );
 
+
+/** Flags stay in code: each is an inline SVG a stored record cannot carry. */
+function Flag({ iso }: { iso?: string }) {
+  if (iso === "IN") return <FlagIndia />;
+  if (iso === "HK") return <FlagHongKong />;
+  if (iso === "AE") return <FlagUAE />;
+  if (iso === "CA") return <FlagCanada />;
+  return null;
+}
+
+/** What this section was written with. A stored record replaces it field by field. */
+const DEFAULT_HEADING = {
+  "eyebrow": "GLOBAL TIMEZONE OVERLAP // CLIENT COVERAGE",
+  "title": "Global Client Coverage & Regional Desks",
+  "highlight": "",
+  "description": "Primary engineering runs out of our Jaipur HQ, with dedicated client coverage and active timezone overlap across APAC, the Middle East, and North America."
+};
+
+const DEFAULT_ITEMS = [
+  {
+    id: "india-hq",
+    country: "India",
+    city: "Jaipur, Rajasthan",
+    isoCode: "IN",
+    roleBadge: "Engineering HQ & Core R&D Lab",
+    accentColor: "teal",
+    tagline: "Primary Engineering Hub & Physical Headquarters",
+    address: "Office 104, Vaishali Tower 2nd, Nursery Circle, Vaishali Nagar, Jaipur 302021",
+    timeZoneName: "India Standard Time",
+    timeZoneOffset: "IST (UTC+5:30)",
+    timeZoneIana: "Asia/Kolkata",
+    primaryPhone: "+91-6375073511",
+    phoneRaw: "+916375073511",
+    email: "business@divanextechnologies.com",
+    whatsappNumber: "919571618625",
+    mapQuery: "Vaishali Tower 2nd, Nursery Circle, Vaishali Nagar, Jaipur",
+  },
+  {
+    id: "hong-kong",
+    country: "Hong Kong",
+    city: "Tsuen Wan, New Territories",
+    isoCode: "HK",
+    roleBadge: "APAC Client Coverage Desk",
+    accentColor: "sky",
+    tagline: "Asia-Pacific Regional Client Coverage",
+    address: "FLAT/RM E (36) 3/F Superluck Industrial Centre Phase 2, 57 Sha Tsui Rd, Tsuen Wan",
+    timeZoneName: "Hong Kong Time",
+    timeZoneOffset: "HKT (UTC+8:00)",
+    timeZoneIana: "Asia/Hong_Kong",
+    primaryPhone: "+852-90270926",
+    phoneRaw: "+85290270926",
+    email: "business@divanextechnologies.com",
+    whatsappNumber: "919571618625",
+    mapQuery: "Superluck Industrial Centre Phase 2, Sha Tsui Road, Tsuen Wan, Hong Kong",
+  },
+  {
+    id: "dubai-uae",
+    country: "United Arab Emirates",
+    city: "Dubai Media City",
+    isoCode: "AE",
+    roleBadge: "MENA Client Coverage Desk",
+    accentColor: "amber",
+    tagline: "Middle East & GCC Regional Client Coverage",
+    address: "Building C8, Dubai Media City, Dubai, United Arab Emirates",
+    timeZoneName: "Gulf Standard Time",
+    timeZoneOffset: "GST (UTC+4:00)",
+    timeZoneIana: "Asia/Dubai",
+    primaryPhone: "+91-6375073511",
+    phoneRaw: "+916375073511",
+    email: "business@divanextechnologies.com",
+    whatsappNumber: "919571618625",
+    mapQuery: "Dubai Media City, Dubai, UAE",
+  },
+  {
+    id: "canada",
+    country: "Canada",
+    city: "Newmarket, Greater Toronto",
+    isoCode: "CA",
+    roleBadge: "North America Client Coverage Desk",
+    accentColor: "rose",
+    tagline: "Americas Regional Client Coverage & Support",
+    address: "105 Sawmill Valley Dr, Newmarket, ON L3X 1S4, Canada",
+    timeZoneName: "Eastern Standard Time",
+    timeZoneOffset: "EST (UTC-5:00)",
+    timeZoneIana: "America/Toronto",
+    primaryPhone: "+91-6375073511",
+    phoneRaw: "+916375073511",
+    email: "business@divanextechnologies.com",
+    whatsappNumber: "919571618625",
+    mapQuery: "105 Sawmill Valley Dr, Newmarket, ON, Canada",
+  },
+];
+
 export default function GlobalOfficesSection() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [activeTimes, setActiveTimes] = useState<Record<string, string>>({});
 
-  const offices: OfficeLocation[] = [
-    {
-      id: "india-hq",
-      country: "India",
-      city: "Jaipur, Rajasthan",
-      isoCode: "IN",
-      roleBadge: "Engineering HQ & Core R&D Lab",
-      accentColor: "teal",
-      tagline: "Primary Engineering Hub & Physical Headquarters",
-      address: "Office 104, Vaishali Tower 2nd, Nursery Circle, Vaishali Nagar, Jaipur 302021",
-      timeZoneName: "India Standard Time",
-      timeZoneOffset: "IST (UTC+5:30)",
-      timeZoneIana: "Asia/Kolkata",
-      primaryPhone: "+91-6375073511",
-      phoneRaw: "+916375073511",
-      email: "business@divanextechnologies.com",
-      whatsappNumber: "919571618625",
-      mapQuery: "Vaishali Tower 2nd, Nursery Circle, Vaishali Nagar, Jaipur",
-      flagSvg: <FlagIndia />,
-    },
-    {
-      id: "hong-kong",
-      country: "Hong Kong",
-      city: "Tsuen Wan, New Territories",
-      isoCode: "HK",
-      roleBadge: "APAC Client Coverage Desk",
-      accentColor: "sky",
-      tagline: "Asia-Pacific Regional Client Coverage",
-      address: "FLAT/RM E (36) 3/F Superluck Industrial Centre Phase 2, 57 Sha Tsui Rd, Tsuen Wan",
-      timeZoneName: "Hong Kong Time",
-      timeZoneOffset: "HKT (UTC+8:00)",
-      timeZoneIana: "Asia/Hong_Kong",
-      primaryPhone: "+852-90270926",
-      phoneRaw: "+85290270926",
-      email: "business@divanextechnologies.com",
-      whatsappNumber: "919571618625",
-      mapQuery: "Superluck Industrial Centre Phase 2, Sha Tsui Road, Tsuen Wan, Hong Kong",
-      flagSvg: <FlagHongKong />,
-    },
-    {
-      id: "dubai-uae",
-      country: "United Arab Emirates",
-      city: "Dubai Media City",
-      isoCode: "AE",
-      roleBadge: "MENA Client Coverage Desk",
-      accentColor: "amber",
-      tagline: "Middle East & GCC Regional Client Coverage",
-      address: "Building C8, Dubai Media City, Dubai, United Arab Emirates",
-      timeZoneName: "Gulf Standard Time",
-      timeZoneOffset: "GST (UTC+4:00)",
-      timeZoneIana: "Asia/Dubai",
-      primaryPhone: "+91-6375073511",
-      phoneRaw: "+916375073511",
-      email: "business@divanextechnologies.com",
-      whatsappNumber: "919571618625",
-      mapQuery: "Dubai Media City, Dubai, UAE",
-      flagSvg: <FlagUAE />,
-    },
-    {
-      id: "canada",
-      country: "Canada",
-      city: "Newmarket, Greater Toronto",
-      isoCode: "CA",
-      roleBadge: "North America Client Coverage Desk",
-      accentColor: "rose",
-      tagline: "Americas Regional Client Coverage & Support",
-      address: "105 Sawmill Valley Dr, Newmarket, ON L3X 1S4, Canada",
-      timeZoneName: "Eastern Standard Time",
-      timeZoneOffset: "EST (UTC-5:00)",
-      timeZoneIana: "America/Toronto",
-      primaryPhone: "+91-6375073511",
-      phoneRaw: "+916375073511",
-      email: "business@divanextechnologies.com",
-      whatsappNumber: "919571618625",
-      mapQuery: "105 Sawmill Valley Dr, Newmarket, ON, Canada",
-      flagSvg: <FlagCanada />,
-    },
-  ];
+  const { heading, items: offices } = useSection<OfficeLocation>("footer/offices", {
+    heading: DEFAULT_HEADING,
+    items: DEFAULT_ITEMS,
+  });
+
 
   // Real-time time updater for all offices
   useEffect(() => {
@@ -188,7 +209,9 @@ export default function GlobalOfficesSection() {
     updateTimes();
     const interval = setInterval(updateTimes, 1000);
     return () => clearInterval(interval);
-  }, []);
+    // The office list is stored content now, so a desk added in the console
+    // starts its clock without a reload.
+  }, [offices]);
 
   const handleCopy = (id: string, text: string) => {
     navigator.clipboard.writeText(text);
@@ -196,7 +219,7 @@ export default function GlobalOfficesSection() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const getAccentStyles = (accent: OfficeLocation["accentColor"]) => {
+  const getAccentStyles = (accent: string | undefined) => {
     switch (accent) {
       case "teal":
         return {
@@ -251,13 +274,13 @@ export default function GlobalOfficesSection() {
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono font-bold text-sky-800 shadow-2xs">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
               <Globe className="w-3.5 h-3.5 text-sky-600" />
-              <span>GLOBAL TIMEZONE OVERLAP // CLIENT COVERAGE</span>
+              <span>{heading.eyebrow}</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#000838] tracking-tight">
-              Global Client Coverage & Regional Desks
+              {heading.title}
             </h2>
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
-              Primary engineering runs out of our Jaipur HQ, with dedicated client coverage and active timezone overlap across APAC, the Middle East, and North America.
+              {heading.description}
             </p>
           </div>
 
@@ -315,7 +338,7 @@ export default function GlobalOfficesSection() {
                   {/* Top Bar: Flag, Country, ISO Code */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      {office.flagSvg}
+                      <Flag iso={office.isoCode} />
                       <div>
                         <h3 className="font-extrabold text-base text-[#000838] tracking-tight group-hover:text-[#0f7670] transition-colors">
                           {office.country}
