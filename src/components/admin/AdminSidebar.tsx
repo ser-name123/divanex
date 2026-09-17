@@ -25,22 +25,28 @@ import {
   LayoutList,
   Mail,
   Inbox,
+  Users,
+  ScrollText,
 } from "lucide-react";
+import { canSeeTab, type Role } from "@/lib/permissions";
 
 interface AdminSidebarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   collapsed: boolean;
   setCollapsed: (val: boolean) => void;
+  /** Null until the session resolves, which hides everything role-gated. */
+  role: Role | null;
 }
 
 export default function AdminSidebar({
   activeTab,
   setActiveTab,
   collapsed,
-  setCollapsed
+  setCollapsed,
+  role
 }: AdminSidebarProps) {
-  const navItems = [
+  const allNavItems = [
     {
       id: "overview",
       label: "Telemetry Overview",
@@ -160,12 +166,28 @@ export default function AdminSidebar({
       badgeColor: "bg-emerald-50 text-emerald-700 border border-emerald-300 font-bold"
     },
     {
+      id: "audit",
+      label: "Audit Trail",
+      icon: ScrollText,
+      badge: null
+    },
+    {
+      id: "users",
+      label: "Admins & Roles",
+      icon: Users,
+      badge: null
+    },
+    {
       id: "settings",
       label: "System Settings",
       icon: Settings,
       badge: null
     }
   ];
+
+  // Drawn from the same matrix the server enforces, so a tab cannot appear
+  // here and refuse on arrival. Hiding it is courtesy; the route is the gate.
+  const navItems = allNavItems.filter((item) => canSeeTab(role, item.id));
 
   return (
     <aside

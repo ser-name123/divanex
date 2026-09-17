@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getBlogPosts, saveBlogPost, deleteBlogPost } from "@/lib/blogStore";
-import { requireAdmin } from "@/lib/guard";
+import { requirePermission } from "@/lib/guard";
 import { sanitizeInput, safeHttpUrl } from "@/lib/security";
 import type { BlogPost } from "@/data/blogData";
 
@@ -18,8 +18,8 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("content.edit");
+    if (!check.ok) return check.response;
 
     const { id } = await params;
     const body = await request.json();
@@ -91,8 +91,8 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("content.edit");
+    if (!check.ok) return check.response;
 
     const { id } = await params;
     await deleteBlogPost(id);

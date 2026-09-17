@@ -10,7 +10,7 @@ import {
   serverError,
   tooManyRequests,
 } from "@/lib/api";
-import { requireAdmin } from "@/lib/guard";
+import { requirePermission } from "@/lib/guard";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { containsThreatSignature } from "@/lib/security";
 import { sendFormNotifications } from "@/lib/formNotifications";
@@ -66,8 +66,8 @@ function toSubscriber(row: SubscriberRow): Subscriber {
 
 export async function GET() {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("subscribers.view");
+    if (!check.ok) return check.response;
 
     const supabase = getSupabase();
     const { data, error } = await supabase
@@ -187,8 +187,8 @@ export async function POST(request: Request) {
 /** Admin-only: flip a subscriber between subscribed and unsubscribed. */
 export async function PUT(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("subscribers.edit");
+    if (!check.ok) return check.response;
 
     const supabase = getSupabase();
     const body = await readJson<{ id?: unknown; status?: unknown }>(request);
@@ -217,8 +217,8 @@ export async function PUT(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("subscribers.edit");
+    if (!check.ok) return check.response;
 
     const { searchParams } = new URL(request.url);
     const id = cleanString(searchParams.get("id"), 100);

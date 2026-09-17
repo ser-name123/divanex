@@ -3,7 +3,9 @@ import { revalidatePath } from "next/cache";
 import { CACHE_ENTRIES, purgeAll, purgeTag, type CacheTag } from "@/lib/cache";
 import { clampTtl, getCacheConfig, saveCacheConfig } from "@/lib/cacheConfig";
 import { badRequest, cleanString, readJson, serverError } from "@/lib/api";
-import { noStore, requireAdmin } from "@/lib/guard";
+import { noStore, requirePermission } from "@/lib/guard";
+import { recordAudit } from "@/lib/auditStore";
+import { clientIp } from "@/lib/rate-limit";
 import { recordAuthEvent } from "@/lib/auditLog";
 
 /**
@@ -18,8 +20,8 @@ const VALID_TAGS = new Set<string>(CACHE_ENTRIES.map((entry) => entry.tag));
 
 export async function GET() {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("settings.view");
+    if (!check.ok) return check.response;
 
     const config = await getCacheConfig();
     return noStore(
@@ -39,8 +41,8 @@ export async function GET() {
 
 export async function PUT(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("settings.edit");
+    if (!check.ok) return check.response;
 
     const body = await readJson<{
       enabled?: unknown;
@@ -86,8 +88,8 @@ export async function PUT(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("settings.edit");
+    if (!check.ok) return check.response;
 
     const body = await readJson<{ action?: unknown; tag?: unknown; path?: unknown }>(request);
     if (!body) return badRequest("Invalid request body.");
@@ -101,6 +103,14 @@ export async function POST(request: Request) {
         type: "admin.cache.purged",
         outcome: "success",
         detail: "all entries",
+      });
+      await recordAudit({
+        actor: { email: check.admin.email, name: check.admin.name, role: check.admin.role },
+        action: "cache.purged",
+        targetType: "cache",
+        targetId: "all",
+        targetLabel: "Every cached entry",
+        ip: clientIp(request),
       });
       return noStore(
         NextResponse.json({

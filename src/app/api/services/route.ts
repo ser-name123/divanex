@@ -1,7 +1,7 @@
 import { getSupabase } from "@/lib/supabase";
 import { AdminServiceConfig } from "@/data/adminData";
 import { badRequest, cleanString, ok, readJson, serverError } from "@/lib/api";
-import { requireAdmin } from "@/lib/guard";
+import { requirePermission } from "@/lib/guard";
 
 /** Admin-only. Access is gated by src/proxy.ts. */
 
@@ -35,8 +35,8 @@ function toService(row: ServiceRow): AdminServiceConfig {
 
 export async function GET() {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("content.view");
+    if (!check.ok) return check.response;
 
     const supabase = getSupabase();
     const { data, error } = await supabase
@@ -54,8 +54,8 @@ export async function GET() {
 
 export async function PUT(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("content.edit");
+    if (!check.ok) return check.response;
 
     const supabase = getSupabase();
     const body = await readJson<Partial<AdminServiceConfig>>(request);

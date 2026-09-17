@@ -3,12 +3,12 @@ import { getProjectById, upsertProject } from "@/lib/projectsStore";
 import { createNotification } from "@/lib/notificationsStore";
 import { readJson, serverError } from "@/lib/api";
 import { ProjectInstallment, ProjectDocument } from "@/data/adminData";
-import { requireAdmin } from "@/lib/guard";
+import { requirePermission } from "@/lib/guard";
 
 export async function POST(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("projects.edit");
+    if (!check.ok) return check.response;
 
     const body = await readJson<{
       projectId: string;

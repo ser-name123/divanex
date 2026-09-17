@@ -3,7 +3,7 @@ import { getSupabase } from "@/lib/supabase";
 import { AdminSystemLog } from "@/data/adminData";
 import { badRequest, cleanString, ok, oneOf, readJson, serverError } from "@/lib/api";
 import { clientIp } from "@/lib/rate-limit";
-import { requireAdmin } from "@/lib/guard";
+import { requirePermission } from "@/lib/guard";
 
 /** Admin-only. Access is gated by src/proxy.ts. */
 
@@ -21,8 +21,8 @@ interface LogRow {
 
 export async function GET() {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("audit.view");
+    if (!check.ok) return check.response;
 
     const supabase = getSupabase();
     const { data, error } = await supabase
@@ -51,8 +51,8 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("audit.view");
+    if (!check.ok) return check.response;
 
     const supabase = getSupabase();
     const body = await readJson<Partial<AdminSystemLog>>(request);
@@ -82,8 +82,8 @@ export async function POST(request: Request) {
 
 export async function DELETE() {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("audit.view");
+    if (!check.ok) return check.response;
 
     const supabase = getSupabase();
     const { error } = await supabase.from("system_logs").delete().neq("id", "");

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ChatSession } from "@/data/chatTypes";
-import { requireAdmin } from "@/lib/guard";
+import { requirePermission } from "@/lib/guard";
 import { cookies } from "next/headers";
 import { SESSION_COOKIE, verifySessionToken } from "@/lib/auth";
 import { CHAT_TOKEN_HEADER, issueChatToken, verifyChatToken } from "@/lib/chatToken";
@@ -35,8 +35,8 @@ import {
 
 export async function GET(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("chats.view");
+    if (!check.ok) return check.response;
 
     const { searchParams } = new URL(request.url);
     const sessionId = searchParams.get("sessionId");
@@ -186,8 +186,8 @@ export async function POST(request: Request) {
  */
 export async function DELETE(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("chats.edit");
+    if (!check.ok) return check.response;
 
     const { searchParams } = new URL(request.url);
     const sessionId = searchParams.get("sessionId");

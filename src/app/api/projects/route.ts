@@ -16,7 +16,7 @@ import {
   deleteProject as deleteFromStore,
   getProjectById,
 } from "@/lib/projectsStore";
-import { requireAdmin } from "@/lib/guard";
+import { requirePermission } from "@/lib/guard";
 
 /** Admin-only. Access is gated by src/proxy.ts. */
 
@@ -102,8 +102,8 @@ function cleanChecklist(value: unknown): AdminProjectSprint["handoverChecklist"]
 
 export async function GET() {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("projects.view");
+    if (!check.ok) return check.response;
 
     const supabase = getSupabase();
     const { data, error } = await supabase
@@ -123,8 +123,8 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("projects.edit");
+    if (!check.ok) return check.response;
 
     const body = await readJson<Partial<AdminProjectSprint>>(request);
     if (!body) return badRequest("Invalid request body.");
@@ -206,8 +206,8 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("projects.edit");
+    if (!check.ok) return check.response;
 
     const body = await readJson<Partial<AdminProjectSprint>>(request);
     if (!body) return badRequest("Invalid request body.");
@@ -252,8 +252,8 @@ export async function PUT(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("projects.edit");
+    if (!check.ok) return check.response;
 
     const id = new URL(request.url).searchParams.get("id");
     if (!id) return badRequest("Missing project ID.");

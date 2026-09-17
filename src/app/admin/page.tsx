@@ -26,6 +26,9 @@ import {
   AdminTechTab,
 } from "@/components/admin/ContentTabs";
 import DatabaseStatusBanner from "@/components/admin/DatabaseStatusBanner";
+import AdminUsersView from "@/components/admin/AdminUsersView";
+import AdminAuditView from "@/components/admin/AdminAuditView";
+import { canSeeTab, type Role } from "@/lib/permissions";
 
 import {
   AdminProjectSprint,
@@ -52,6 +55,26 @@ function AdminDashboardContent() {
   );
   const [collapsed, setCollapsed] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  // The signed-in operator. Null while it loads and if the session is gone,
+  // which is why every role-gated tab below checks before it renders.
+  const [me, setMe] = useState<{ id: string; role: Role } | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      try {
+        const res = await fetch("/api/auth/session");
+        const json = await res.json();
+        if (active && json?.success) setMe({ id: json.user.id, role: json.user.role });
+      } catch {
+        // Leaving it null hides the role-gated tabs, which is the safe default.
+      }
+    })();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   // Consistent Initial States (matches SSR to eliminate hydration mismatch)
   const [services, setServices] = useState<AdminServiceConfig[]>(initialAdminServices);
@@ -232,6 +255,7 @@ function AdminDashboardContent() {
         setActiveTab={setActiveTab}
         collapsed={collapsed}
         setCollapsed={setCollapsed}
+        role={me?.role ?? null}
       />
 
       {/* Main Command Center Container */}
@@ -314,7 +338,26 @@ function AdminDashboardContent() {
             />
           )}
 
-          {activeTab === "settings" && <AdminSettingsView />}
+          {activeTab === "audit" && canSeeTab(me?.role ?? null, "audit") && <AdminAuditView />}
+
+          {activeTab === "users" && canSeeTab(me?.role ?? null, "users") && me && (
+            <AdminUsersView currentUserId={me.id} canManage={me.role === "owner"} />
+          )}
+
+          {activeTab === "settings" && canSeeTab(me?.role ?? null, "settings") && (
+            <AdminSettingsView />
+          )}
+
+          {me && !canSeeTab(me.role, activeTab) && (
+            <div className="p-6 rounded-2xl bg-white border border-slate-200 text-center">
+              <p className="text-sm font-semibold text-slate-900">
+                That screen is not available to your role.
+              </p>
+              <p className="text-xs text-slate-500 mt-1">
+                You are signed in as {me.role}. Ask an owner if you need access.
+              </p>
+            </div>
+          )}
         </main>
       </div>
     </div>

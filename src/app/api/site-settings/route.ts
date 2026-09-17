@@ -6,7 +6,9 @@ import {
   saveSiteSettings,
 } from "@/lib/siteSettingsStore";
 import { badRequest, cleanString, cleanText, readJson, serverError, toStringArray } from "@/lib/api";
-import { noStore, requireAdmin } from "@/lib/guard";
+import { noStore, requirePermission } from "@/lib/guard";
+import { diffObjects, recordAudit } from "@/lib/auditStore";
+import { clientIp } from "@/lib/rate-limit";
 import { safeHttpUrl } from "@/lib/security";
 
 /**
@@ -18,8 +20,8 @@ import { safeHttpUrl } from "@/lib/security";
  */
 export async function GET() {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("settings.view");
+    if (!check.ok) return check.response;
 
     const settings = await getSiteSettings();
     return noStore(NextResponse.json({ success: true, settings }));
@@ -53,8 +55,8 @@ function sanitizePages(raw: unknown): Record<string, PageSeo> | undefined {
 
 export async function PUT(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("settings.edit");
+    if (!check.ok) return check.response;
 
     const body = await readJson<Partial<SiteSettings>>(request);
     if (!body) return badRequest("Invalid request body.");
@@ -131,7 +133,23 @@ export async function PUT(request: Request) {
     const pages = sanitizePages(body.pages);
     if (pages) patch.pages = pages;
 
+    // Read first, so the trail can name the fields rather than only the save.
+    const previous = await getSiteSettings();
+
     const settings = await saveSiteSettings(patch);
+
+    await recordAudit({
+      actor: { email: check.admin.email, name: check.admin.name, role: check.admin.role },
+      action: "settings.updated",
+      targetType: "site_settings",
+      targetId: "site",
+      targetLabel: "Search & metadata",
+      ip: clientIp(request),
+      changes: diffObjects(
+        previous as unknown as Record<string, unknown>,
+        settings as unknown as Record<string, unknown>
+      ),
+    });
     // Metadata is generated from the cached copy, so the next render has to
     // read the new row rather than the one from a moment ago.
     invalidateSiteSettings();

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSupabase } from "@/lib/supabase";
-import { noStore, requireAdmin } from "@/lib/guard";
+import { noStore, requirePermission } from "@/lib/guard";
 
 /**
  * Database health, for the admin console.
@@ -29,8 +29,8 @@ const REQUIRED_TABLES = [
 ] as const;
 
 export async function GET() {
-  const denied = await requireAdmin();
-  if (denied) return denied;
+  const check = await requirePermission("settings.view");
+    if (!check.ok) return check.response;
 
   const start = Date.now();
 

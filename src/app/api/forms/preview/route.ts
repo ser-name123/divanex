@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { badRequest, cleanString, isValidEmail, ok, readJson, serverError } from "@/lib/api";
-import { noStore, requireAdmin } from "@/lib/guard";
+import { noStore, requirePermission } from "@/lib/guard";
 import { getContentFresh } from "@/lib/contentStore";
 import { getSiteSettings } from "@/lib/siteSettingsStore";
 import { sendMail } from "@/lib/email";
@@ -87,8 +87,8 @@ async function build(kind: FormKind, audience: "visitor" | "team", settings: For
 
 export async function GET(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("content.view");
+    if (!check.ok) return check.response;
 
     const { searchParams } = new URL(request.url);
     const kindParam = searchParams.get("kind") || "contact";
@@ -121,8 +121,8 @@ export async function GET(request: Request) {
 /** Sends the previewed message to a nominated address. */
 export async function POST(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("content.edit");
+    if (!check.ok) return check.response;
 
     const body = await readJson<{ kind?: unknown; audience?: unknown; to?: unknown }>(request);
     if (!body) return badRequest("Invalid request body.");

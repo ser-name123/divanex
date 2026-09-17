@@ -197,6 +197,55 @@ async function setup() {
         ON auth_challenges (expires_at);
     `);
 
+    // Admin accounts.
+    //
+    // The console used to authenticate everyone against one shared password
+    // hash in the environment, with a hardcoded directory of names beside it.
+    // That makes "who changed this" unanswerable, so roles could only ever be
+    // decoration. One row per admin, each with their own password.
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS admin_users (
+        id TEXT PRIMARY KEY,
+        email TEXT NOT NULL UNIQUE,
+        name TEXT NOT NULL,
+        role TEXT NOT NULL DEFAULT 'viewer',
+        password_hash TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'active',
+        created_by TEXT,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+        last_login_at TIMESTAMPTZ
+      );
+      CREATE INDEX IF NOT EXISTS admin_users_email_idx ON admin_users (lower(email));
+    `);
+
+    // Audit trail.
+    //
+    // Separate from system_logs, which holds free text for operators to read.
+    // These rows are queried: by actor, by action, by date, and each carries the
+    // before and after of what changed, so the answer to "what did this edit
+    // actually do" does not depend on someone having remembered.
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS audit_events (
+        id TEXT PRIMARY KEY,
+        at TIMESTAMPTZ NOT NULL DEFAULT now(),
+        actor_email TEXT,
+        actor_name TEXT,
+        actor_role TEXT,
+        action TEXT NOT NULL,
+        target_type TEXT,
+        target_id TEXT,
+        target_label TEXT,
+        outcome TEXT NOT NULL DEFAULT 'success',
+        ip_address TEXT,
+        detail TEXT,
+        changes JSONB NOT NULL DEFAULT '[]'::jsonb
+      );
+      CREATE INDEX IF NOT EXISTS audit_events_at_idx ON audit_events (at DESC);
+      CREATE INDEX IF NOT EXISTS audit_events_actor_idx ON audit_events (lower(actor_email));
+      CREATE INDEX IF NOT EXISTS audit_events_action_idx ON audit_events (action);
+    `);
+
     console.log("Tables created successfully!");
 
     // 1b. Lock every table down with Row Level Security.
@@ -208,7 +257,7 @@ async function setup() {
     // bypasses RLS by design.
     console.log("Enabling Row Level Security...");
 
-    const TABLES = ["leads", "estimates", "projects", "services", "system_logs", "site_settings", "site_content", "chat_sessions", "subscribers", "auth_challenges"];
+    const TABLES = ["leads", "estimates", "projects", "services", "system_logs", "site_settings", "site_content", "chat_sessions", "subscribers", "auth_challenges", "admin_users", "audit_events"];
 
     for (const table of TABLES) {
       await client.query(`ALTER TABLE ${table} ENABLE ROW LEVEL SECURITY;`);

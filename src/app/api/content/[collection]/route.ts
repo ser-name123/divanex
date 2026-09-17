@@ -1,8 +1,15 @@
 import { NextResponse } from "next/server";
-import { isContentCollection, type ContentCollection, type ContentShapes } from "@/data/siteContent";
+import {
+  CONTENT_COLLECTIONS,
+  isContentCollection,
+  type ContentCollection,
+  type ContentShapes,
+} from "@/data/siteContent";
 import { getContentFresh, resetContent, saveContent } from "@/lib/contentStore";
 import { badRequest, readJson, serverError } from "@/lib/api";
-import { noStore, requireAdmin } from "@/lib/guard";
+import { noStore, requirePermission } from "@/lib/guard";
+import { diffObjects, recordAudit } from "@/lib/auditStore";
+import { clientIp } from "@/lib/rate-limit";
 import { invalidateSiteSettings } from "@/lib/siteSettingsStore";
 import { CACHE_TAGS, purgeTag } from "@/lib/cache";
 
@@ -40,8 +47,8 @@ async function resolveCollection(context: RouteContext): Promise<ContentCollecti
 
 export async function GET(_request: Request, context: RouteContext) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("content.view");
+    if (!check.ok) return check.response;
 
     const collection = await resolveCollection(context);
     if (!collection) return badRequest("Unknown content collection.");
@@ -57,8 +64,8 @@ export async function GET(_request: Request, context: RouteContext) {
 
 export async function PUT(request: Request, context: RouteContext) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("content.edit");
+    if (!check.ok) return check.response;
 
     const collection = await resolveCollection(context);
     if (!collection) return badRequest("Unknown content collection.");
@@ -76,11 +83,40 @@ export async function PUT(request: Request, context: RouteContext) {
       );
     }
 
+    // Read before writing, so the audit row can say what actually changed
+    // rather than only that something did. One extra read per save, on a path
+    // a person triggers by hand.
+    const previous = await getContentFresh(collection);
+
     const saved = await saveContent(
       collection,
       body.data as ContentShapes[ContentCollection]
     );
     purgeDerivedCaches(collection);
+
+    // Only keyed records produce a field-level diff. A collection that is a
+    // list — testimonials, portfolio — would otherwise diff as "0, 1, 2, …",
+    // which names the array index rather than anything a reader recognises.
+    const changes =
+      previous && typeof previous === "object" && !Array.isArray(previous)
+        ? diffObjects(
+            previous as Record<string, unknown>,
+            saved as unknown as Record<string, unknown>
+          )
+        : [];
+
+    await recordAudit({
+      actor: { email: check.admin.email, name: check.admin.name, role: check.admin.role },
+      action: "content.updated",
+      targetType: "content",
+      targetId: collection,
+      targetLabel: CONTENT_COLLECTIONS[collection].label,
+      ip: clientIp(request),
+      detail: changes.length
+        ? `${changes.length} field${changes.length === 1 ? "" : "s"} changed`
+        : "saved with no field-level change",
+      changes,
+    });
 
     return noStore(
       NextResponse.json({
@@ -96,17 +132,35 @@ export async function PUT(request: Request, context: RouteContext) {
 }
 
 /** Restores a collection to the seed the codebase ships with. */
-export async function DELETE(_request: Request, context: RouteContext) {
+export async function DELETE(request: Request, context: RouteContext) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("content.edit");
+    if (!check.ok) return check.response;
 
     const collection = await resolveCollection(context);
     if (!collection) return badRequest("Unknown content collection.");
 
+    const previous = await getContentFresh(collection);
     await resetContent(collection);
     purgeDerivedCaches(collection);
     const data = await getContentFresh(collection);
+
+    await recordAudit({
+      actor: { email: check.admin.email, name: check.admin.name, role: check.admin.role },
+      action: "content.updated",
+      targetType: "content",
+      targetId: collection,
+      targetLabel: CONTENT_COLLECTIONS[collection].label,
+      ip: clientIp(request),
+      detail: "reset to the built-in defaults",
+      changes:
+        previous && typeof previous === "object" && !Array.isArray(previous)
+          ? diffObjects(
+              previous as Record<string, unknown>,
+              data as unknown as Record<string, unknown>
+            )
+          : [],
+    });
 
     return noStore(
       NextResponse.json({

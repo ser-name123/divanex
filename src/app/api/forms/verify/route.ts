@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ok, serverError } from "@/lib/api";
-import { noStore, requireAdmin } from "@/lib/guard";
+import { noStore, requirePermission } from "@/lib/guard";
 import { verifyMailTransport } from "@/lib/email";
 
 /**
@@ -14,8 +14,8 @@ import { verifyMailTransport } from "@/lib/email";
  */
 export async function GET() {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("settings.view");
+    if (!check.ok) return check.response;
 
     const result = await verifyMailTransport();
 

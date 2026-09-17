@@ -3,7 +3,7 @@ import { getBlogPosts, saveBlogPost } from "@/lib/blogStore";
 import { randomUUID } from "node:crypto";
 import { sanitizeInput, safeHttpUrl } from "@/lib/security";
 import { BlogPost } from "@/data/blogData";
-import { requireAdmin } from "@/lib/guard";
+import { requirePermission } from "@/lib/guard";
 
 export async function GET(request: Request) {
   try {
@@ -55,8 +55,8 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const check = await requirePermission("content.edit");
+    if (!check.ok) return check.response;
 
     const body = await request.json();
 
