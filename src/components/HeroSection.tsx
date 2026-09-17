@@ -43,57 +43,57 @@ export default function HeroSection({ onOpenConsultation: _onOpenConsultation }:
     {
       id: "saas",
       title: "Custom SaaS Platforms",
-      subtitle: "Multi-tenant cloud architecture, automated subscriptions, metered billing & tenant isolation",
+      subtitle: "Multi-tenant platforms with automated subscription billing, customer self-onboarding & zero data leakage",
       icon: Layers,
       color: "from-sky-500 to-blue-600",
       accent: "#189a91",
-      badge: "CUSTOM SAAS",
+      badge: "RECURRING REVENUE",
       stats: "Sub-second response • 100% Tenant Isolation",
-      techs: ["Next.js 15", "PostgreSQL RLS", "Docker", "Stripe"],
+      techs: ["Multi-Tenant Isolation", "Automated Subscriptions", "Usage Metering", "Stripe / Razorpay"],
     },
     {
       id: "ai",
       title: "AI & Workflow Automation",
-      subtitle: "Custom AI agents, RAG document intelligence, and automated backend execution pipelines",
+      subtitle: "Custom AI assistants that read company documents, answer customer inquiries & automate operational tasks",
       icon: Bot,
       color: "from-teal-500 to-emerald-600",
       accent: "#0f7670",
-      badge: "AI & AUTOMATION",
-      stats: "Sub-second inference • Runs on your private data",
-      techs: ["DeepSeek", "GPT-4o", "FastAPI", "LangChain"],
+      badge: "OPERATIONAL AI",
+      stats: "Sub-second inference • Runs on private company data",
+      techs: ["Document AI & OCR", "Private Knowledge RAG", "Customer Support Bots", "Task Automation"],
     },
     {
       id: "apps",
       title: "Web & Mobile Applications",
-      subtitle: "High-speed interactive web portals and cross-platform native iOS & Android applications",
+      subtitle: "Cross-platform mobile apps for iOS & Android paired with ultra-responsive customer portals",
       icon: Smartphone,
       color: "from-emerald-500 to-teal-600",
       accent: "#5c9556",
       badge: "WEB & MOBILE",
       stats: "Offline-first sync • Smooth 60fps mobile UX",
-      techs: ["React Native", "Flutter", "Next.js", "WebSockets"],
+      techs: ["iOS & Android Apps", "Fast Web Portals", "Live GPS Telemetry", "Biometric Login"],
     },
     {
       id: "enterprise",
       title: "Enterprise Business Software",
-      subtitle: "Internal operations platforms, client portals, sales CRM engines and cloud infrastructure",
+      subtitle: "Custom ERPs, inventory trackers, and internal tooling built to eliminate per-seat licensing fees",
       icon: Globe2,
       color: "from-blue-600 to-indigo-700",
       accent: "#000838",
-      badge: "ENTERPRISE",
-      stats: "Zero per-seat licensing • Custom workflows",
-      techs: ["Microservices", "PostgreSQL", "Redis", "AWS / GCP"],
+      badge: "ZERO PER-SEAT FEES",
+      stats: "Custom workflows • Zero recurring license fees",
+      techs: ["Multi-Warehouse Stock", "Automated GST Invoicing", "Production MRP", "Role-Based Access"],
     },
     {
       id: "verticals",
       title: "Healthcare, ERP & Marketplaces",
-      subtitle: "Regulated hospital HMIS, multi-warehouse MRP ERP, and multi-vendor eCommerce platforms",
+      subtitle: "Regulated hospital HMIS, multi-vendor marketplaces, and smart IoT telemetry hubs",
       icon: ShieldCheck,
       color: "from-purple-600 to-indigo-700",
       accent: "#0f7670",
-      badge: "COMPLEX SYSTEMS",
-      stats: "HIPAA / ABDM compliant • Multi-vendor escrow",
-      techs: ["FHIR/HL7", "Double-Entry", "Elasticsearch", "Stripe Escrow"],
+      badge: "INDUSTRY ECOSYSTEMS",
+      stats: "HIPAA & ABDM–Ready Architecture • Multi-Vendor Escrow",
+      techs: ["Clinical EMR Workflows", "Doctor/Patient Portals", "Vendor Split Payouts", "Instant B2B Quotes"],
     },
   ];
 
@@ -159,12 +159,12 @@ export default function HeroSection({ onOpenConsultation: _onOpenConsultation }:
             <div className="pt-1 flex flex-wrap items-center justify-center lg:justify-start gap-2 text-[11px] text-slate-600">
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-2xs">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#0f7670] shrink-0" />
-                <span className="font-bold text-slate-900">50+ Projects Delivered</span>
+                <span className="font-bold text-slate-900">Full-Cycle Engineering</span>
               </div>
 
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-emerald-200 text-emerald-700 shadow-2xs">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#5c9556] shrink-0" />
-                <span className="font-semibold text-slate-800">100% Code Ownership</span>
+                <span className="font-semibold text-slate-800">Full IP &amp; Code Ownership</span>
               </div>
 
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-[#0f7670]/30 text-[#0f7670] shadow-2xs">
@@ -194,7 +194,7 @@ export default function HeroSection({ onOpenConsultation: _onOpenConsultation }:
 
               <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-md border border-slate-200 shadow-2xs text-[10px] font-mono text-[#0f7670] font-bold">
                 <Activity className="w-3 h-3" />
-                <span>50+ PROJECTS DELIVERED</span>
+                <span>PRODUCTION-READY ARCHITECTURE</span>
               </div>
             </div>
 
@@ -289,7 +289,7 @@ export default function HeroSection({ onOpenConsultation: _onOpenConsultation }:
                     Ready to build your solution?
                   </span>
                   <span className="text-[10px] text-slate-500 block truncate">
-                    14-Day Discovery &amp; Architecture Sprint • Free Architecture Consultation
+                    14-Day Architecture &amp; Discovery Sprint • Technical Plan &amp; Roadmap
                   </span>
                 </div>
               </div>

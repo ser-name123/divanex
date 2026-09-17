@@ -176,7 +176,7 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
       stats: [
         s("sv-1", "Cloud Architecture", "High Availability", "AWS, GCP & Docker Setup", "ShieldCheck", "emerald"),
         s("sv-2", "Target Latency", "< 100ms", "Architecture Benchmark", "Zap", "cyan"),
-        s("sv-3", "Projects Delivered", "50+", "SaaS, Mobile & AI Platforms", "Layers", "blue"),
+        s("sv-3", "Engineering Scope", "Full-Stack", "SaaS, Mobile & AI Platforms", "Layers", "blue"),
         s("sv-4", "AI Architecture", "Streaming", "Low-Latency RAG Pipelines", "Cpu", "amber"),
       ],
     },
@@ -246,10 +246,10 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
       actionLabel: "Book a Consultation",
       actionHref: "/contact",
       stats: [
-        s("pf-1", "Projects Delivered", "50+", "Web, Mobile & AI Platforms", "Briefcase", "blue"),
+        s("pf-1", "Delivery Scope", "Full-Stack", "Web, Mobile & AI Platforms", "Briefcase", "blue"),
         s("pf-2", "Development Speed", "2-3x Faster", "Rapid MVP to Production", "TrendingUp", "emerald"),
         s("pf-3", "Codebase Quality", "100%", "Strict TypeScript & Testing", "Users", "cyan"),
-        s("pf-4", "Client Rating", "5.0 ★", "Upwork & Direct Client Feedback", "Award", "amber"),
+        s("pf-4", "Client Satisfaction", "Top Rated", "Upwork & Direct Client Feedback", "Award", "amber"),
       ],
     },
     "/testimonials": {
@@ -313,7 +313,7 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
       title: "Institutional Trust &",
       titleHighlight: "Cybersecurity Architecture",
       description:
-        "At Divanex, security is not an afterthought—it is foundational. Explore our multi-layer perimeter defense, encryption protocols, regulatory compliance certifications, and Vulnerability Disclosure Program.",
+        "At Divanex, security is not an afterthought—it is foundational. Explore our multi-layer perimeter defense, encryption protocols, regulatory compliance readiness frameworks, and Vulnerability Disclosure Program.",
       statusText: "INGRESS FIREWALL // ALL SYSTEMS NOMINAL & ARMED",
       actionLabel: "Report a Vulnerability",
       actionHref: "#vdp",
@@ -339,7 +339,7 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
         // "{postCount}" is replaced with the live number of published posts.
         s("bl-1", "Technical Articles", "{postCount}+ Guides", "In-Depth Engineering Blueprints", "Code2", "sky"),
         s("bl-2", "Code & Architecture", "100%", "Production-Tested Snippets", "Terminal", "blue"),
-        s("bl-3", "Monthly Readers", "45K+", "CTOs, Founders & Engineers", "BookOpen", "emerald"),
+        s("bl-3", "Technical Rigor", "100%", "Written by Senior Engineers", "BookOpen", "emerald"),
         s("bl-4", "Average Read Depth", "8.5 Min", "High Technical Rigor", "Sparkles", "amber"),
       ],
     },
@@ -576,11 +576,11 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
     freelancers: "A solo freelancer",
   },
   processHeading: {
-    eyebrow: "HOW THE WORK RUNS // TYPICAL MVP TIMELINE & SPRINTS",
+    eyebrow: "HOW THE WORK RUNS // TYPICAL MVP DELIVERY FRAMEWORK",
     title: "Five Phases, From First Call to",
     highlight: "Live and Handed Over",
     description:
-      "Every fortnight you get something you can open and click through on a staging URL, plus the test results behind it. Timelines reflect typical MVP builds (enterprise systems scale across dedicated sprint roadmaps).",
+      "Every fortnight you get something you can open and click through on a staging URL, plus the test results behind it. Timelines reflect our typical 10-week MVP delivery framework—complex enterprise ERPs, healthcare platforms, and marketplaces scale across dedicated multi-sprint roadmaps.",
   },
   processSteps,
   faqs: faqsData,
@@ -597,14 +597,14 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
       id: "em-fixed",
       badge: "MOST POPULAR FOR STARTUPS",
       title: "Fixed-Price Milestone Sprint",
-      tagline: "Predictable Budget & Guaranteed Delivery SLA",
+      tagline: "Predictable Budget & 14-Day Architecture Milestones",
       description:
         "Ideal for clear scopes, MVPs, and feature build-outs. Every sprint milestone is pre-defined with crystal clear deliverables and fixed payment milestones.",
       features: [
-        "Guaranteed delivery SLA with clear milestone gates",
+        "14-Day architecture & discovery sprint to validate requirements",
         "Bi-weekly interactive staging review & client demos",
         "100% intellectual property & code transfer",
-        "30-day post-launch hypercare & bug-free guarantee",
+        "30-day post-launch hypercare & technical warranty",
       ],
       ctaLabel: "Book a Consultation",
       ctaHref: "/contact",

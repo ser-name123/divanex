@@ -61,17 +61,35 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
   },
   "contact/hubs": {
     "heading": {
-      "eyebrow": "Where We Work",
-      "title": "Our Engineering Hub &",
-      "highlight": "Operating Hours",
-      "description": "One team, one office, working with clients across time zones. Add a row here for every location you actually operate from."
+      "eyebrow": "GLOBAL REACH // LOCAL OVERLAP",
+      "title": "Global Client Coverage &",
+      "highlight": "Regional Desks",
+      "description": "Centralized engineering delivered from our Jaipur HQ, with dedicated representative client coverage across APAC, MENA, and North America."
     },
     "items": [
       {
-        "city": "Jaipur, Rajasthan (India)",
-        "tz": "India Standard Time (IST)",
-        "hours": "09:30 AM - 08:30 PM",
-        "coverage": "All client engagements, worldwide"
+        "city": "Jaipur — Engineering HQ (India)",
+        "tz": "IST (UTC+5:30)",
+        "hours": "10:00 AM - 08:00 PM",
+        "coverage": "Office 104, Vaishali Tower 2nd, Nursery Circle, Vaishali Nagar, Jaipur 302021 • Phone: +91-6375073511 • Mail: business@divanextechnologies.com"
+      },
+      {
+        "city": "Hong Kong — APAC Client Coverage",
+        "tz": "HKT (UTC+8:00)",
+        "hours": "09:00 AM - 07:00 PM",
+        "coverage": "FLAT/RM E (36) 3/F Superluck Industrial Centre Phase 2, 57 Sha Tsui Rd, Tsuen Wan, Hong Kong • Phone: +852-90270926"
+      },
+      {
+        "city": "Dubai — MENA Client Coverage",
+        "tz": "GST (UTC+4:00)",
+        "hours": "10:00 AM - 07:00 PM",
+        "coverage": "Building C8, Dubai Media City, Dubai, United Arab Emirates • Direct Line: +91-6375073511"
+      },
+      {
+        "city": "Canada — North America Client Coverage",
+        "tz": "EST (UTC-5:00)",
+        "hours": "09:00 AM - 06:00 PM",
+        "coverage": "105 Sawmill Valley Dr, Newmarket, ON L3X 1S4, Canada • Direct Line: +91-6375073511"
       }
     ]
   },
@@ -170,7 +188,7 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
       {
         "icon": null,
         "title": "Security & SLAs",
-        "desc": "OWASP compliance, SOC 2 alignment, and uptime guarantees."
+        "desc": "OWASP standards, security hardening, and resilient high-availability SLAs."
       },
       {
         "icon": null,
@@ -305,31 +323,31 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
     },
     "items": [
       {
-        "slug": "fintech-clearing-engine",
-        "title": "FinTech Multi-Currency Clearing Engine",
-        "sector": "FinTech & Payments",
+        "slug": "fynito",
+        "title": "Hyperlocal Real-Time Rider Telemetry HUD",
+        "sector": "Food & Logistics",
         "icon": null,
-        "challenge": "Handling 25,000 transactions/second with zero race conditions and strict double-entry ledger verification.",
-        "solution": "Engineered Go microservices backed by PostgreSQL serializable isolation and Redis distributed redlocks.",
-        "metrics": "Zero-drift double-entry ledger, sub-50ms transaction latency."
+        "challenge": "Handling high-concurrency rider GPS streams and low-latency kitchen order state transitions.",
+        "solution": "Engineered Node.js worker clusters backed by Socket.io and Redis Pub/Sub geospatial clustering.",
+        "metrics": "<120ms live map latency, high-throughput delivery architecture."
       },
       {
-        "slug": "neurochat-ai",
-        "title": "Autonomous Healthcare RAG Diagnosis Assistant",
+        "slug": "evtor",
+        "title": "OCPP 2.0.1 Connected EV Telemetry Gateway",
+        "sector": "IoT & Mobility",
+        "icon": null,
+        "challenge": "Standardizing heterogeneous EV charging station firmware with sub-second QR charge session triggering.",
+        "solution": "Universal OCPP 2.0.1 WebSocket broker ingesting real-time meter telemetry into TimescaleDB.",
+        "metrics": "High-availability telemetry SLA, <2.5s QR charge flow."
+      },
+      {
+        "slug": "magnus-partners",
+        "title": "HIPAA & ABDM Clinical Case Sharing Pipeline",
         "sector": "HealthTech & MedAI",
         "icon": null,
-        "challenge": "HIPAA-compliant private vector search across 500k+ clinical research papers with zero data leakage.",
-        "solution": "Isolated self-hosted Qdrant vector cluster, encrypted embedding pipelines, and strict role-based access control (RBAC).",
-        "metrics": "94.2% diagnostic retrieval relevance, HIPAA-Ready Architecture architecture."
-      },
-      {
-        "slug": "supply-chain-telemetry",
-        "title": "Global Supply Chain Real-Time Telemetry HUD",
-        "sector": "Logistics & IoT",
-        "icon": null,
-        "challenge": "Streaming GPS and temperature telemetry from 40,000 active freight containers worldwide simultaneously.",
-        "solution": "MQTT broker ingestion with Kafka event streaming feeding ClickHouse real-time database and Next.js WebSocket dashboards.",
-        "metrics": "<200ms end-to-end device-to-screen latency."
+        "challenge": "Secure multi-hospital clinical consultation exchange with zero patient health information leakage.",
+        "solution": "HL7 FHIR v4 data pipeline, PostgreSQL row-level security, and encrypted DICOM radiology viewer.",
+        "metrics": "Multi-hospital network, HIPAA-ready clinical architecture."
       }
     ]
   },
@@ -378,7 +396,7 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
   },
   "portfolio/impact": {
     "heading": {
-      "eyebrow": "CROSS-INDUSTRY DOMINANCE",
+      "eyebrow": "CROSS-INDUSTRY EXPERTISE",
       "title": "Delivering Impact Across",
       "highlight": "Diverse Verticals",
       "description": "Our architectural primitives power mission-critical platforms across heavily regulated, high-concurrency industries."
@@ -386,26 +404,26 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
     "items": [
       {
         "name": "FinTech & Payments",
-        "stat": "$420M+",
-        "label": "Transaction Volume Processed",
+        "stat": "Enterprise",
+        "label": "Multi-Currency & High-Throughput Gateways",
         "icon": null
       },
       {
         "name": "HealthTech & Telehealth",
-        "stat": "180k+",
-        "label": "Patient Consultations & Telehealth",
+        "stat": "HIPAA-Ready",
+        "label": "Patient Portals & Encrypted EHR Workflows",
         "icon": null
       },
       {
         "name": "E-Commerce & Retail",
-        "stat": "+280%",
-        "label": "Conversion Rate Uplift",
+        "stat": "Sub-Second",
+        "label": "High-Conversion Multi-Vendor Architecture",
         "icon": null
       },
       {
         "name": "Supply Chain & Logistics",
-        "stat": "99.99%",
-        "label": "GPS Telemetry Tracking Uptime",
+        "stat": "Real-Time",
+        "label": "Live Telemetry & Fleet Route Optimization",
         "icon": null
       }
     ]
@@ -429,13 +447,13 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
         "icon": null
       },
       {
-        "title": "45% Cloud Hosting Savings",
-        "desc": "Serverless edge functions and Dockerized right-sizing dramatically reduce runaway AWS / GCP monthly bills.",
+        "title": "High-Availability Reliability",
+        "desc": "Resilient automated failover configurations protect against unexpected system outages.",
         "icon": null
       },
       {
-        "title": "99.9%+ Target Availability",
-        "desc": "Resilient automated failover configurations eliminate revenue loss from unexpected system outages.",
+        "title": "Direct Engineer Access",
+        "desc": "Collaborate directly on Slack with the senior engineers building your platform — zero account manager delays.",
         "icon": null
       }
     ]
@@ -445,7 +463,7 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
       "eyebrow": "Velocity Track Record",
       "title": "Average Time-to-Production:",
       "highlight": "4 to 12 Weeks",
-      "description": "Across 50+ shipped production software releases, here is how our predictable sprint cadence transforms requirements into revenue-generating platforms."
+      "description": "Across our production software releases, here is how our predictable sprint cadence transforms requirements into high-performance platforms."
     },
     "items": [
       {
@@ -672,11 +690,11 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
       },
       {
         "icon": null,
-        "title": "Regulatory Compliance Suite",
+        "title": "Regulatory & Compliance Readiness",
         "badge": "GLOBAL STANDARDS",
-        "description": "Engineered from the ground up to comply with the most stringent global healthcare, fintech, and data sovereignty compliance mandates.",
+        "description": "Architectures engineered to align with global healthcare, fintech, and data sovereignty regulatory frameworks.",
         "points": [
-          "HIPAA & ABDM Health ID compliance ready",
+          "HIPAA-ready architecture & ABDM-aligned workflows",
           "PCI-DSS–aware tokenized payment gateways",
           "ISO 27001–Aligned Information Security Controls",
           "GDPR & CCPA strict right-to-be-forgotten"
@@ -859,8 +877,8 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
           "Multi-cloud Terraform (AWS, GCP, Cloudflare)",
           "Zero-trust security & SOC2 audit readiness",
           "Dedicated senior engineering pod with daily Slack",
-          "99.9%+ high-availability cloud architecture with 24/7 telemetry",
-          "Direct architect phone & emergency line"
+          "High availability architecture with 24/7 telemetry",
+          "Direct architect communication & sprint alignment"
         ],
         "highlight": false
       }
@@ -877,7 +895,7 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
       {
         "icon": null,
         "title": "Isolated PostgreSQL Schema Tenancy",
-        "desc": "Every tenant gets dedicated database schema isolation, preventing cross-tenant data leakage and ensuring GDPR & HIPAA compliance.",
+        "desc": "Every tenant gets dedicated database schema isolation, preventing cross-tenant data leakage with GDPR & HIPAA-ready privacy safeguards.",
         "stat": "Zero Data Leakage"
       },
       {
@@ -902,7 +920,7 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
   },
   "services/slas": {
     "heading": {
-      "eyebrow": "Guaranteed Incident Response",
+      "eyebrow": "Incident Response Framework",
       "title": "Production Service Level",
       "highlight": "Agreements (SLAs)",
       "description": "Contractual uptime, round-the-clock monitoring, and strict ticket response times backed by financial remedies and dedicated senior engineers."
@@ -1208,18 +1226,18 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
   },
   "testimonials/outcomes": {
     "heading": {
-      "eyebrow": "Verifiable ROI",
-      "title": "Before vs After:",
-      "highlight": "Client Business Outcomes",
-      "description": "Our code transforms businesses. Here is the concrete financial and operational impact experienced by founders after shipping with Divanex."
+      "eyebrow": "ENGINEERING IMPACT",
+      "title": "Transforming Workflows:",
+      "highlight": "Architecture Outcomes",
+      "description": "Here is how our modern engineering implementations solved core operational bottlenecks and performance limits for our clients."
     },
     "items": [
       {
         "company": "FleetWave Logistics",
         "before": "Legacy manual spreadsheets, delayed dispatch, driver churn.",
         "after": "Automated real-time dispatch dashboard with sub-second GPS tracking.",
-        "stat": "+320% Revenue",
-        "statDetail": "Expanded to 4 new states in 6 months"
+        "stat": "High-Throughput",
+        "statDetail": "Automated dispatch across multi-state fleets"
       },
       {
         "company": "MediFlow EHR",
@@ -1232,8 +1250,8 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
         "company": "FinPulse Global",
         "before": "Fragile monolithic payment code with frequent cart drop-offs.",
         "after": "Fault-tolerant Next.js & Stripe multi-currency checkout engine.",
-        "stat": "High Availability SLA",
-        "statDetail": "$12M+ processed in first 90 days"
+        "stat": "High-Availability",
+        "statDetail": "Consistent reliable payment flows"
       }
     ]
   },
@@ -1339,46 +1357,34 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
   "why-us/comparison": {
     "heading": {
       "eyebrow": "THE HONEST COMPARISON",
-      "title": "Where Each Option",
-      "highlight": "Tends To Break",
-      "description": "A freelancer, an agency and us are three different trade-offs, and all three are sometimes the right answer. Here is what usually goes wrong with each so you can pick knowingly."
+      "title": "Us, an Agency, or a",
+      "highlight": "Freelancer",
+      "description": "All three models can work depending on your stage. Here is an honest look across team seniority, code ownership, progress transparency, and long-term support."
     },
     "items": [
       {
-        "vector": "Time to something usable",
-        "freelancers": "Fast if they are free, unpredictable if not",
-        "agencies": "Four to eight months, much of it in planning",
-        "divanex": "Six to ten weeks for a first working version"
+        "vector": "Senior engineers",
+        "freelancers": "Single developer working solo, without peer code reviews",
+        "agencies": "Assigned from available bench, often juniors behind an account manager",
+        "divanex": "Senior full-stack engineers and architects who design and write the code directly"
       },
       {
-        "vector": "Who owns it afterwards",
-        "freelancers": "Usually you, if the repo and logins survive",
-        "agencies": "Their hosting, their framework, their terms",
-        "divanex": "Yours from week one, in your accounts"
+        "vector": "100% Code ownership",
+        "freelancers": "Usually yours, provided repo and cloud credentials are fully handed over",
+        "agencies": "Proprietary agency frameworks, locked hosting, or restrictive IP clauses",
+        "divanex": "Day-1 repository access in your Git org & cloud accounts with full IP rights"
       },
       {
-        "vector": "Who writes it",
-        "freelancers": "One person, nobody reviewing them",
-        "agencies": "Whoever is free, often behind a manager",
-        "divanex": "The seniors you met, reviewing each other"
+        "vector": "Progress & transparency",
+        "freelancers": "Varies widely; updates can stall when juggling multiple client gigs",
+        "agencies": "Monthly slide deck status reports, with actual software shown near deadline",
+        "divanex": "Fortnightly clickable staging builds, recorded video walkthroughs & direct Slack pod"
       },
       {
-        "vector": "Getting hold of someone",
-        "freelancers": "Good until they take another contract",
-        "agencies": "Through an account manager, on their calendar",
-        "divanex": "Shared channel with the engineers"
-      },
-      {
-        "vector": "How you are billed",
-        "freelancers": "Hourly, and the hours grow",
-        "agencies": "Large monthly retainer regardless of output",
-        "divanex": "Fixed per milestone, agreed in advance"
-      },
-      {
-        "vector": "Six months after launch",
-        "freelancers": "Often unreachable",
-        "agencies": "Billable hours and a ticket queue",
-        "divanex": "Same engineers, small monthly arrangement"
+        "vector": "Post-launch support",
+        "freelancers": "Often unavailable once committed to subsequent freelance engagements",
+        "agencies": "Expensive monthly retainers and multi-day ticket queues",
+        "divanex": "Same engineering team provides hypercare, uptime monitoring & quick bug fixes"
       }
     ]
   },

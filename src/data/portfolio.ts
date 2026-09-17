@@ -25,8 +25,8 @@ export const portfolioProjects: PortfolioProject[] = [
     tagline: "Hyperlocal On-Demand Food Delivery Ecosystem & Real-Time Logistics",
     description:
       "Architected and engineered a high-concurrency food delivery platform featuring real-time rider dispatch algorithms, interactive live kitchen tracking, automated surge pricing, and sub-second multi-gateway checkout.",
-    impactMetric: "450K+ /mo",
-    impactLabel: "Orders Fulfilled with 13.2x Faster Dispatch",
+    impactMetric: "< 120ms",
+    impactLabel: "Live Rider GPS Telemetry Ping",
     techStack: ["React Native", "Next.js 15", "Node.js", "Socket.io", "PostgreSQL", "Google Maps API", "Stripe"],
     gradient: "from-rose-500/20 via-pink-900/10 to-slate-900",
     imagePlaceholderColor: "bg-rose-500/20",
@@ -42,8 +42,8 @@ export const portfolioProjects: PortfolioProject[] = [
     tagline: "Smart PG, Hostel & Coliving Operations Platform with Automated Invoicing",
     description:
       "Developed a comprehensive cloud and mobile management suite for hostels and coliving properties, featuring automated rent invoicing, room/bed occupancy matrix, biometric check-in sync, and tenant ticketing.",
-    impactMetric: "85K+ Beds",
-    impactLabel: "Digitized with 98.2% On-Time Rent Collection",
+    impactMetric: "Zero Errors",
+    impactLabel: "Automated Invoicing & Bed Allocation",
     techStack: ["Flutter", "Next.js 15", "Node.js", "PostgreSQL", "Razorpay AutoPay", "Tailwind CSS", "AWS S3"],
     gradient: "from-blue-500/20 via-indigo-900/10 to-slate-900",
     imagePlaceholderColor: "bg-blue-500/20",
@@ -59,8 +59,8 @@ export const portfolioProjects: PortfolioProject[] = [
     tagline: "Luxury Real Estate Portal, Off-Plan Developments & 3D Interactive Floor Explorer",
     description:
       "Engineered an ultra-premium real estate discovery platform featuring dynamic off-plan property showcases, interactive 3D architectural views, high-resolution photo galleries, and instant high-intent broker lead routing.",
-    impactMetric: "260+/mo",
-    impactLabel: "Qualified Inquiries & -71% Mobile Bounce",
+    impactMetric: "0.8s",
+    impactLabel: "Sub-Second Page Load with 3D WebGL",
     techStack: ["Next.js 15", "TypeScript", "Three.js / WebGL", "Tailwind CSS", "Sanity CMS", "Algolia"],
     gradient: "from-emerald-500/20 via-teal-900/10 to-slate-900",
     imagePlaceholderColor: "bg-emerald-500/20",
@@ -77,7 +77,7 @@ export const portfolioProjects: PortfolioProject[] = [
     description:
       "Constructed a connected EV infrastructure platform supporting live charger availability telemetry, OCPP 2.0.1 smart station synchronization, automated slot booking, dynamic tariffs, and in-app wallet payments.",
     impactMetric: "2.4s",
-    impactLabel: "QR Scan-to-Charge across 50+ Fast Chargers",
+    impactLabel: "QR Scan-to-Charge Session Start",
     techStack: ["React Native", "Next.js 15", "OCPP 2.0.1", "TimescaleDB", "MQTT Broker", "Tailwind CSS", "Redis"],
     gradient: "from-green-500/20 via-emerald-900/10 to-slate-900",
     imagePlaceholderColor: "bg-green-500/20",
@@ -93,8 +93,8 @@ export const portfolioProjects: PortfolioProject[] = [
     tagline: "Enterprise Healthcare Collaboration & Clinical Partnership Network",
     description:
       "Built a HIPAA-compliant medical collaboration platform connecting healthcare institutions, pharmaceutical researchers, and clinical providers with secure case sharing, diagnostic directory, and telehealth sync.",
-    impactMetric: "100% HIPAA",
-    impactLabel: "ABDM / FHIR Compliance across 25+ Hospitals",
+    impactMetric: "16x Faster",
+    impactLabel: "Consultation Turnaround (72h → 4.5h)",
     techStack: ["Next.js 15", "TypeScript", "Python FastAPI", "HL7 FHIR v4", "PostgreSQL RLS", "AWS CloudFront"],
     gradient: "from-cyan-500/20 via-blue-900/10 to-slate-900",
     imagePlaceholderColor: "bg-cyan-500/20",
@@ -111,7 +111,7 @@ export const portfolioProjects: PortfolioProject[] = [
     description:
       "Engineered an industrial tool catalog and engineering component configurator for B2B precision tooling buyers with dynamic technical datasheets and instant quote calculation.",
     impactMetric: "< 3 sec",
-    impactLabel: "Instant B2B Quotes across 3,200+ CNC SKUs",
+    impactLabel: "Instant Parametric RFQ Quoting",
     techStack: ["Next.js 15", "React Native", "Node.js", "PostgreSQL", "Redis", "Algolia", "Stripe API"],
     gradient: "from-amber-500/20 via-orange-900/10 to-slate-900",
     imagePlaceholderColor: "bg-amber-500/20",

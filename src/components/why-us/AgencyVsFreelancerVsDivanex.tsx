@@ -7,56 +7,43 @@ import { Check, X, Minus, Scale } from "lucide-react";
 /** What this section was written with. A stored record replaces it field by field. */
 const DEFAULT_HEADING = {
   "eyebrow": "THE HONEST COMPARISON",
-  "title": "Where Each Option",
-  "highlight": "Tends To Break",
-  "description": "A freelancer, an agency and us are three different trade-offs, and all three are sometimes the right answer. Here is what usually goes wrong with each so you can pick knowingly."
+  "title": "Us, an Agency, or a",
+  "highlight": "Freelancer",
+  "description": "All three models can work depending on your stage. Here is an honest look across team seniority, code ownership, progress transparency, and long-term support."
 };
 
 const DEFAULT_ITEMS = [
-    {
-      vector: "Time to something usable",
-      freelancers: "Fast if they are free, unpredictable if not",
-      agencies: "Four to eight months, much of it in planning",
-      divanex: "Six to ten weeks for a first working version",
-    },
-    {
-      vector: "Who owns it afterwards",
-      freelancers: "Usually you, if the repo and logins survive",
-      agencies: "Their hosting, their framework, their terms",
-      divanex: "Yours from week one, in your accounts",
-    },
-    {
-      vector: "Who writes it",
-      freelancers: "One person, nobody reviewing them",
-      agencies: "Whoever is free, often behind a manager",
-      divanex: "The seniors you met, reviewing each other",
-    },
-    {
-      vector: "Getting hold of someone",
-      freelancers: "Good until they take another contract",
-      agencies: "Through an account manager, on their calendar",
-      divanex: "Shared channel with the engineers",
-    },
-    {
-      vector: "How you are billed",
-      freelancers: "Hourly, and the hours grow",
-      agencies: "Large monthly retainer regardless of output",
-      divanex: "Fixed per milestone, agreed in advance",
-    },
-    {
-      vector: "Six months after launch",
-      freelancers: "Often unreachable",
-      agencies: "Billable hours and a ticket queue",
-      divanex: "Same engineers, small monthly arrangement",
-    }
-  ];
+  {
+    vector: "Senior engineers",
+    freelancers: "Single developer working solo, without peer code reviews",
+    agencies: "Assigned from available bench, often juniors behind an account manager",
+    divanex: "Senior full-stack engineers and architects who design and write the code directly",
+  },
+  {
+    vector: "100% Code ownership",
+    freelancers: "Usually yours, provided repo and cloud credentials are fully handed over",
+    agencies: "Proprietary agency frameworks, locked hosting, or restrictive IP clauses",
+    divanex: "Day-1 repository access in your Git org & cloud accounts with full IP rights",
+  },
+  {
+    vector: "Progress & transparency",
+    freelancers: "Varies widely; updates can stall when juggling multiple client gigs",
+    agencies: "Monthly slide deck status reports, with actual software shown near deadline",
+    divanex: "Fortnightly clickable staging builds, recorded video walkthroughs & direct Slack pod",
+  },
+  {
+    vector: "Post-launch support",
+    freelancers: "Often unavailable once committed to subsequent freelance engagements",
+    agencies: "Expensive monthly retainers and multi-day ticket queues",
+    divanex: "Same engineering team provides hypercare, uptime monitoring & quick bug fixes",
+  }
+];
 
 export default function AgencyVsFreelancerVsDivanex() {
   const { heading, items: comparisons } = useSection("why-us/comparison", {
     heading: DEFAULT_HEADING,
     items: DEFAULT_ITEMS,
   });
-
 
   return (
     <section className="py-20 relative bg-slate-50/50 border-b border-slate-200 overflow-hidden">
@@ -85,26 +72,33 @@ export default function AgencyVsFreelancerVsDivanex() {
             </div>
 
             <div className="divide-y divide-slate-100">
-              {comparisons.map((row, idx) => (
-                <div
-                  key={idx}
-                  className="grid grid-cols-4 p-5 items-center hover:bg-slate-50 transition-colors text-xs sm:text-sm"
-                >
-                  <div className="font-semibold text-slate-900 pr-4">{row.vector}</div>
-                  <div className="text-slate-600 text-center flex items-center justify-center gap-1.5 px-2 font-normal">
-                    <Minus className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                    <span>{row.freelancers}</span>
+              {comparisons.map((row: any, idx: number) => {
+                const vectorLabel = row.vector || row.feature;
+                const freelancerText = row.freelancers;
+                const agencyText = row.agencies || row.traditional;
+                const divanexText = row.divanex;
+
+                return (
+                  <div
+                    key={idx}
+                    className="grid grid-cols-4 p-5 items-center hover:bg-slate-50 transition-colors text-xs sm:text-sm"
+                  >
+                    <div className="font-semibold text-slate-900 pr-4">{vectorLabel}</div>
+                    <div className="text-slate-600 text-center flex items-center justify-center gap-1.5 px-2 font-normal">
+                      <Minus className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                      <span>{freelancerText}</span>
+                    </div>
+                    <div className="text-slate-600 text-center flex items-center justify-center gap-1.5 px-2 font-normal">
+                      <X className="w-3.5 h-3.5 text-rose-500 shrink-0" />
+                      <span>{agencyText}</span>
+                    </div>
+                    <div className="text-sky-900 font-medium text-center flex items-center justify-center gap-1.5 px-2 bg-sky-50/80 py-2 rounded-lg border border-sky-200">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 font-bold" />
+                      <span>{divanexText}</span>
+                    </div>
                   </div>
-                  <div className="text-slate-600 text-center flex items-center justify-center gap-1.5 px-2 font-normal">
-                    <X className="w-3.5 h-3.5 text-rose-500 shrink-0" />
-                    <span>{row.agencies}</span>
-                  </div>
-                  <div className="text-sky-900 font-medium text-center flex items-center justify-center gap-1.5 px-2 bg-sky-50/80 py-2 rounded-lg border border-sky-200">
-                    <Check className="w-4 h-4 text-emerald-600 shrink-0 font-bold" />
-                    <span>{row.divanex}</span>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

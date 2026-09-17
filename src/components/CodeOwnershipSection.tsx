@@ -83,15 +83,15 @@ export default function CodeOwnershipSection() {
         <div className="reveal-init text-center max-w-3xl mx-auto space-y-4 mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-mono font-bold text-emerald-800 shadow-2xs">
             <Lock className="w-3.5 h-3.5 text-emerald-600" />
-            <span>100% INTELLECTUAL PROPERTY PLEDGE</span>
+            <span>DAY-1 CODE OWNERSHIP // ZERO VENDOR LOCK-IN</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] font-semibold tracking-tight text-slate-900">
-            You Own <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0f7670] to-[#5c9556] font-bold">Everything</span> We Build
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
+            You Own the Product. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0f7670] to-[#5c9556] font-extrabold">Not Us.</span>
           </h2>
 
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
-            No proprietary lock-in, no hostage codebases, no hidden maintenance traps. From day one of milestone completion, every single asset belongs 100% to your company.
+          <p className="text-slate-600 text-sm sm:text-base md:text-lg leading-relaxed font-normal">
+            From the first milestone, your Git repository, cloud accounts, database models, and design assets belong 100% to your company. No hostage code, no exit fees, and zero vendor lock-in.
           </p>
         </div>
 
@@ -179,10 +179,10 @@ export default function CodeOwnershipSection() {
 
               <div>
                 <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 leading-tight">
-                  Why Code Ownership Is Our Core Standard
+                  What You Receive on Day One
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed mt-1.5">
-                  Traditional agencies often retain code in private repositories or charge heavy exit fees. We believe your software cannot scale on rented foundations.
+                  Traditional agencies often retain code in private repositories or charge exit fees. We hand you full ownership from the first milestone.
                 </p>
               </div>
 
@@ -190,31 +190,39 @@ export default function CodeOwnershipSection() {
               <div className="p-3 rounded-xl bg-white/95 border border-emerald-200/80 shadow-2xs flex items-center gap-2.5">
                 <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
                 <p className="text-emerald-950 font-semibold text-xs leading-snug">
-                  You receive full intellectual property rights, root cloud access, and complete repository ownership.
+                  Complete repository admin rights, direct cloud accounts, and 100% intellectual property transfer.
                 </p>
               </div>
 
-              {/* 5 Concrete Guarantees */}
+              {/* Complete 7 Concrete Ownership Deliverables */}
               <div className="space-y-2 pt-1 text-xs font-mono">
                 <div className="flex items-start gap-2 text-slate-700">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>Direct GitHub / GitLab organization root admin invite</span>
+                  <span><strong>Source Code:</strong> Clean, modular, fully typed TypeScript / Python</span>
                 </div>
                 <div className="flex items-start gap-2 text-slate-700">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>Cloud accounts &amp; billing created directly in your name</span>
+                  <span><strong>Git Repository:</strong> Full commit history transferred to your organization</span>
                 </div>
                 <div className="flex items-start gap-2 text-slate-700">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>Readable, fully-typed standard codebases without locked blobs</span>
+                  <span><strong>Database:</strong> PostgreSQL schemas, migrations &amp; automated seeders</span>
                 </div>
                 <div className="flex items-start gap-2 text-slate-700">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>PostgreSQL schemas, ORM migrations &amp; automated seeders</span>
+                  <span><strong>Cloud Accounts:</strong> AWS / GCP / Vercel created directly in your name</span>
                 </div>
                 <div className="flex items-start gap-2 text-slate-700">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>OpenAPI Swagger specifications &amp; developer runbooks</span>
+                  <span><strong>Design Files:</strong> Complete tokenized Figma design system &amp; components</span>
+                </div>
+                <div className="flex items-start gap-2 text-slate-700">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>Documentation:</strong> OpenAPI Swagger specs &amp; developer runbooks</span>
+                </div>
+                <div className="flex items-start gap-2 text-slate-700">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>Deployment Access:</strong> Root API keys, DNS, SSL &amp; production secrets</span>
                 </div>
               </div>
 

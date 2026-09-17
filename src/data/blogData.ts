@@ -48,7 +48,7 @@ export const initialBlogPosts: BlogPost[] = [
     id: "post-1",
     slug: "hyperlocal-delivery-dispatch-algorithms-gps-telemetry",
     title: "Engineering Sub-15 Minute Hyperlocal Delivery: Dispatch Algorithms, Driver Batching & Live GPS Telemetry",
-    subtitle: "How we engineered the real-time dispatch core for Fynito, processing 10,000+ hourly orders with dynamic geofencing.",
+    subtitle: "How we engineered the real-time dispatch core for Fynito, achieving high-throughput rider matching with dynamic geofencing.",
     excerpt: "A deep dive into building real-time dispatch systems: sub-second driver matching using H3 hexagonal spatial indexing, WebSocket order states, and battery-optimized mobile GPS telemetry.",
     coverImage: "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=1200&q=80",
     category: "Food Delivery & Logistics",
@@ -138,7 +138,7 @@ Continuously polling GPS on mobile devices burns rider batteries in under 4 hour
     id: "post-2",
     slug: "automating-coliving-operations-visual-bed-allocation-smart-meters",
     title: "Automating Coliving & Student Housing: Visual Bed Allocations, Smart Electricity Meters & AutoPay Invoicing",
-    subtitle: "Architecting the Our PG multi-property coliving operating system managing 10,000+ residents across 15 cities.",
+    subtitle: "Architecting the Our PG multi-property coliving operating system with automated billing and visual occupancy matrix.",
     excerpt: "Learn how we built visual 2D floor plans with live bed availability, MQTT IoT smart energy sub-metering, and automated UPI recurring rent collection engines.",
     coverImage: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=1200&q=80",
     category: "PropTech & SaaS",
@@ -220,8 +220,8 @@ By integrating UPI 2.0 Recurring Mandates and payment webhooks, Our PG automated
     coverImage: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1200&q=80",
     category: "E-Commerce & Retail",
     author: {
-      name: "Divanex Digital Commerce Pod",
-      role: "E-Commerce & Cloud Architecture, Divanex",
+      name: "Divya N.",
+      role: "Lead E-Commerce Architect, Divanex",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80"
     },
     publishedAt: "2026-09-06",
@@ -443,14 +443,14 @@ If user sentiment drops below critical threshold, or if financial action exceeds
   {
     id: "post-7",
     slug: "modern-hospital-hmis-architecture-abdm-hl7-fhir",
-    title: "Modern Hospital HMIS Architecture: ABDM Milestone 3 Compliance, HL7 FHIR v4 & Zero-Downtime EMR",
+    title: "Modern Hospital HMIS Architecture: ABDM Milestone 3 Readiness, HL7 FHIR v4 & Zero-Downtime EMR",
     subtitle: "Engineering secure, paperless digital workflows for multi-specialty hospitals with Ayushman Bharat integration.",
-    excerpt: "A comprehensive architectural guide to building ABDM-certified healthcare information systems, LOINC/SNOMED diagnostic interfaces, and fast cloud PACS DICOM viewers.",
+    excerpt: "A comprehensive architectural guide to building ABDM-aligned healthcare information systems, LOINC/SNOMED diagnostic interfaces, and fast cloud PACS DICOM viewers.",
     coverImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
     category: "Healthcare HMIS",
     author: {
-      name: "Divanex HealthTech Pod",
-      role: "HealthTech Systems & Compliance, Divanex",
+      name: "Aarav M.",
+      role: "Principal HealthTech Architect, Divanex",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80"
     },
     publishedAt: "2026-08-15",
@@ -470,7 +470,7 @@ If user sentiment drops below critical threshold, or if financial action exceeds
 
 Under India's Ayushman Bharat Digital Mission (ABDM), healthcare institutions must eliminate manual paper prescriptions and implement standardized, interoperable electronic health records.
 
-Divanex builds end-to-end ABDM M1, M2, and M3 compliant hospital platforms enabling:
+Divanex builds end-to-end ABDM M1, M2, and M3 aligned hospital platforms enabling:
 - Instant patient registration using **ABHA QR code scanning**.
 - Cryptographically signed electronic health records (EHR) pushed to national health lockers.
 - Consent-driven clinical data exchange between hospitals, clinics, and diagnostic labs.
@@ -540,8 +540,8 @@ Our Go payment orchestration engine executes atomic multi-party ledger transfers
     coverImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
     category: "Cloud & DevOps",
     author: {
-      name: "Divanex Cloud & DevOps Pod",
-      role: "Infrastructure & Site Reliability, Divanex",
+      name: "Kunal R.",
+      role: "Lead Site Reliability Engineer, Divanex",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
     },
     publishedAt: "2026-07-30",

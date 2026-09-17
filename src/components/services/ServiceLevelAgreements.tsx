@@ -6,7 +6,7 @@ import { Shield, CheckCircle } from "lucide-react";
 
 /** What this section was written with. A stored record replaces it field by field. */
 const DEFAULT_HEADING = {
-  "eyebrow": "Guaranteed Incident Response",
+  "eyebrow": "Incident Response Framework",
   "title": "Production Service Level",
   "highlight": "Agreements (SLAs)",
   "description": "Contractual uptime, round-the-clock monitoring, and strict ticket response times backed by financial remedies and dedicated senior engineers."

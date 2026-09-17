@@ -27,9 +27,9 @@ export const servicesData: ServiceItem[] = [
       "Real-time Doctor Appointment Scheduling & Patient Mobile App",
       "Diagnostic Lab Management (LIS) & DICOM Imaging Integration",
       "Automated Pharmacy Inventory, Billing & Insurance Claims",
-      "HIPAA, ABDM & ISO 27001 Data Privacy Compliance"
+      "HIPAA-Ready, ABDM-Aligned & ISO 27001–Aligned Architecture"
     ],
-    deliverables: ["Full HMIS Architecture", "Doctor & Patient Web/Mobile Portals", "DICOM/Lab API Handlers", "Compliance Audit Certificate"],
+    deliverables: ["Full HMIS Architecture", "Doctor & Patient Web/Mobile Portals", "DICOM/Lab API Handlers", "Security & HIPAA-Readiness Audit Dossier"],
     idealFor: "Multi-specialty Hospitals, Polyclinic Chains, Diagnostic Labs & Telehealth Startups"
   },
   {
@@ -67,7 +67,7 @@ export const servicesData: ServiceItem[] = [
       "Automated KYC/AML Verification with Facial Biometrics & OCR",
       "Lending & Micro-Finance Engine with Automated Credit Scoring",
       "Multi-Gateway Payment Switch (Stripe, UPI, Razorpay, Swift)",
-      "PCI-DSS–Aware Payment Architecture & SOC-2 Compliant Encryption Architecture"
+      "PCI-DSS–Aware Payment Architecture & SOC 2–Aligned Encryption Architecture"
     ],
     deliverables: ["Double-Entry Ledger Engine", "KYC Automated Pipeline", "Payment Gateway Switch", "Security Audit Package"],
     idealFor: "Neo-Banks, NBFCs, Lending Platforms, Forex Brokers & Payment Gateways"
@@ -261,7 +261,7 @@ export const servicesData: ServiceItem[] = [
     title: "Cybersecurity & Zero-Trust Defense",
     tagline: "Penetration Testing, SOC-2 Hardening & Threat Intelligence",
     description:
-      "Institutional perimeter defenses and automated application security audits. We harden codebases against OWASP Top 10 exploits, deploy zero-trust RBAC IAM, and fast-track SOC-2 / ISO 27001 compliance certifications.",
+      "Institutional perimeter defenses and automated application security audits. We harden codebases against OWASP Top 10 exploits, deploy zero-trust RBAC IAM, and prepare your systems for SOC 2 and ISO 27001 readiness.",
     iconName: "ShieldCheck",
     color: "#000838",
     gradient: "from-blue-950/20 via-sky-600/10 to-transparent",
@@ -269,11 +269,11 @@ export const servicesData: ServiceItem[] = [
       "Full SAST/DAST Penetration Testing (Web, Mobile & API)",
       "Zero-Trust IAM, MFA & Role-Based Access Control (RBAC)",
       "Cloud Security Posture Management (CSPM) & Cloudflare WAF",
-      "SOC 2–Aligned, ISO 27001 & GDPR Regulatory Fast-Tracking",
+      "SOC 2–Aligned, ISO 27001 & GDPR Architecture Readiness",
       "Real-time SIEM Threat Intelligence & Automated Anomaly Blocking",
       "Disaster Recovery, Automated Backups & Incident Response Runbooks"
     ],
-    deliverables: ["Penetration Audit Report", "Remediation Code Fixes", "WAF Ruleset Configuration", "Compliance Readiness Certificate"],
+    deliverables: ["Penetration Audit Report", "Remediation Code Fixes", "WAF Ruleset Configuration", "Security & Readiness Dossier"],
     idealFor: "Fintechs, Healthcare Portals, Enterprise SaaS & High-Security Government Systems"
   },
   {
@@ -351,7 +351,7 @@ export const servicesData: ServiceItem[] = [
       "Multi-Language & Multi-Region Dynamic Localization Engine",
       "High-Resolution Video & Audio Media Streaming CDN Pipeline",
       "Granular Role Permissions, Editorial Workflows & Live Preview",
-      "Programmatic SEO Engine Generating 10,000+ Structured Pages"
+      "Programmatic SEO Engine & Structured Data Architecture"
     ],
     deliverables: ["Headless CMS Architecture", "Next.js Frontend", "Global CDN Configuration", "Editorial Workflow Specs"],
     idealFor: "Digital Publishers, News Networks, Media Companies & Global Marketing Teams"
@@ -448,7 +448,7 @@ export const servicesData: ServiceItem[] = [
     features: [
       "AI-Powered Contract Clause Analysis & Automated Risk Redlining",
       "Automated Legal Document Drafting & Dynamic Template Assembly",
-      "Cryptographic E-Signature & Tamper-Proof Audit Trail Compliance",
+      "Cryptographic E-Signature & Tamper-Proof Audit Trail Verification",
       "Law Firm Matter Management, Time Tracking & LEDES Billing",
       "Secure Client Virtual Data Rooms with Granular Watermarking",
       "Automated Court Calendar Synchronization & Deadline Calculations"
@@ -481,12 +481,12 @@ export const servicesData: ServiceItem[] = [
     title: "EnergyTech & Smart Grid Systems",
     tagline: "OCPP 2.0.1 EV Charging Hubs, Microgrid Telemetry & Carbon Accounting",
     description:
-      "Mission-critical energy management platforms, distributed smart-grid load balancers, OCPP 2.0.1-compliant EV charging network orchestrators, and automated ESG carbon compliance accounting pipelines.",
+      "Mission-critical energy management platforms, distributed smart-grid load balancers, OCPP 2.0.1-aligned EV charging network orchestrators, and automated ESG carbon accounting pipelines.",
     iconName: "BatteryCharging",
     color: "#5c9556",
     gradient: "from-emerald-600/20 via-green-500/10 to-transparent",
     features: [
-      "OCPP 1.6J / 2.0.1 Compliant EV Charging Station Management System (CSMS)",
+      "OCPP 1.6J / 2.0.1 Aligned EV Charging Station Management System (CSMS)",
       "Real-Time Distributed Microgrid Load Balancing & Peak Shaving Algorithms",
       "Solar PV & BESS Battery Energy Storage System Telemetry HUD",
       "Automated ESG Carbon Footprint Accounting & Scope 1/2/3 Audit Trails",

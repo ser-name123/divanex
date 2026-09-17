@@ -12,17 +12,17 @@ import {
 
 /** What this section was written with. A stored record replaces it field by field. */
 const DEFAULT_HEADING = {
-  "eyebrow": "CROSS-INDUSTRY DOMINANCE",
+  "eyebrow": "CROSS-INDUSTRY EXPERTISE",
   "title": "Delivering Impact Across",
   "highlight": "Diverse Verticals",
   "description": "Our architectural primitives power mission-critical platforms across heavily regulated, high-concurrency industries."
 };
 
 const DEFAULT_ITEMS = [
-    { name: "FinTech & Payments", stat: "$420M+", label: "Transaction Volume Processed", icon: DollarSign },
-    { name: "HealthTech & Telehealth", stat: "180k+", label: "Patient Consultations & Telehealth", icon: Activity },
-    { name: "E-Commerce & Retail", stat: "+280%", label: "Conversion Rate Uplift", icon: ShoppingCart },
-    { name: "Supply Chain & Logistics", stat: "99.99%", label: "GPS Telemetry Tracking Uptime", icon: Truck }
+    { name: "FinTech & Payments", stat: "Enterprise", label: "Multi-Currency & High-Throughput Gateways", icon: DollarSign },
+    { name: "HealthTech & Telehealth", stat: "HIPAA-Ready", label: "Patient Portals & Encrypted EHR Workflows", icon: Activity },
+    { name: "E-Commerce & Retail", stat: "Sub-Second", label: "High-Conversion Multi-Vendor Architecture", icon: ShoppingCart },
+    { name: "Supply Chain & Logistics", stat: "Real-Time", label: "Live Telemetry & Fleet Route Optimization", icon: Truck }
   ];
 
 export default function IndustryImpactStats() {

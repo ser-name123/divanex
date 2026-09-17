@@ -22,7 +22,7 @@ const DEFAULT_ITEMS = [
     {
       icon: Database,
       title: "Isolated PostgreSQL Schema Tenancy",
-      desc: "Every tenant gets dedicated database schema isolation, preventing cross-tenant data leakage and ensuring GDPR & HIPAA compliance.",
+      desc: "Every tenant gets dedicated database schema isolation, preventing cross-tenant data leakage with GDPR & HIPAA-ready privacy safeguards.",
       stat: "Zero Data Leakage"
     },
     {

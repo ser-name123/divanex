@@ -46,7 +46,6 @@ const COLUMN_SPAN: Record<number, string> = {
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const [currentTime, setCurrentTime] = useState("");
   const router = useRouter();
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterBusy, setNewsletterBusy] = useState(false);
@@ -67,17 +66,6 @@ export default function Footer() {
   const footer = useNavigation().footer;
   const footerColumns = visibleGroups(footer.columns);
   const bottomLinks = visibleLinks(footer.bottomLinks);
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const utcString = now.toUTCString().slice(17, 25);
-      setCurrentTime(utcString);
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -165,7 +153,7 @@ export default function Footer() {
 
               <div className="flex flex-wrap items-center gap-4 text-[11px] font-mono text-slate-500 pt-1">
                 <span className="flex items-center gap-1 text-emerald-700 font-semibold">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> 4,800+ CTOs & Founders
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Join our engineering newsletter
                 </span>
                 <span className="flex items-center gap-1">
                   <Lock className="w-3.5 h-3.5 text-sky-600" /> 100% Zero-Spam Guarantee
@@ -214,50 +202,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 2. REAL-TIME GLOBAL MULTI-REGION TELEMETRY HUD BAR */}
-        <div className="mb-8 rounded-2xl p-4 sm:p-5 bg-white border border-slate-200/90 font-mono text-xs flex flex-wrap items-center justify-between gap-4 shadow-xs">
-          {/* Status Indicator */}
-          <div className="flex items-center gap-2.5">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600" />
-            </span>
-            <span className="text-slate-900 font-bold tracking-wider uppercase text-[11px]">
-              GLOBAL INGRESS CLUSTERS:
-            </span>
-            <span className="px-2 py-0.5 rounded bg-emerald-50 border border-emerald-300 text-emerald-700 text-[10px] font-bold">
-              100% OPERATIONAL
-            </span>
-          </div>
-
-          {/* Region Node Latencies */}
-          <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-[11px] text-slate-600">
-            <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
-              <span>US-East (N. Virginia):</span>
-              <span className="text-emerald-600 font-bold">12ms</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
-              <span>EU-Central (Frankfurt):</span>
-              <span className="text-emerald-600 font-bold">24ms</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
-              <span>AP-South (Mumbai):</span>
-              <span className="text-emerald-600 font-bold">4ms</span>
-            </div>
-          </div>
-
-          {/* Live UTC Telemetry Time Clock */}
-          <div className="flex items-center gap-2 text-[11px] text-sky-700 font-semibold">
-            <Clock className="w-3.5 h-3.5 text-sky-600" />
-            <span className="text-slate-400">UTC:</span>
-            <span className="font-bold">{currentTime || "18:59:00"}</span>
-          </div>
-        </div>
-
-        {/* 3. COMPREHENSIVE 5-COLUMN ENTERPRISE NAVIGATION MATRIX */}
+        {/* 2. COMPREHENSIVE 5-COLUMN ENTERPRISE NAVIGATION MATRIX */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-5 xl:gap-6 pb-8 border-b border-slate-200">
           
           {/* Column 1: Brand DNA, Mission, Direct Comms (4 Cols) */}

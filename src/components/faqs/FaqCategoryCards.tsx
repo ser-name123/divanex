@@ -16,7 +16,7 @@ const DEFAULT_ITEMS = [
     { icon: FileText, title: "IP & Contracts", desc: "Source code ownership, Git repo transfer, and NDA agreements." },
     { icon: DollarSign, title: "Pricing & Invoicing", desc: "Milestone-gated payments, wire transfers, and currency support." },
     { icon: Clock, title: "Sprint Execution", desc: "14-day cadence, daily standups, and bi-weekly live staging demos." },
-    { icon: ShieldCheck, title: "Security & SLAs", desc: "OWASP compliance, SOC 2 alignment, and uptime guarantees." },
+    { icon: ShieldCheck, title: "Security & SLAs", desc: "OWASP standards, security hardening, and resilient high-availability SLAs." },
     { icon: Cpu, title: "Tech Stack & Code", desc: "Next.js, React Native, Python, Go, and PostgreSQL architecture." },
     { icon: Headphones, title: "Post-Launch Hypercare", desc: "30-day warranty, retainer options, and emergency incident SLA." }
   ];

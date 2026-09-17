@@ -155,9 +155,9 @@ export const DEFAULT_NAVIGATION: SiteNavigation = {
             id: "mega-faqs",
             label: "Client FAQs & IP Ownership",
             href: "/faqs",
-            description: "100% Day-1 code transfer, milestone pricing, strict NDAs & warranties",
+            description: "Full IP code transfer, milestone pricing, strict NDAs & hypercare support",
             icon: "HelpCircle",
-            badge: "100% IP Transfer",
+            badge: "Full IP Transfer",
           },
           {
             id: "mega-security",
@@ -176,7 +176,7 @@ export const DEFAULT_NAVIGATION: SiteNavigation = {
     megaMenuPromoCtaLabel: "Book a Consultation",
     megaMenuPromoCtaHref: "/contact",
     megaMenuStatusText: "ALL SYSTEMS PRODUCTION READY",
-    megaMenuStatusDetail: "99.99% SLA",
+    megaMenuStatusDetail: "High Availability",
     megaMenuQuickLinks: [
       { id: "quick-cases", label: "View Case Studies", href: "/portfolio" },
     ],
@@ -192,7 +192,7 @@ export const DEFAULT_NAVIGATION: SiteNavigation = {
   },
   footer: {
     tagline:
-      "Engineering across 5 core disciplines: Custom SaaS, AI & Automation, Web & Mobile Apps, Enterprise Business Software, and Healthcare / ERP / Marketplace Systems with 100% code ownership.",
+      "Engineering across 5 core disciplines: Custom SaaS, AI & Automation, Web & Mobile Apps, Enterprise Business Software, and Healthcare / ERP / Marketplace Systems with complete code ownership & IP assignment.",
     columns: [
       {
         id: "col-services",
@@ -299,7 +299,7 @@ export const DEFAULT_NAVIGATION: SiteNavigation = {
             id: "f-portfolio",
             label: "Case Studies & ROI",
             href: "/portfolio",
-            badge: "50+ BUILDS",
+            badge: "FEATURED BUILDS",
           },
           {
             id: "f-reviews",
@@ -309,7 +309,7 @@ export const DEFAULT_NAVIGATION: SiteNavigation = {
           },
           {
             id: "f-ownership",
-            label: "100% Code Ownership",
+            label: "Full Code Ownership",
             href: "/why-us",
             badge: "DAY 1",
           },
@@ -382,7 +382,7 @@ export const DEFAULT_NAVIGATION: SiteNavigation = {
     ],
     copyrightName: "Divanex Technologies",
     copyrightText: "© {year} {name}. All rights reserved.",
-    badges: ["SOC 2–Aligned", "ISO 27001 Aligned", "HIPAA Ready", "GDPR Compliant"],
+    badges: ["SOC 2–Aligned", "ISO 27001 Aligned", "HIPAA Ready", "GDPR Aligned"],
   },
 };
 

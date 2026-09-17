@@ -48,11 +48,11 @@ const DEFAULT_ITEMS = [
     },
     {
       icon: ShieldCheck,
-      title: "Regulatory Compliance Suite",
+      title: "Regulatory & Compliance Readiness",
       badge: "GLOBAL STANDARDS",
-      description: "Engineered from the ground up to comply with the most stringent global healthcare, fintech, and data sovereignty compliance mandates.",
+      description: "Architectures engineered to align with global healthcare, fintech, and data sovereignty regulatory frameworks.",
       points: [
-        "HIPAA & ABDM Health ID compliance ready",
+        "HIPAA-ready architecture & ABDM-aligned workflows",
         "PCI-DSS–aware tokenized payment gateways",
         "ISO 27001–Aligned Information Security Controls",
         "GDPR & CCPA strict right-to-be-forgotten"

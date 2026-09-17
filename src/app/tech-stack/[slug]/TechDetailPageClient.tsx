@@ -484,7 +484,7 @@ export default function TechDetailPageClient({ tech }: TechDetailPageClientProps
                   href="/tech-stack"
                   className="w-full py-3 px-6 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 bg-white hover:bg-sky-50 border border-slate-200 hover:border-sky-300 transition-colors flex items-center justify-center gap-2 shadow-2xs"
                 >
-                  <span>Explore Other 50+ Technologies</span>
+                  <span>Explore All Technologies</span>
                   <ArrowUpRight className="w-4 h-4 text-slate-400" />
                 </Link>
               </div>

@@ -924,7 +924,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
                     href="/contact"
                     className="block text-center text-xs text-slate-600 hover:text-sky-700 font-semibold transition-colors pt-1 cursor-pointer"
                   >
-                    Or Discuss Scope & ROI →
+                    Book a Consultation →
                   </Link>
                 </div>
               </div>

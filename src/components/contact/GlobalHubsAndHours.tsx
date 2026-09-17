@@ -6,44 +6,36 @@ import { Building2 } from "lucide-react";
 
 /** What this section was written with. A stored record replaces it field by field. */
 const DEFAULT_HEADING = {
-  "eyebrow": "Where We Work",
-  "title": "Our Engineering Hub &",
-  "highlight": "Operating Hours",
-  "description": "One team, one office, working with clients across time zones. Add a row here for every location you actually operate from."
+  "eyebrow": "GLOBAL REACH // LOCAL OVERLAP",
+  "title": "Global Client Coverage &",
+  "highlight": "Regional Desks",
+  "description": "Centralized engineering delivered from our Jaipur HQ, with dedicated representative client coverage across APAC, MENA, and North America."
 };
 
-/*
- * One hub, because there is one office.
- *
- * This listed four — San Francisco, London, Dubai and Delhi/Bengaluru — with
- * opening hours and coverage areas for each. A prospective client reads that
- * as four staffed offices, and the contact page's own address said something
- * different again. Add a row per location you actually operate from.
- */
 const DEFAULT_ITEMS = [
   {
-    city: "Jaipur, Rajasthan (India - HQ)",
+    city: "Jaipur — Engineering HQ (India)",
     tz: "IST (UTC+5:30)",
     hours: "10:00 AM - 08:00 PM",
-    coverage: "Office 104, Vaishali Tower 2nd, Nursery Circle, Vaishali Nagar Jaipur 302021 • Phone: +91-6375073511 • Mail: business@divanextechnologies.com"
+    coverage: "Office 104, Vaishali Tower 2nd, Nursery Circle, Vaishali Nagar, Jaipur 302021 • Phone: +91-6375073511 • Mail: business@divanextechnologies.com"
   },
   {
-    city: "Tsuen Wan (Hong Kong Hub)",
+    city: "Hong Kong — APAC Client Coverage",
     tz: "HKT (UTC+8:00)",
     hours: "09:00 AM - 07:00 PM",
-    coverage: "FLAT/RM E (36) ON 3RD FLOOR SUPERLUCK INDUSTRIAL CENTRE PHASE 2, 57 SHA TSUI ROAD TSUEN WAN, Hong Kong • Phone: +852-90270926"
+    coverage: "FLAT/RM E (36) 3/F Superluck Industrial Centre Phase 2, 57 Sha Tsui Rd, Tsuen Wan, Hong Kong • Phone: +852-90270926"
   },
   {
-    city: "Dubai Media City (UAE Hub)",
+    city: "Dubai — MENA Client Coverage",
     tz: "GST (UTC+4:00)",
     hours: "10:00 AM - 07:00 PM",
-    coverage: "C8, Dubai Media City, Dubai, United Arab Emirates • Middle East & GCC Operations"
+    coverage: "Building C8, Dubai Media City, Dubai, United Arab Emirates • Direct Line: +91-6375073511"
   },
   {
-    city: "Newmarket, Ontario (Canada Hub)",
+    city: "Canada — North America Client Coverage",
     tz: "EST (UTC-5:00)",
     hours: "09:00 AM - 06:00 PM",
-    coverage: "105 Sawmill Valley Dr, Newmarket, ON, Canada • North America Client Relations"
+    coverage: "105 Sawmill Valley Dr, Newmarket, ON L3X 1S4, Canada • Direct Line: +91-6375073511"
   }
 ];
 

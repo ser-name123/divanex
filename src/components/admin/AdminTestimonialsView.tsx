@@ -44,7 +44,7 @@ export default function AdminTestimonialsView() {
     headline: "",
     quote: "",
     projectType: "Enterprise SaaS",
-    metricsAchieved: "Sub-35ms query latency at 14,000+ tenants",
+    metricsAchieved: "Sub-35ms query latency at multi-tenant scale",
     verifiedBadge: "Clutch Verified 5.0",
     avatarText: "CL",
     avatarBg: "bg-blue-600"
@@ -474,7 +474,7 @@ export default function AdminTestimonialsView() {
                   type="text"
                   value={formData.metricsAchieved || ""}
                   onChange={(e) => setFormData({ ...formData, metricsAchieved: e.target.value })}
-                  placeholder="e.g. Sub-35ms query latency at 14,000+ tenants"
+                  placeholder="e.g. Sub-35ms query latency at multi-tenant scale"
                   className="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-300 focus:bg-white focus:border-sky-500 text-slate-900 focus:outline-none"
                 />
               </div>

@@ -188,7 +188,7 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
             <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 space-y-1.5">
               <div className="flex justify-between text-xs font-mono">
                 <span className="text-slate-300">Monthly Rent Cycle Automation</span>
-                <span className="text-emerald-400 font-bold">₹45 Cr+ Settled</span>
+                <span className="text-emerald-400 font-bold">Automated Settlement Engine</span>
               </div>
               <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
                 <div className="w-[98%] h-full bg-blue-500" />
@@ -203,7 +203,7 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
               <span>INTERACTIVE BED MATRIX &amp; AUTOPAY</span>
             </div>
             <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              85,000+ Coliving Beds Digitized Across 420+ Properties
+              Enterprise Coliving &amp; Bed Matrix OS Across Multi-City Properties
             </h4>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
               Eliminated manual registers and double bookings with a real-time visual floor grid, instant Aadhaar biometric KYC, and automated recurring WhatsApp AutoPay billing.
@@ -332,7 +332,7 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
               <span>HARDWARE TELEMETRY &amp; DRIVER APP</span>
             </div>
             <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              Connected EV Charging Network Across 50+ Commercial Fast Chargers
+              Connected EV Charging Network &amp; OCPP 2.0.1 Telemetry Engine
             </h4>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
               Standardized heterogeneous multi-brand EVSE hardware through a universal OCPP 2.0.1 WebSocket broker, enabling instant QR scan-to-charge in 2.4 seconds with real-time electrical telemetry.
@@ -359,7 +359,7 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
                 <HeartPulse className="w-4 h-4 text-cyan-400" />
                 <span className="font-bold text-sm text-white font-mono">DICOM Radiology &amp; FHIR Pipeline</span>
               </div>
-              <span className="text-xs text-cyan-400 font-mono font-bold">100% HIPAA Pass</span>
+              <span className="text-xs text-cyan-400 font-mono font-bold">HIPAA-Ready Architecture</span>
             </div>
 
             <div className="p-4 bg-slate-900 rounded-xl border border-slate-800 font-mono text-xs space-y-3">
@@ -378,7 +378,7 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
 
             <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 flex items-center justify-between text-xs font-mono">
               <span className="text-slate-300">Consultation Turnaround:</span>
-              <span className="text-cyan-400 font-bold">72 hours → 4.5 hours (16x Faster)</span>
+              <span className="text-cyan-400 font-bold">72 hours → 4.5 hours (Accelerated Workflow)</span>
             </div>
           </div>
 
@@ -388,15 +388,15 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
               <span>HL7 FHIR V4 &amp; ZERO-TRUST SECURITY</span>
             </div>
             <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              Enterprise HealthTech Platform Connecting 25+ Hospital Systems
+              Enterprise HealthTech &amp; Clinical Collaboration Architecture
             </h4>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              Constructed a zero-trust medical case collaboration pipeline with browser DICOM imaging viewer and ABDM / HIPAA compliance, cutting inter-hospital consultation turnaround from 72 hours to 4.5 hours.
+              Constructed a zero-trust clinical collaboration pipeline with in-browser DICOM radiology viewing, FHIR-compatible data models, and HIPAA-ready access controls.
             </p>
             <div className="flex flex-wrap gap-2 pt-2 font-mono text-xs">
-              <span className="px-3 py-1 rounded-lg bg-slate-800 text-slate-200 border border-slate-700">✓ 100% HIPAA &amp; ABDM Compliant</span>
-              <span className="px-3 py-1 rounded-lg bg-slate-800 text-slate-200 border border-slate-700">✓ 0 Security Incidents</span>
-              <span className="px-3 py-1 rounded-lg bg-slate-800 text-slate-200 border border-slate-700">✓ 15,000+ Consultations</span>
+              <span className="px-3 py-1 rounded-lg bg-slate-800 text-slate-200 border border-slate-700">✓ HIPAA-Ready Architecture</span>
+              <span className="px-3 py-1 rounded-lg bg-slate-800 text-slate-200 border border-slate-700">✓ ABDM-Aligned Workflows</span>
+              <span className="px-3 py-1 rounded-lg bg-slate-800 text-slate-200 border border-slate-700">✓ FHIR-Compatible Interoperability</span>
             </div>
           </div>
         </div>
@@ -437,7 +437,7 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
 
           <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 flex items-center justify-between text-xs font-mono">
             <span className="text-slate-300">Quote Turnaround Slashed:</span>
-            <span className="text-amber-400 font-bold">72 hrs → &lt; 3 sec (1,400x Faster)</span>
+            <span className="text-amber-400 font-bold">72 hrs → Sub-second Quotes</span>
           </div>
         </div>
 

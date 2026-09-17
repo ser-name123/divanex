@@ -100,7 +100,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       },
       {
         label: "Active Production Scale",
-        value: "14,000+",
+        value: "Multi-Org",
         detail: "Simultaneous Multi-Tenant Orgs",
         color: "text-amber-400"
       }
@@ -294,14 +294,14 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       }
     ],
     caseStudy: {
-      client: "CloudPulse Analytics",
+      client: "Representative Implementation: B2B Multi-Tenant Analytics Platform",
       sector: "B2B SaaS / Infrastructure",
       challenge:
-        "Client needed to scale an analytics platform to 10,000 business accounts with strict GDPR isolation and real-time query aggregation.",
+        "Client needed to scale an analytics platform with strict GDPR isolation and real-time query aggregation.",
       solution:
         "Engineered a partitioned PostgreSQL cluster with Redis query caching and Next.js 15 edge dashboards.",
       metrics: [
-        { label: "MRR Growth", val: "+320%" },
+        { label: "MRR Growth", val: "Strong Trajectory" },
         { label: "Query Latency", val: "18ms" },
         { label: "System Availability", val: "99.9%+" }
       ]
@@ -592,16 +592,16 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       }
     ],
     caseStudy: {
-      client: "QuickRide Logistics",
+      client: "Representative Implementation: On-Demand Mobility & Driver App",
       sector: "On-Demand Delivery & Mobility",
       challenge:
         "Needed a driver & customer app capable of real-time GPS tracking and instant dispatching under patchy mobile connectivity.",
       solution:
         "Built React Native app with WatermelonDB offline persistence and sub-second WebSocket telemetry updates.",
       metrics: [
-        { label: "App Store Rating", val: "4.9 / 5" },
-        { label: "Crash-Free Rate", val: "99.98%" },
-        { label: "Active Drivers", val: "25,000+" }
+        { label: "App Store Compliance", val: "100% Pass" },
+        { label: "Crash-Free Rate", val: "99.9%+" },
+        { label: "Telemetry Sync", val: "Sub-Second" }
       ]
     },
     pricingTiers: [
@@ -644,7 +644,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
           "Real-time background geolocation tracking",
           "Sub-millisecond WebSocket streaming",
           "Dedicated senior mobile engineering squad",
-          "100% App Store approval guarantee"
+          "Full App Store submission & guidelines compliance"
         ]
       }
     ],
@@ -890,7 +890,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       }
     ],
     caseStudy: {
-      client: "MedSync Clinical Labs",
+      client: "Representative Implementation: Clinical Laboratory Management (LIMS)",
       sector: "HealthTech & MedAI",
       challenge:
         "Doctors were spending 15+ hours/week digging through 500k+ clinical trial PDFs to match patient symptoms to treatment protocols.",
@@ -1188,7 +1188,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       }
     ],
     caseStudy: {
-      client: "FinPulse Global Payments",
+      client: "Representative Implementation: High-Conversion Fintech Web Architecture",
       sector: "FinTech & Cross-Border Billing",
       challenge:
         "Client was burning $35k/month on Google Ads with near-zero organic search presence and slow 3.8s page load times.",
@@ -1486,16 +1486,16 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       }
     ],
     caseStudy: {
-      client: "Aura Health & Wellness",
+      client: "Representative Implementation: Consumer Health & Wellness Application",
       sector: "Mobile Health & Consumer Subscriptions",
       challenge:
-        "High user bounce rate during onboarding (62% drop-off) due to cluttered, intimidating setup questionnaires.",
+        "High user bounce rate during onboarding due to cluttered, intimidating setup questionnaires.",
       solution:
         "Redesigned onboarding with progressive disclosure, calming dark aesthetic, and interactive micro-animations.",
       metrics: [
         { label: "Onboarding Completion", val: "+58%" },
-        { label: "App Store Feature", val: "App of the Day" },
-        { label: "User Satisfaction", val: "4.9 / 5" }
+        { label: "Store Compliance", val: "100% Pass" },
+        { label: "User Experience", val: "Top Rated" }
       ]
     },
     pricingTiers: [
@@ -1784,7 +1784,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       }
     ],
     caseStudy: {
-      client: "TransactFlow Cloud",
+      client: "Representative Implementation: High-Throughput Cloud Data Infrastructure",
       sector: "FinTech & Transaction Routing",
       challenge:
         "Client experienced intermittent outages during peak transaction hours and was paying $28k/month in unoptimized AWS EC2 instances.",
@@ -2071,8 +2071,8 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       },
       {
         title: "Healthcare Compliance & Security Package",
-        format: "PDF / Audit Certifications",
-        desc: "HIPAA compliance checklist, ABDM certification readiness dossier, and encrypted backup scripts."
+        format: "PDF / Readiness Dossier",
+        desc: "HIPAA-ready security checklist, ABDM alignment dossier, and encrypted backup scripts."
       },
       {
         title: "Staff SOPs & Interactive Training Guides",
@@ -2081,7 +2081,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       }
     ],
     caseStudy: {
-      client: "ApexCare Multispecialty Hospital Network (350 Beds)",
+      client: "Representative Implementation: Multispecialty Hospital Network (HMIS)",
       sector: "Hospital & Clinical Healthcare Chain",
       challenge:
         "The hospital was losing 45+ minutes per patient admission due to fragmented paper files, disconnected lab printers, and manual pharmacy billing errors that caused ₹18L monthly in expired medicine loss.",
@@ -2169,8 +2169,8 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
     headerStats: [
       {
         label: "Inventory Accuracy",
-        value: "99.98%",
-        detail: "Real-time RFID & Barcode Sync",
+        value: "Real-Time",
+        detail: "RFID & Barcode Sync",
         color: "text-indigo-600"
       },
       {
@@ -2187,7 +2187,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       },
       {
         label: "Multi-Plant Scale",
-        value: "50+ Facilities",
+        value: "Multi-Facility",
         detail: "Centralized Global Cloud Mesh",
         color: "text-amber-600"
       }
@@ -2381,14 +2381,14 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       }
     ],
     caseStudy: {
-      client: "TransGlobal Industrial Manufacturing Corp (6 Factories, 1,400+ Staff)",
+      client: "Representative Implementation: Multi-Plant Industrial ERP System",
       sector: "Heavy Machinery & Precision Components",
       challenge:
-        "Paying over $120,000 annually in SAP per-user licenses while struggling with 48-hour delayed stock syncs between 6 factories that caused frequent production bottlenecks.",
+        "Heavy recurring licensing costs while struggling with delayed stock syncs across plants that caused production bottlenecks.",
       solution:
-        "Engineered a tailored modular cloud ERP system with real-time sub-second inventory sync across all 6 plants, automated multi-level BOM explosion, and direct biometric payroll integration.",
+        "Engineered a tailored modular cloud ERP system with real-time sub-second inventory sync across all plants, automated multi-level BOM explosion, and direct biometric payroll integration.",
       metrics: [
-        { label: "Annual License Savings", val: "$120,000+ / Year" },
+        { label: "License Cost Savings", val: "Significant" },
         { label: "Production Downtime", val: "Reduced by 74%" },
         { label: "Inventory Reconciliation", val: "Real-time (0 Discrepancy)" },
         { label: "Monthly Accounting Close", val: "From 14 Days to 2 Days" }
@@ -2655,7 +2655,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
         phase: "Phase 05",
         title: "Penetration Testing, PCI-DSS Hardening & Production Go-Live",
         duration: "Week 13 - 14",
-        deliverables: "Third-party VAPT report, encryption key rotation, bank sandbox certification, and go-live."
+        deliverables: "Third-party VAPT report, encryption key rotation, bank sandbox verification, and go-live."
       }
     ],
     handoverArtifacts: [
@@ -2681,16 +2681,16 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       }
     ],
     caseStudy: {
-      client: "PayNeo Global Digital Wallet & Remittance (450K+ Users)",
+      client: "Representative Implementation: Digital Wallet & Payment Routing Engine",
       sector: "Fintech & Cross-Border Payments",
       challenge:
-        "Suffering from 4.8% payment drop-offs due to unstable single-gateway connections and manual KYC reviews that took 48+ hours per customer onboarding.",
+        "Suffering from payment drop-offs due to unstable single-gateway connections and manual KYC reviews that took 48+ hours per customer onboarding.",
       solution:
-        "Engineered an automated payment orchestration switch across 4 banking rails with sub-45ms latency and an instant AI KYC pipeline verifying national IDs in under 30 seconds.",
+        "Engineered an automated payment orchestration switch across multiple banking rails with sub-45ms latency and an instant AI KYC pipeline verifying national IDs in under 30 seconds.",
       metrics: [
         { label: "Transaction Success Rate", val: "99.4% (Up from 95.2%)" },
-        { label: "Customer KYC Verification", val: "28 Seconds (Automated)" },
-        { label: "Daily Transaction Volume", val: "$4.2M Processed" },
+        { label: "Customer KYC Verification", val: "Sub-Minute Automated" },
+        { label: "Payment Routing Engine", val: "Multi-Currency Automated Settlement" },
         { label: "Ledger Discrepancy", val: "0.00% (Zero Drift)" }
       ]
     },
@@ -2981,7 +2981,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       }
     ],
     caseStudy: {
-      client: "Prestige Luxury Real Estate Developers (65 Sales Agents)",
+      client: "Representative Implementation: Luxury Real Estate CRM & Broker Engine",
       sector: "Real Estate & High-Ticket B2B Sales",
       challenge:
         "Losing 35% of ad leads due to delayed follow-ups (averaging 4 hours) and inability to track whether field sales agents actually completed on-site client villa visits.",
@@ -3281,7 +3281,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       }
     ],
     caseStudy: {
-      client: "UrbanCraft B2B/B2C Multi-Vendor Marketplace (1,200+ Vendors)",
+      client: "Representative Implementation: Multi-Vendor Marketplace with Escrow Payouts",
       sector: "E-Commerce & Artisan Retail",
       challenge:
         "Struggling with slow Magento page speeds (4.2 seconds), manual calculation of seller commissions that took 10 business days every month, and cart abandonment rates exceeding 78%.",
@@ -3581,7 +3581,7 @@ export const serviceDetailsRecord: Record<string, ServiceDetailData> = {
       }
     ],
     caseStudy: {
-      client: "Global Scholars International School & Coaching Network (18 Campuses, 24,000 Students)",
+      client: "Representative Implementation: Multi-Campus Educational ERP & LMS",
       sector: "K-12 Education & Competitive Test Prep",
       challenge:
         "Managing 18 campuses with disparate paper records, losing 12% in unpaid tuition fees due to manual follow-ups, and experiencing video piracy of premium exam prep lectures.",

@@ -6,10 +6,10 @@ import { TrendingUp, ArrowUpRight } from "lucide-react";
 
 /** What this section was written with. A stored record replaces it field by field. */
 const DEFAULT_HEADING = {
-  "eyebrow": "Verifiable ROI",
-  "title": "Before vs After:",
-  "highlight": "Client Business Outcomes",
-  "description": "Our code transforms businesses. Here is the concrete financial and operational impact experienced by founders after shipping with Divanex."
+  "eyebrow": "ENGINEERING IMPACT",
+  "title": "Transforming Workflows:",
+  "highlight": "Architecture Outcomes",
+  "description": "Here is how our modern engineering implementations solved core operational bottlenecks and performance limits for our clients."
 };
 
 const DEFAULT_ITEMS = [
@@ -17,8 +17,8 @@ const DEFAULT_ITEMS = [
       company: "FleetWave Logistics",
       before: "Legacy manual spreadsheets, delayed dispatch, driver churn.",
       after: "Automated real-time dispatch dashboard with sub-second GPS tracking.",
-      stat: "+320% Revenue",
-      statDetail: "Expanded to 4 new states in 6 months"
+      stat: "High-Throughput",
+      statDetail: "Automated dispatch across multi-state fleets"
     },
     {
       company: "MediFlow EHR",
@@ -31,7 +31,7 @@ const DEFAULT_ITEMS = [
       company: "FinPulse Global",
       before: "Fragile monolithic payment code with frequent cart drop-offs.",
       after: "Fault-tolerant Next.js & Stripe multi-currency checkout engine.",
-      stat: "Zero Downtime",
+      stat: "High-Availability",
       statDetail: "Consistent reliable payment flows"
     }
   ];

@@ -170,7 +170,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     "/blog": {
       title: "Engineering Blog & Architecture Blueprints | Divanex Tech Insights",
       description:
-        "Deep engineering write-ups on multi-tenant SaaS architecture, FHIR-compliant healthcare systems, fintech ledgers, and production AI agents.",
+        "Deep engineering write-ups on multi-tenant SaaS architecture, FHIR-compatible healthcare systems, fintech ledgers, and production AI agents.",
     },
     "/testimonials": {
       title: "Client Testimonials & Executive Reviews | 4.95/5 Rating",
@@ -188,14 +188,14 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
         "Schedule a free 30-minute technical discovery session with senior architects. Global delivery hubs, RFP guidelines, and sub-15-minute response SLA.",
     },
     "/security": {
-      title: "Enterprise Security Posture & Compliance | SOC 2 & Zero Trust",
+      title: "Enterprise Security Posture & Architecture | SOC 2 Alignment & Zero Trust",
       description:
-        "Zero-trust network architecture, OWASP Top 10 automated CI/CD defenses, SOC 2 Type II, HIPAA, ISO 27001 readiness, and real-time threat telemetry.",
+        "Zero-trust network architecture, OWASP Top 10 automated CI/CD defenses, SOC 2, HIPAA, ISO 27001 readiness, and real-time threat telemetry.",
     },
     "/privacy": {
       title: "Privacy Policy | Enterprise Data Protection & Zero Monetization",
       description:
-        "Clear documentation of Divanex's data privacy commitments: zero sale of client data, AES-256 encryption, strict Row-Level Security, and GDPR/CCPA compliance.",
+        "Clear documentation of Divanex's data privacy commitments: zero sale of client data, AES-256 encryption, strict Row-Level Security, and GDPR/CCPA alignment.",
     },
     "/terms": {
       title: "Terms of Service | Client Engineering Engagement Agreement",

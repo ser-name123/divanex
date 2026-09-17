@@ -120,27 +120,27 @@ export interface ComparisonRow {
 
 export const comparisonData: ComparisonRow[] = [
   {
-    feature: "How often you see progress",
-    divanex: "A working staging link and a walkthrough every two weeks",
-    traditional: "Status decks for months, then a demo near the deadline",
-    freelancers: "Depends entirely on the week and how busy they are"
+    feature: "Senior engineers",
+    divanex: "Senior full-stack engineers and architects who design and write the code directly",
+    traditional: "Assigned from available bench, often juniors behind an account manager",
+    freelancers: "Single developer working solo, without peer code reviews"
   },
   {
-    feature: "Who writes the code",
-    divanex: "The senior engineers you met in the first call",
-    traditional: "Whoever is on the bench, often juniors behind an account manager",
-    freelancers: "One person, with nobody reviewing their work"
+    feature: "100% Code ownership",
+    divanex: "Day-1 repository access in your Git org & cloud accounts with full IP rights",
+    traditional: "Proprietary agency frameworks, locked hosting, or restrictive IP clauses",
+    freelancers: "Usually yours, provided repo and cloud credentials are fully handed over"
   },
   {
-    feature: "Who owns it at the end",
-    divanex: "You do, from day one — repository, cloud accounts and database",
-    traditional: "Licensing terms and hosting you cannot easily leave",
-    freelancers: "Usually yours, if the repository and credentials survive"
+    feature: "Progress & transparency",
+    divanex: "Fortnightly clickable staging builds, recorded video walkthroughs & direct Slack pod",
+    traditional: "Monthly slide deck status reports, with actual software shown near deadline",
+    freelancers: "Varies widely; updates can stall when juggling multiple client gigs"
   },
   {
-    feature: "What happens after launch",
-    divanex: "Monitoring, security patches and direct access to the engineers",
-    traditional: "A retainer and a ticket queue measured in days",
-    freelancers: "Often gone, or busy with the next client"
+    feature: "Post-launch support",
+    divanex: "Same engineering team provides hypercare, uptime monitoring & quick bug fixes",
+    traditional: "Expensive monthly retainers and multi-day ticket queues",
+    freelancers: "Often unavailable once committed to subsequent freelance engagements"
   }
 ];

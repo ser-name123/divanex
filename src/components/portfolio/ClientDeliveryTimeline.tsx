@@ -9,7 +9,7 @@ const DEFAULT_HEADING = {
   "eyebrow": "Velocity Track Record",
   "title": "Average Time-to-Production:",
   "highlight": "4 to 12 Weeks",
-  "description": "Across 50+ shipped production software releases, here is how our predictable sprint cadence transforms requirements into revenue-generating platforms."
+  "description": "Across our production software releases, here is how our predictable sprint cadence transforms requirements into high-performance platforms."
 };
 
 const DEFAULT_ITEMS = [

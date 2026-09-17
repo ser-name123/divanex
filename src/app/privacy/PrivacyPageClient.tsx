@@ -160,7 +160,7 @@ export default function PrivacyPageClient() {
                   </p>
                   <ul className="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
                     <li><strong>Data in Transit:</strong> Encrypted using TLS 1.3 with strict HSTS and Perfect Forward Secrecy across all HTTP and WebSocket connections.</li>
-                    <li><strong>Data at Rest:</strong> Stored in SOC 2 Type II and ISO 27001 certified cloud database clusters with AES-256-GCM encryption.</li>
+                    <li><strong>Data at Rest:</strong> Stored in SOC 2 and ISO 27001 audited cloud database infrastructure with AES-256-GCM encryption.</li>
                     <li><strong>Row-Level Isolation (RLS):</strong> Database architecture utilizes strict tenant partitioning ensuring zero cross-client inspection.</li>
                     <li><strong>Access Controls:</strong> Principle of Least Privilege (PoLP) enforced with biometric multi-factor authentication (MFA) on all developer workstations.</li>
                   </ul>

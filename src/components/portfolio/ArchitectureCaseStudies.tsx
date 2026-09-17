@@ -19,9 +19,9 @@ const DEFAULT_ITEMS = [
       title: "Hyperlocal Real-Time Rider Telemetry HUD",
       sector: "Food & Logistics",
       icon: Cpu,
-      challenge: "Handling 2,000+ simultaneous live rider GPS streams and zero-latency kitchen order state transitions.",
+      challenge: "Handling high-concurrency rider GPS streams and low-latency kitchen order state transitions.",
       solution: "Engineered Node.js worker clusters backed by Socket.io and Redis Pub/Sub geospatial clustering.",
-      metrics: "<120ms live map latency, 450K+ orders delivered."
+      metrics: "<120ms live map latency, high-throughput delivery architecture."
     },
     {
       slug: "evtor",
@@ -30,7 +30,7 @@ const DEFAULT_ITEMS = [
       icon: Server,
       challenge: "Standardizing heterogeneous EV charging station firmware with sub-second QR charge session triggering.",
       solution: "Universal OCPP 2.0.1 WebSocket broker ingesting real-time meter telemetry into TimescaleDB.",
-      metrics: "99.98% telemetry SLA, <2.5s QR charge flow."
+      metrics: "High-availability telemetry SLA, <2.5s QR charge flow."
     },
     {
       slug: "magnus-partners",
@@ -39,7 +39,7 @@ const DEFAULT_ITEMS = [
       icon: ShieldCheck,
       challenge: "Secure multi-hospital clinical consultation exchange with zero patient health information leakage.",
       solution: "HL7 FHIR v4 data pipeline, PostgreSQL row-level security, and encrypted DICOM radiology viewer.",
-      metrics: "50+ hospital networks, HIPAA-Ready Architecture architecture."
+      metrics: "Multi-hospital network, HIPAA-ready clinical architecture."
     }
   ];
 

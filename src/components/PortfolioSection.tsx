@@ -141,10 +141,10 @@ function ProjectLaptopMockup({ project }: { project: PortfolioProject }) {
 
           <div className="flex flex-wrap gap-1 pt-1">
             <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold text-[7px] sm:text-[8px]">
-              98.2% Auto-Rent
+              AutoPay Invoicing
             </span>
             <span className="px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 border border-blue-300 font-bold text-[7px] sm:text-[8px]">
-              85,000+ Beds
+              Multi-Property Grid
             </span>
           </div>
         </div>
@@ -245,7 +245,7 @@ function ProjectLaptopMockup({ project }: { project: PortfolioProject }) {
         {/* Bottom Banner */}
         <div className="flex items-center justify-between text-[8px] text-slate-400 bg-slate-900/80 px-2 py-0.5 rounded border border-slate-800">
           <span>Sub-1s Fast Reporting</span>
-          <span className="font-bold text-emerald-400">₹25 Cr+ Portfolio Monitored</span>
+          <span className="font-bold text-emerald-400">High-Value Property Pipeline</span>
         </div>
       </div>
     );
@@ -284,9 +284,9 @@ function ProjectLaptopMockup({ project }: { project: PortfolioProject }) {
 
           <div className="flex items-center gap-2 text-[8px]">
             <span className="px-2 py-0.5 rounded bg-green-500 text-slate-950 font-black shadow-xs">
-              99.98% Uptime
+              Live Telemetry
             </span>
-            <span className="text-green-200 font-bold">1,400+ Stations</span>
+            <span className="text-green-200 font-bold">Connected Fast Chargers</span>
           </div>
         </div>
 

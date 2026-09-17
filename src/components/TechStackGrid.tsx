@@ -252,7 +252,7 @@ export default function TechStackGrid({ isHome = false, items }: TechStackGridPr
                   Need a Specific Framework, Cloud Service, or Database?
                 </h3>
                 <p className="text-slate-600 text-xs sm:text-sm font-normal max-w-2xl">
-                  Explore our full spectrum of 50+ languages, frameworks, libraries, and dev tools—including Redis, Kafka, Supabase, GraphQL, and ClickHouse.
+                  Explore our comprehensive spectrum of languages, frameworks, libraries, and dev tools—including Redis, Kafka, Supabase, GraphQL, and ClickHouse.
                 </p>
               </div>
 
@@ -261,7 +261,7 @@ export default function TechStackGrid({ isHome = false, items }: TechStackGridPr
                   href="/tech-stack"
                   className="btn-futuristic-primary w-full sm:w-auto text-xs sm:text-sm !py-3.5 !px-6 !rounded-xl"
                 >
-                  <span>Explore Full 50+ Tech Stack</span>
+                  <span>Explore Full Tech Stack</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link

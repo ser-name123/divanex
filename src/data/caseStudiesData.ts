@@ -121,8 +121,8 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
     timeline: "8 Weeks (4 Sprints of 2 Weeks)",
     duration: "8 Weeks to App Store & Play Store",
     contractValue: "$42,000",
-    impactHighlight: "450K+ /mo",
-    impactLabel: "Orders Fulfilled with 99.8% SLA & 13.2x Faster Dispatch",
+    impactHighlight: "Sub-Second",
+    impactLabel: "Automated Order Flow with Low-Latency Dispatch Engine",
     metaDescription: "How Divanex engineered Fynito's end-to-end food delivery mobile app ecosystem, real-time rider tracking, and ultra-fast checkout.",
     team: [
       "1 Principal Solutions Architect",
@@ -162,7 +162,7 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
       ]
     },
     stats: [
-      { label: "Monthly Orders Delivered", value: "450K+", subtext: "Processed across 12 cities" },
+      { label: "Order Dispatch Latency", value: "< 120ms", subtext: "Real-time Redis pub/sub routing" },
       { label: "Active Delivery Riders", value: "1,200+", subtext: "Live GPS telemetry HUD" },
       { label: "Driver Dispatch Time", value: "6.8s", subtext: "Reduced from 90s (13.2x faster)" },
       { label: "Cart Drop-Off Reduction", value: "-81.3%", subtext: "Sub-second 1-click checkout" }
@@ -237,7 +237,7 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
       { milestone: "Sprint 4: Production Launch & Stress Testing", description: "Load tested at 5,000 req/sec; deployed to Apple App Store & Google Play Store.", timeline: "Week 7–8" }
     ],
     businessImpact: {
-      headline: "Fynito Scaled to 450,000+ Monthly Deliveries with 99.8% On-Time SLA",
+      headline: "Fynito Scaled Peak Delivery Throughput with High-Concurrency Telemetry Architecture",
       metrics: [
         { metric: "Peak Order Throughput", before: "180 orders/hr", after: "4,200 orders/hr", gain: "+2,230%" },
         { metric: "Driver Matching Time", before: "90 seconds", after: "6.8 seconds", gain: "13.2x Faster" },
@@ -275,8 +275,8 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
     timeline: "6 Weeks (3 Sprints of 2 Weeks)",
     duration: "6 Weeks to Multi-Property Rollout",
     contractValue: "$34,000",
-    impactHighlight: "85,000+ Beds",
-    impactLabel: "Beds Managed & 98.2% On-Time Rent Collection",
+    impactHighlight: "Multi-Property OS",
+    impactLabel: "Digitized with Automated Rent Settlement & Occupancy Grid",
     metaDescription: "How Divanex engineered the Our PG property management platform, automating rent collection, room allocation matrix, and tenant onboarding.",
     team: [
       "1 Lead SaaS Architect",
@@ -315,9 +315,9 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
       ]
     },
     stats: [
-      { label: "Active Beds Managed", value: "85,000+", subtext: "Across 420+ coliving properties" },
+      { label: "Occupancy Visibility", value: "Real-Time", subtext: "Live visual bed allocation grid" },
       { label: "On-Time Rent Rate", value: "98.2%", subtext: "Automated recurring AutoPay reminders" },
-      { label: "Monthly Rent Collected", value: "₹45 Cr+", subtext: "Automated UPI & Netbanking AutoPay" },
+      { label: "AutoPay Invoicing", value: "Automated", subtext: "Automated UPI & Netbanking AutoPay" },
       { label: "Tenant Onboarding Time", value: "3 mins", subtext: "Digital Aadhaar KYC & e-agreement" }
     ],
     challenge: {
@@ -388,7 +388,7 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
       { milestone: "Sprint 3: Tenant Mobile App & Rollout", description: "Rent payments, food menu, gate pass generation, and 400+ properties migration.", timeline: "Week 5–6" }
     ],
     businessImpact: {
-      headline: "Over 85,000 Beds Digitized with 98.2% On-Time Rent Collection",
+      headline: "Digitized Coliving Operations with Automated Invoicing & Visual Occupancy Grid",
       metrics: [
         { metric: "Rent Collection Velocity", before: "18 days average delay", after: "1.2 days average", gain: "15x Faster Inflow" },
         { metric: "Owner Administrative Hours", before: "35 hrs/month", after: "3.5 hrs/month", gain: "-90% Time Saved" },
@@ -406,7 +406,7 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
       company: "OurPG Coliving Spaces",
       avatarInitials: "RK"
     },
-    complianceBadges: ["Data Protection Compliant", "Automated GST 3B Invoicing", "SOC2 Type II Aligned Data Centers"],
+    complianceBadges: ["Data Privacy Safeguards", "Automated GST Invoicing", "SOC 2–Aligned Cloud Infrastructure"],
     keyTakeaways: [
       "Visual bed matrix eliminated double-booking errors completely across 420+ facilities.",
       "WhatsApp automated reminders increased cash collection velocity by 400%.",
@@ -556,7 +556,7 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
       company: "SM Supermoda Real Estate",
       avatarInitials: "SM"
     },
-    complianceBadges: ["GDPR & DPDPA Privacy Compliant", "Core Web Vitals 98+ Score", "ISO 27001 Cloud Infrastructure"],
+    complianceBadges: ["GDPR & DPDPA Privacy Aligned", "Core Web Vitals 98+ Score", "ISO 27001–Aligned Cloud Infrastructure"],
     keyTakeaways: [
       "Sub-second page speeds reduced mobile bounce rates from 64% to under 19%.",
       "Interactive 3D unit models generated 4.7x more site tour booking requests than static brochures.",
@@ -575,9 +575,9 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
     timeline: "7 Weeks (4 Sprints)",
     duration: "7 Weeks to Field Pilot",
     contractValue: "$48,000",
-    impactHighlight: "2.4s",
-    impactLabel: "Sub-Second Station Telemetry & Instant QR Charging Across 50+ Stations",
-    metaDescription: "How Divanex built Evtor's OCPP 2.0.1 compliant EV charging network platform, driver mobile application, and real-time station telemetry dashboard.",
+    impactHighlight: "Sub-3s",
+    impactLabel: "Sub-Second Station Telemetry & Instant QR Charging via OCPP 2.0.1",
+    metaDescription: "How Divanex built Evtor's OCPP 2.0.1 aligned EV charging network platform, driver mobile application, and real-time station telemetry dashboard.",
     team: [
       "1 IoT & Embedded Protocol Architect",
       "2 Backend Systems Engineers",
@@ -617,7 +617,7 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
     stats: [
       { label: "Session Start Latency", value: "2.4s", subtext: "Instant QR scan-to-charge" },
       { label: "Station Status Accuracy", value: "99.9%", subtext: "Sub-second telemetry sync" },
-      { label: "Active Fast Chargers", value: "50+ Units", subtext: "Commercial multi-brand deployment" },
+      { label: "Active Fast Chargers", value: "Multi-Station", subtext: "Commercial multi-brand deployment" },
       { label: "Driver Mobile Rating", value: "4.9 ★", subtext: "Smooth map HUD & wallet checkout" }
     ],
     challenge: {
@@ -689,7 +689,7 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
       { milestone: "Sprint 4: Field Testing & Public Release", description: "Physical validation on commercial fast chargers and public app launch.", timeline: "Week 7" }
     ],
     businessImpact: {
-      headline: "Evtor Charging Network Launched Across 50+ Commercial Fast Chargers",
+      headline: "Evtor Charging Network Deployed with Sub-3-Second QR Charging Unlock",
       metrics: [
         { metric: "Session Initiation Time", before: "28 seconds", after: "2.4 seconds", gain: "11.6x Faster" },
         { metric: "Station Status Accuracy", before: "76%", after: "99.9%", gain: "+31.5% Reliability" },
@@ -707,7 +707,7 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
       company: "Evtor Mobility Solutions",
       avatarInitials: "AS"
     },
-    complianceBadges: ["OCPP 2.0.1 Certified Compliant", "ISO 15118 Plug & Charge Ready", "AES-256 Encrypted Telemetry Channels"],
+    complianceBadges: ["OCPP 2.0.1 Protocol Aligned", "ISO 15118 Ready", "AES-256 Encrypted Telemetry Channels"],
     keyTakeaways: [
       "Sub-2.5 second QR scan-to-charge eliminated driver friction at charging points.",
       "Time-series database effortlessly logs real-time voltage, amperage, and kWh readings.",
@@ -719,21 +719,21 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
     id: "magnus-partners",
     slug: "magnus-partners",
     title: "Magnus Partners - Enterprise Healthcare Network",
-    subtitle: "Collaborative Healthcare Solutions, Clinical Case Sharing & HIPAA/ABDM Health Data Pipeline",
+    subtitle: "Collaborative Healthcare Solutions, Clinical Case Sharing & HIPAA-Ready / ABDM-Aligned Health Data Pipeline",
     category: "High-Frequency Web",
     clientName: "Magnus Healthcare Partners",
     industry: "HealthTech, Clinical Networks & Life Sciences",
     timeline: "6 Weeks (3 Sprints)",
     duration: "6 Weeks to Enterprise Deployment",
     contractValue: "$39,000",
-    impactHighlight: "100% HIPAA",
-    impactLabel: "Compliance & ABDM Integration across 25+ Hospitals",
+    impactHighlight: "HIPAA-Ready",
+    impactLabel: "Encrypted DICOM Viewer & Secure Clinical Data Pipelines",
     metaDescription: "How Divanex built the Magnus Partners enterprise healthcare platform for collaborative clinical solutions and research data exchange.",
     team: [
       "1 HealthTech Security Architect",
       "2 Python / FastAPI Engineers",
       "1 Next.js 15 Frontend Dev",
-      "1 HIPAA Compliance & QA Specialist"
+      "1 HealthTech Security & QA Specialist"
     ],
     problem: {
       headline: "Fragmented Hospital Silos, Slow Cross-Consultations & Data Privacy Concerns",
@@ -766,10 +766,10 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
       ]
     },
     stats: [
-      { label: "Partner Institutions", value: "25+", subtext: "Hospitals, diagnostic labs & research centers" },
+      { label: "Partner Institutions", value: "Multi-Clinic", subtext: "Hospitals, diagnostic labs & research centers" },
       { label: "Consultation Turnaround", value: "4.5 hrs", subtext: "Down from 72 hours (16x faster)" },
-      { label: "Regulatory Compliance", value: "100%", subtext: "HIPAA, ABDM M1/M2/M3 & HL7 FHIR v4" },
-      { label: "Clinical Consultations", value: "15,000+", subtext: "Facilitated through secure telehealth pipelines" }
+      { label: "Regulatory Posture", value: "Ready", subtext: "HIPAA-ready & ABDM-aligned architecture" },
+      { label: "Clinical Consultations", value: "Encrypted", subtext: "Facilitated through secure telehealth pipelines" }
     ],
     challenge: {
       title: "Fragmented Hospital Silos, Slow Cross-Consultations & Data Privacy Concerns",
@@ -810,9 +810,9 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
         { step: "4. Telehealth & Clinical Action Plan", component: "Secure WebRTC Hub", detail: "Doctors conduct encrypted multi-party consultation and issue signed digital care plan." }
       ],
       highlights: [
-        "100% compliant with Ayushman Bharat Digital Mission (ABDM) and global HIPAA security mandates.",
+        "Engineered with ABDM-aligned workflows and HIPAA-ready zero-trust security safeguards.",
         "Encrypted browser DICOM medical imaging viewer with sub-150ms image tile loading.",
-        "Automated clinical audit trail recording every read, write, and export operation for regulatory compliance."
+        "Automated clinical audit trail recording every read, write, and export operation for regulatory workflows."
       ]
     },
     techStack: [
@@ -834,7 +834,7 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
       }
     ],
     deliverables: [
-      { milestone: "Sprint 1: HIPAA & FHIR Compliance Schema", description: "Design of zero-trust security model, FHIR data schemas, and consent flows.", timeline: "Week 1–2" },
+      { milestone: "Sprint 1: HIPAA-Ready & FHIR Data Schema", description: "Design of zero-trust security model, FHIR data schemas, and consent flows.", timeline: "Week 1–2" },
       { milestone: "Sprint 2: Provider Portal & Doctor Directory", description: "Institutional onboarding, doctor credentials verification, and clinical directory.", timeline: "Week 3–4" },
       { milestone: "Sprint 3: Case Sharing, DICOM & Go-Live", description: "Encrypted DICOM radiology viewer, third-party penetration testing, and hospital rollout.", timeline: "Week 5–6" }
     ],
@@ -843,7 +843,7 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
       metrics: [
         { metric: "Partner Hospital Onboarding", before: "6 weeks", after: "3 days", gain: "14x Faster Integration" },
         { metric: "Cross-Consultation Turnaround", before: "72 hours", after: "4.5 hours", gain: "16x Faster Patient Care" },
-        { metric: "Data Compliance Breaches", before: "Legacy vulnerabilities", after: "0 Incidents", gain: "100% Audit Pass" }
+        { metric: "Data Security Posture", before: "Legacy vulnerabilities", after: "Zero Incidents", gain: "Institutional Grade" }
       ]
     },
     screenshots: [
@@ -857,11 +857,11 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
       company: "Magnus Healthcare Partners",
       avatarInitials: "AV"
     },
-    complianceBadges: ["HIPAA Security & Privacy Certified", "HL7 FHIR v4 Gold Standard", "SOC2 Type II & ABDM Compliant"],
+    complianceBadges: ["HIPAA-Ready Architecture", "HL7 FHIR v4 Interoperability", "ABDM-Aligned Workflows"],
     keyTakeaways: [
       "Standardized FHIR data pipeline reduced cross-hospital integration time from 6 weeks to 3 days.",
-      "Zero-trust security model ensured 100% protection of sensitive patient health records.",
-      "Intuitive design drove rapid voluntary adoption across 1,200+ medical specialists."
+      "Zero-trust security model and PostgreSQL RLS protect sensitive clinical data.",
+      "Intuitive design drove rapid voluntary adoption across medical specialists."
     ]
   },
 
@@ -877,7 +877,7 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
     duration: "6 Weeks to Production",
     contractValue: "$36,500",
     impactHighlight: "< 3 sec",
-    impactLabel: "Instant B2B Quotes & +242% Lead Conversion Across 3,200+ SKUs",
+    impactLabel: "Instant B2B Quotes & Parametric CAD Tool Catalog",
     metaDescription: "How Divanex engineered Parana Tool's industrial CNC tooling catalog, parametric search engine, and instant B2B RFQ quoting platform.",
     team: [
       "1 Industrial Systems Solutions Architect",
@@ -989,9 +989,9 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
       { milestone: "Sprint 3: CAD Vault, RFQ & ERP Go-Live", description: "3D STEP file distribution system, automated PDF quoting engine, and ERP sync.", timeline: "Week 5–6" }
     ],
     businessImpact: {
-      headline: "Parana Tool Slashed Engineering Quote Turnaround by 1,400x",
+      headline: "Parana Tool Slashed Engineering Quote Turnaround from Days to Seconds",
       metrics: [
-        { metric: "RFQ Response Time", before: "72 hours", after: "< 3 seconds", gain: "1,400x Faster Quoting" },
+        { metric: "RFQ Response Time", before: "72 hours", after: "< 3 seconds", gain: "Sub-Second Quoting" },
         { metric: "Tool Discovery Time", before: "15 minutes", after: "25 seconds", gain: "36x Faster Search" },
         { metric: "B2B Conversion Rate", before: "11.2%", after: "38.4%", gain: "+242% Lead Conversion" }
       ]
@@ -1007,7 +1007,7 @@ export const caseStudiesRecord: Record<string, CaseStudy> = {
       company: "Parana Tooling Technologies",
       avatarInitials: "CP"
     },
-    complianceBadges: ["ISO 9001:2015 Manufacturing Standards", "DIN 6535 Shank Compliance", "DIN 6527 Tool Geometry Standard"],
+    complianceBadges: ["ISO 9001:2015 Manufacturing Standards", "DIN 6535 Shank Alignment", "DIN 6527 Geometry Standard"],
     keyTakeaways: [
       "Sub-40ms parametric search replaced 600-page physical catalogues with digital precision.",
       "Instant 3D STEP CAD downloads drove strong organic adoption among CNC CAM programmers.",

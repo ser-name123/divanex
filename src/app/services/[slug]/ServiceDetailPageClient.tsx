@@ -708,15 +708,15 @@ export default function ServiceDetailPageClient({ service, related = [] }: Props
                 href="/contact"
                 className="btn-futuristic-primary text-sm sm:text-base !py-3.5 !px-8 !rounded-2xl shadow-md"
               >
-                <span>Discuss Exact Project Scope</span>
+                <span>Book a Consultation</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
               <Link
-                href="/contact"
-                className="btn-futuristic-glass text-sm sm:text-base !py-3.5 !px-8 !rounded-2xl"
+                href="/portfolio"
+                className="btn-futuristic-glass text-sm sm:text-base !py-3.5 !px-8 !rounded-2xl font-bold"
               >
-                <span>Schedule Discovery Session</span>
+                <span>View Case Studies</span>
               </Link>
             </div>
 

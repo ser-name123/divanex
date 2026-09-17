@@ -80,7 +80,7 @@ export default function Testimonials({ isHome = false, items }: TestimonialsProp
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-xs font-bold text-sky-800 shadow-xs">
             <MessageSquareQuote className="w-3.5 h-3.5 text-sky-600" />
             <span className="uppercase tracking-wider">
-              {isHome ? "IN THEIR WORDS // SIX REVIEWS" : `IN THEIR WORDS // ${testimonialsData.length}+ REVIEWS`}
+              IN THEIR WORDS // CLIENT REVIEWS
             </span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 tracking-tight">
