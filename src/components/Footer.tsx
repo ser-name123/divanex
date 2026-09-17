@@ -435,7 +435,11 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-3 text-[11px] text-slate-600">
             {bottomLinks.map((link, idx) => (
               <span key={link.id} className="inline-flex items-center gap-3">
-                <Link href={link.href} className="hover:text-sky-600 transition-colors font-medium">
+                <Link
+                  href={link.href}
+                  {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="hover:text-sky-600 transition-colors font-medium"
+                >
                   {link.label}
                 </Link>
                 {idx < bottomLinks.length - 1 && <span className="text-slate-400">•</span>}

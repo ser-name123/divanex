@@ -379,6 +379,7 @@ export const DEFAULT_NAVIGATION: SiteNavigation = {
       { id: "b-nda", label: "NDA & IP", href: "/nda" },
       { id: "b-security", label: "Security", href: "/security" },
       { id: "b-refund", label: "Refund Policy", href: "/refund-policy" },
+      { id: "b-sitemap", label: "Sitemap", href: "/sitemap.xml", external: true },
     ],
     copyrightName: "Divanex Technologies",
     copyrightText: "© {year} {name}. All rights reserved.",
