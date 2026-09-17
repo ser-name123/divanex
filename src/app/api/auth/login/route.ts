@@ -14,6 +14,13 @@ import { noStore } from "@/lib/guard";
 import { checkLockout, clearFailures, recordFailure } from "@/lib/lockout";
 import { recordAuthEvent } from "@/lib/auditLog";
 import { sendOtpEmail } from "@/lib/email";
+import {
+  clearChallenge,
+  countAttempt,
+  readChallenge,
+  saveChallenge,
+  sweepExpiredChallenges,
+} from "@/lib/authChallengeStore";
 
 interface LoginBody {
   step?: "check-email" | "verify-password" | "verify-otp";
@@ -27,13 +34,6 @@ interface LoginBody {
  * Pending 2FA challenges. The code itself is never stored — only a keyed digest
  * of it — so a memory dump or an accidental log of this map cannot be replayed.
  */
-interface OtpChallenge {
-  digest: string;
-  expiresAt: number;
-  attempts: number;
-}
-const otpStore = new Map<string, OtpChallenge>();
-
 const OTP_TTL_MS = 10 * 60 * 1000;
 const OTP_MAX_ATTEMPTS = 5;
 
@@ -79,13 +79,6 @@ function unauthorized(message: string) {
   return noStore(NextResponse.json({ success: false, error: message }, { status: 401 }));
 }
 
-function sweepExpiredChallenges() {
-  const now = Date.now();
-  for (const [key, challenge] of otpStore) {
-    if (challenge.expiresAt <= now) otpStore.delete(key);
-  }
-}
-
 export async function POST(request: Request) {
   try {
     const ip = clientIp(request);
@@ -112,7 +105,9 @@ export async function POST(request: Request) {
         (envUsername && envUsername === inputIdentifier)
     );
 
-    sweepExpiredChallenges();
+    // Housekeeping only — an expired row is rejected on read either way, so
+    // it need not cost every sign-in a round trip.
+    after(() => sweepExpiredChallenges());
 
     // =========================================================================
     // STEP 1: VERIFY EMAIL IDENTITY
@@ -190,11 +185,26 @@ export async function POST(request: Request) {
       // outputs and must never generate an authentication factor.
       const generatedOtp = String(randomInt(0, 1000000)).padStart(6, "0");
 
-      otpStore.set(accountKey, {
+      const stored = await saveChallenge(accountKey, {
         digest: hashShortSecret(generatedOtp),
         expiresAt: Date.now() + OTP_TTL_MS,
         attempts: 0,
       });
+
+      // Without a stored challenge the code cannot be verified, so sending it
+      // would strand the operator on a step that can never pass.
+      if (!stored) {
+        recordAuthEvent({ type: "admin.login.otp.failure", subject: accountKey, outcome: "failure", ip, detail: "challenge store unavailable" });
+        return noStore(
+          NextResponse.json(
+            {
+              success: false,
+              error: "Could not start two-factor verification. Please try again in a moment.",
+            },
+            { status: 503 }
+          )
+        );
+      }
 
       // Printed only outside production. A one-time code sitting in the
       // platform log is a second copy of an authentication factor, readable by
@@ -244,7 +254,7 @@ export async function POST(request: Request) {
       if (!matchedAdmin) return unauthorized("Unauthorized operator identity.");
 
       const accountKey = matchedAdmin.email.toLowerCase();
-      const challenge = otpStore.get(accountKey);
+      const challenge = await readChallenge(accountKey);
 
       const invalid = () =>
         noStore(
@@ -265,17 +275,19 @@ export async function POST(request: Request) {
       }
 
       if (!challenge || Date.now() > challenge.expiresAt) {
-        otpStore.delete(accountKey);
+        await clearChallenge(accountKey);
         recordFailure(`otp:${accountKey}`);
         recordAuthEvent({ type: "admin.login.otp.failure", subject: accountKey, outcome: "failure", ip, detail: "no active challenge" });
         return invalid();
       }
 
       // Burn the challenge after a handful of wrong guesses so the 6-digit
-      // space can never be walked, even from rotating source addresses.
-      challenge.attempts += 1;
-      if (challenge.attempts > OTP_MAX_ATTEMPTS) {
-        otpStore.delete(accountKey);
+      // space can never be walked, even from rotating source addresses. The
+      // count is spent before the code is compared, and conditionally on the
+      // value just read, so parallel guesses cannot share one attempt.
+      const counted = await countAttempt(accountKey, challenge.attempts);
+      if (!counted || challenge.attempts + 1 > OTP_MAX_ATTEMPTS) {
+        await clearChallenge(accountKey);
         recordFailure(`otp:${accountKey}`);
         recordAuthEvent({
           type: "admin.login.otp.failure",
@@ -299,7 +311,7 @@ export async function POST(request: Request) {
       }
 
       // Single use.
-      otpStore.delete(accountKey);
+      await clearChallenge(accountKey);
       clearFailures(`otp:${accountKey}`);
       recordAuthEvent({
         type: "admin.login.otp.success",

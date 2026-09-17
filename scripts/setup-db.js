@@ -178,6 +178,25 @@ async function setup() {
         ON subscribers (created_at DESC);
     `);
 
+    // Admin sign-in one-time codes.
+    //
+    // These were held in a Map inside the login route, which only works while
+    // one process serves every step of the flow. The code is issued by one
+    // request and verified by the next, and on a serverless host those are
+    // different instances: the second one had no record of the challenge, so a
+    // correct code was rejected as expired.
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS auth_challenges (
+        id TEXT PRIMARY KEY,
+        digest TEXT NOT NULL,
+        expires_at TIMESTAMPTZ NOT NULL,
+        attempts INT NOT NULL DEFAULT 0,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+      );
+      CREATE INDEX IF NOT EXISTS auth_challenges_expires_at_idx
+        ON auth_challenges (expires_at);
+    `);
+
     console.log("Tables created successfully!");
 
     // 1b. Lock every table down with Row Level Security.
@@ -189,7 +208,7 @@ async function setup() {
     // bypasses RLS by design.
     console.log("Enabling Row Level Security...");
 
-    const TABLES = ["leads", "estimates", "projects", "services", "system_logs", "site_settings", "site_content", "chat_sessions", "subscribers"];
+    const TABLES = ["leads", "estimates", "projects", "services", "system_logs", "site_settings", "site_content", "chat_sessions", "subscribers", "auth_challenges"];
 
     for (const table of TABLES) {
       await client.query(`ALTER TABLE ${table} ENABLE ROW LEVEL SECURITY;`);
