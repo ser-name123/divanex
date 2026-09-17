@@ -516,6 +516,52 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
       }
     ]
   },
+  "footer/social": {
+    "heading": {
+      "eyebrow": "",
+      "title": "",
+      "highlight": "",
+      "description": ""
+    },
+    "items": [
+      {
+        "network": "whatsapp",
+        "label": "WhatsApp Business",
+        "source": "whatsapp",
+        "tone": "emerald"
+      },
+      {
+        "network": "email",
+        "label": "Direct Email",
+        "source": "email",
+        "tone": "sky"
+      },
+      {
+        "network": "linkedin",
+        "label": "LinkedIn Profile",
+        "source": "linkedinUrl",
+        "tone": "blue"
+      },
+      {
+        "network": "github",
+        "label": "GitHub",
+        "source": "githubUrl",
+        "tone": "slate"
+      },
+      {
+        "network": "x",
+        "label": "X",
+        "source": "twitterUrl",
+        "tone": "slate"
+      },
+      {
+        "network": "instagram",
+        "label": "Instagram",
+        "source": "instagramUrl",
+        "tone": "rose"
+      }
+    ]
+  },
   "home/core-services": {
     "heading": {
       "eyebrow": "CORE ENGINEERING CAPABILITIES",

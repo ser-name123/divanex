@@ -29,6 +29,7 @@ import { useNavigation } from "@/context/SiteContentContext";
 import { visibleGroups, visibleLinks } from "@/data/navigation";
 import RichText from "@/components/RichText";
 import { useSection } from "@/lib/useSection";
+import SocialMark from "@/components/SocialMark";
 import GlobalOfficesSection from "@/components/GlobalOfficesSection";
 
 /**
@@ -60,6 +61,49 @@ const DEFAULT_BRAND_ITEMS = [
   { kind: "support", label: "Direct Support Call", action: "WhatsApp" },
   { kind: "newsletter-note", label: "Direct engineering digest • No third-party tracking", action: "TLS 1.3 Verified" }
 ];
+
+const DEFAULT_SOCIAL_HEADING = {
+  "eyebrow": "",
+  "title": "",
+  "highlight": "",
+  "description": ""
+};
+
+/**
+ * The dock, in order.
+ *
+ * `source` names where the address comes from: a site-config field, or the
+ * contact address and WhatsApp number the rest of the footer already uses. An
+ * entry can instead carry its own `href` for a network the settings do not
+ * cover.
+ */
+const DEFAULT_SOCIAL_ITEMS = [
+  { network: "whatsapp", label: "WhatsApp Business", source: "whatsapp", tone: "emerald" },
+  { network: "email", label: "Direct Email", source: "email", tone: "sky" },
+  { network: "linkedin", label: "LinkedIn Profile", source: "linkedinUrl", tone: "blue" },
+  { network: "github", label: "GitHub", source: "githubUrl", tone: "slate" },
+  { network: "x", label: "X", source: "twitterUrl", tone: "slate" },
+  { network: "instagram", label: "Instagram", source: "instagramUrl", tone: "rose" }
+];
+
+interface SocialItem extends Record<string, unknown> {
+  network?: string;
+  label?: string;
+  source?: string;
+  href?: string;
+  tone?: string;
+}
+
+/** Button colours, so an entry can be toned without touching this file. */
+const SOCIAL_TONES: Record<string, string> = {
+  emerald:
+    "bg-emerald-50 border-emerald-200 text-emerald-600 hover:bg-emerald-600 hover:border-emerald-600",
+  sky: "bg-sky-50 border-sky-200 text-sky-600 hover:bg-sky-600 hover:border-sky-600",
+  blue: "bg-blue-50 border-blue-200 text-blue-600 hover:bg-blue-600 hover:border-blue-600",
+  slate: "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-700 hover:border-slate-700",
+  rose: "bg-rose-50 border-rose-200 text-rose-600 hover:bg-rose-600 hover:border-rose-600",
+  amber: "bg-amber-50 border-amber-200 text-amber-600 hover:bg-amber-600 hover:border-amber-600",
+};
 
 const DEFAULT_BRAND_CTA = {
   "label": "Book a Consultation",
@@ -95,6 +139,11 @@ export default function Footer() {
     heading: DEFAULT_BRAND_HEADING,
     items: DEFAULT_BRAND_ITEMS,
     cta: DEFAULT_BRAND_CTA,
+  });
+
+  const { items: socialItems } = useSection<SocialItem>("footer/social", {
+    heading: DEFAULT_SOCIAL_HEADING,
+    items: DEFAULT_SOCIAL_ITEMS,
   });
 
   /** A pill's copy, by the role it plays. Missing entries fall back to none. */
@@ -164,6 +213,40 @@ export default function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  /**
+   * Each dock entry with its address filled in.
+   *
+   * An entry whose address is not configured is dropped rather than rendered
+   * as a dead button — the whole point of the list is that a network appears
+   * once somebody sets its URL.
+   */
+  const socialLinks = socialItems
+    .map((item, index) => {
+      const source = String(item.source || "");
+      let href = String(item.href || "");
+      let external = true;
+
+      if (!href) {
+        if (source === "whatsapp") href = WHATSAPP_LINK;
+        else if (source === "email") {
+          href = CONTACT_EMAIL ? `mailto:${CONTACT_EMAIL}` : "";
+          external = false;
+        } else if (source) {
+          href = String((siteConfig as unknown as Record<string, unknown>)[source] || "");
+        }
+      }
+
+      return {
+        key: `${item.network || source || "link"}-${index}`,
+        href,
+        external,
+        network: item.network,
+        label: item.label || item.network || "",
+        tone: SOCIAL_TONES[String(item.tone || "slate")] ?? SOCIAL_TONES.slate,
+      };
+    })
+    .filter((link) => link.href);
 
   return (
     <>
@@ -352,33 +435,17 @@ export default function Footer() {
 
             {/* Social Docks */}
             <div className="flex items-center gap-2 pt-1">
-              <a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 hover:scale-105 transition-all shadow-xs"
-                aria-label="WhatsApp Business"
-              >
-                <MessageCircle className="w-4 h-4" />
-              </a>
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="w-9 h-9 rounded-xl bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-600 hover:bg-sky-600 hover:text-white hover:border-sky-600 hover:scale-105 transition-all shadow-xs"
-                aria-label="Direct Email"
-              >
-                <Mail className="w-4 h-4" />
-              </a>
-              <a
-                href={siteConfig.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:scale-105 transition-all shadow-xs"
-                aria-label="LinkedIn Profile"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.6 1.6 0 0 0-1.6 1.6 1.6 1.6 0 0 0 1.6-1.6 1.6 1.6 0 0 0 1.6-1.6 1.6 1.6 0 0 0-1.6-1.6Z" />
-                </svg>
-              </a>
+              {socialLinks.map((link) => (
+                <a
+                  key={link.key}
+                  href={link.href}
+                  {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className={`w-9 h-9 rounded-xl border flex items-center justify-center hover:text-white hover:scale-105 transition-all shadow-xs ${link.tone}`}
+                  aria-label={link.label}
+                >
+                  <SocialMark network={link.network} />
+                </a>
+              ))}
               <Link
                 href={brandCta.href}
                 className="px-3 py-1.5 rounded-xl bg-sky-50 border border-sky-200 text-sky-700 hover:text-white hover:bg-sky-600 hover:border-sky-600 text-xs font-mono font-semibold flex items-center gap-1.5 transition-all shadow-xs"
