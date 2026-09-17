@@ -27,6 +27,7 @@ import {
   Inbox,
   Users,
   ScrollText,
+  Map as MapIcon,
 } from "lucide-react";
 import { canSeeTab, type Role } from "@/lib/permissions";
 
@@ -107,6 +108,12 @@ export default function AdminSidebar({
       icon: BookOpen,
       badge: "6 Posts",
       badgeColor: "bg-purple-100 text-purple-800 border border-purple-300 font-bold"
+    },
+    {
+      id: "sitemap",
+      label: "Sitemap",
+      icon: MapIcon,
+      badge: null
     },
     {
       id: "seo",

@@ -28,7 +28,8 @@ import {
 import DatabaseStatusBanner from "@/components/admin/DatabaseStatusBanner";
 import AdminUsersView from "@/components/admin/AdminUsersView";
 import AdminAuditView from "@/components/admin/AdminAuditView";
-import { canSeeTab, type Role } from "@/lib/permissions";
+import AdminSitemapView from "@/components/admin/AdminSitemapView";
+import { can, canSeeTab, type Role } from "@/lib/permissions";
 
 import {
   AdminProjectSprint,
@@ -336,6 +337,10 @@ function AdminDashboardContent() {
               logs={logs}
               onClearLogs={handleClearLogs}
             />
+          )}
+
+          {activeTab === "sitemap" && canSeeTab(me?.role ?? null, "sitemap") && (
+            <AdminSitemapView canEdit={can(me?.role ?? null, "content.edit")} />
           )}
 
           {activeTab === "audit" && canSeeTab(me?.role ?? null, "audit") && <AdminAuditView />}

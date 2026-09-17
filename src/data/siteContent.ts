@@ -6,6 +6,7 @@ import { DEFAULT_NAVIGATION, type SiteNavigation } from "@/data/navigation";
 import { DEFAULT_PAGE_CONTENT, type PageContent } from "@/data/pageContent";
 import { DEFAULT_PAGE_SECTIONS, type PageSections } from "@/data/pageSections";
 import { DEFAULT_FORM_SETTINGS, type FormSettings } from "@/data/formSettings";
+import { DEFAULT_SITEMAP_SETTINGS, type SitemapSettings } from "@/data/sitemapSettings";
 import { servicesData, type ServiceItem } from "@/data/services";
 import { serviceDetailsRecord, type ServiceDetailData } from "@/data/serviceDetails";
 import { caseStudiesRecord, type CaseStudy } from "@/data/caseStudiesData";
@@ -188,6 +189,14 @@ export const CONTENT_COLLECTIONS = {
     label: "Forms & notifications",
     mergeWithSeed: true,
   },
+  sitemap: {
+    tag: CACHE_TAGS.sitemap,
+    seed: DEFAULT_SITEMAP_SETTINGS as unknown,
+    label: "Sitemap",
+    // Fixed keys, so a group added to the seed later still resolves for a
+    // project that saved this row before it existed.
+    mergeWithSeed: true,
+  },
   integrations: {
     tag: CACHE_TAGS.integrations,
     seed: DEFAULT_INTEGRATIONS as unknown,
@@ -232,5 +241,6 @@ export interface ContentShapes {
   pages: PageContent;
   sections: PageSections;
   forms: FormSettings;
+  sitemap: SitemapSettings;
   integrations: IntegrationEntry[];
 }

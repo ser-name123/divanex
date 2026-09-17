@@ -126,6 +126,7 @@ export const TAB_PERMISSIONS: Record<string, Permission | null> = {
   techstack: "content.view",
   blog: "content.view",
   seo: "content.view",
+  sitemap: "content.view",
   siteconfig: "content.view",
   navigation: "content.view",
   pages: "content.view",

@@ -75,6 +75,9 @@ const TAG_ROUTES: Record<CacheTag, Array<[string, ("page" | "layout")?]>> = {
   [CACHE_TAGS.sections]: [["/", "layout"]],
   // Only the thank-you page renders from it.
   [CACHE_TAGS.forms]: [["/thank-you"]],
+  // Only /sitemap.xml reads it, and that route is its own path rather than a
+  // page segment — so nothing under "/" needs rebuilding when it changes.
+  [CACHE_TAGS.sitemap]: [["/sitemap.xml"]],
   // Admin-only; nothing public renders it.
   [CACHE_TAGS.integrations]: [],
 };
