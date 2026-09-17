@@ -512,7 +512,7 @@ async function setup() {
         ["log-02", "18:40:02 UTC", "info", "crm-pipeline", "Inbound opportunity received from Hyperion Capital (SaaS Tier).", 19, "198.51.100.4"],
         ["log-03", "18:35:44 UTC", "info", "escrow-vault", "Stripe webhook verified deposit for Aether Logistics ($18,000).", 32, "54.187.12.89"],
         ["log-04", "18:29:11 UTC", "warn", "ingress-waf", "Rate-limit threshold warning on edge node bom1 (AP-South).", 4, "203.0.113.42"],
-        ["log-05", "18:14:20 UTC", "info", "cluster-telemetry", "PostgreSQL database connected: aws-0-ap-south-1.pooler.supabase.com.", 8, "127.0.0.1"]
+        ["log-05", "18:14:20 UTC", "info", "cluster-telemetry", "PostgreSQL database connected: aws-0-ap-northeast-2.pooler.supabase.com.", 8, "127.0.0.1"]
       ];
 
       for (const lg of sampleLogs) {

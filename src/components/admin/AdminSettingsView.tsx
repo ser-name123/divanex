@@ -26,7 +26,7 @@ const INITIAL_API_KEYS: ApiConfig[] = [
   {
     id: "supabase-db",
     name: "Supabase Cloud PostgreSQL Cluster",
-    service: "Production Database & Auth Engine (ap-south-1)",
+    service: "Production Database & Auth Engine (ap-northeast-2)",
     maskedKey: "sb_publishable_****************************",
     environment: "Production",
     status: "Connected",
