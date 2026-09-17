@@ -13,12 +13,13 @@
  */
 
 /** The forms a visitor can submit. */
-export const FORM_KINDS = ["contact", "newsletter"] as const;
+export const FORM_KINDS = ["contact", "newsletter", "chat"] as const;
 export type FormKind = (typeof FORM_KINDS)[number];
 
 export const FORM_KIND_LABELS: Record<FormKind, string> = {
   contact: "Contact enquiry",
   newsletter: "Newsletter signup",
+  chat: "Live chat started",
 };
 
 /** Where a visitor lands once the submission is stored. */
@@ -175,7 +176,7 @@ const CONTACT_FLOW: FormFlow = {
     ctaLabel: "See how we work",
     ctaHref: "/process",
     signOff: "Speak soon,",
-    signature: "The Divanex engineering team",
+    signature: "The Divanex Technologies engineering team",
   },
   teamEmail: {
     enabled: true,
@@ -187,7 +188,7 @@ const CONTACT_FLOW: FormFlow = {
 };
 
 const NEWSLETTER_FLOW: FormFlow = {
-  notifyTeam: false,
+  notifyTeam: true,
   notifyVisitor: true,
   thankYou: {
     eyebrow: "Subscription confirmed",
@@ -227,7 +228,7 @@ const NEWSLETTER_FLOW: FormFlow = {
   },
   visitorEmail: {
     enabled: true,
-    subject: "You're subscribed to the Divanex engineering dispatch",
+    subject: "You're subscribed to the Divanex Technologies engineering dispatch",
     heading: "Welcome to the dispatch",
     intro:
       "Thank you for subscribing. You will now receive our engineering dispatch — written by the team that ships the work, not by a marketing department.",
@@ -240,10 +241,10 @@ const NEWSLETTER_FLOW: FormFlow = {
     ctaLabel: "Browse past articles",
     ctaHref: "/blog",
     signOff: "Welcome aboard,",
-    signature: "The Divanex engineering team",
+    signature: "The Divanex Technologies engineering team",
   },
   teamEmail: {
-    enabled: false,
+    enabled: true,
     subject: "New newsletter subscriber — {{email}}",
     heading: "New newsletter subscriber",
     intro: "Somebody subscribed to the engineering dispatch.",
@@ -251,20 +252,67 @@ const NEWSLETTER_FLOW: FormFlow = {
   },
 };
 
+/**
+ * A visitor verifying to use the live chat.
+ *
+ * The visitor's own copy is the verification code, sent from the chat route
+ * itself, so this flow only raises the team's alert — turning notifyVisitor on
+ * here would deliver a second, contentless email on top of the code.
+ */
+const CHAT_FLOW: FormFlow = {
+  notifyTeam: true,
+  notifyVisitor: false,
+  thankYou: {
+    eyebrow: "Chat verified",
+    headline: "You're verified —",
+    headlineHighlight: "say hello.",
+    subhead: "Your chat session is open. An engineer joins as soon as one is free.",
+    steps: [],
+    responseNote: "Usually answered within the working day.",
+    primaryCtaLabel: "Back to home",
+    primaryCtaHref: "/",
+    secondaryCtaLabel: "",
+    secondaryCtaHref: "/",
+    showReference: false,
+    referenceLabel: "",
+  },
+  visitorEmail: {
+    enabled: false,
+    subject: "",
+    heading: "",
+    intro: "",
+    highlights: [],
+    ctaLabel: "",
+    ctaHref: "/",
+    outro: "",
+    signOff: "",
+    signature: "",
+  },
+  teamEmail: {
+    enabled: true,
+    subject: "Live chat started — {{name}} ({{email}})",
+    heading: "Somebody opened the live chat",
+    intro:
+      "A visitor verified their email and started a chat session. Their verification code is deliberately not repeated here.",
+    extraRecipients: [],
+  },
+};
+
 export const DEFAULT_FORM_SETTINGS: FormSettings = {
   teamRecipients: [],
-  senderName: "Divanex",
+  senderName: "Divanex Technologies",
   replyToEmail: "",
-  brandName: "Divanex",
+  brandName: "Divanex Technologies",
   brandTagline: "Enterprise software engineering, SaaS & AI systems",
   logoUrl: "/brand-logo-icon.png",
   accentColor: "#0f7670",
   footerNote:
-    "You are receiving this because you contacted Divanex through our website.",
+    "You are receiving this because you contacted Divanex Technologies through our website.",
   unsubscribeNote: "",
   forms: {
     contact: CONTACT_FLOW,
     newsletter: NEWSLETTER_FLOW,
+    chat: CHAT_FLOW,
   },
 };
 

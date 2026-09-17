@@ -22,6 +22,38 @@ import type { FormFlow, FormKind, FormSettings } from "@/data/formSettings";
 const FONT =
   "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
+/**
+ * The brand palette, kept in step with the tokens in globals.css.
+ *
+ * Mail clients run no CSS variables and no Tailwind, so the same colours that
+ * the site resolves from `--brand-*` have to be written out literally here.
+ * Changing a brand colour means changing both places; there is no shared source
+ * a stylesheet and an inline style attribute can both read.
+ */
+const BRAND = {
+  /** --brand-navy: headings and body copy. */
+  ink: "#000838",
+  /** --brand-teal: links, buttons, the code card. */
+  teal: "#0f7670",
+  /** --brand-green: the far end of the gradient. */
+  green: "#5c9556",
+  /** --brand-gray: taglines and labels. */
+  gray: "#858585",
+  /** The page behind the card. */
+  page: "#eef1f0",
+  border: "#dce3e1",
+  muted: "#8a9391",
+  faint: "#b6bebc",
+} as const;
+
+/**
+ * The brand gradient as an email-safe pair.
+ *
+ * `background-color` lands first so Outlook, which drops background-image
+ * entirely, still shows solid brand teal rather than a transparent strip.
+ */
+const GRADIENT = `background-color:${BRAND.teal};background-image:linear-gradient(90deg, ${BRAND.teal} 0%, #2f8767 45%, ${BRAND.green} 100%);`;
+
 /** Escapes text for HTML. Ampersand first, or it double-escapes the rest. */
 export function esc(value: unknown): string {
   return String(value ?? "")
@@ -69,7 +101,24 @@ export interface ShellOptions {
 }
 
 /**
- * The frame both templates sit in.
+ * The masthead: the logo when one is configured, the brand name when not.
+ *
+ * Mail clients block remote images until the reader allows them, and some
+ * never load them at all, so the name is carried in `alt` and the height is
+ * declared inline — an unloaded image with no dimensions collapses the header
+ * to nothing. The name is also repeated in the footer, which means the brand
+ * is legible even in a client that shows no pictures.
+ */
+function masthead(settings: FormSettings, siteUrl: string): string {
+  const brand = esc(settings.brandName);
+  if (!settings.logoUrl) {
+    return `<span style="font-family:${FONT};font-size:19px;font-weight:700;letter-spacing:-0.3px;color:${BRAND.ink};">${brand}</span>`;
+  }
+  return `<img src="${esc(safeUrl(settings.logoUrl, siteUrl))}" alt="${brand}" width="44" height="44" style="display:block;margin:0 auto;border:0;outline:none;text-decoration:none;width:44px;height:44px;" />`;
+}
+
+/**
+ * The frame every template sits in.
  *
  * The outer table paints the page background, because `background` on <body>
  * is dropped by Outlook and by Gmail's web client.
@@ -78,6 +127,7 @@ function shell({ settings, siteUrl, preheader, body, extraFooter }: ShellOptions
   const brand = esc(settings.brandName);
   const tagline = esc(settings.brandTagline);
   const home = safeUrl("/", siteUrl);
+  const logo = masthead(settings, siteUrl);
 
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -89,35 +139,42 @@ function shell({ settings, siteUrl, preheader, body, extraFooter }: ShellOptions
 <meta name="supported-color-schemes" content="light" />
 <title>${brand}</title>
 </head>
-<body style="margin:0;padding:0;background-color:#eef0f2;">
-<div style="display:none;font-size:1px;color:#eef0f2;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">${esc(
+<body style="margin:0;padding:0;background-color:${BRAND.page};">
+<div style="display:none;font-size:1px;color:${BRAND.page};line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">${esc(
     preheader
   )}</div>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#eef0f2;padding:32px 12px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:${BRAND.page};padding:32px 12px;">
   <tr>
     <td align="center">
       <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;">
 
         <tr>
           <td align="center" style="padding:0 0 22px 0;">
-            <a href="${esc(home)}" style="text-decoration:none;color:#0a1130;">
-              <span style="font-family:${FONT};font-size:19px;font-weight:700;letter-spacing:-0.3px;color:#0a1130;">${brand}</span>
+            <a href="${esc(home)}" style="text-decoration:none;color:${BRAND.ink};">
+              ${logo}
             </a>
-            <div style="font-family:${FONT};font-size:12px;color:#858585;margin-top:5px;">${tagline}</div>
+            <div style="font-family:${FONT};font-size:12px;color:${BRAND.gray};margin-top:5px;">${tagline}</div>
           </td>
         </tr>
 
         <tr>
-          <td style="background-color:#ffffff;border:1px solid #dfe2e6;border-radius:16px;overflow:hidden;">
-            ${body}
+          <td style="background-color:#ffffff;border:1px solid ${BRAND.border};border-radius:16px;overflow:hidden;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="height:4px;line-height:4px;font-size:0;${GRADIENT}">&nbsp;</td>
+              </tr>
+              <tr>
+                <td>${body}</td>
+              </tr>
+            </table>
           </td>
         </tr>
 
         <tr>
-          <td style="padding:22px 16px 0 16px;font-family:${FONT};font-size:12px;line-height:1.6;color:#a3a8b1;text-align:center;">
+          <td style="padding:22px 16px 0 16px;font-family:${FONT};font-size:12px;line-height:1.6;color:${BRAND.muted};text-align:center;">
             ${esc(settings.footerNote)}
             ${extraFooter ? `<div style="margin-top:8px;">${extraFooter}</div>` : ""}
-            <div style="margin-top:12px;color:#c8ccd2;">
+            <div style="margin-top:12px;color:${BRAND.faint};">
               &copy; ${new Date().getFullYear()} ${brand}. All rights reserved.
             </div>
           </td>
@@ -193,13 +250,13 @@ export function renderVisitorEmail({
     reference && referenceLabel
       ? `<tr>
           <td style="padding:0 34px 26px 34px;">
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f7f9f9;border:1px solid #dfe2e6;border-radius:10px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f7f9f9;border:1px solid ${BRAND.border};border-radius:10px;">
               <tr>
                 <td style="padding:14px 18px;font-family:${FONT};">
-                  <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#a3a8b1;">${esc(
+                  <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:${BRAND.muted};">${esc(
                     referenceLabel
                   )}</div>
-                  <div style="font-size:13px;color:#0a1130;margin-top:4px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;">${esc(
+                  <div style="font-size:13px;color:${BRAND.ink};margin-top:4px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;">${esc(
                     reference
                   )}</div>
                 </td>
@@ -214,7 +271,7 @@ export function renderVisitorEmail({
 
     <tr>
       <td style="padding:34px 34px 0 34px;font-family:${FONT};">
-        <h1 style="margin:0 0 14px 0;font-size:23px;line-height:1.3;font-weight:700;color:#0a1130;">${esc(
+        <h1 style="margin:0 0 14px 0;font-size:23px;line-height:1.3;font-weight:700;color:${BRAND.ink};">${esc(
           content.heading
         )}</h1>
         <p style="margin:0 0 20px 0;font-size:15px;line-height:1.65;color:#666c77;">${intro}</p>
@@ -245,18 +302,18 @@ export function renderVisitorEmail({
 
     <tr>
       <td style="padding:0 34px 0 34px;">
-        <div style="height:1px;background-color:#eef0f2;font-size:0;line-height:0;">&nbsp;</div>
+        <div style="height:1px;background-color:${BRAND.page};font-size:0;line-height:0;">&nbsp;</div>
       </td>
     </tr>
 
     <tr>
       <td style="padding:22px 34px 32px 34px;font-family:${FONT};">
-        <p style="margin:0 0 18px 0;font-size:14px;line-height:1.65;color:#858585;">${esc(
+        <p style="margin:0 0 18px 0;font-size:14px;line-height:1.65;color:${BRAND.gray};">${esc(
           content.outro
         )}</p>
         <p style="margin:0;font-size:14px;line-height:1.6;color:#4e535d;">
           ${esc(content.signOff)}<br />
-          <strong style="color:#0a1130;">${esc(content.signature)}</strong>
+          <strong style="color:${BRAND.ink};">${esc(content.signature)}</strong>
         </p>
       </td>
     </tr>
@@ -341,21 +398,21 @@ export function renderTeamEmail({
     .map((field) => {
       if (field.wide) {
         return `<tr>
-          <td colspan="2" style="padding:14px 0 0 0;border-top:1px solid #eef0f2;font-family:${FONT};">
-            <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#a3a8b1;margin-bottom:6px;">${esc(
+          <td colspan="2" style="padding:14px 0 0 0;border-top:1px solid ${BRAND.page};font-family:${FONT};">
+            <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:${BRAND.muted};margin-bottom:6px;">${esc(
               field.label
             )}</div>
-            <div style="font-size:14px;line-height:1.65;color:#0a1130;white-space:pre-wrap;">${esc(
+            <div style="font-size:14px;line-height:1.65;color:${BRAND.ink};white-space:pre-wrap;">${esc(
               field.value
             )}</div>
           </td>
         </tr>`;
       }
       return `<tr>
-        <td valign="top" width="34%" style="padding:10px 12px 10px 0;border-top:1px solid #eef0f2;font-family:${FONT};font-size:12px;font-weight:600;color:#858585;">${esc(
+        <td valign="top" width="34%" style="padding:10px 12px 10px 0;border-top:1px solid ${BRAND.page};font-family:${FONT};font-size:12px;font-weight:600;color:${BRAND.gray};">${esc(
           field.label
         )}</td>
-        <td valign="top" style="padding:10px 0;border-top:1px solid #eef0f2;font-family:${FONT};font-size:14px;color:#0a1130;word-break:break-word;">${esc(
+        <td valign="top" style="padding:10px 0;border-top:1px solid ${BRAND.page};font-family:${FONT};font-size:14px;color:${BRAND.ink};word-break:break-word;">${esc(
           field.value
         )}</td>
       </tr>`;
@@ -367,13 +424,13 @@ export function renderTeamEmail({
 
     <tr>
       <td style="padding:28px 32px 0 32px;font-family:${FONT};">
-        <span style="display:inline-block;padding:4px 10px;border-radius:999px;background-color:#eef0f2;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#666c77;">${esc(
+        <span style="display:inline-block;padding:4px 10px;border-radius:999px;background-color:${BRAND.page};font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#666c77;">${esc(
           kindLabel
         )}</span>
-        <h1 style="margin:14px 0 8px 0;font-size:21px;line-height:1.3;font-weight:700;color:#0a1130;">${esc(
+        <h1 style="margin:14px 0 8px 0;font-size:21px;line-height:1.3;font-weight:700;color:${BRAND.ink};">${esc(
           content.heading
         )}</h1>
-        <p style="margin:0 0 20px 0;font-size:14px;line-height:1.6;color:#858585;">${esc(
+        <p style="margin:0 0 20px 0;font-size:14px;line-height:1.6;color:${BRAND.gray};">${esc(
           content.intro
         )}</p>
       </td>
@@ -392,7 +449,7 @@ export function renderTeamEmail({
     </tr>
 
     <tr>
-      <td style="padding:14px 32px 28px 32px;font-family:${FONT};font-size:11px;line-height:1.6;color:#a3a8b1;">
+      <td style="padding:14px 32px 28px 32px;font-family:${FONT};font-size:11px;line-height:1.6;color:${BRAND.muted};">
         Received ${esc(new Date().toUTCString())}${ipAddress ? ` &middot; from ${esc(ipAddress)}` : ""}
         ${
           email
@@ -426,4 +483,102 @@ export function renderTeamEmail({
       body,
     }),
   };
+}
+
+
+export interface OtpEmailOptions {
+  settings: FormSettings;
+  siteUrl: string;
+  /** Card headline, e.g. "Your verification code". */
+  heading: string;
+  /** Sentence above the code, already plain text. */
+  intro: string;
+  code: string;
+  /** How long the code lasts, spelled out for the reader. */
+  expiry: string;
+  /** Small print under the card: requesting address, timestamp, IP. */
+  meta?: Array<{ label: string; value: string }>;
+  /** Shown in red under the meta rows. */
+  warning?: string;
+}
+
+/**
+ * The one-time-code email, in the same frame as every other message.
+ *
+ * These two mails used to carry their own hand-written HTML — one on a dark
+ * background, one on a light one, neither showing the logo and both spelling
+ * the brand differently from the rest. A verification code is often the first
+ * thing a new visitor ever receives from us, so it is the worst message to
+ * have looking like it came from somewhere else.
+ */
+export function renderOtpEmail({
+  settings,
+  siteUrl,
+  heading,
+  intro,
+  code,
+  expiry,
+  meta = [],
+  warning,
+}: OtpEmailOptions): string {
+  const accent = esc(settings.accentColor);
+
+  const metaRows = meta.length
+    ? `
+      <tr>
+        <td style="padding:0 34px 6px 34px;font-family:${FONT};font-size:12px;line-height:1.7;color:${BRAND.gray};border-top:1px solid ${BRAND.page};padding-top:16px;">
+          ${meta
+            .map(
+              (row) =>
+                `<div><span style="color:${BRAND.muted};">${esc(row.label)}:</span> ${esc(row.value)}</div>`
+            )
+            .join("")}
+          ${warning ? `<div style="margin-top:8px;color:#b42318;">${esc(warning)}</div>` : ""}
+        </td>
+      </tr>`
+    : "";
+
+  const body = `
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td style="padding:34px 34px 0 34px;font-family:${FONT};">
+        <div style="font-size:21px;font-weight:700;color:${BRAND.ink};letter-spacing:-0.2px;">${esc(heading)}</div>
+        <div style="margin-top:10px;font-size:14px;line-height:1.65;color:#4e535d;">${esc(intro)}</div>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:22px 34px 0 34px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f7f9f9;border:1px solid ${BRAND.border};border-radius:14px;">
+          <tr>
+            <td align="center" style="padding:22px 16px;font-family:${FONT};">
+              <div style="font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:${BRAND.gray};">Verification code</div>
+              <div style="margin-top:10px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:34px;font-weight:700;letter-spacing:9px;color:${accent};">${esc(
+                code
+              )}</div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:16px 34px 0 34px;font-family:${FONT};font-size:13px;line-height:1.6;color:#666c77;">
+        This code expires in ${esc(expiry)}. Nobody from ${esc(
+          settings.brandName
+        )} will ever ask you for it.
+      </td>
+    </tr>
+
+    <tr><td style="padding:0 34px 22px 34px;">&nbsp;</td></tr>
+    ${metaRows}
+    <tr><td style="padding:0 34px 26px 34px;">&nbsp;</td></tr>
+  </table>`;
+
+  return shell({
+    settings,
+    siteUrl,
+    preheader: `${code} — ${heading}`,
+    body,
+  });
 }

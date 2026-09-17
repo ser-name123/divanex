@@ -3,6 +3,7 @@ import { sendChatVerificationOtpEmail } from "@/lib/email";
 import { badRequest, cleanString, isValidEmail, readJson, tooManyRequests } from "@/lib/api";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { issueChatOtp } from "@/lib/chatOtp";
+import { sendFormNotifications } from "@/lib/formNotifications";
 
 /**
  * Sends the chat widget verification code.
@@ -46,11 +47,14 @@ export async function POST(req: NextRequest) {
 
     const code = issueChatOtp(sessionId, email);
 
+    const name = cleanString(body.name, 100) || "Valued Visitor";
+    const phone = cleanString(body.phone, 40);
+
     const emailResult = await sendChatVerificationOtpEmail({
       to: email,
       otp: code,
-      userName: cleanString(body.name, 100) || "Valued Visitor",
-      userPhone: cleanString(body.phone, 40),
+      userName: name,
+      userPhone: phone,
     });
 
     if (!emailResult.success) {
@@ -62,6 +66,23 @@ export async function POST(req: NextRequest) {
         { status: 502 }
       );
     }
+
+    // The team's copy. Sent after the visitor's, and deliberately without the
+    // code in it: the alert says somebody is waiting in the chat, it is not a
+    // second delivery of a credential that authenticates them. A failure here
+    // is logged inside and never turns a working verification into an error.
+    await sendFormNotifications({
+      kind: "chat",
+      name,
+      email,
+      fields: [
+        { label: "Name", value: name },
+        { label: "Email", value: email },
+        { label: "Phone", value: phone },
+      ],
+      adminHref: "/admin?tab=chats",
+      ipAddress: ip,
+    });
 
     return NextResponse.json({
       success: true,
