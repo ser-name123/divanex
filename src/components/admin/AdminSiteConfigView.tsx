@@ -17,6 +17,7 @@ import {
   Sparkles,
   ShieldAlert,
   ShieldCheck,
+  Link2 as LinkIcon,
   Bot,
   RotateCcw
 } from "lucide-react";
@@ -402,6 +403,80 @@ export default function AdminSiteConfigView() {
                 />
               </div>
             </div>
+          </div>
+
+          {/* SECTION: Social profiles */}
+          <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+            <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
+              <div className="w-9 h-9 rounded-xl bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-700">
+                <LinkIcon className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-slate-900 font-sans">Social Profiles</h3>
+                <p className="text-[11px] text-slate-500 font-sans">
+                  A profile with an address shows in the footer. Clear the address to take it down.
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <div>
+                <label className="block text-[10px] text-slate-700 uppercase font-bold mb-1 flex items-center gap-1.5">
+                  <LinkIcon className="w-3 h-3 text-slate-500" />
+                  <span>LinkedIn</span>
+                </label>
+                <input
+                  type="url"
+                  value={config.linkedinUrl ?? ""}
+                  onChange={(e) => setConfig({ ...config, linkedinUrl: e.target.value })}
+                  placeholder="https://linkedin.com/company/yourcompany"
+                  className="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-300 focus:bg-white focus:border-sky-500 text-slate-900 focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-slate-700 uppercase font-bold mb-1 flex items-center gap-1.5">
+                  <LinkIcon className="w-3 h-3 text-slate-500" />
+                  <span>GitHub</span>
+                </label>
+                <input
+                  type="url"
+                  value={config.githubUrl ?? ""}
+                  onChange={(e) => setConfig({ ...config, githubUrl: e.target.value })}
+                  placeholder="https://github.com/yourcompany"
+                  className="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-300 focus:bg-white focus:border-sky-500 text-slate-900 focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-slate-700 uppercase font-bold mb-1 flex items-center gap-1.5">
+                  <LinkIcon className="w-3 h-3 text-slate-500" />
+                  <span>X (Twitter)</span>
+                </label>
+                <input
+                  type="url"
+                  value={config.twitterUrl ?? ""}
+                  onChange={(e) => setConfig({ ...config, twitterUrl: e.target.value })}
+                  placeholder="https://x.com/yourcompany"
+                  className="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-300 focus:bg-white focus:border-sky-500 text-slate-900 focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-slate-700 uppercase font-bold mb-1 flex items-center gap-1.5">
+                  <LinkIcon className="w-3 h-3 text-slate-500" />
+                  <span>Instagram</span>
+                </label>
+                <input
+                  type="url"
+                  value={config.instagramUrl ?? ""}
+                  onChange={(e) => setConfig({ ...config, instagramUrl: e.target.value })}
+                  placeholder="https://instagram.com/yourcompany"
+                  className="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-300 focus:bg-white focus:border-sky-500 text-slate-900 focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <p className="text-[10px] text-slate-400">
+              Order, labels and colours live under Page Sections &rarr; Footer &rarr; Footer social links.
+            </p>
           </div>
 
           {/* SECTION 4: Live Features & Widget Controls */}
