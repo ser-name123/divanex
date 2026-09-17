@@ -29,6 +29,7 @@ import DatabaseStatusBanner from "@/components/admin/DatabaseStatusBanner";
 import AdminUsersView from "@/components/admin/AdminUsersView";
 import AdminAuditView from "@/components/admin/AdminAuditView";
 import AdminSitemapView from "@/components/admin/AdminSitemapView";
+import AdminRobotsView from "@/components/admin/AdminRobotsView";
 import { can, canSeeTab, type Role } from "@/lib/permissions";
 
 import {
@@ -337,6 +338,10 @@ function AdminDashboardContent() {
               logs={logs}
               onClearLogs={handleClearLogs}
             />
+          )}
+
+          {activeTab === "robots" && canSeeTab(me?.role ?? null, "robots") && (
+            <AdminRobotsView canEdit={can(me?.role ?? null, "content.edit")} />
           )}
 
           {activeTab === "sitemap" && canSeeTab(me?.role ?? null, "sitemap") && (

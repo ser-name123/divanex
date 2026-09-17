@@ -78,6 +78,8 @@ const TAG_ROUTES: Record<CacheTag, Array<[string, ("page" | "layout")?]>> = {
   // Only /sitemap.xml reads it, and that route is its own path rather than a
   // page segment — so nothing under "/" needs rebuilding when it changes.
   [CACHE_TAGS.sitemap]: [["/sitemap.xml"]],
+  // Same shape as the sitemap: its own path, nothing under "/" to rebuild.
+  [CACHE_TAGS.robots]: [["/robots.txt"]],
   // Admin-only; nothing public renders it.
   [CACHE_TAGS.integrations]: [],
 };

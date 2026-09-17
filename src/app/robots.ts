@@ -1,26 +1,27 @@
 import type { MetadataRoute } from "next";
+import { getContent } from "@/lib/contentStore";
 import { getSiteSettings } from "@/lib/siteSettingsStore";
+import { buildRobots } from "@/lib/robotsRules";
 
+/**
+ * robots.txt.
+ *
+ * The rules are built in src/lib/robotsRules.ts so the console can preview the
+ * same file before it is saved. `/admin` and `/api/` are disallowed there
+ * unconditionally: the console is behind a session either way, but there is no
+ * version of this site where advertising those paths is wanted.
+ */
 export default async function robots(): Promise<MetadataRoute.Robots> {
-  const settings = await getSiteSettings();
+  const [settings, robotsSettings] = await Promise.all([
+    getSiteSettings(),
+    getContent("robots"),
+  ]);
 
-  // Staging and pre-launch: keep the whole site out of every index.
-  if (settings.discourageSearchEngines) {
-    return {
-      rules: { userAgent: "*", disallow: "/" },
-      host: settings.siteUrl,
-    };
-  }
-
-  return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      // The console is authenticated, but there is no reason to advertise it
-      // or the API surface to crawlers.
-      disallow: ["/admin", "/admin/", "/api/", ...settings.robotsDisallow],
-    },
-    sitemap: `${settings.siteUrl}/sitemap.xml`,
-    host: settings.siteUrl,
-  };
+  return buildRobots({
+    settings: robotsSettings,
+    // Still honoured so anything set before this screen existed keeps working.
+    legacyDisallow: settings.robotsDisallow,
+    discourageSearchEngines: settings.discourageSearchEngines,
+    siteUrl: settings.siteUrl,
+  });
 }

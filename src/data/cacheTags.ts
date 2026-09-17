@@ -21,6 +21,7 @@ export const CACHE_TAGS = {
   sections: "content:sections",
   forms: "content:forms",
   sitemap: "content:sitemap",
+  robots: "content:robots",
 } as const;
 
 export type CacheTag = (typeof CACHE_TAGS)[keyof typeof CACHE_TAGS];
@@ -36,6 +37,11 @@ export const CACHE_ENTRIES: Array<{ tag: CacheTag; label: string; description: s
     tag: CACHE_TAGS.sitemap,
     label: "Sitemap",
     description: "Which URLs the sitemap lists, and what each one claims about itself.",
+  },
+  {
+    tag: CACHE_TAGS.robots,
+    label: "Robots",
+    description: "Which crawlers are allowed, and which paths they are kept out of.",
   },
   {
     tag: CACHE_TAGS.seo,

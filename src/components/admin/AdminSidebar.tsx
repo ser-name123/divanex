@@ -28,6 +28,7 @@ import {
   Users,
   ScrollText,
   Map as MapIcon,
+  Bot,
 } from "lucide-react";
 import { canSeeTab, type Role } from "@/lib/permissions";
 
@@ -113,6 +114,12 @@ export default function AdminSidebar({
       id: "sitemap",
       label: "Sitemap",
       icon: MapIcon,
+      badge: null
+    },
+    {
+      id: "robots",
+      label: "Robots & Crawlers",
+      icon: Bot,
       badge: null
     },
     {

@@ -7,6 +7,7 @@ import { DEFAULT_PAGE_CONTENT, type PageContent } from "@/data/pageContent";
 import { DEFAULT_PAGE_SECTIONS, type PageSections } from "@/data/pageSections";
 import { DEFAULT_FORM_SETTINGS, type FormSettings } from "@/data/formSettings";
 import { DEFAULT_SITEMAP_SETTINGS, type SitemapSettings } from "@/data/sitemapSettings";
+import { DEFAULT_ROBOTS_SETTINGS, type RobotsSettings } from "@/data/robotsSettings";
 import { servicesData, type ServiceItem } from "@/data/services";
 import { serviceDetailsRecord, type ServiceDetailData } from "@/data/serviceDetails";
 import { caseStudiesRecord, type CaseStudy } from "@/data/caseStudiesData";
@@ -197,6 +198,12 @@ export const CONTENT_COLLECTIONS = {
     // project that saved this row before it existed.
     mergeWithSeed: true,
   },
+  robots: {
+    tag: CACHE_TAGS.robots,
+    seed: DEFAULT_ROBOTS_SETTINGS as unknown,
+    label: "Robots",
+    mergeWithSeed: true,
+  },
   integrations: {
     tag: CACHE_TAGS.integrations,
     seed: DEFAULT_INTEGRATIONS as unknown,
@@ -242,5 +249,6 @@ export interface ContentShapes {
   sections: PageSections;
   forms: FormSettings;
   sitemap: SitemapSettings;
+  robots: RobotsSettings;
   integrations: IntegrationEntry[];
 }
