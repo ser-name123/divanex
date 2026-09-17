@@ -1,3 +1,4 @@
+import { getBlogCategories, isBlogCategory } from "@/lib/blogCategories";
 import { NextResponse } from "next/server";
 import { getBlogPosts, saveBlogPost } from "@/lib/blogStore";
 import { randomUUID } from "node:crypto";
@@ -64,6 +65,18 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, error: "Title and content are required." }, { status: 400 });
     }
 
+    // The same check the update route makes, so a category cannot enter the
+    // store on create that an edit would later reject.
+    if (body.category !== undefined && !(await isBlogCategory(body.category))) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `"${body.category}" is not one of the blog categories. Add it under Page Sections first.`,
+        },
+        { status: 400 }
+      );
+    }
+
     const title = sanitizeInput(body.title);
     const slug = (body.slug || title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")).slice(0, 120);
 
@@ -81,7 +94,7 @@ export async function POST(request: Request) {
         body.coverImage,
         "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80"
       ),
-      category: body.category || "Architecture & SaaS",
+      category: body.category || (await getBlogCategories())[0] || "Architecture & SaaS",
       author: {
         name: sanitizeInput(body.author?.name || "Divanex Engineering"),
         role: sanitizeInput(body.author?.role || "Lead Solutions Architect"),

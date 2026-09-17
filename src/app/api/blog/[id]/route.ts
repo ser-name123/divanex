@@ -1,17 +1,10 @@
+import { isBlogCategory } from "@/lib/blogCategories";
 import { NextResponse } from "next/server";
 import { getBlogPosts, saveBlogPost, deleteBlogPost } from "@/lib/blogStore";
 import { requirePermission } from "@/lib/guard";
 import { sanitizeInput, safeHttpUrl } from "@/lib/security";
 import type { BlogPost } from "@/data/blogData";
 
-const BLOG_CATEGORIES: readonly string[] = [
-  "Architecture & SaaS",
-  "Healthcare HMIS",
-  "Enterprise ERP",
-  "Fintech & Security",
-  "AI & Autonomous Agents",
-  "Cloud & DevOps",
-];
 
 export async function PUT(
   request: Request,
@@ -23,6 +16,16 @@ export async function PUT(
 
     const { id } = await params;
     const body = await request.json();
+
+    if (body.category !== undefined && !(await isBlogCategory(body.category))) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `"${body.category}" is not one of the blog categories. Add it under Page Sections first.`,
+        },
+        { status: 400 }
+      );
+    }
 
     const posts = await getBlogPosts();
     const existing = posts.find((p) => p.id === id);
@@ -41,7 +44,7 @@ export async function PUT(
       ...(body.subtitle !== undefined && { subtitle: sanitizeInput(body.subtitle) }),
       ...(body.excerpt !== undefined && { excerpt: sanitizeInput(body.excerpt) }),
       ...(body.content !== undefined && { content: String(body.content).slice(0, 200000) }),
-      ...(BLOG_CATEGORIES.includes(body.category) && {
+      ...(body.category !== undefined && {
         category: body.category as BlogPost["category"],
       }),
       ...(body.readTime !== undefined && { readTime: sanitizeInput(body.readTime) }),
