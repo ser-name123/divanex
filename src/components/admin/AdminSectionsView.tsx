@@ -53,14 +53,38 @@ export default function AdminSectionsView() {
     setTimeout(() => setToast(null), 4000);
   };
 
-  const pages = useMemo(
-    () => [...new Set(SECTION_REGISTRY.map((entry) => entry.page))],
-    []
-  );
+  /**
+   * Every section the site can render, not only the ones listed by hand.
+   *
+   * The registry carries the human labels, but it is maintained separately from
+   * the generated defaults — and when a section was added to a component and
+   * not to the registry, it existed on the page and could not be reached here
+   * at all. Anything missing is included under a label derived from its id, so
+   * a new section is at worst badly named rather than invisible.
+   */
+  const registry = useMemo(() => {
+    const listed = new Set(SECTION_REGISTRY.map((entry) => entry.id));
+
+    const derived = Object.keys(SECTION_DEFAULTS)
+      .filter((id) => !listed.has(id))
+      .map((id) => {
+        const [prefix, rest = ""] = id.split("/");
+        const words = rest.replace(/[-_]+/g, " ").trim();
+        return {
+          id,
+          page: prefix === "home" ? "/" : `/${prefix}`,
+          label: words ? words.charAt(0).toUpperCase() + words.slice(1) : id,
+        };
+      });
+
+    return [...SECTION_REGISTRY, ...derived];
+  }, []);
+
+  const pages = useMemo(() => [...new Set(registry.map((entry) => entry.page))], [registry]);
 
   const visible = useMemo(() => {
     const needle = query.trim().toLowerCase();
-    return SECTION_REGISTRY.filter((entry) => {
+    return registry.filter((entry) => {
       if (needle) {
         return (
           entry.label.toLowerCase().includes(needle) ||
@@ -69,13 +93,13 @@ export default function AdminSectionsView() {
       }
       return entry.page === page;
     });
-  }, [page, query]);
+  }, [page, query, registry]);
 
-  const activeId = selected && SECTION_REGISTRY.some((e) => e.id === selected)
+  const activeId = selected && registry.some((e) => e.id === selected)
     ? selected
     : visible[0]?.id ?? null;
 
-  const entry = SECTION_REGISTRY.find((item) => item.id === activeId);
+  const entry = registry.find((item) => item.id === activeId);
 
   /**
    * What the section currently shows.

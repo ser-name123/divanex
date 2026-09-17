@@ -53,6 +53,21 @@ export const DEFAULT_PAGE_SECTIONS: PageSections = {};
  * alone would start empty and stay that way.
  */
 export const SECTION_REGISTRY: Array<{ id: string; page: string; label: string }> = [
+  // Home page
+  { id: "home/ratings", page: "/", label: "Review platform strip" },
+  { id: "home/core-services", page: "/", label: "Core service cards" },
+  { id: "home/tech-pillars", page: "/", label: "Technology pillars" },
+  { id: "home/why-proof", page: "/", label: "Proof point banner" },
+  { id: "home/ownership", page: "/", label: "Code ownership grid" },
+  { id: "home/ownership-panel", page: "/", label: "Code ownership panel" },
+
+  // Blog directory
+  { id: "blog/categories", page: "/blog", label: "Blog categories" },
+  { id: "blog/tags", page: "/blog", label: "Popular tags" },
+
+  // Site-wide
+  { id: "footer/offices", page: "/", label: "Global offices (footer)" },
+
   // /services
   { id: "services/saas-deep-dive", page: "/services", label: "SaaS architecture deep dive" },
   { id: "services/ai-agents", page: "/services", label: "AI agent capabilities" },
