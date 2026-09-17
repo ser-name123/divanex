@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { randomInt } from "node:crypto";
 import {
   SESSION_COOKIE,
@@ -196,22 +196,34 @@ export async function POST(request: Request) {
         attempts: 0,
       });
 
-      console.log(`\n========================================\n[ADMIN 2FA OTP] For ${matchedAdmin.email}: ${generatedOtp}\n========================================\n`);
+      // Printed only outside production. A one-time code sitting in the
+      // platform log is a second copy of an authentication factor, readable by
+      // anyone with access to the deployment logs.
+      if (process.env.NODE_ENV !== "production") {
+        console.log(`\n========================================\n[ADMIN 2FA OTP] For ${matchedAdmin.email}: ${generatedOtp}\n========================================\n`);
+      }
 
-      // Asynchronous email dispatch so UI transitions instantly (< 50ms)
-      sendOtpEmail({
-        to: matchedAdmin.email,
-        otp: generatedOtp,
-        recipientName: matchedAdmin.name,
-        ipAddress: ip,
-      }).then((emailResult) => {
-        if (emailResult.success) {
-          console.log(`[EMAIL] 2FA OTP delivered to ${matchedAdmin.email}. MessageId: ${emailResult.messageId}`);
-        } else {
-          console.warn(`[EMAIL] 2FA OTP delivery notice:`, emailResult.error);
+      // Sent after the response so the UI still transitions instantly, but handed
+      // to `after` rather than left as a floating promise. A serverless function
+      // is frozen the moment its response is sent, which killed this send before
+      // it reached the mail server: the API reported the code as dispatched and
+      // it never arrived. `after` keeps the invocation alive until it finishes.
+      after(async () => {
+        try {
+          const emailResult = await sendOtpEmail({
+            to: matchedAdmin.email,
+            otp: generatedOtp,
+            recipientName: matchedAdmin.name,
+            ipAddress: ip,
+          });
+          if (emailResult.success) {
+            console.log(`[EMAIL] 2FA OTP delivered to ${matchedAdmin.email}. MessageId: ${emailResult.messageId}`);
+          } else {
+            console.warn(`[EMAIL] 2FA OTP delivery notice:`, emailResult.error);
+          }
+        } catch (err) {
+          console.warn(`[EMAIL] 2FA OTP delivery error:`, err);
         }
-      }).catch((err) => {
-        console.warn(`[EMAIL] 2FA OTP delivery error:`, err);
       });
 
       return noStore(
