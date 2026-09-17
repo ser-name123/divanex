@@ -6,6 +6,7 @@ import { useAdminContent } from "@/lib/useAdminContent";
 import { useUnsavedGuard } from "@/lib/useUnsavedGuard";
 import {
   DEFAULT_PAGE_SECTIONS,
+  SECTION_PAGE_LABELS,
   SECTION_REGISTRY,
   type SectionContent,
 } from "@/data/pageSections";
@@ -218,7 +219,7 @@ export default function AdminSectionsView() {
                       : "bg-white border-slate-200 text-slate-600 hover:border-sky-300"
                   }`}
                 >
-                  {path}
+                  {SECTION_PAGE_LABELS[path] ?? path}
                 </button>
               ))}
             </div>

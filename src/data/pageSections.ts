@@ -52,6 +52,27 @@ export const DEFAULT_PAGE_SECTIONS: PageSections = {};
  * section that has never been edited — a list built from the stored record
  * alone would start empty and stay that way.
  */
+/**
+ * What each group of sections is called in the console.
+ *
+ * The tabs used to show the route itself, so the footer sections sat under "/"
+ * beside the home page's own — findable only by someone who already knew.
+ */
+export const SECTION_PAGE_LABELS: Record<string, string> = {
+  "/": "Home page",
+  "/footer": "Footer",
+  "/blog": "Blog",
+  "/services": "Services",
+  "/why-us": "Why us",
+  "/process": "Process",
+  "/tech-stack": "Tech stack",
+  "/portfolio": "Portfolio",
+  "/testimonials": "Testimonials",
+  "/faqs": "FAQs",
+  "/security": "Security",
+  "/contact": "Contact",
+};
+
 export const SECTION_REGISTRY: Array<{ id: string; page: string; label: string }> = [
   // Home page
   { id: "home/ratings", page: "/", label: "Review platform strip" },
@@ -66,9 +87,9 @@ export const SECTION_REGISTRY: Array<{ id: string; page: string; label: string }
   { id: "blog/tags", page: "/blog", label: "Popular tags" },
 
   // Site-wide
-  { id: "footer/brand", page: "/", label: "Footer brand column" },
-  { id: "footer/social", page: "/", label: "Footer social links" },
-  { id: "footer/offices", page: "/", label: "Global offices (footer)" },
+  { id: "footer/brand", page: "/footer", label: "Footer brand column" },
+  { id: "footer/social", page: "/footer", label: "Footer social links" },
+  { id: "footer/offices", page: "/footer", label: "Global offices (footer)" },
 
   // /services
   { id: "services/saas-deep-dive", page: "/services", label: "SaaS architecture deep dive" },
