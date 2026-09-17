@@ -80,6 +80,8 @@ const TAG_ROUTES: Record<CacheTag, Array<[string, ("page" | "layout")?]>> = {
   [CACHE_TAGS.sitemap]: [["/sitemap.xml"]],
   // Same shape as the sitemap: its own path, nothing under "/" to rebuild.
   [CACHE_TAGS.robots]: [["/robots.txt"]],
+  // One rendered page each; none of them share a segment.
+  [CACHE_TAGS.legal]: [["/privacy"], ["/terms"], ["/cookies"], ["/nda"], ["/refund-policy"]],
   // Admin-only; nothing public renders it.
   [CACHE_TAGS.integrations]: [],
 };

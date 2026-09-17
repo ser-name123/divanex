@@ -29,6 +29,7 @@ import {
   ScrollText,
   Map as MapIcon,
   Bot,
+  Scale,
 } from "lucide-react";
 import { canSeeTab, type Role } from "@/lib/permissions";
 
@@ -152,6 +153,12 @@ export default function AdminSidebar({
       id: "sections",
       label: "Page Sections",
       icon: LayoutList,
+      badge: null
+    },
+    {
+      id: "legal",
+      label: "Legal Pages",
+      icon: Scale,
       badge: null
     },
     {

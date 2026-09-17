@@ -128,6 +128,7 @@ export const TAB_PERMISSIONS: Record<string, Permission | null> = {
   seo: "content.view",
   sitemap: "content.view",
   robots: "content.view",
+  legal: "content.view",
   siteconfig: "content.view",
   navigation: "content.view",
   pages: "content.view",

@@ -22,6 +22,7 @@ export const CACHE_TAGS = {
   forms: "content:forms",
   sitemap: "content:sitemap",
   robots: "content:robots",
+  legal: "content:legal",
 } as const;
 
 export type CacheTag = (typeof CACHE_TAGS)[keyof typeof CACHE_TAGS];
@@ -37,6 +38,11 @@ export const CACHE_ENTRIES: Array<{ tag: CacheTag; label: string; description: s
     tag: CACHE_TAGS.sitemap,
     label: "Sitemap",
     description: "Which URLs the sitemap lists, and what each one claims about itself.",
+  },
+  {
+    tag: CACHE_TAGS.legal,
+    label: "Legal pages",
+    description: "Privacy, terms, cookies, NDA and refund copy.",
   },
   {
     tag: CACHE_TAGS.robots,

@@ -30,6 +30,7 @@ import AdminUsersView from "@/components/admin/AdminUsersView";
 import AdminAuditView from "@/components/admin/AdminAuditView";
 import AdminSitemapView from "@/components/admin/AdminSitemapView";
 import AdminRobotsView from "@/components/admin/AdminRobotsView";
+import AdminLegalView from "@/components/admin/AdminLegalView";
 import { can, canSeeTab, type Role } from "@/lib/permissions";
 
 import {
@@ -338,6 +339,10 @@ function AdminDashboardContent() {
               logs={logs}
               onClearLogs={handleClearLogs}
             />
+          )}
+
+          {activeTab === "legal" && canSeeTab(me?.role ?? null, "legal") && (
+            <AdminLegalView canEdit={can(me?.role ?? null, "content.edit")} />
           )}
 
           {activeTab === "robots" && canSeeTab(me?.role ?? null, "robots") && (

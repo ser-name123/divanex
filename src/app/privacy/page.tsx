@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { breadcrumbSchema, buildPageMetadata, jsonLdScript } from "@/lib/seo";
 import { getSiteSettings } from "@/lib/siteSettingsStore";
-import PrivacyPageClient from "./PrivacyPageClient";
+import LegalDocumentView from "@/components/legal/LegalDocumentView";
+import { getContent } from "@/lib/contentStore";
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildPageMetadata({ path: "/privacy" });
 }
 
 export default async function Page() {
-  const settings = await getSiteSettings();
+  const [settings, legal] = await Promise.all([getSiteSettings(), getContent("legal")]);
 
   const privacySchema = {
     "@context": "https://schema.org",
@@ -37,7 +38,7 @@ export default async function Page() {
           ),
         }}
       />
-      <PrivacyPageClient />
+      <LegalDocumentView route="/privacy" document={legal["privacy"]} />
     </>
   );
 }

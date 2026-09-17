@@ -8,6 +8,7 @@ import { DEFAULT_PAGE_SECTIONS, type PageSections } from "@/data/pageSections";
 import { DEFAULT_FORM_SETTINGS, type FormSettings } from "@/data/formSettings";
 import { DEFAULT_SITEMAP_SETTINGS, type SitemapSettings } from "@/data/sitemapSettings";
 import { DEFAULT_ROBOTS_SETTINGS, type RobotsSettings } from "@/data/robotsSettings";
+import { DEFAULT_LEGAL_PAGES, type LegalPages } from "@/data/legalPages";
 import { servicesData, type ServiceItem } from "@/data/services";
 import { serviceDetailsRecord, type ServiceDetailData } from "@/data/serviceDetails";
 import { caseStudiesRecord, type CaseStudy } from "@/data/caseStudiesData";
@@ -204,6 +205,14 @@ export const CONTENT_COLLECTIONS = {
     label: "Robots",
     mergeWithSeed: true,
   },
+  legal: {
+    tag: CACHE_TAGS.legal,
+    seed: DEFAULT_LEGAL_PAGES as unknown,
+    label: "Legal pages",
+    // Keyed by slug, so a page added to the seed later still resolves for a
+    // project that saved this row before it existed.
+    mergeWithSeed: true,
+  },
   integrations: {
     tag: CACHE_TAGS.integrations,
     seed: DEFAULT_INTEGRATIONS as unknown,
@@ -250,5 +259,6 @@ export interface ContentShapes {
   forms: FormSettings;
   sitemap: SitemapSettings;
   robots: RobotsSettings;
+  legal: LegalPages;
   integrations: IntegrationEntry[];
 }

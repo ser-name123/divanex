@@ -64,6 +64,15 @@ import {
   Timer,
   Wallet,
   Wrench,
+  Cookie,
+  EyeOff,
+  Clock,
+  Banknote,
+  Scale,
+  RefreshCw,
+  ArrowRight,
+  FileSignature,
+  Gavel,
   type LucideIcon,
 } from "lucide-react";
 
@@ -140,6 +149,15 @@ export const ICON_REGISTRY: Record<string, LucideIcon> = {
   Users,
   Workflow,
   Zap,
+  Cookie,
+  EyeOff,
+  Clock,
+  Banknote,
+  Scale,
+  RefreshCw,
+  ArrowRight,
+  FileSignature,
+  Gavel,
 };
 
 /** Sorted names, for the icon picker in the admin console. */
