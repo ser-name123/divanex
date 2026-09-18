@@ -246,10 +246,10 @@ export default function HeroSection({ onOpenConsultation: _onOpenConsultation }:
 
                     {/* Title & Description */}
                     <div className="space-y-0.5 mb-2">
-                      <h3 className="text-xs sm:text-sm font-bold text-[#000838] group-hover:text-[#0f7670] transition-colors leading-snug flex items-center justify-between">
+                      <h2 className="text-xs sm:text-sm font-bold text-[#000838] group-hover:text-[#0f7670] transition-colors leading-snug flex items-center justify-between">
                         <span>{cap.title}</span>
                         <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#0f7670]" />
-                      </h3>
+                      </h2>
                       <p className="text-[11px] text-slate-500 leading-relaxed line-clamp-2">
                         {cap.subtitle}
                       </p>

@@ -86,6 +86,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
 
       let heuristicCurrency: CurrencyCode = "USD";
       let heuristicCountry = "US";
+      let matched = false;
 
       if (
         tz.includes("Kolkata") ||
@@ -97,6 +98,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
       ) {
         heuristicCurrency = "INR";
         heuristicCountry = "IN";
+        matched = true;
       } else if (
         tz.includes("London") ||
         tz.includes("Europe/London") ||
@@ -104,6 +106,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
       ) {
         heuristicCurrency = "GBP";
         heuristicCountry = "GB";
+        matched = true;
       } else if (
         tz.includes("Berlin") ||
         tz.includes("Paris") ||
@@ -114,6 +117,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
       ) {
         heuristicCurrency = "EUR";
         heuristicCountry = "EU";
+        matched = true;
       } else if (
         tz.includes("Dubai") ||
         tz.includes("Riyadh") ||
@@ -124,6 +128,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
       ) {
         heuristicCurrency = "AED";
         heuristicCountry = "AE";
+        matched = true;
       } else if (
         tz.includes("Sydney") ||
         tz.includes("Melbourne") ||
@@ -134,6 +139,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
       ) {
         heuristicCurrency = "AUD";
         heuristicCountry = "AU";
+        matched = true;
       } else if (
         tz.includes("Toronto") ||
         tz.includes("Vancouver") ||
@@ -144,6 +150,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
       ) {
         heuristicCurrency = "CAD";
         heuristicCountry = "CA";
+        matched = true;
       } else if (
         tz.includes("Singapore") ||
         tz.includes("Asia/Singapore") ||
@@ -151,6 +158,22 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
       ) {
         heuristicCurrency = "SGD";
         heuristicCountry = "SG";
+        matched = true;
+      }
+
+      /**
+       * The browser's region, for anywhere the timezone list above does not
+       * name: "en-NZ" gives NZ, "de-CH" gives CH.
+       *
+       * Only consulted when nothing matched. The timezone says where the
+       * machine is; the locale says which language it was set up in, and the
+       * two disagree often enough — an Indian visitor on en-US is ordinary —
+       * that letting the region win would make the guess worse, not better.
+       */
+      const region = matched ? "" : new Intl.Locale(locale).region;
+      if (region && COUNTRY_TO_CURRENCY[region]) {
+        heuristicCurrency = COUNTRY_TO_CURRENCY[region];
+        heuristicCountry = region;
       }
 
       setCurrencyState(heuristicCurrency);
@@ -160,26 +183,15 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
       // Fallback
     }
 
-    // 2. High-Accuracy IP-Based Geo API Check (Async Background Update)
-    const detectIPCountry = async () => {
-      try {
-        const res = await fetch("https://api.country.is/", { cache: "no-store" });
-        if (res.ok) {
-          const data = await res.json();
-          const countryCode = data?.country?.toUpperCase();
-          if (countryCode && COUNTRY_TO_CURRENCY[countryCode]) {
-            setCurrencyState(COUNTRY_TO_CURRENCY[countryCode]);
-            setUserCountry(countryCode);
-            setIsAutoDetected(true);
-            return;
-          }
-        }
-      } catch {
-        // Silently fallback to heuristic detection
-      }
-    };
-
-    detectIPCountry();
+    /**
+     * There used to be a second pass here that asked api.country.is for the
+     * visitor's country.
+     *
+     * It never worked: the site's Content Security Policy does not list that
+     * origin, so the browser refused every call and logged the refusal on each
+     * page load. It was also the one thing on the site that handed a visitor's
+     * address to a third party, for a guess the timezone above already makes.
+     */
   }, []);
 
   const setCurrency = (code: CurrencyCode) => {

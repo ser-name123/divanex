@@ -305,12 +305,12 @@ export default function ContactSection() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700">
+                  <label htmlFor="contact-name" className="text-xs font-bold text-slate-700">
                     Your Full Name <span className="text-sky-600">*</span>
                   </label>
                   <input
                     type="text"
-                    name="name"
+                    name="name" id="contact-name"
                     required
                     value={formData.name}
                     onChange={handleChange}
@@ -320,12 +320,12 @@ export default function ContactSection() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700">
+                  <label htmlFor="contact-email" className="text-xs font-bold text-slate-700">
                     Email Address <span className="text-sky-600">*</span>
                   </label>
                   <input
                     type="email"
-                    name="email"
+                    name="email" id="contact-email"
                     required
                     value={formData.email}
                     onChange={handleChange}
@@ -337,12 +337,12 @@ export default function ContactSection() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-700">
+                  <label htmlFor="contact-phone" className="text-xs font-semibold text-slate-700">
                     Phone / WhatsApp Number
                   </label>
                   <input
                     type="tel"
-                    name="phone"
+                    name="phone" id="contact-phone"
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+1 555-0199 or +91 98765..."
@@ -351,11 +351,11 @@ export default function ContactSection() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-700">
+                  <label htmlFor="contact-service" className="text-xs font-semibold text-slate-700">
                     Target Core Service <span className="text-slate-400 font-normal">(Optional)</span>
                   </label>
                   <select
-                    name="service"
+                    name="service" id="contact-service"
                     value={formData.service}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-sky-500 focus:bg-white transition-all"
@@ -379,11 +379,11 @@ export default function ContactSection() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-700">
+                  <label htmlFor="contact-budget" className="text-xs font-semibold text-slate-700">
                     Estimated Project Budget <span className="text-slate-400 font-normal">(Optional)</span>
                   </label>
                   <select
-                    name="budget"
+                    name="budget" id="contact-budget"
                     value={formData.budget}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-sky-500 focus:bg-white transition-all"
@@ -398,11 +398,11 @@ export default function ContactSection() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-700">
+                  <label htmlFor="contact-timeline" className="text-xs font-semibold text-slate-700">
                     Expected Timeline <span className="text-slate-400 font-normal">(Optional)</span>
                   </label>
                   <select
-                    name="timeline"
+                    name="timeline" id="contact-timeline"
                     value={formData.timeline}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-sky-500 focus:bg-white transition-all"
@@ -417,11 +417,11 @@ export default function ContactSection() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700">
+                <label htmlFor="contact-message" className="text-xs font-bold text-slate-700">
                   Project Vision & Scope Details <span className="text-sky-600">*</span>
                 </label>
                 <textarea
-                  name="message"
+                  name="message" id="contact-message"
                   required
                   rows={4}
                   value={formData.message}

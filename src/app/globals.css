@@ -948,7 +948,7 @@ main section .space-y-14 > :not([hidden]) ~ :not([hidden]) {
 }
 
 .text-slate-500 {
-  color: #858585 !important;
+  color: #5f6570 !important;
 }
 
 /* Protect vibrant gradient text & primary buttons */

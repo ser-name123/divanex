@@ -78,14 +78,30 @@ export async function syncSessionsFromServer(): Promise<ChatSession[]> {
   return getAllSessions();
 }
 
-export function subscribeToChatStore(listener: StoreListener) {
+/**
+ * Watches the local store, and optionally the server's copy.
+ *
+ * Only the console needs the server: it is the one place that shows every
+ * visitor's conversation, and it polls so two admins watching the same chat
+ * stay in step. The widget on the public site knows about exactly one
+ * conversation — its own — and it already writes that through POST.
+ *
+ * It used to sync regardless, which meant every visitor's browser asked an
+ * admin-only endpoint for the full transcript list every two seconds, was
+ * refused, and logged the refusal. The list was never used; the 401 was
+ * swallowed and the local copy returned.
+ */
+export function subscribeToChatStore(listener: StoreListener, options?: { sync?: boolean }) {
+  const syncWithServer = options?.sync === true;
+
   listeners.add(listener);
 
   if (typeof window !== "undefined") {
-    // Initial sync
-    syncSessionsFromServer().then((updated) => {
-      listener(updated);
-    });
+    if (syncWithServer) {
+      syncSessionsFromServer().then((updated) => {
+        listener(updated);
+      });
+    }
 
     const handleStorage = (e: StorageEvent) => {
       if (e.key === STORAGE_KEY_SESSIONS || e.key === STORAGE_KEY_DELETED_IDS) {
@@ -103,18 +119,21 @@ export function subscribeToChatStore(listener: StoreListener) {
       // BroadcastChannel unavailable
     }
 
-    // Polling interval for cross-client real-time synchronization
-    const pollInterval = setInterval(async () => {
-      const fresh = await syncSessionsFromServer();
-      listener(fresh);
-    }, 2000);
+    // Cross-client sync for the console. Left unset on the public site, where
+    // there is nothing to reconcile and nobody authorised to read it.
+    const pollInterval = syncWithServer
+      ? setInterval(async () => {
+          const fresh = await syncSessionsFromServer();
+          listener(fresh);
+        }, 2000)
+      : null;
 
     window.addEventListener("storage", handleStorage);
 
     return () => {
       listeners.delete(listener);
       window.removeEventListener("storage", handleStorage);
-      clearInterval(pollInterval);
+      if (pollInterval) clearInterval(pollInterval);
       if (channel) channel.close();
     };
   }

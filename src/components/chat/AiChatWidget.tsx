@@ -441,7 +441,6 @@ export default function AiChatWidget() {
             setIsMinimized(false);
           }}
           className="group relative flex items-center gap-3 px-4 py-3.5 bg-white hover:bg-sky-50/80 text-slate-900 rounded-full shadow-2xl hover:shadow-sky-500/20 transition-all duration-300 transform hover:scale-105 active:scale-95 cursor-pointer border border-sky-200"
-          aria-label="Open AI Live Chat Support"
         >
           {/* Subtle Outer Glowing Ring */}
           <span className="absolute -inset-1 rounded-full bg-sky-400/20 blur-md group-hover:blur-lg transition-all"></span>

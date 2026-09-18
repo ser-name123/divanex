@@ -102,7 +102,7 @@ export default function AdminChatsView() {
     setSessions(getAllSessions());
     const unsubscribe = subscribeToChatStore((updatedSessions) => {
       setSessions(updatedSessions);
-    });
+    }, { sync: true });
     return () => unsubscribe();
   }, []);
 

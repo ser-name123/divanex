@@ -29,8 +29,8 @@ const DEFAULT_ITEMS = [
     { kind: "platform", name: "Clutch", rating: "4.7", reviewCount: "45+", logoType: "clutch" },
     { kind: "platform", name: "Upwork", rating: "4.7", reviewCount: "150+", logoType: "upwork" },
     { kind: "platform", name: "Fiverr", rating: "4.7", reviewCount: "210+", logoType: "fiverr" },
-    { kind: "badge", name: "GoodFirms", initials: "GF", subLabel: "Top Rated", markColor: "#2575fc", subColor: "#0f7670" },
-    { kind: "badge", name: "TopDevelopers", initials: "TD", subLabel: "Best Web Dev", markColor: "#000838", subColor: "#5c9556" }
+    { kind: "badge", name: "GoodFirms", initials: "GF", subLabel: "Top Rated", markColor: "#1a5ed8", subColor: "#0f7670" },
+    { kind: "badge", name: "TopDevelopers", initials: "TD", subLabel: "Best Web Dev", markColor: "#000838", subColor: "#41703c" }
   ];
 
 /**
@@ -67,7 +67,7 @@ function BrandMark({ logoType, name }: { logoType?: string; name?: string }) {
 
   if (logoType === "freelancer") {
     return (
-      <span className="flex items-center gap-1 font-bold text-xs text-[#29b2fe]">
+      <span className="flex items-center gap-1 font-bold text-xs text-[#15719f]">
         <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
           <path d="M14.07 3.5L9.67 9.88l3.18 2.45 6.08-8.83h-4.86zm-5.75 3.5l-4.82 7 6.46 3.63 1.54-7-3.18-3.63z" />
         </svg>
@@ -85,13 +85,13 @@ function BrandMark({ logoType, name }: { logoType?: string; name?: string }) {
   }
 
   if (logoType === "upwork") {
-    return <span className="font-extrabold text-sm tracking-tight text-[#14a800]">upwork</span>;
+    return <span className="font-extrabold text-sm tracking-tight text-[#0e7a00]">upwork</span>;
   }
 
   if (logoType === "fiverr") {
     return (
-      <span className="font-black text-sm tracking-tight text-[#00b22d] flex items-center">
-        fiverr<span className="w-1.5 h-1.5 rounded-full bg-[#00b22d] ml-0.5 inline-block" />
+      <span className="font-black text-sm tracking-tight text-[#00791e] flex items-center">
+        fiverr<span className="w-1.5 h-1.5 rounded-full bg-[#00791e] ml-0.5 inline-block" />
       </span>
     );
   }
@@ -123,7 +123,7 @@ export default function GlobalRatingsStrip() {
                 </span>
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#5c9556] animate-pulse" />
               </div>
-              <p className="text-[11px] text-slate-500 font-medium">{heading.description}</p>
+              <p className="text-[11px] text-slate-600 font-medium">{heading.description}</p>
             </div>
           </div>
 
@@ -148,7 +148,7 @@ export default function GlobalRatingsStrip() {
                       ))}
                     </div>
                   </div>
-                  <span className="text-[9.5px] font-mono text-slate-400 leading-tight">Rating</span>
+                  <span className="text-[9.5px] font-mono text-slate-600 leading-tight">Rating</span>
                 </div>
               </div>
             ))}

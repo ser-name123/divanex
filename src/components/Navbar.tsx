@@ -74,7 +74,7 @@ export default function Navbar({ onOpenConsultation: _onOpenConsultation }: Navb
             alt="Divanex Technologies"
             width={1400}
             height={286}
-            sizes="(min-width: 640px) 210px, 0px"
+            sizes="210px"
             className="hidden sm:block w-[196px] lg:w-[210px] h-auto group-hover:scale-[1.03] transition-transform duration-300"
             priority
           />

@@ -755,7 +755,7 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
         "name": "GoodFirms",
         "initials": "GF",
         "subLabel": "Top Rated",
-        "markColor": "#2575fc",
+        "markColor": "#1a5ed8",
         "subColor": "#0f7670"
       },
       {
@@ -764,7 +764,7 @@ export const SECTION_DEFAULTS: Record<string, Partial<SectionContent>> =
         "initials": "TD",
         "subLabel": "Best Web Dev",
         "markColor": "#000838",
-        "subColor": "#5c9556"
+        "subColor": "#41703c"
       }
     ]
   },
