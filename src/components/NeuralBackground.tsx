@@ -23,6 +23,9 @@ export default function NeuralBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    // Somebody who has asked for less motion gets none of this.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -210,14 +213,46 @@ export default function NeuralBackground() {
       animationFrameId = requestAnimationFrame(render);
     };
 
-    animationFrameId = requestAnimationFrame(render);
+    /**
+     * The loop waits for the browser to be idle before its first frame.
+     *
+     * Sixty-five nodes with a pairwise connection pass is real work every
+     * frame, and it used to begin the moment the effect ran — competing with
+     * hydration for the main thread and landing inside the window Lighthouse
+     * measures as blocking time. Nothing here is load-bearing: starting it a
+     * beat later costs an animation nobody has looked at yet.
+     */
+    const start = () => {
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    const idle =
+      typeof window.requestIdleCallback === "function"
+        ? window.requestIdleCallback(start, { timeout: 2000 })
+        : window.setTimeout(start, 400);
+
+    /** A hidden tab should not be animating at all. */
+    const handleVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animationFrameId);
+      } else {
+        animationFrameId = requestAnimationFrame(render);
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("visibilitychange", handleVisibility);
       clearInterval(pulseInterval);
       cancelAnimationFrame(animationFrameId);
+      if (typeof window.cancelIdleCallback === "function") {
+        window.cancelIdleCallback(idle as number);
+      } else {
+        clearTimeout(idle as number);
+      }
     };
   }, []);
 
