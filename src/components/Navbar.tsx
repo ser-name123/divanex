@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -57,6 +57,31 @@ export default function Navbar({ onOpenConsultation: _onOpenConsultation }: Navb
   const ctas = (header.ctas ?? []).filter((cta) => !cta.hidden);
   const quickLinks = visibleLinks(header.megaMenuQuickLinks);
 
+  /**
+   * The wordmark on tablet and up, the icon mark on phones.
+   *
+   * `getImageProps` gives the optimised srcset without rendering an element,
+   * which is what lets both live inside one <picture>.
+   */
+  const { props: wordmark } = getImageProps({
+    src: "/divanex-logo.png",
+    alt: "Divanex Technologies",
+    width: 1400,
+    height: 286,
+    sizes: "(min-width: 1024px) 210px, 196px",
+    priority: true,
+  });
+  const wordmarkSrcSet = wordmark.srcSet;
+
+  const { props: iconProps } = getImageProps({
+    src: "/brand-logo-icon.png",
+    alt: "Divanex Technologies",
+    width: 512,
+    height: 512,
+    sizes: "44px",
+    priority: true,
+  });
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -68,26 +93,24 @@ export default function Navbar({ onOpenConsultation: _onOpenConsultation }: Navb
       <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 flex items-center justify-between">
         {/* Brand Logo — official Divanex Technologies lockup */}
         <Link href="/" className="flex items-center group" aria-label="Divanex Technologies — home">
-          {/* Full wordmark on tablet and up, where there is room for it */}
-          <Image
-            src="/divanex-logo.png"
-            alt="Divanex Technologies"
-            width={1400}
-            height={286}
-            sizes="210px"
-            className="hidden sm:block w-[196px] lg:w-[210px] h-auto group-hover:scale-[1.03] transition-transform duration-300"
-            priority
-          />
-          {/* Icon mark alone on phones, so the navbar stays uncrowded */}
-          <Image
-            src="/brand-logo-icon.png"
-            alt="Divanex Technologies"
-            width={512}
-            height={512}
-            sizes="44px"
-            className="sm:hidden w-[44px] h-[44px] group-hover:scale-105 transition-transform duration-300"
-            priority
-          />
+          {/*
+            One picture, two sources, one download.
+            
+            These used to be two <Image>s, one hidden by CSS at each breakpoint —
+            which hides an image but does not stop the browser fetching it. The
+            wordmark was being downloaded on phones that never show it, and the
+            variant it asked for there was 32px wide for a 1400px file, whose
+            rounded dimensions no longer matched its declared aspect ratio.
+            
+            A <picture> fetches only the source whose media query matches.
+          */}
+          <picture>
+            <source media="(min-width: 640px)" srcSet={wordmarkSrcSet} />
+            <img
+              {...iconProps}
+              className="w-[44px] h-[44px] sm:w-[196px] lg:w-[210px] sm:h-auto group-hover:scale-105 sm:group-hover:scale-[1.03] transition-transform duration-300"
+            />
+          </picture>
         </Link>
 
         {/* Right Section: Desktop Navigation + Action Buttons */}

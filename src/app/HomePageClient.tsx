@@ -52,7 +52,7 @@ export default function HomePageClient({
       {/* Navigation Header */}
       <Navbar />
 
-      <main>
+      <main className="defer-below-fold">
         {/* Section 1: Hero Section */}
         <HeroSection />
 

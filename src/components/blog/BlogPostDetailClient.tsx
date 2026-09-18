@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { coverImageProps, portraitImageProps } from "@/lib/remoteImage";
 import Link from "next/link";
 import { BlogPost } from "@/data/blogData";
 import {
@@ -175,6 +176,7 @@ export default function BlogPostDetailClient({ post, relatedPosts }: BlogPostDet
                 <div className="flex items-center gap-3">
                   <img
                     src={post.author.avatar}
+                    {...portraitImageProps(post.author.avatar)}
                     alt={post.author.name}
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80";
@@ -257,6 +259,7 @@ export default function BlogPostDetailClient({ post, relatedPosts }: BlogPostDet
               <div className="relative h-64 sm:h-72 lg:h-[280px] w-full rounded-3xl overflow-hidden border border-slate-200 shadow-md group bg-slate-900">
                 <img
                   src={post.coverImage}
+                    {...coverImageProps(post.coverImage)}
                   alt={post.title}
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=1200&q=80";
@@ -389,6 +392,7 @@ export default function BlogPostDetailClient({ post, relatedPosts }: BlogPostDet
             <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-6">
               <img
                 src={post.author.avatar}
+                    {...portraitImageProps(post.author.avatar)}
                 alt={post.author.name}
                 className="w-18 h-18 rounded-3xl object-cover border-2 border-sky-200 shadow-md flex-shrink-0"
               />
@@ -518,6 +522,7 @@ export default function BlogPostDetailClient({ post, relatedPosts }: BlogPostDet
                     <div className="relative h-44 rounded-2xl overflow-hidden bg-slate-100">
                       <img
                         src={rel.coverImage}
+                    {...coverImageProps(rel.coverImage)}
                         alt={rel.title}
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=1200&q=80";

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import { coverImageProps, portraitImageProps } from "@/lib/remoteImage";
 import { useSection } from "@/lib/useSection";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -392,6 +393,7 @@ export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClien
                 <div className="flex items-center gap-3">
                   <img
                     src={featuredPost.author.avatar}
+                    {...portraitImageProps(featuredPost.author.avatar)}
                     alt={featuredPost.author.name}
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80";
@@ -421,6 +423,7 @@ export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClien
             <div className="lg:col-span-5 relative h-72 sm:h-84 lg:h-96 rounded-3xl overflow-hidden border border-slate-200 shadow-inner">
               <img
                 src={featuredPost.coverImage}
+                    {...coverImageProps(featuredPost.coverImage)}
                 alt={featuredPost.title}
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=1200&q=80";
@@ -505,6 +508,7 @@ export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClien
                     <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-slate-100">
                       <img
                         src={post.coverImage}
+                    {...coverImageProps(post.coverImage)}
                         alt={post.title}
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=1200&q=80";
@@ -568,6 +572,7 @@ export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClien
                       <div className="flex items-center gap-2.5">
                         <img
                           src={post.author.avatar}
+                    {...portraitImageProps(post.author.avatar)}
                           alt={post.author.name}
                           onError={(e) => {
                             (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80";

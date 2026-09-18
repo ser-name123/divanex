@@ -1384,3 +1384,42 @@ tr:hover,
 .animate-scan-line {
   animation: scanLine 3s linear infinite;
 }
+
+/**
+ * Skips style, layout and paint for sections the visitor has not reached.
+ *
+ * The home page carries close to four thousand elements, and a trace put more
+ * of its main thread in style and layout than in running JavaScript. Almost all
+ * of that was for sections below the fold: the browser was laying out the whole
+ * document before it could paint the first screen, which is why the largest
+ * element in the hero took four and a half seconds to appear while the first
+ * paint happened in under two.
+ *
+ * The first three sections are left alone — they are at or near the fold, and
+ * skipping work that has to happen anyway only delays it.
+ *
+ * `contain-intrinsic-size` is what keeps the scrollbar honest: without a
+ * placeholder height the page would collapse and jump as each section came into
+ * view. `auto` lets the browser remember the real height after the first
+ * render, so the guess only matters once. Measured at CLS 0 on both form
+ * factors.
+ *
+ * An earlier attempt at this wrapped each section in an extra div and made
+ * blocking time worse. Applying it to the sections themselves does not.
+ */
+.defer-below-fold > section:nth-of-type(n + 4) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+/**
+ * Printing renders the whole page at once, so nothing may be skipped.
+ *
+ * `content-visibility: auto` decides by what is on screen, and a printer has no
+ * screen — without this the sections below the fold come out blank.
+ */
+@media print {
+  .defer-below-fold > section {
+    content-visibility: visible;
+  }
+}
