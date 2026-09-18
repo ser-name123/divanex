@@ -51,7 +51,7 @@ interface CaseStudyDetailClientProps {
 function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
   if (caseStudy.slug === "fynito") {
     return (
-      <div className="rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 text-white overflow-hidden relative shadow-2xl">
+      <div className="dark-surface rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 text-white overflow-hidden relative shadow-2xl">
         <div className="absolute top-0 right-0 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="flex flex-col lg:flex-row items-center gap-8 relative z-10">
           {/* Mobile Screen Mockup */}
@@ -109,9 +109,9 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
               <Sparkles className="w-3.5 h-3.5 text-rose-400" />
               <span>LIVE SYSTEM PRODUCTION MOCKUP</span>
             </div>
-            <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Real-Time Kitchen Dispatch &amp; Driver Routing Console
-            </h4>
+            </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
               Engineered with Socket.io and Redis geospatial pub/sub, the Fynito ecosystem matches orders to the nearest idle rider in 6.8 seconds while broadcasting 60 FPS live vehicle trajectory to customer phones.
             </p>
@@ -141,7 +141,7 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
 
   if (caseStudy.slug === "our-pg") {
     return (
-      <div className="rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 text-white overflow-hidden relative shadow-2xl">
+      <div className="dark-surface rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 text-white overflow-hidden relative shadow-2xl">
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="flex flex-col lg:flex-row items-center gap-8 relative z-10">
           {/* Visual Bed Grid Dashboard Mockup */}
@@ -202,9 +202,9 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
               <Building className="w-3.5 h-3.5 text-blue-400" />
               <span>INTERACTIVE BED MATRIX &amp; AUTOPAY</span>
             </div>
-            <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Enterprise Coliving &amp; Bed Matrix OS Across Multi-City Properties
-            </h4>
+            </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
               Eliminated manual registers and double bookings with a real-time visual floor grid, instant Aadhaar biometric KYC, and automated recurring WhatsApp AutoPay billing.
             </p>
@@ -221,7 +221,7 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
 
   if (caseStudy.slug === "sm-supermoda") {
     return (
-      <div className="rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 text-white overflow-hidden relative shadow-2xl">
+      <div className="dark-surface rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 text-white overflow-hidden relative shadow-2xl">
         <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="flex flex-col lg:flex-row items-center gap-8 relative z-10">
           {/* 3D Model Explorer Mockup */}
@@ -262,9 +262,9 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
               <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
               <span>SUB-SECOND EDGE NEXT.JS 15 &amp; THREE.JS</span>
             </div>
-            <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Cinematic Real Estate Discovery Generating 260+ Qualified Leads/Mo
-            </h4>
+            </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
               Transformed heavy, sluggish WordPress real estate pages into lightning-fast edge-cached Next.js 15 pages with touch-friendly 3D unit walkthroughs and instant WhatsApp broker routing.
             </p>
@@ -286,7 +286,7 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
 
   if (caseStudy.slug === "evtor") {
     return (
-      <div className="rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 text-white overflow-hidden relative shadow-2xl">
+      <div className="dark-surface rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 text-white overflow-hidden relative shadow-2xl">
         <div className="absolute top-0 right-0 w-96 h-96 bg-green-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="flex flex-col lg:flex-row items-center gap-8 relative z-10">
           <div className="w-full lg:w-1/2 bg-slate-950 rounded-2xl border border-slate-800 p-5 space-y-4">
@@ -331,9 +331,9 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
               <Zap className="w-3.5 h-3.5 text-green-400" />
               <span>HARDWARE TELEMETRY &amp; DRIVER APP</span>
             </div>
-            <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Connected EV Charging Network &amp; OCPP 2.0.1 Telemetry Engine
-            </h4>
+            </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
               Standardized heterogeneous multi-brand EVSE hardware through a universal OCPP 2.0.1 WebSocket broker, enabling instant QR scan-to-charge in 2.4 seconds with real-time electrical telemetry.
             </p>
@@ -350,7 +350,7 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
 
   if (caseStudy.slug === "magnus-partners") {
     return (
-      <div className="rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 text-white overflow-hidden relative shadow-2xl">
+      <div className="dark-surface rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 text-white overflow-hidden relative shadow-2xl">
         <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="flex flex-col lg:flex-row items-center gap-8 relative z-10">
           <div className="w-full lg:w-1/2 bg-slate-950 rounded-2xl border border-slate-800 p-5 space-y-4">
@@ -387,9 +387,9 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
               <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
               <span>HL7 FHIR V4 &amp; ZERO-TRUST SECURITY</span>
             </div>
-            <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Enterprise HealthTech &amp; Clinical Collaboration Architecture
-            </h4>
+            </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
               Constructed a zero-trust clinical collaboration pipeline with in-browser DICOM radiology viewing, FHIR-compatible data models, and HIPAA-ready access controls.
             </p>
@@ -406,7 +406,7 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
 
   // Parana Tool Default
   return (
-    <div className="rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 text-white overflow-hidden relative shadow-2xl">
+    <div className="dark-surface rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 text-white overflow-hidden relative shadow-2xl">
       <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="flex flex-col lg:flex-row items-center gap-8 relative z-10">
         <div className="w-full lg:w-1/2 bg-slate-950 rounded-2xl border border-slate-800 p-5 space-y-4">
@@ -446,9 +446,9 @@ function ProjectVisualShowcase({ caseStudy }: { caseStudy: CaseStudy }) {
             <Cpu className="w-3.5 h-3.5 text-amber-400" />
             <span>PARAMETRIC SEARCH &amp; AUTOMATED B2B RFQ</span>
           </div>
-          <h4 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
             Industrial CNC Tooling Catalog Driving +242% B2B Inquiry Conversions
-          </h4>
+          </h2>
           <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
             Replaced 600-page static PDF catalogues with sub-40ms parametric search, 3D STEP CAD model downloads, and automated PDF volume quoting in under 3 seconds.
           </p>
