@@ -1484,3 +1484,42 @@ tr:hover,
 .dark-surface .text-slate-500 {
   color: #808aa3 !important;
 }
+
+/**
+ * An element that asks for white text is declaring itself dark.
+ *
+ * The sweep above lightens .bg-slate-800/900/950 because, in most places, the
+ * darkness was incidental and the light theme wanted them pale. It leaves
+ * .text-white alone, because buttons and gradient fills still need it.
+ *
+ * Where a single element carries both, the two rules cancel out and the element
+ * renders white on white: a solid button with no label, a selected tab that
+ * looks like an empty pill. There were thirty-five of them — the case study
+ * tabs, the "View all" buttons, the selected chips in the console.
+ *
+ * Patching each call site would leave the next one to break the same way. An
+ * element that pairs a dark background class with white text has said what it
+ * means, so it keeps both. The compound selector outranks the single-class
+ * sweep on specificity, which is what lets this sit underneath it.
+ */
+.bg-slate-900.text-white,
+[class*="bg-slate-900\/"].text-white,
+[class*="bg-slate-900\/"][class*="text-white\/"] {
+  background-color: #141b33 !important;
+  border-color: #141b33 !important;
+  color: #ffffff !important;
+}
+
+.bg-slate-800.text-white,
+[class*="bg-slate-800\/"].text-white,
+[class*="bg-slate-800\/"][class*="text-white\/"] {
+  background-color: #1f2740 !important;
+  border-color: #1f2740 !important;
+  color: #ffffff !important;
+}
+
+.bg-slate-950.text-white,
+[class*="bg-slate-950\/"].text-white {
+  background-color: #0a1130 !important;
+  color: #ffffff !important;
+}
