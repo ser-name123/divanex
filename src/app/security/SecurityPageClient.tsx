@@ -146,7 +146,7 @@ export default function SecurityPageClient() {
         </section>
 
         {/* Section 3: Vulnerability Disclosure Program (VDP) */}
-        <section id="vdp" className="py-16 bg-slate-50 border-t border-b border-slate-200">
+        <section id="vdp" className="scroll-mt-24 py-16 bg-slate-50 border-t border-b border-slate-200">
           <div className="max-w-4xl mx-auto px-4 sm:px-8 space-y-8">
             <div className="space-y-3 text-center">
               <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-50 text-amber-800 border border-amber-200">

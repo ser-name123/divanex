@@ -235,7 +235,7 @@ export default function BlogDirectoryClient({ initialPosts }: BlogDirectoryClien
   };
 
   return (
-    <div className="py-10 lg:py-16 max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 space-y-16">
+    <div id="articles" className="scroll-mt-24 py-10 lg:py-16 max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 space-y-16">
       
       {/* ------------------------------------------------------------- */}
       {/* 1. FILTERING, SEARCH & SORT CONTROL CENTER */}

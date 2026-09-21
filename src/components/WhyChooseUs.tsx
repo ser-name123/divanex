@@ -43,7 +43,7 @@ export default function WhyChooseUs() {
   const pillars = content.whyUsPillars ?? [];
 
   return (
-    <section id="why-us" className="relative py-12 lg:py-16 bg-white overflow-hidden">
+    <section id="why-us" className="scroll-mt-24 relative py-12 lg:py-16 bg-white overflow-hidden">
       <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         {/* Section Header */}
         <div className="reveal-init text-center max-w-4xl mx-auto space-y-4">

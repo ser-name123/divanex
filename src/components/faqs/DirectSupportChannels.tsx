@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useSection } from "@/lib/useSection";
 import RichText from "@/components/RichText";
 import { useState } from "react";
@@ -133,12 +134,12 @@ export default function DirectSupportChannels() {
                 <Calendar className="w-5 h-5" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-1">Discovery Call Calendar</h3>
-              <a
-                href="#contact"
+              <Link
+                href="/contact#schedule"
                 className="inline-block text-base font-mono text-indigo-700 font-bold mb-2 hover:text-indigo-800"
               >
                 Book 30-Min Call →
-              </a>
+              </Link>
               <p className="text-slate-600 text-xs sm:text-sm font-normal">Select a convenient time for a video discussion with a lead architect.</p>
             </div>
           </div>

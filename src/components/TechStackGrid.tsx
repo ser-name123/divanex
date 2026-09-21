@@ -160,7 +160,7 @@ export default function TechStackGrid({ isHome = false, items }: TechStackGridPr
   }, [activeCategory, searchQuery]);
 
   return (
-    <section id="tech-stack" className="relative py-12 lg:py-16 bg-slate-50/70 overflow-hidden">
+    <section id="tech-stack" className="scroll-mt-24 relative py-12 lg:py-16 bg-slate-50/70 overflow-hidden">
       {/* Background Grids */}
       <div className="absolute inset-0 bg-cyber-grid opacity-30 pointer-events-none" />
       <div className="glow-orb-cyan w-[400px] h-[400px] top-10 right-10 pointer-events-none opacity-20"></div>

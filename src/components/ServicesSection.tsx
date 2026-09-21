@@ -524,7 +524,7 @@ export default function ServicesSection({ isHome = false, limit, items }: Servic
   }, [services, activeCategory, searchQuery]);
 
   return (
-    <section id="services" className="relative py-12 lg:py-16 overflow-hidden bg-slate-50/50">
+    <section id="services" className="scroll-mt-24 relative py-12 lg:py-16 overflow-hidden bg-slate-50/50">
       <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         
         {/* Section Header */}

@@ -21,7 +21,7 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faqs" className="relative py-8 lg:py-10 bg-slate-50/50 overflow-hidden">
+    <section id="faqs" className="scroll-mt-24 relative py-8 lg:py-10 bg-slate-50/50 overflow-hidden">
       <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         {/* Section Header */}
         <div className="reveal-init text-center space-y-4">

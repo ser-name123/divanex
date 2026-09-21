@@ -516,7 +516,7 @@ export default function PortfolioSection({ isHome = false, items }: PortfolioSec
   }, [portfolioProjects, activeCategory, searchQuery]);
 
   return (
-    <section id="portfolio" className="relative py-12 lg:py-16 bg-[#f8fafc] text-slate-900 overflow-hidden border-t border-slate-200">
+    <section id="portfolio" className="scroll-mt-24 relative py-12 lg:py-16 bg-[#f8fafc] text-slate-900 overflow-hidden border-t border-slate-200">
       {/* Background Subtle Grid Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] [background-size:24px_24px] opacity-35 pointer-events-none" />
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-100/40 rounded-full blur-3xl pointer-events-none" />

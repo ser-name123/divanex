@@ -25,7 +25,7 @@ export default function DirectCalendlyScheduler() {
   });
 
   return (
-    <section className="py-20 relative bg-slate-50/70 border-b border-slate-200 overflow-hidden select-none">
+    <section id="schedule" className="scroll-mt-24 py-20 relative bg-slate-50/70 border-b border-slate-200 overflow-hidden select-none">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-sky-800 text-xs font-mono font-bold tracking-wider uppercase mb-4 shadow-2xs">
           <Calendar className="w-3.5 h-3.5 text-sky-600" />

@@ -96,7 +96,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-8 lg:py-10 bg-white overflow-hidden">
+    <section id="contact" className="scroll-mt-24 relative py-8 lg:py-10 bg-white overflow-hidden">
       <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         {/* Section Header */}
         <div className="reveal-init text-center max-w-4xl mx-auto space-y-4">
@@ -284,7 +284,9 @@ export default function ContactSection() {
           </div>
 
           {/* Right Column: Interactive Quick Inquiry Form */}
-          <div className="reveal-init reveal-delay-2 lg:col-span-7 rounded-3xl p-7 sm:p-10 border border-slate-200 bg-white shadow-xl shadow-sky-950/5 space-y-6">
+          <div
+            id="contact-form"
+            className="scroll-mt-28 reveal-init reveal-delay-2 lg:col-span-7 rounded-3xl p-7 sm:p-10 border border-slate-200 bg-white shadow-xl shadow-sky-950/5 space-y-6">
             <div className="space-y-1">
               <h3 className="text-2xl font-bold text-slate-900">Send Us a Quick Inquiry</h3>
               <p className="text-xs sm:text-sm text-slate-600">

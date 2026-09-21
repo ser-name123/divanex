@@ -69,7 +69,8 @@ export default function Testimonials({ isHome = false, items }: TestimonialsProp
   const displayedItems = isHome ? filteredTestimonials.slice(0, 6) : filteredTestimonials;
 
   return (
-    <section id="testimonials" className="relative py-8 lg:py-10 bg-white overflow-hidden border-t border-slate-200/80">
+    <section id="testimonials" className="scroll-mt-24 relative py-8 lg:py-10 bg-white overflow-hidden border-t border-slate-200/80">
+      <span id="reviews" aria-hidden="true" className="block scroll-mt-28" />
       <div className="absolute inset-0 bg-cyber-grid opacity-25 pointer-events-none" />
       <div className="glow-orb-blue w-[400px] h-[400px] top-1/4 -left-20 opacity-15"></div>
       <div className="glow-orb-cyan w-[350px] h-[350px] bottom-10 right-10 opacity-15"></div>

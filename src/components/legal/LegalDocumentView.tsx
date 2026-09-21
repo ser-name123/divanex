@@ -79,7 +79,7 @@ export default function LegalDocumentView({
       <main>
         <PageHeader route={route} />
 
-        <section className="py-16 sm:py-20 max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
+        <section id="policy" className="scroll-mt-24 py-16 sm:py-20 max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
             <div className="lg:col-span-4 space-y-6">
               <div className="sticky top-28 space-y-6">
@@ -130,8 +130,8 @@ export default function LegalDocumentView({
                   id={section.id}
                   className={
                     index === 0
-                      ? "space-y-4 pt-2"
-                      : "space-y-4 pt-6 border-t border-slate-200"
+                      ? "scroll-mt-28 space-y-4 pt-2"
+                      : "scroll-mt-28 space-y-4 pt-6 border-t border-slate-200"
                   }
                 >
                   <div className="flex items-center gap-2 text-xs font-mono font-bold text-sky-800 uppercase tracking-wider">
@@ -161,7 +161,7 @@ export default function LegalDocumentView({
               ))}
 
               {document.cta && (
-                <div className="pt-6 border-t border-slate-200">
+                <div id="contact" className="scroll-mt-28 pt-6 border-t border-slate-200">
                   <div className="rounded-2xl p-6 bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div className="space-y-1 text-center sm:text-left">
                       <h4 className="text-base font-bold text-slate-900">{document.cta.title}</h4>

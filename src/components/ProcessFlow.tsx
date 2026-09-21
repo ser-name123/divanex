@@ -18,7 +18,7 @@ export default function ProcessFlow() {
   const activeStep = processSteps[activeStepIndex];
 
   return (
-    <section id="process" className="relative py-8 lg:py-10 bg-slate-50/50 overflow-hidden">
+    <section id="process" className="scroll-mt-24 relative py-8 lg:py-10 bg-slate-50/50 overflow-hidden">
       <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         {/* Section Header */}
         <div className="reveal-init text-center max-w-4xl mx-auto space-y-4">
