@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import SmartLink from "@/components/SmartLink";
 import { ChevronRight, Home, ArrowRight, Terminal } from "lucide-react";
 import { Icon } from "@/lib/iconRegistry";
 import { accent } from "@/lib/accents";
@@ -83,13 +84,13 @@ export default function PageHeader({ route, tokens }: PageHeaderProps) {
             </p>
 
             <div className="flex flex-wrap items-center gap-3.5 pt-2">
-              <Link
+              <SmartLink
                 href={content.actionHref || "/contact"}
                 className="btn-futuristic-primary text-xs sm:text-sm !py-3 !px-6 !rounded-xl"
               >
                 <span>{content.actionLabel || "Book a Consultation"}</span>
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </SmartLink>
 
               <Link
                 href="/portfolio"

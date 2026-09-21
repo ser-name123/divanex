@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { getImageProps } from "next/image";
 import Link from "next/link";
+import SmartLink from "@/components/SmartLink";
 import { usePathname } from "next/navigation";
 import {
   Menu,
@@ -269,14 +270,14 @@ export default function Navbar({ onOpenConsultation: _onOpenConsultation }: Navb
                             <span>2 Review Slots Open Today</span>
                           </div>
 
-                          <Link
+                          <SmartLink
                             href={header.megaMenuPromoCtaHref || "/contact"}
                             onClick={() => setMoreDropdownOpen(false)}
                             className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#0f7670] to-[#5c9556] hover:from-[#0d645f] hover:to-[#4e8149] text-white font-bold text-xs font-mono flex items-center justify-center gap-2 shadow-md shadow-[#0f7670]/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                           >
                             <span>{header.megaMenuPromoCtaLabel || "Book Free Consultation"}</span>
                             <ArrowRight className="w-3.5 h-3.5" />
-                          </Link>
+                          </SmartLink>
                         </div>
                       </div>
                     </div>

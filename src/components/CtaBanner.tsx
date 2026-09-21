@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import SmartLink from "@/components/SmartLink";
 import { ArrowRight, Briefcase, MessageCircle, ShieldCheck, Sparkles, Zap } from "lucide-react";
 import { usePageContent } from "@/context/SiteContentContext";
 import { useSiteConfig } from "@/context/SiteConfigContext";
@@ -57,21 +58,21 @@ export default function CtaBanner({
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link
+            <SmartLink
               href={banner.primaryHref}
               className="btn-futuristic-primary text-sm sm:text-base !py-3.5 !px-7 !rounded-2xl"
             >
               <span>{banner.primaryLabel}</span>
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </SmartLink>
 
-            <Link
+            <SmartLink
               href={banner.secondaryHref}
               className="btn-futuristic-amber text-sm sm:text-base !py-3.5 !px-7 !rounded-2xl"
             >
               <Briefcase className="w-4 h-4 text-amber-600" />
               <span>{banner.secondaryLabel}</span>
-            </Link>
+            </SmartLink>
 
             <a
               href={`https://wa.me/${whatsapp}`}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SmartLink from "@/components/SmartLink";
 import { ArrowRight, CheckCircle2, Clock } from "lucide-react";
 import { buildPageMetadata } from "@/lib/seo";
 import { getContent } from "@/lib/contentStore";
@@ -112,21 +113,21 @@ export default async function ThankYouPage({ searchParams }: PageProps) {
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           {content.primaryCtaLabel && (
-            <Link
+            <SmartLink
               href={content.primaryCtaHref || "/"}
               className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-sky-600/20 transition-all hover:from-sky-700 hover:to-blue-700 sm:w-auto"
             >
               {content.primaryCtaLabel}
               <ArrowRight className="h-4 w-4" />
-            </Link>
+            </SmartLink>
           )}
           {content.secondaryCtaLabel && (
-            <Link
+            <SmartLink
               href={content.secondaryCtaHref || "/"}
               className="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50 sm:w-auto"
             >
               {content.secondaryCtaLabel}
-            </Link>
+            </SmartLink>
           )}
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import { scrollToHash } from "@/lib/scrollToHash";
 
 export default function PageTransitionManager() {
   const pathname = usePathname();
@@ -11,12 +12,22 @@ export default function PageTransitionManager() {
 
   // When pathname or searchParams change, conclude the transition
   useEffect(() => {
-    // Jump instantly to top (0,0)
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant",
-    });
+    // A fragment in the address bar is the reader's destination, so honour it
+    // rather than jumping to the top and throwing it away. This effect also
+    // runs on first mount, which is how a shared link like /contact#schedule
+    // used to land at the top of the page.
+    //
+    // The target is re-aligned for a moment after arriving: fonts and images
+    // above it settle late, and each one moves it out from under the reader.
+    const stopSettling = scrollToHash();
+
+    if (!stopSettling) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant",
+      });
+    }
 
     if (isNavigating) {
       setProgress(100);
@@ -24,8 +35,13 @@ export default function PageTransitionManager() {
         setIsNavigating(false);
         setProgress(0);
       }, 300);
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(timer);
+        stopSettling?.();
+      };
     }
+
+    return stopSettling ?? undefined;
   }, [pathname, searchParams]);
 
   // Intercept internal anchor link clicks to show instant loader BEFORE page loads
