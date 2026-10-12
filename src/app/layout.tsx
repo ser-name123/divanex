@@ -127,6 +127,21 @@ export default async function RootLayout({
       <head>
         <link rel="icon" href="/brand-logo-icon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/brand-logo-icon.png" />
+        {/* Google tag (gtag.js) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-09YCQ5JGWQ"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-09YCQ5JGWQ');
+            `,
+          }}
+        />
       </head>
       <body
         suppressHydrationWarning
