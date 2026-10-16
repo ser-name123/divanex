@@ -287,6 +287,25 @@ function AdminDashboardContent() {
               actually being stored. */}
           <DatabaseStatusBanner />
 
+          {/*
+            One gate for every screen below.
+            The sidebar already hides what a role may not use, but the tab is
+            read from the URL, so the guard has to live here too — and living
+            here once means a new tab cannot be added without a decision in
+            TAB_PERMISSIONS.
+          */}
+          {!me ? null : !canSeeTab(me.role, activeTab) ? (
+            <div className="p-6 rounded-2xl bg-white border border-slate-200 text-center">
+              <p className="text-sm font-semibold text-slate-900">
+                That screen is not available to your role.
+              </p>
+              <p className="text-xs text-slate-500 mt-1">
+                You are signed in as {me.role}. Ask an owner if you need access.
+              </p>
+            </div>
+          ) : (
+          <>
+
           {activeTab === "overview" && (
             <AdminOverviewView />
           )}
@@ -328,7 +347,9 @@ function AdminDashboardContent() {
 
           {activeTab === "sections" && <AdminSectionsView />}
 
-          {activeTab === "forms" && <AdminFormsView />}
+          {activeTab === "forms" && (
+            <AdminFormsView canCheckMail={can(me?.role ?? null, "settings.view")} />
+          )}
 
           {activeTab === "content-tools" && <AdminContentToolsView />}
 
@@ -341,37 +362,29 @@ function AdminDashboardContent() {
             />
           )}
 
-          {activeTab === "legal" && canSeeTab(me?.role ?? null, "legal") && (
+          {activeTab === "legal" && (
             <AdminLegalView canEdit={can(me?.role ?? null, "content.edit")} />
           )}
 
-          {activeTab === "robots" && canSeeTab(me?.role ?? null, "robots") && (
+          {activeTab === "robots" && (
             <AdminRobotsView canEdit={can(me?.role ?? null, "content.edit")} />
           )}
 
-          {activeTab === "sitemap" && canSeeTab(me?.role ?? null, "sitemap") && (
+          {activeTab === "sitemap" && (
             <AdminSitemapView canEdit={can(me?.role ?? null, "content.edit")} />
           )}
 
-          {activeTab === "audit" && canSeeTab(me?.role ?? null, "audit") && <AdminAuditView />}
+          {activeTab === "audit" && <AdminAuditView />}
 
-          {activeTab === "users" && canSeeTab(me?.role ?? null, "users") && me && (
+          {activeTab === "users" && me && (
             <AdminUsersView currentUserId={me.id} canManage={me.role === "owner"} />
           )}
 
-          {activeTab === "settings" && canSeeTab(me?.role ?? null, "settings") && (
+          {activeTab === "settings" && (
             <AdminSettingsView />
           )}
 
-          {me && !canSeeTab(me.role, activeTab) && (
-            <div className="p-6 rounded-2xl bg-white border border-slate-200 text-center">
-              <p className="text-sm font-semibold text-slate-900">
-                That screen is not available to your role.
-              </p>
-              <p className="text-xs text-slate-500 mt-1">
-                You are signed in as {me.role}. Ask an owner if you need access.
-              </p>
-            </div>
+          </>
           )}
         </main>
       </div>

@@ -55,7 +55,7 @@ interface AuditEvent {
 }
 
 interface OverviewStats {
-  content: {
+  content?: {
     pages: StatCount;
     services: StatCount;
     caseStudies: StatCount;
@@ -64,12 +64,12 @@ interface OverviewStats {
     testimonials: StatCount;
     legalPages: StatCount;
   };
-  audience: {
-    subscribers: StatCount;
-    leads: StatCount;
-    leadsLast30Days: number;
+  audience?: {
+    subscribers?: StatCount;
+    leads?: StatCount;
+    leadsLast30Days?: number;
   };
-  recentChanges: AuditEvent[];
+  recentChanges?: AuditEvent[];
   sources: { database: boolean; databaseError?: string };
   generatedAt: string;
 }
@@ -212,6 +212,12 @@ export default function AdminOverviewView() {
       )}
 
       {/* ---- What is on the website ---------------------------------- */}
+      {/*
+        A section the role may not read is left out entirely rather than drawn
+        with zeros. "0 subscribers" and "you may not ask" are different facts,
+        and only one of them is true.
+      */}
+      {content && (
       <section className="space-y-3">
         <h3 className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500">
           Published content
@@ -261,50 +267,62 @@ export default function AdminOverviewView() {
             value={content?.legalPages.total ?? 0}
             icon={<Scale className="w-4 h-4" />}
           />
-          <StatTile
-            label="Subscribers"
-            value={audience?.subscribers.total ?? 0}
-            icon={<Mail className="w-4 h-4" />}
-          />
+          {audience?.subscribers && (
+            <StatTile
+              label="Subscribers"
+              value={audience.subscribers.total}
+              icon={<Mail className="w-4 h-4" />}
+            />
+          )}
         </div>
       </section>
+      )}
 
       {/* ---- Enquiries ------------------------------------------------ */}
-      <section className="space-y-3">
-        <h3 className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500">
-          Enquiries
-        </h3>
+      {audience?.leads && (
+        <section className="space-y-3">
+          <h3 className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500">
+            Enquiries
+          </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <StatTile
-            label="Total received"
-            value={audience?.leads.total ?? 0}
-            icon={<Inbox className="w-4 h-4" />}
-            note="since the form went live"
-          />
-          <StatTile
-            label="Last 30 days"
-            value={audience?.leadsLast30Days ?? 0}
-            icon={<Inbox className="w-4 h-4" />}
-          />
-        </div>
-      </section>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <StatTile
+              label="Total received"
+              value={audience.leads.total}
+              icon={<Inbox className="w-4 h-4" />}
+              note="since the form went live"
+            />
+            <StatTile
+              label="Last 30 days"
+              value={audience.leadsLast30Days ?? 0}
+              icon={<Inbox className="w-4 h-4" />}
+            />
+          </div>
+        </section>
+      )}
 
       {/* ---- Who changed what ----------------------------------------- */}
+      {/*
+        The audit trail, and so behind the same right as the audit screen. An
+        Editor is refused it everywhere else in the console; showing it here
+        because the screen is called "overview" would be the same leak with a
+        friendlier name.
+      */}
+      {stats?.recentChanges && (
       <section className="space-y-3">
         <h3 className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500">
           Recent changes
         </h3>
 
         <div className="rounded-2xl bg-white border border-slate-200 shadow-sm divide-y divide-slate-100">
-          {(stats?.recentChanges ?? []).length === 0 && (
+          {stats.recentChanges.length === 0 && (
             <div className="p-5 text-sm text-slate-500 flex items-center gap-2">
               <ScrollText className="w-4 h-4" />
               <span>{loading ? "Loading…" : "Nothing has been changed yet."}</span>
             </div>
           )}
 
-          {(stats?.recentChanges ?? []).map((event) => (
+          {stats.recentChanges.map((event) => (
             <div key={event.id} className="p-4 flex flex-wrap items-baseline gap-x-2.5 gap-y-1 text-sm">
               <span className="font-bold text-slate-900">{humanAction(event.action)}</span>
               {event.targetLabel && (
@@ -327,6 +345,7 @@ export default function AdminOverviewView() {
           ))}
         </div>
       </section>
+      )}
 
       {/* ---- What is deliberately not here ---------------------------- */}
       <section className="p-5 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600 leading-relaxed">

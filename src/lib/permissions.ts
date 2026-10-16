@@ -114,6 +114,15 @@ export const ROLE_SUMMARIES: Record<Role, string> = {
  * Kept next to the matrix rather than in the sidebar, so adding a tab without
  * deciding who may see it is a type error rather than an accidentally public
  * page.
+ *
+ * A tab must ask for at least what its screen needs to load. Search &
+ * metadata sat on `content.view` while the settings record behind it needs
+ * `settings.view`, so the console offered Editors a tab that answered 403 —
+ * the audit trail has a real Editor hitting exactly that. A tab the role
+ * cannot open is worse than one they cannot see.
+ *
+ * Write permissions being stricter than the tab is fine and deliberate: a
+ * Viewer is meant to open a screen, read it, and be refused the save.
  */
 export const TAB_PERMISSIONS: Record<string, Permission | null> = {
   overview: null,
@@ -125,7 +134,9 @@ export const TAB_PERMISSIONS: Record<string, Permission | null> = {
   testimonials: "content.view",
   techstack: "content.view",
   blog: "content.view",
-  seo: "content.view",
+  // Reads and writes the site settings record: canonical host, verification
+  // tokens, the analytics id, index controls.
+  seo: "settings.view",
   sitemap: "content.view",
   robots: "content.view",
   legal: "content.view",

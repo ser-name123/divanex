@@ -45,7 +45,7 @@ const AUDIENCES = [
   { id: "team" as const, label: "Team alert" },
 ];
 
-export default function AdminFormsView() {
+export default function AdminFormsView({ canCheckMail = true }: { canCheckMail?: boolean }) {
   const {
     data: settings,
     setData: setSettings,
@@ -383,14 +383,20 @@ export default function AdminFormsView() {
             title="Send yourself a test"
             description="Delivers this exact message to one address, so you can check it in a real client before a visitor does."
             right={
-              <button
-                type="button"
-                onClick={handleVerify}
-                disabled={checking}
-                className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all disabled:opacity-50 cursor-pointer"
-              >
-                {checking ? "Checking…" : "Check mail server"}
-              </button>
+              // The mail check reads server credentials, so it is behind
+              // settings.view like everything else that does. Offering the
+              // button to a role the endpoint refuses just produces a 403 and
+              // a denial in the audit trail.
+              canCheckMail ? (
+                <button
+                  type="button"
+                  onClick={handleVerify}
+                  disabled={checking}
+                  className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all disabled:opacity-50 cursor-pointer"
+                >
+                  {checking ? "Checking…" : "Check mail server"}
+                </button>
+              ) : null
             }
           >
             <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
