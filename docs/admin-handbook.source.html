@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Divanex Admin Handbook</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+
+  :root {
+    --ink: #10172a;
+    --body: #333c52;
+    --muted: #6b7489;
+    --line: #d9dee8;
+    --brand: #0f7670;
+    --brand-deep: #000838;
+    --warn-bg: #fdf6e7;
+    --warn-line: #e3bb62;
+    --warn-ink: #6b4d10;
+    --soft: #f4f6f9;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: "Segoe UI", -apple-system, system-ui, sans-serif;
+    color: var(--body);
+    font-size: 10.2pt;
+    line-height: 1.52;
+    margin: 0;
+  }
+
+  h1, h2, h3 { color: var(--ink); line-height: 1.25; }
+
+  h1 {
+    font-size: 25pt;
+    margin: 0 0 4px;
+    letter-spacing: -0.4px;
+  }
+
+  h2 {
+    font-size: 14pt;
+    margin: 0 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--brand);
+    letter-spacing: -0.2px;
+  }
+
+  h3 {
+    font-size: 11pt;
+    margin: 16px 0 5px;
+    color: var(--brand-deep);
+  }
+
+  p { margin: 0 0 9px; }
+
+  /* Each numbered part starts on a fresh page. */
+  section.part { page-break-before: always; }
+  section.part:first-of-type { page-break-before: avoid; }
+
+  .eyebrow {
+    font-family: "Consolas", monospace;
+    font-size: 7.6pt;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    color: var(--brand);
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  /* ---------- cover ---------- */
+  .cover { padding-top: 48mm; page-break-after: always; }
+  .cover h1 { font-size: 34pt; }
+  .cover .sub { font-size: 13pt; color: var(--muted); margin-top: 6px; }
+  .cover .rule { height: 3px; background: var(--brand); width: 70px; margin: 22px 0; }
+  .cover dl {
+    margin: 30px 0 0; display: grid;
+    grid-template-columns: 34mm 1fr; row-gap: 5px; font-size: 9.6pt;
+  }
+  .cover dt { color: var(--muted); }
+  .cover dd { margin: 0; color: var(--ink); font-weight: 600; }
+
+  /* ---------- tables ---------- */
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; font-size: 9.4pt; }
+  th, td { text-align: left; vertical-align: top; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  th {
+    background: var(--soft); color: var(--ink); font-weight: 700;
+    font-size: 8.4pt; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  td.tick { text-align: center; font-weight: 700; color: var(--brand); }
+  td.cross { text-align: center; color: #b4bac7; }
+  tr { page-break-inside: avoid; }
+
+  /* ---------- callouts ---------- */
+  .note, .warn {
+    padding: 10px 13px; margin: 11px 0; font-size: 9.6pt;
+    border-left: 3px solid var(--brand); background: var(--soft);
+    page-break-inside: avoid;
+  }
+  .warn { border-left-color: var(--warn-line); background: var(--warn-bg); color: var(--warn-ink); }
+  .note strong, .warn strong { display: block; margin-bottom: 2px; color: inherit; }
+
+  code, .path {
+    font-family: "Consolas", monospace;
+    font-size: 8.9pt;
+    background: #eef1f6;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: var(--brand-deep);
+  }
+
+  ol, ul { margin: 0 0 10px; padding-left: 19px; }
+  li { margin-bottom: 3px; }
+
+  ol.steps { counter-reset: s; list-style: none; padding-left: 0; }
+  ol.steps > li {
+    counter-increment: s; position: relative;
+    padding-left: 24px; margin-bottom: 6px;
+  }
+  ol.steps > li::before {
+    content: counter(s);
+    position: absolute; left: 0; top: 1px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--brand); color: #fff;
+    font-size: 8pt; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .task { page-break-inside: avoid; margin-bottom: 15px; }
+
+  .toc { font-size: 10pt; }
+  .toc div { padding: 5px 0; border-bottom: 1px dotted var(--line); }
+  .toc span { color: var(--brand); font-weight: 700; display: inline-block; width: 22px; }
+</style>
+</head>
+<body>
+
+<!-- =================== COVER =================== -->
+<div class="cover">
+  <div class="eyebrow">Divanex Technologies</div>
+  <h1>Admin Handbook</h1>
+  <div class="sub">Running the website without touching the code</div>
+  <div class="rule"></div>
+  <p style="max-width:118mm;color:var(--muted);font-size:10.4pt">
+    Who can do what, which screen owns which part of the site, how to carry out
+    the jobs that come up most often — and, just as important, the things this
+    console deliberately cannot do.
+  </p>
+  <dl>
+    <dt>Written for</dt><dd>The Divanex team managing content and SEO</dd>
+    <dt>Console</dt><dd>divanextechnologies.com/admin</dd>
+    <dt>Prepared</dt><dd>16 October 2026</dd>
+  </dl>
+</div>
+
+<!-- =================== CONTENTS =================== -->
+<section>
+  <h2>Contents</h2>
+  <div class="toc">
+    <div><span>1</span> Signing in</div>
+    <div><span>2</span> The four roles</div>
+    <div><span>3</span> The one rule to remember before you edit</div>
+    <div><span>4</span> Which screen owns which part of the site</div>
+    <div><span>5</span> How to do the jobs that come up most</div>
+    <div><span>6</span> What this console cannot change</div>
+    <div><span>7</span> What is not built yet</div>
+    <div><span>8</span> Where to look when something is wrong</div>
+  </div>
+</section>
+
+<!-- =================== 1 =================== -->
+<section class="part">
+  <div class="eyebrow">Part 1</div>
+  <h2>Signing in</h2>
+
+  <p>The console lives at <span class="path">https://www.divanextechnologies.com/admin</span>.</p>
+
+  <ol class="steps">
+    <li>Enter your email address and password.</li>
+    <li>A six-digit code is emailed to you. Enter it on the next screen.</li>
+    <li>The code is single-use and expires. If it does not arrive within a
+        minute, check spam, then request a new one.</li>
+  </ol>
+
+  <p>Every screen has its own address, so a link can be shared or bookmarked.
+     Add <code>?tab=</code> and the screen name:</p>
+
+  <table>
+    <tr><th>Screen</th><th>Address</th></tr>
+    <tr><td>Page Content</td><td><span class="path">/admin?tab=pages</span></td></tr>
+    <tr><td>Page Sections</td><td><span class="path">/admin?tab=sections</span></td></tr>
+    <tr><td>Blog CMS Studio</td><td><span class="path">/admin?tab=blog</span></td></tr>
+    <tr><td>Portfolio &amp; Cases</td><td><span class="path">/admin?tab=portfolio</span></td></tr>
+    <tr><td>Services Catalog</td><td><span class="path">/admin?tab=services</span></td></tr>
+    <tr><td>Header &amp; Footer Menus</td><td><span class="path">/admin?tab=navigation</span></td></tr>
+    <tr><td>Search &amp; Metadata</td><td><span class="path">/admin?tab=seo</span></td></tr>
+    <tr><td>Admins &amp; Roles</td><td><span class="path">/admin?tab=users</span></td></tr>
+    <tr><td>Audit Trail</td><td><span class="path">/admin?tab=audit</span></td></tr>
+  </table>
+
+  <div class="note">
+    <strong>A bookmarked link is not a way around your role.</strong>
+    Opening the address of a screen your role does not cover shows a short
+    notice instead, and the data behind it is refused separately by the server.
+  </div>
+</section>
+
+<!-- =================== 2 =================== -->
+<section class="part">
+  <div class="eyebrow">Part 2</div>
+  <h2>The four roles</h2>
+
+  <p>Every admin account holds exactly one role. Only an <strong>Owner</strong>
+     can add an admin or change anyone's role — including their own.</p>
+
+  <table>
+    <tr>
+      <th style="width:38%">Can do</th>
+      <th style="width:15.5%">Owner</th>
+      <th style="width:15.5%">Manager</th>
+      <th style="width:15.5%">Editor</th>
+      <th style="width:15.5%">Viewer</th>
+    </tr>
+    <tr><td>Read every content screen</td><td class="tick">Yes</td><td class="tick">Yes</td><td class="tick">Yes</td><td class="tick">Yes</td></tr>
+    <tr><td>Edit pages, services, cases, posts</td><td class="tick">Yes</td><td class="tick">Yes</td><td class="tick">Yes</td><td class="cross">—</td></tr>
+    <tr><td>Reply in live chats</td><td class="tick">Yes</td><td class="tick">Yes</td><td class="tick">Yes</td><td class="cross">—</td></tr>
+    <tr><td>Manage subscribers</td><td class="tick">Yes</td><td class="tick">Yes</td><td class="cross">—</td><td class="cross">—</td></tr>
+    <tr><td>Edit client sprints</td><td class="tick">Yes</td><td class="tick">Yes</td><td class="cross">—</td><td class="cross">—</td></tr>
+    <tr><td>Search &amp; Metadata, System Settings, Cache</td><td class="tick">Yes</td><td class="tick">Yes</td><td class="cross">—</td><td class="cross">—</td></tr>
+    <tr><td>Read the audit trail</td><td class="tick">Yes</td><td class="tick">Yes</td><td class="cross">—</td><td class="cross">—</td></tr>
+    <tr><td>Add, remove or re-role admins</td><td class="tick">Yes</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+  </table>
+
+  <p>In screen counts: Owner and Manager see all 24; Editor and Viewer see 17.
+     The seven hidden from them are Search &amp; Metadata; Backup, Audit &amp;
+     Search; Cache &amp; Performance; Audit Telemetry; Audit Trail; Admins
+     &amp; Roles; and System Settings.</p>
+
+  <div class="note">
+    <strong>A Viewer sees the screens but cannot save.</strong>
+    This is on purpose. Someone can be shown exactly what is on the site and be
+    walked through it without any risk of a change.
+  </div>
+
+  <h3>Every change is recorded</h3>
+  <p>The Audit Trail stores who made each change, when, from which address,
+     and the value <em>before</em> and <em>after</em> for each field. It also
+     records refusals — an attempt to reach something out of reach is logged
+     too. Passwords, tokens and codes are never written into it.</p>
+</section>
+
+<!-- =================== 3 =================== -->
+<section class="part">
+  <div class="eyebrow">Part 3</div>
+  <h2>The one rule to remember before you edit</h2>
+
+  <div class="warn">
+    <strong>Saving publishes. There is no draft step.</strong>
+    The moment you press Save on a content screen, the change is on the live
+    website. There is no preview, no second button, and no approval. Write the
+    text somewhere else first if you are not sure of it.
+  </div>
+
+  <p>Two exceptions, both of which do have a held-back state:</p>
+  <ul>
+    <li><strong>Blog posts</strong> carry a status. A post set to
+        <em>draft</em> is not published and does not appear in the sitemap.</li>
+    <li><strong>Pages</strong> can be set to <em>noindex</em> under Search
+        &amp; Metadata. The page still exists and anyone with the link can
+        read it; it is only kept out of search results.</li>
+  </ul>
+
+  <h3>Undoing a mistake</h3>
+  <p>There is no one-click revert. What you do have:</p>
+  <ul>
+    <li>The Audit Trail shows the previous value of the field, so it can be
+        typed back in.</li>
+    <li>Backup, Audit &amp; Search takes a copy of every content record. Take
+        one before any large edit — that is what it is for.</li>
+  </ul>
+
+  <h3>Deleting</h3>
+  <p>Deleting a page, service or case study makes its address return
+     <em>Not Found</em>. Anything already linking to it — a menu item, a line
+     in another page, a result in Google — breaks. The console asks you to
+     confirm; read the address in the confirmation before agreeing.</p>
+</section>
+
+<!-- =================== 4 =================== -->
+<section class="part">
+  <div class="eyebrow">Part 4</div>
+  <h2>Which screen owns which part of the site</h2>
+
+  <table>
+    <tr><th style="width:30%">Screen</th><th>What it controls</th></tr>
+
+    <tr><td><strong>Telemetry Overview</strong></td>
+        <td>Counts of what is published, enquiries received, and the last
+            changes made. Read-only.</td></tr>
+
+    <tr><td><strong>Site Content &amp; CMS</strong></td>
+        <td>Company name, address, phone, email, office hours, WhatsApp number,
+            social links, footer tagline and footer columns. These appear on
+            every page, so a change here is site-wide.</td></tr>
+
+    <tr><td><strong>Header &amp; Footer Menus</strong></td>
+        <td>Every menu item and its destination, the mega-menu panels, the
+            navbar buttons, and the footer link columns.</td></tr>
+
+    <tr><td><strong>Page Content</strong></td>
+        <td>The top of each page — badge, heading, highlighted heading,
+            description, the two buttons and their links, and the four
+            statistic tiles.</td></tr>
+
+    <tr><td><strong>Page Sections</strong></td>
+        <td>Everything further down each page: headings, body copy, list items
+            and the closing call-to-action. Grouped by the page it belongs to.</td></tr>
+
+    <tr><td><strong>Services Catalog</strong></td>
+        <td>The service list and each service's own page — summary, features,
+            use cases, technologies, FAQs, call-to-action.</td></tr>
+
+    <tr><td><strong>Portfolio &amp; Cases</strong></td>
+        <td>Portfolio cards and the full case study behind each one.
+            <em>See the warning in Part 5.</em></td></tr>
+
+    <tr><td><strong>Tech Stack Registry</strong></td>
+        <td>The technology list and each technology's own page.</td></tr>
+
+    <tr><td><strong>Client Reviews</strong></td>
+        <td>Testimonials: quote, name, company, role, project.</td></tr>
+
+    <tr><td><strong>Blog CMS Studio</strong></td>
+        <td>Articles — title, address, excerpt, body, cover image, author,
+            category, tags, date, publish status and search metadata.</td></tr>
+
+    <tr><td><strong>Legal Pages</strong></td>
+        <td>Privacy, Terms, Cookies, NDA and Refund Policy.</td></tr>
+
+    <tr><td><strong>Forms &amp; Notifications</strong></td>
+        <td>Enquiry form fields and dropdown options, where submissions are
+            emailed, and the wording of the automatic reply.</td></tr>
+
+    <tr><td><strong>Search &amp; Metadata</strong></td>
+        <td>Per-page search title and description, social share image, the
+            canonical domain, Search Console and Bing tokens, and the Google
+            Analytics measurement ID. <em>Manager and Owner only.</em></td></tr>
+
+    <tr><td><strong>Sitemap</strong> / <strong>Robots &amp; Crawlers</strong></td>
+        <td>Which addresses are offered to search engines and which crawlers
+            are allowed where.</td></tr>
+
+    <tr><td><strong>Newsletter Subscribers</strong></td>
+        <td>The subscriber list, with export.</td></tr>
+
+    <tr><td><strong>Live AI &amp; Support Chats</strong></td>
+        <td>Conversations from the website chat widget.</td></tr>
+
+    <tr><td><strong>Client Sprints</strong></td>
+        <td>Internal project tracking. Nothing here is published.</td></tr>
+
+    <tr><td><strong>Backup, Audit &amp; Search</strong></td>
+        <td>Search every record at once, find links pointing at pages that no
+            longer exist, and take a backup.</td></tr>
+
+    <tr><td><strong>Admins &amp; Roles</strong></td>
+        <td>Admin accounts and their roles. <em>Owner only.</em></td></tr>
+
+    <tr><td><strong>Audit Trail</strong></td>
+        <td>The full record of who changed what, with before and after.</td></tr>
+  </table>
+</section>
+
+<!-- =================== 5 =================== -->
+<section class="part">
+  <div class="eyebrow">Part 5</div>
+  <h2>How to do the jobs that come up most</h2>
+
+  <div class="task">
+    <h3>Change wording already on a page</h3>
+    <ol class="steps">
+      <li>Is it in the top block of the page — badge, big heading, the two
+          buttons, the four tiles? Use <strong>Page Content</strong>.</li>
+      <li>Anything further down the page? Use <strong>Page Sections</strong>,
+          then pick the page.</li>
+      <li>Is it in the header, the footer, or on every page? Use
+          <strong>Site Content &amp; CMS</strong> or
+          <strong>Header &amp; Footer Menus</strong>.</li>
+      <li>Edit, Save, then open the live page and confirm.</li>
+    </ol>
+  </div>
+
+  <div class="task">
+    <h3>Add a service</h3>
+    <ol class="steps">
+      <li><strong>Services Catalog</strong> &rarr; Add service. Give it a name
+          and an address (lowercase, hyphens, no spaces).</li>
+      <li>Fill in the summary, features, use cases, technologies and FAQs.</li>
+      <li>The page goes live at
+          <span class="path">/services/your-address</span>.</li>
+      <li>Give it a search title and description under
+          <strong>Search &amp; Metadata</strong>, or it inherits the site
+          default.</li>
+      <li>Add it to a menu under <strong>Header &amp; Footer Menus</strong> if
+          people should be able to find it.</li>
+    </ol>
+  </div>
+
+  <div class="task">
+    <h3>Add a case study</h3>
+    <div class="warn">
+      <strong>A portfolio card and its case study are two separate records.</strong>
+      Adding a project creates the card only. Until the write-up exists the card
+      shows with no link, because a link would open a page that does not exist.
+      The Portfolio screen lists the projects still waiting on one.
+    </div>
+    <ol class="steps">
+      <li><strong>Portfolio &amp; Cases</strong> &rarr; add the project. Note
+          the id it is given.</li>
+      <li>Open the case study pages editor and add a page using
+          <em>that same id</em> as the address.</li>
+      <li>Write the overview, the challenge, the solution, the outcome.</li>
+      <li>Reload the portfolio page — the card now links to it.</li>
+    </ol>
+    <p>Only publish an outcome or a client name you can stand behind. A figure
+       on a case study is a claim the company is making.</p>
+  </div>
+
+  <div class="task">
+    <h3>Publish a blog post</h3>
+    <ol class="steps">
+      <li><strong>Blog CMS Studio</strong> &rarr; new article.</li>
+      <li>Write it with the status left on <em>draft</em> — a draft is not
+          public and is kept out of the sitemap, so you can work over
+          several sittings.</li>
+      <li>Fill in the excerpt, cover image, author, category and tags.</li>
+      <li>Link to at least one service page from inside the article.</li>
+      <li>Set the status to <em>published</em> when it is ready.</li>
+    </ol>
+  </div>
+
+  <div class="task">
+    <h3>Change how a page appears in Google</h3>
+    <ol class="steps">
+      <li><strong>Search &amp; Metadata</strong>, then pick the page.</li>
+      <li>Title: aim for under 60 characters. Description: under 160.</li>
+      <li><em>Noindex</em> keeps the page out of search while leaving it
+          reachable by anyone with the link.</li>
+      <li>Google re-reads pages on its own schedule. A change here is live
+          immediately; the search result catches up later.</li>
+    </ol>
+  </div>
+
+  <div class="task">
+    <h3>Point analytics at a different property</h3>
+    <p><strong>Search &amp; Metadata</strong> &rarr; Google Analytics
+       measurement ID. Paste the <code>G-</code> value from the GA4 property.
+       Leaving it empty stops all reporting and removes the tag from the site
+       entirely. The admin console is never counted — those are staff, not
+       visitors.</p>
+  </div>
+</section>
+
+<!-- =================== 6 =================== -->
+<section class="part">
+  <div class="eyebrow">Part 6</div>
+  <h2>What this console cannot change</h2>
+
+  <p>These need a developer and a deployment. That is not a shortcoming — it is
+     the line between editing content and changing the application.</p>
+
+  <table>
+    <tr><th style="width:42%">Needs code</th><th>Why</th></tr>
+    <tr><td>A new kind of section or layout</td>
+        <td>Existing section types can be edited, reordered and refilled. A new
+            arrangement has to be built.</td></tr>
+    <tr><td>Colours, fonts, spacing, the overall design</td>
+        <td>Held in the stylesheet, deliberately, so the site cannot drift out
+            of brand one edit at a time.</td></tr>
+    <tr><td>A whole new page type</td>
+        <td>For example country or city pages, which do not exist yet.</td></tr>
+    <tr><td>New integrations</td>
+        <td>Payments, a CRM, a different mail provider.</td></tr>
+    <tr><td>Login rules, permissions, security</td>
+        <td>Changing these from a web form would defeat them.</td></tr>
+    <tr><td>Redirecting an old address to a new one</td>
+        <td>Not built yet. See Part 7.</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Do not paste HTML or scripts into a content field.</strong>
+    Fields take text and simple formatting. Anything else is escaped rather than
+    run — by design, because a content box that executes code is the easiest way
+    into a website.
+  </div>
+</section>
+
+<!-- =================== 7 =================== -->
+<section class="part">
+  <div class="eyebrow">Part 7</div>
+  <h2>What is not built yet</h2>
+
+  <p>Listed plainly so nobody goes looking for a button that is not there.</p>
+
+  <table>
+    <tr><th style="width:32%">Missing</th><th>What to do instead</th></tr>
+    <tr><td><strong>Draft and preview for pages</strong></td>
+        <td>Saving publishes. Draft the wording elsewhere, then paste it in.
+            Blog posts are the exception — they have a real draft state.</td></tr>
+    <tr><td><strong>Rollback</strong></td>
+        <td>The Audit Trail shows the old value; type it back. Take a backup
+            before a large edit.</td></tr>
+    <tr><td><strong>Media library</strong></td>
+        <td>There is no uploader. Images are referenced by web address, so host
+            the file elsewhere and paste the link.</td></tr>
+    <tr><td><strong>Redirects</strong></td>
+        <td>Changing or deleting an address breaks the old one. Ask a developer
+            to add a redirect before changing an address that has been shared or
+            indexed.</td></tr>
+    <tr><td><strong>Location pages</strong></td>
+        <td>None exist. They need both a developer and genuine local detail for
+            each market — the same page with the country name swapped is worse
+            than no page.</td></tr>
+    <tr><td><strong>Scheduled publishing</strong></td>
+        <td>Publish by hand at the time you want it live.</td></tr>
+    <tr><td><strong>SEO warnings</strong></td>
+        <td>Nothing flags a duplicate address, an over-long description or a
+            missing image description. Check these yourself for now.</td></tr>
+  </table>
+</section>
+
+<!-- =================== 8 =================== -->
+<section class="part">
+  <div class="eyebrow">Part 8</div>
+  <h2>Where to look when something is wrong</h2>
+
+  <table>
+    <tr><th style="width:38%">Symptom</th><th>First thing to check</th></tr>
+
+    <tr><td>The edit saved but the site looks unchanged</td>
+        <td>Hard-refresh the page. If it is still stale, use Cache &amp;
+            Performance to clear the cache for that area.</td></tr>
+
+    <tr><td>A red banner at the top of the console</td>
+        <td>The database is unreachable. Nothing will save. Stop editing and
+            tell a developer — carrying on risks losing the work.</td></tr>
+
+    <tr><td>A screen is missing from the sidebar</td>
+        <td>Your role does not cover it. Check Part 2 and ask an Owner.</td></tr>
+
+    <tr><td>Enquiries have stopped arriving</td>
+        <td>Forms &amp; Notifications &rarr; Check mail server. It tests the
+            credentials without sending anything. Also check the recipient
+            address on the same screen.</td></tr>
+
+    <tr><td>A link on the site leads nowhere</td>
+        <td>Backup, Audit &amp; Search finds links pointing at pages that no
+            longer exist.</td></tr>
+
+    <tr><td>Analytics shows nothing</td>
+        <td>Confirm the measurement ID under Search &amp; Metadata, then check
+            Realtime in Google Analytics while loading the site yourself.</td></tr>
+
+    <tr><td>Something changed and nobody admits it</td>
+        <td>The Audit Trail has the name, the time and the exact before and
+            after.</td></tr>
+  </table>
+
+  <h3>Things that live outside this console</h3>
+  <table>
+    <tr><th style="width:38%">What</th><th>Where</th></tr>
+    <tr><td>Visitor numbers and traffic</td><td>Google Analytics</td></tr>
+    <tr><td>Search performance and indexing</td><td>Google Search Console</td></tr>
+    <tr><td>Hosting, deployments, uptime</td><td>Vercel</td></tr>
+    <tr><td>The database and its backups</td><td>Supabase</td></tr>
+    <tr><td>Email delivery</td><td>The SMTP provider</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>The Overview does not show traffic or revenue.</strong>
+    The website does not collect either, so no figure for them is shown rather
+    than an invented one. Traffic lives in Google Analytics; uptime lives in
+    Vercel.
+  </div>
+</section>
+
+</body>
+</html>
