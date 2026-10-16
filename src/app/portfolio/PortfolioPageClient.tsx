@@ -16,7 +16,14 @@ import CustomCursor from "@/components/CustomCursor";
 import NeuralBackground from "@/components/NeuralBackground";
 import ScrollObserver from "@/components/ScrollObserver";
 
-export default function PortfolioPageClient({ projects }: { projects?: PortfolioProject[] }) {
+export default function PortfolioPageClient({
+  projects,
+  detailSlugs,
+}: {
+  projects?: PortfolioProject[];
+  /** Which projects have a case study behind them; the rest do not get a link. */
+  detailSlugs?: string[];
+}) {
 
   return (
     <div className="relative min-h-screen bg-[#f7f9f9] text-slate-900 selection:bg-sky-500 selection:text-white overflow-x-hidden">
@@ -31,7 +38,7 @@ export default function PortfolioPageClient({ projects }: { projects?: Portfolio
         <PageHeader route="/portfolio" />
 
         {/* Section 2: Portfolio Showcase Component (Exclusive to /portfolio) */}
-        <PortfolioSection items={projects} />
+        <PortfolioSection items={projects} detailSlugs={detailSlugs} />
 
         {/* Section 3: Industry Impact Stats (Unique) */}
         <IndustryImpactStats />

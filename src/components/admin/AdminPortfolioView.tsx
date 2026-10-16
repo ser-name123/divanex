@@ -16,10 +16,12 @@ import {
   BarChart3,
   Globe,
   Tag,
-  ArrowUpRight
+  ArrowUpRight,
+  AlertTriangle
 } from "lucide-react";
 import { portfolioProjects, PortfolioProject } from "@/data/portfolio";
 import { useAdminContent } from "@/lib/useAdminContent";
+import { caseStudiesRecord } from "@/data/caseStudiesData";
 
 export default function AdminPortfolioView() {
   // Server-backed: edits reach every visitor and every other admin browser,
@@ -30,6 +32,19 @@ export default function AdminPortfolioView() {
     loading: contentLoading,
     saving: contentSaving,
   } = useAdminContent("portfolio", portfolioProjects);
+
+  /**
+   * The written-up case studies, which are a separate collection.
+   *
+   * A card here and the page it opens come from different records, so a
+   * project added in this screen used to publish a card linking to a page
+   * nobody had written. Thirty-nine of those were live. The card no longer
+   * links anywhere until the write-up exists, and this screen says which
+   * ones are waiting on one.
+   */
+  const { data: caseStudies } = useAdminContent("case-studies", caseStudiesRecord);
+  const writtenUp = new Set(Object.keys(caseStudies || {}));
+  const missingStudies = projects.filter((p) => !writtenUp.has(p.id));
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [editingProject, setEditingProject] = useState<PortfolioProject | null>(null);
@@ -154,6 +169,29 @@ export default function AdminPortfolioView() {
         <div className="flex items-center gap-3 p-4 rounded-xl bg-sky-50 border border-sky-200 text-sky-800 text-xs font-mono shadow-sm animate-fadeIn">
           <CheckCircle2 className="w-4 h-4 text-sky-600 shrink-0" />
           <span>{toastMsg}</span>
+        </div>
+      )}
+
+      {missingStudies.length > 0 && (
+        <div className="flex items-start gap-3 p-4 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 text-xs font-sans">
+          <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
+          <div className="space-y-1">
+            <div className="font-bold">
+              {missingStudies.length} project{missingStudies.length === 1 ? " has" : "s have"} no case study written yet.
+            </div>
+            <p className="leading-relaxed">
+              These still appear in the portfolio grid, but without a link — a
+              link would open a page that does not exist. Add the write-up under
+              Content &amp; CMS &rarr; Case study pages, using the project id as the
+              slug, and the link comes back on its own.
+            </p>
+            <div className="pt-1 font-mono text-[11px] text-amber-800 break-all">
+              {missingStudies.slice(0, 12).map((p) => p.id).join(", ")}
+              {missingStudies.length > 12
+                ? ` and ${missingStudies.length - 12} more`
+                : ""}
+            </div>
+          </div>
         </div>
       )}
 

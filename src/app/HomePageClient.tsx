@@ -28,12 +28,15 @@ import ScrollObserver from "@/components/ScrollObserver";
 export default function HomePageClient({
   testimonials,
   projects,
+  caseStudySlugs,
   tech,
   services,
   posts,
 }: {
   testimonials?: TestimonialItem[];
   projects?: PortfolioProject[];
+  /** Which projects have a case study behind them; the rest do not get a link. */
+  caseStudySlugs?: string[];
   tech?: TechItem[];
   services?: ServiceItem[];
   posts?: BlogPost[];
@@ -78,7 +81,7 @@ export default function HomePageClient({
         <TechStackGrid isHome={true} items={tech} />
 
         {/* Section 8: Case Studies & Portfolio Showcase */}
-        <PortfolioSection isHome={true} items={projects} />
+        <PortfolioSection isHome={true} items={projects} detailSlugs={caseStudySlugs} />
 
         {/* Section 9: Stats & Impact Counters */}
         <StatsSection />

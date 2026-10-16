@@ -16,13 +16,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const [settings, testimonials, projects, tech, pages, services, posts] = await Promise.all([
+  const [settings, testimonials, projects, tech, pages, services, caseStudies, posts] = await Promise.all([
     getSiteSettings(),
     getContent("testimonials"),
     getContent("portfolio"),
     getContent("tech-stack"),
     getContent("pages"),
     getContent("services"),
+    getContent("case-studies"),
     getBlogPosts(),
   ]);
 
@@ -135,6 +136,7 @@ export default async function Page() {
       <HomePageClient
         testimonials={testimonials}
         projects={projects}
+        caseStudySlugs={Object.keys(caseStudies)}
         tech={tech}
         services={services}
         posts={posts.filter((post) => post.status === "published").slice(0, 3)}

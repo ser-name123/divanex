@@ -31,6 +31,16 @@ interface PortfolioSectionProps {
   /** Admin-managed records. Falls back to the built-in seed. */
   items?: PortfolioProject[];
   isHome?: boolean;
+  /**
+   * Ids that have a case study written for them.
+   *
+   * A card and its detail page come from two different collections, so adding
+   * a project in the console used to publish a card linking to a page nobody
+   * had written — 39 of them were live, every one a 404 for readers and a soft
+   * 404 for search engines. A card now only offers the link when there is
+   * something behind it.
+   */
+  detailSlugs?: string[];
 }
 
 /** High-fidelity, rich visual laptop screen preview for each client project */
@@ -486,7 +496,7 @@ function ProjectLaptopMockup({ project }: { project: PortfolioProject }) {
   );
 }
 
-export default function PortfolioSection({ isHome = false, items }: PortfolioSectionProps) {
+export default function PortfolioSection({ isHome = false, items, detailSlugs }: PortfolioSectionProps) {
   const portfolioProjects = items ?? seedPortfolio;
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -499,6 +509,16 @@ export default function PortfolioSection({ isHome = false, items }: PortfolioSec
     { id: "E-Commerce", label: "E-Commerce", icon: ShoppingBag },
     { id: "Healthcare", label: "Healthcare", icon: HeartPulse },
   ];
+
+  /**
+   * Undefined means the caller did not tell us, so link everything and keep
+   * the old behaviour; an empty array means it told us there are none.
+   */
+  const hasDetailPage = useMemo(() => {
+    if (!detailSlugs) return () => true;
+    const slugs = new Set(detailSlugs);
+    return (id: string) => slugs.has(id);
+  }, [detailSlugs]);
 
   const filteredProjects = useMemo(() => {
     return portfolioProjects.filter((p: PortfolioProject) => {
@@ -612,11 +632,17 @@ export default function PortfolioSection({ isHome = false, items }: PortfolioSec
 
               {/* Card Header: Title & Subtitle */}
               <div className="text-center relative z-10 space-y-1">
-                <Link href={`/portfolio/${project.id}`} className="group/link inline-block">
-                  <h3 className="text-2xl font-black text-[#000838] group-hover/link:text-[#0f7670] transition-colors tracking-tight">
+                {hasDetailPage(project.id) ? (
+                  <Link href={`/portfolio/${project.id}`} className="group/link inline-block">
+                    <h3 className="text-2xl font-black text-[#000838] group-hover/link:text-[#0f7670] transition-colors tracking-tight">
+                      {project.title}
+                    </h3>
+                  </Link>
+                ) : (
+                  <h3 className="text-2xl font-black text-[#000838] tracking-tight">
                     {project.title}
                   </h3>
-                </Link>
+                )}
                 <p className="text-xs sm:text-sm font-bold text-[#0f7670] tracking-wider uppercase">
                   {project.clientSubtitle || project.category}
                 </p>
@@ -658,13 +684,15 @@ export default function PortfolioSection({ isHome = false, items }: PortfolioSec
                     <span className="text-[10px] text-slate-600 font-medium max-w-[130px] truncate">{project.impactLabel || "Verified"}</span>
                   </div>
 
-                  <Link
-                    href={`/portfolio/${project.id}`}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-[#0f7670] hover:text-[#000838] transition-colors group/btn"
-                  >
-                    <span>Read Study</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
-                  </Link>
+                  {hasDetailPage(project.id) && (
+                    <Link
+                      href={`/portfolio/${project.id}`}
+                      className="inline-flex items-center gap-1 text-xs font-bold text-[#0f7670] hover:text-[#000838] transition-colors group/btn"
+                    >
+                      <span>Read Study</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
+                    </Link>
+                  )}
                 </div>
 
                 {/* Tech Pills */}

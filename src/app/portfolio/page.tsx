@@ -47,7 +47,7 @@ export default async function Page() {
           ),
         }}
       />
-      <PortfolioPageClient projects={projects} />
+      <PortfolioPageClient projects={projects} detailSlugs={Object.keys(caseStudies)} />
     </>
   );
 }
