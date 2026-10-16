@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Divanex CMS — Audit &amp; Estimate</title>
+<style>
+  @page { size: A4; margin: 18mm 14mm 20mm 14mm; }
+  :root{--ink:#10172a;--body:#333c52;--muted:#6b7489;--line:#d9dee8;--brand:#0f7670;--deep:#000838;--soft:#f4f6f9;
+        --ok:#0f7670;--part:#a86a12;--miss:#b4332b;--na:#7b8294}
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI",system-ui,sans-serif;color:var(--body);font-size:9.5pt;line-height:1.46;margin:0}
+  h1,h2,h3{color:var(--ink);line-height:1.24}
+  h1{font-size:25pt;margin:0 0 4px;letter-spacing:-.4px}
+  h2{font-size:13.5pt;margin:0 0 9px;padding-bottom:6px;border-bottom:2px solid var(--brand)}
+  h3{font-size:10.4pt;margin:15px 0 5px;color:var(--deep)}
+  p{margin:0 0 8px}
+  section.part{page-break-before:always}
+  section.part:first-of-type{page-break-before:avoid}
+  .eyebrow{font-family:Consolas,monospace;font-size:7.4pt;letter-spacing:1.3px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:5px}
+  .cover{padding-top:44mm;page-break-after:always}
+  .cover h1{font-size:32pt}
+  .cover .sub{font-size:12.5pt;color:var(--muted);margin-top:6px}
+  .cover .rule{height:3px;background:var(--brand);width:70px;margin:20px 0}
+  .cover dl{margin:26px 0 0;display:grid;grid-template-columns:34mm 1fr;row-gap:5px;font-size:9.4pt}
+  .cover dt{color:var(--muted)} .cover dd{margin:0;color:var(--ink);font-weight:600}
+  table{width:100%;border-collapse:collapse;margin:7px 0 11px;font-size:8.7pt}
+  th,td{text-align:left;vertical-align:top;padding:5.5px 7px;border-bottom:1px solid var(--line)}
+  th{background:var(--soft);color:var(--ink);font-weight:700;font-size:7.8pt;text-transform:uppercase;letter-spacing:.45px}
+  tr{page-break-inside:avoid}
+  .st{font-weight:700;font-size:7.9pt;white-space:nowrap}
+  .st.ok{color:var(--ok)} .st.part{color:var(--part)} .st.miss{color:var(--miss)} .st.na{color:var(--na)}
+  code,.ev{font-family:Consolas,monospace;font-size:7.8pt;background:#eef1f6;padding:1px 3px;border-radius:3px;color:var(--deep);word-break:break-all}
+  .note,.warn{padding:9px 12px;margin:10px 0;font-size:9.1pt;border-left:3px solid var(--brand);background:var(--soft);page-break-inside:avoid}
+  .warn{border-left-color:#e3bb62;background:#fdf6e7;color:#6b4d10}
+  .err{border-left-color:#c2544b;background:#fdf1f0;color:#7d2b24}
+  .note strong,.warn strong{display:block;margin-bottom:2px}
+  ul{margin:0 0 9px;padding-left:18px} li{margin-bottom:3px}
+  .legend{display:flex;gap:15px;font-size:8.5pt;margin:9px 0 13px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="eyebrow">Divanex Technologies</div>
+  <h1>Audit &amp; Estimate</h1>
+  <div class="sub">Against the Complete Developer Specification</div>
+  <div class="rule"></div>
+  <p style="max-width:118mm;color:var(--muted);font-size:10.2pt">
+    Every module and requirement classified Working, Partial, Missing or Not
+    Applicable, with the evidence behind each call — followed by the phased
+    estimate the specification asks for before any coding begins.
+  </p>
+  <dl>
+    <dt>Audits</dt><dd>Complete Developer Specification, 16 Oct 2026</dd>
+    <dt>Codebase</dt><dd>main @ ee5bdf8</dd>
+    <dt>Confirmed stack</dt><dd>Next.js 16 App Router, TypeScript, Supabase</dd>
+    <dt>Supersedes</dt><dd>Addendum Audit of the same date</dd>
+  </dl>
+</div>
+
+<!-- ======== CORRECTION ======== -->
+<section>
+  <h2>Correction to the previous audit</h2>
+
+  <div class="note err" style="border-left:3px solid #c2544b;background:#fdf1f0;color:#7d2b24">
+    <strong>Blog CMS Studio was marked Working. It was not working at all.</strong>
+    That classification was made by reading the screen, which offers create,
+    edit, publish and delete. Nobody checked whether any of it reached the
+    database. It did not.
+  </div>
+
+  <p>The <span class="ev">blog_posts</span> table had never been created —
+     nothing in <span class="ev">scripts/setup-db.js</span> made it. Reads fell
+     through to the seed file, writes went to a module-level array that lives
+     inside one serverless instance and is gone by the next request, and the
+     database error was discarded rather than checked, so the route reported
+     success. Publishing an article said it worked and lost it.</p>
+
+  <p>It went unnoticed because the console's blog screen never asked the server
+     either — it rendered the same seed. The ten posts on screen always matched
+     the ten on the site, and a new article stayed in the list right up until
+     the page was reloaded.</p>
+
+  <p>Fixed and verified: the table exists with RLS forced, holds the ten live
+     articles, failed writes now throw rather than being swallowed, and the
+     console reads from the database.</p>
+
+  <p><strong>The lesson applies to the rest of this document.</strong> Every
+     status below was taken from running the code or driving the live site,
+     not from the presence of a button. Where that distinction mattered it is
+     stated in the evidence column.</p>
+</section>
+
+<!-- ======== PART 1 : MODULES ======== -->
+<section class="part">
+  <div class="eyebrow">Part 1</div>
+  <h2>Section 2 — module audit</h2>
+
+  <div class="legend">
+    <span class="st ok">WORKING</span> built and verified
+    <span class="st part">PARTIAL</span> exists, short of the requirement
+    <span class="st miss">MISSING</span> no implementation
+    <span class="st na">N/A</span> does not apply
+  </div>
+
+  <table>
+    <tr><th style="width:20%">Module</th><th style="width:10%">Status</th><th>Evidence and required change</th></tr>
+
+    <tr><td><strong>Telemetry Overview</strong></td><td class="st ok">WORKING</td>
+      <td>Rebuilt this cycle. Previously showed a fixed revenue curve, "99.9% SLA"
+          and a 98.8% hit ratio for a cache the site does not run — all literals.
+          Now counts pages, services, cases, posts, testimonials, subscribers and
+          enquiries on request, and names what it does not collect.</td></tr>
+
+    <tr><td><strong>Live AI &amp; Support Chats</strong></td><td class="st ok">WORKING</td>
+      <td>Backed by <span class="ev">chat_sessions</span>; access behind
+          <span class="ev">chats.view</span>.</td></tr>
+
+    <tr><td><strong>Newsletter Subscribers</strong></td><td class="st ok">WORKING</td>
+      <td>Table carries source, status, created_at and unsubscribed_at; the
+          screen lists, searches and exports. Zero subscribers so far, which is
+          a marketing fact, not a defect.</td></tr>
+
+    <tr><td><strong>Services Catalog</strong></td><td class="st part">PARTIAL</td>
+      <td>24 services, each with its own public page and metadata — all verified
+          200. <em>No</em> draft/published/archived status, featured toggle or
+          display order. A service is live or deleted.</td></tr>
+
+    <tr><td><strong>Client Sprints</strong></td><td class="st ok">WORKING</td>
+      <td>Internal only; nothing from it is published. Correctly separated from
+          CMS content, as the specification asks.</td></tr>
+
+    <tr><td><strong>Portfolio &amp; Cases</strong></td><td class="st part">PARTIAL</td>
+      <td>Cards and case studies are two collections joined by copying the
+          project id by hand — exactly the workaround §2 names. It produced 39
+          live links to pages nobody had written; those are now suppressed and
+          the console warns, but the relationship is still manual.</td></tr>
+
+    <tr><td><strong>Client Reviews</strong></td><td class="st part">PARTIAL</td>
+      <td>53 testimonials with name, company, role and project. No field records
+          whether permission to publish was obtained.</td></tr>
+
+    <tr><td><strong>Tech Stack Registry</strong></td><td class="st ok">WORKING</td>
+      <td>9 technologies, each with a public page, and
+          <span class="ev">relatedServices</span> already links them to services
+          (<span class="ev">techDetails.ts:53</span>).</td></tr>
+
+    <tr><td><strong>Blog CMS Studio</strong></td><td class="st part">PARTIAL</td>
+      <td>Persistence fixed this cycle — see the correction. Rich text, draft
+          status, categories, tags and SEO all work. No revision history, no
+          scheduled publishing, no preview, and until this cycle no audit record
+          of any change.</td></tr>
+
+    <tr><td><strong>Sitemap / Robots</strong></td><td class="st part">PARTIAL</td>
+      <td>109 addresses, all verified 200 live; robots.txt names the production
+          domain. Draft posts are excluded. <strong>The per-page noindex flag is
+          never read</strong>, so the first page set to noindex will still be
+          advertised.</td></tr>
+
+    <tr><td><strong>Search &amp; Metadata</strong></td><td class="st part">PARTIAL</td>
+      <td>16 routes editable, with a search-result preview and a social card
+          preview already built (<span class="ev">AdminSeoView.tsx:344</span>).
+          No validation warnings of any kind; canonical is correct but not
+          overridable.</td></tr>
+
+    <tr><td><strong>Site Content / Page Content / Page Sections</strong></td><td class="st part">PARTIAL</td>
+      <td>Every section on every page is reachable and editable, and the editor
+          lists the union of registry and defaults so none can be orphaned. But
+          sections cannot be <em>added, duplicated, reordered or hidden</em>,
+          and pages have no list view with status or last-modified, no slug or
+          H1 field, and no image alt text.</td></tr>
+
+    <tr><td><strong>Header &amp; Footer Menus</strong></td><td class="st ok">WORKING</td>
+      <td>Items, destinations, order, mega-menu panels and footer columns all
+          editable.</td></tr>
+
+    <tr><td><strong>Legal Pages</strong></td><td class="st part">PARTIAL</td>
+      <td>All five editable. No revision history and no publish confirmation
+          beyond the ordinary save.</td></tr>
+
+    <tr><td><strong>Forms &amp; Notifications</strong></td><td class="st ok">WORKING</td>
+      <td>Fields and options editable, recipients configurable, six enquiries
+          stored and retrievable, and a mail-server check that authenticates
+          without sending.</td></tr>
+
+    <tr><td><strong>Roles / Audit / Backup / Cache</strong></td><td class="st part">PARTIAL</td>
+      <td>Roles enforced server-side on every admin route — swept the whole API
+          tree, the only ungated handlers are sign-in, sign-out, session and the
+          public blog read. Backup exports and restores. Cache revalidates on
+          save. <strong>But the audit trail misses blog posts, client sprints
+          and subscriber deletions</strong>, and the recovery procedure has
+          never been written down or rehearsed.</td></tr>
+  </table>
+</section>
+
+<!-- ======== PART 2 : REQUIREMENTS ======== -->
+<section class="part">
+  <div class="eyebrow">Part 2</div>
+  <h2>Sections 3–9 — requirement status</h2>
+
+  <table>
+    <tr><th style="width:38%">Requirement</th><th style="width:10%">Status</th><th>Note</th></tr>
+
+    <tr><td colspan="3" style="background:#fbfcfd;font-weight:700;color:var(--deep)">§3 Page manager and section builder</td></tr>
+    <tr><td>Page list with search, status, last-modified</td><td class="st miss">MISSING</td><td>Pages are picked from a selector; no list, no status, no timestamps.</td></tr>
+    <tr><td>Edit title, body, hero, CTA</td><td class="st ok">WORKING</td><td>All editable per page.</td></tr>
+    <tr><td>Edit slug, H1, image alt text</td><td class="st miss">MISSING</td><td>Slugs are fixed routes; no alt-text field anywhere.</td></tr>
+    <tr><td>Add / duplicate / reorder / hide / remove sections</td><td class="st miss">MISSING</td><td>The largest gap in the whole document. Editing exists; composition does not.</td></tr>
+    <tr><td>Desktop / tablet / mobile preview</td><td class="st miss">MISSING</td><td>Only the forms screen has a preview frame.</td></tr>
+    <tr><td>Save Draft separate from Publish</td><td class="st miss">MISSING</td><td>Saving publishes. No draft state for pages.</td></tr>
+    <tr><td>Validate fields, slugs, links before publish</td><td class="st miss">MISSING</td><td>No validation layer.</td></tr>
+    <tr><td>Safe schemas, no arbitrary HTML or JS</td><td class="st ok">WORKING</td><td>Rich text escapes first, then applies markup (<span class="ev">richText.ts:77</span>).</td></tr>
+
+    <tr><td colspan="3" style="background:#fbfcfd;font-weight:700;color:var(--deep)">§4 Content modules</td></tr>
+    <tr><td>Service creates its own public URL</td><td class="st ok">WORKING</td><td>24 live.</td></tr>
+    <tr><td>Service status, featured, display order</td><td class="st miss">MISSING</td><td>—</td></tr>
+    <tr><td>Stable portfolio ↔ case study relationship</td><td class="st part">PARTIAL</td><td>Manual id matching.</td></tr>
+    <tr><td>Blog rich text, status, SEO, internal links</td><td class="st ok">WORKING</td><td>Persistence fixed this cycle.</td></tr>
+    <tr><td>Blog revisions, scheduling, preview</td><td class="st miss">MISSING</td><td>—</td></tr>
+    <tr><td>Media library</td><td class="st miss">MISSING</td><td>No upload path exists; images are pasted URLs.</td></tr>
+    <tr><td>Reusable FAQs assignable to pages</td><td class="st part">PARTIAL</td><td>FAQs live inside each record; cannot be shared.</td></tr>
+    <tr><td>Testimonial permission tracking</td><td class="st miss">MISSING</td><td>—</td></tr>
+    <tr><td>Navigation management</td><td class="st ok">WORKING</td><td>—</td></tr>
+    <tr><td>Legal revision history</td><td class="st miss">MISSING</td><td>—</td></tr>
+    <tr><td>Forms, leads, notifications</td><td class="st ok">WORKING</td><td>—</td></tr>
+
+    <tr><td colspan="3" style="background:#fbfcfd;font-weight:700;color:var(--deep)">§5 SEO and technical SEO</td></tr>
+    <tr><td>Per-page title, description, robots, social</td><td class="st ok">WORKING</td><td>16 routes.</td></tr>
+    <tr><td>Canonical override per page</td><td class="st part">PARTIAL</td><td>Correct and automatic; not editable.</td></tr>
+    <tr><td>Validation warnings</td><td class="st miss">MISSING</td><td>Duplicate slugs, lengths, missing H1 or alt text — none checked.</td></tr>
+    <tr><td>Sitemap excludes drafts and noindex</td><td class="st part">PARTIAL</td><td>Drafts yes, noindex no.</td></tr>
+    <tr><td>robots.txt on the production domain</td><td class="st ok">WORKING</td><td>Verified live.</td></tr>
+    <tr><td>Redirect management</td><td class="st miss">MISSING</td><td>No redirect table or config.</td></tr>
+    <tr><td>Warn before URL change or deletion</td><td class="st part">PARTIAL</td><td>Deletion warns and names the address; renaming does not.</td></tr>
+    <tr><td>Broken internal-link check</td><td class="st ok">WORKING</td><td>In Backup, Audit &amp; Search. Confirmed independently: 109/109 sitemap addresses and every internal link resolve.</td></tr>
+    <tr><td>Structured data from visible content</td><td class="st ok">WORKING</td><td>Built from the same records the page renders.</td></tr>
+    <tr><td>Search and social previews</td><td class="st ok">WORKING</td><td>Both already present.</td></tr>
+
+    <tr><td colspan="3" style="background:#fbfcfd;font-weight:700;color:var(--deep)">§6 Locations</td></tr>
+    <tr><td>Nine market pages</td><td class="st miss">MISSING</td><td>No route for any of them. Blocked on content, not code — see the note.</td></tr>
+
+    <tr><td colspan="3" style="background:#fbfcfd;font-weight:700;color:var(--deep)">§7 Publishing, revisions, rollback</td></tr>
+    <tr><td>Draft → preview → publish workflow</td><td class="st miss">MISSING</td><td>—</td></tr>
+    <tr><td>Scheduled publishing</td><td class="st miss">MISSING</td><td>The specification asks whether blog scheduling exists. It does not.</td></tr>
+    <tr><td>Version snapshots, compare, restore</td><td class="st part">PARTIAL</td><td>Whole-content backup and restore works. Per-record versions do not exist.</td></tr>
+    <tr><td>Record who changed what, before/after</td><td class="st part">PARTIAL</td><td>Everything through the content store. Blog, sprints and subscriber deletes are not recorded.</td></tr>
+    <tr><td>Confirm before deleting</td><td class="st ok">WORKING</td><td>Names the address that will start returning Not Found.</td></tr>
+    <tr><td>Documented backup and tested recovery</td><td class="st part">PARTIAL</td><td>Scripts exist; the procedure is unwritten and unrehearsed.</td></tr>
+
+    <tr><td colspan="3" style="background:#fbfcfd;font-weight:700;color:var(--deep)">§8–9 Security, architecture, dashboard</td></tr>
+    <tr><td>Roles enforced server-side</td><td class="st ok">WORKING</td><td>Whole API tree swept.</td></tr>
+    <tr><td>Drafts and admin APIs not publicly reachable</td><td class="st ok">WORKING</td><td>Fixed this cycle — see Part 3.</td></tr>
+    <tr><td>Service-role secret off the browser</td><td class="st ok">WORKING</td><td><span class="ev">server-only</span>; RLS forced with no permissive policies.</td></tr>
+    <tr><td>Revalidate affected paths on publish</td><td class="st ok">WORKING</td><td>Tag purge plus path revalidation.</td></tr>
+    <tr><td>Real dashboard metrics</td><td class="st ok">WORKING</td><td>Rebuilt this cycle.</td></tr>
+    <tr><td>Status and error reporting</td><td class="st ok">WORKING</td><td>Database banner on every screen; mail check on forms.</td></tr>
+    <tr><td>Preserve GA4 events and conversions</td><td class="st na">N/A</td><td>None are defined in the code. Analytics itself was blocked by the site's own security policy until this cycle and had never reported; now verified live.</td></tr>
+    <tr><td>Upload validation</td><td class="st na">N/A</td><td>No upload path yet. Becomes a requirement with the media library.</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Location pages need content before they need code.</strong>
+    The template is a couple of days. The nine markets are the constraint: the
+    specification rightly forbids thin duplicates, and only Jaipur has a real
+    address. Decide what is genuinely true per market first, or the work
+    produces nine pages that should not be indexed.
+  </div>
+</section>
+
+<!-- ======== PART 3 : EXTRA DEFECTS ======== -->
+<section class="part">
+  <div class="eyebrow">Part 3</div>
+  <h2>Defects found that the specification does not list</h2>
+
+  <p>Found while checking its items. Two were already losing data; two more
+     would have gone wrong the first time a feature was used. All four are
+     fixed or small.</p>
+
+  <table>
+    <tr><th style="width:26%">Defect</th><th style="width:11%">State</th><th>Detail</th></tr>
+
+    <tr><td><strong>Blog saved nowhere</strong></td><td class="st ok">FIXED</td>
+      <td>Table never created; writes went to per-instance memory and the error
+          was discarded. Publishing reported success and lost the article.</td></tr>
+
+    <tr><td><strong>Drafts were public</strong></td><td class="st ok">FIXED</td>
+      <td><span class="ev">/api/blog?status=draft</span> honoured the parameter
+          with no authentication, so every unfinished article would have been
+          readable by anyone. Nothing leaked only because no draft existed yet.
+          Now 401 for an anonymous caller; verified live.</td></tr>
+
+    <tr><td><strong>Analytics never reported</strong></td><td class="st ok">FIXED</td>
+      <td>The Google tag was in the markup and refused by the site's own
+          Content-Security-Policy on every page load. The property had received
+          nothing at all.</td></tr>
+
+    <tr><td><strong>39 links to pages nobody wrote</strong></td><td class="st ok">FIXED</td>
+      <td>Portfolio cards linked to case studies that did not exist.</td></tr>
+
+    <tr><td><strong>Sitemap ignores noindex</strong></td><td class="st miss">OPEN</td>
+      <td>Draft posts are excluded but the per-page flag is never read. Nothing
+          is wrong today because no page is set to noindex; it breaks the first
+          time the setting is used. An hour's work.</td></tr>
+
+    <tr><td><strong>Blog changes leave no audit record</strong></td><td class="st miss">OPEN</td>
+      <td>Posts, sprints and subscriber deletions are never recorded. The action
+          names are declared in the audit type and nothing writes them. Half a
+          day.</td></tr>
+
+    <tr><td><strong>Rate limiting is per-instance</strong></td><td class="st miss">OPEN</td>
+      <td>200 requests a minute counted in the memory of whichever serverless
+          instance answers, so the real limit is neither 200 nor knowable. It can
+          also catch several genuine visitors behind one office network. A
+          security control, so it needs a decision rather than a quiet change.</td></tr>
+
+    <tr><td><strong>Two unused components</strong></td><td class="st miss">OPEN</td>
+      <td><span class="ev">EngagementModels.tsx</span> and
+          <span class="ev">SecurityComplianceSection.tsx</span> are complete and
+          rendered nowhere.</td></tr>
+  </table>
+</section>
+
+<!-- ======== PART 4 : TALLY + ESTIMATE ======== -->
+<section class="part">
+  <div class="eyebrow">Part 4</div>
+  <h2>Tally and phased estimate</h2>
+
+  <table>
+    <tr><th style="width:14%">Status</th><th style="width:10%">Count</th><th>Summary</th></tr>
+    <tr><td class="st ok">WORKING</td><td>24</td><td>Chats, subscribers, sprints, tech stack, navigation, forms, structured data, SEO previews, broken-link check, robots domain, server-side roles, secret handling, revalidation, real metrics, analytics, delete confirmation, HTML escaping, and the content editing that exists.</td></tr>
+    <tr><td class="st part">PARTIAL</td><td>14</td><td>Services, portfolio, reviews, blog, sitemap, search metadata, page sections, legal, roles/audit/backup, canonical, FAQs, URL warnings, versions, recovery docs.</td></tr>
+    <tr><td class="st miss">MISSING</td><td>18</td><td>Page list, slug/H1/alt, section composition, previews, drafts, validation, service status, blog revisions and scheduling, media library, testimonial permission, legal revisions, SEO warnings, redirects, locations, scheduling.</td></tr>
+    <tr><td class="st na">N/A</td><td>2</td><td>Upload validation, GA4 conversion preservation.</td></tr>
+  </table>
+
+  <h3>Phased estimate</h3>
+  <p>Working days for one developer, excluding the client-side content work
+     that location pages depend on.</p>
+
+  <table>
+    <tr><th style="width:7%">Phase</th><th style="width:36%">Work</th><th style="width:10%">Days</th><th>Note</th></tr>
+    <tr><td><strong>0</strong></td><td>The four open defects in Part 3</td><td>2</td>
+        <td>Not in the specification. Two will break silently the first time a
+            feature is used; one is a security control that needs a decision.</td></tr>
+    <tr><td><strong>1</strong></td><td>SEO validation warnings</td><td>3</td>
+        <td>Cheapest item on the list and the only one that prevents mistakes
+            rather than recording them.</td></tr>
+    <tr><td><strong>2</strong></td><td>Draft, preview, publish; responsive preview</td><td>10</td>
+        <td>Touches every content screen. The largest safety gain available.</td></tr>
+    <tr><td><strong>3</strong></td><td>Section composition — add, duplicate, reorder, hide</td><td>8</td>
+        <td>Understated in the specification. Without it a page's shape still
+            needs a developer, which is most of what a CMS is for.</td></tr>
+    <tr><td><strong>4</strong></td><td>Media library</td><td>6</td>
+        <td>Storage bucket, signed upload, validation, picker, alt text.</td></tr>
+    <tr><td><strong>5</strong></td><td>Per-record versions and restore</td><td>5</td>
+        <td>Backup already covers the catastrophic case; this covers the ordinary one.</td></tr>
+    <tr><td><strong>6</strong></td><td>Redirects; URL-change warnings</td><td>4</td>
+        <td>Matters more once phases 2 and 3 start causing address changes.</td></tr>
+    <tr><td><strong>7</strong></td><td>Portfolio relationship, service status, FAQ reuse, legal revisions</td><td>6</td>
+        <td>The Partial rows.</td></tr>
+    <tr><td><strong>8</strong></td><td>Scheduled publishing</td><td>3</td>
+        <td>Needs decisions on timezone and on a missed run.</td></tr>
+    <tr><td><strong>9</strong></td><td>Location template and nine pages</td><td>4 + content</td>
+        <td>Code is small. Blocked on real market detail.</td></tr>
+    <tr><td><strong>10</strong></td><td>Recovery rehearsal, documentation, QA, training</td><td>5</td>
+        <td>Specification §13.</td></tr>
+    <tr><td colspan="2" style="text-align:right;font-weight:700">Total</td><td style="font-weight:700">56 days</td><td>Roughly eleven weeks at five days a week.</td></tr>
+  </table>
+
+  <div class="warn">
+    <strong>On the ordering.</strong>
+    The specification puts the audit first, which is done, then page manager
+    and media together. Two changes are worth considering: the Part 3 defects
+    come before anything new, because two of them are live faults; and SEO
+    warnings move ahead of the media library, because they cost three days and
+    stop mistakes reaching the website.
+  </div>
+
+  <h3>Acceptance criteria today</h3>
+  <p>Of the twenty in §11, five can be demonstrated now: the audit report
+     exists with evidence; published content appears on the correct live URL;
+     new services and blog posts get their own public pages; drafts and
+     protected operations are refused to unauthorised users; and the existing
+     forms, newsletter, chat, analytics, navigation and notifications all work.
+     The sitemap and robots criteria pass except for the noindex rule. The
+     remaining fourteen depend on the phases above.</p>
+</section>
+
+</body>
+</html>
