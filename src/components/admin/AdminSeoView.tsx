@@ -1,7 +1,8 @@
 "use client";
 
 import { PlainField, StringListEditor } from "@/components/admin/fields";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { runSeoChecks, summarise, type SeoIssue } from "@/lib/seoChecks";
 import {
   Search,
   Save,
@@ -61,12 +62,170 @@ function Field({
 const inputClass =
   "w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-sky-500 focus:bg-white";
 
+
+/** The findings for one field, under that field. */
+function IssueList({ issues }: { issues: SeoIssue[] }) {
+  if (issues.length === 0) return null;
+
+  return (
+    <ul className="mt-1.5 space-y-1">
+      {issues.map((issue, i) => (
+        <li
+          key={i}
+          className={`text-[11.5px] leading-snug flex items-start gap-1.5 ${
+            issue.severity === "error" ? "text-red-700" : "text-amber-700"
+          }`}
+        >
+          <span aria-hidden className="mt-[1px]">
+            {issue.severity === "error" ? "●" : "▲"}
+          </span>
+          <span>{issue.message}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/**
+ * The overview.
+ *
+ * Deliberately not a score. A number out of a hundred invites someone to
+ * chase it, and no tool can tell you what a change does to a ranking — what
+ * it can tell you is that a description is cut off, or that two pages are
+ * indistinguishable in a result. So this counts findings and says what they
+ * are.
+ */
+function SeoIssuePanel({
+  issues,
+  counts,
+}: {
+  issues: SeoIssue[];
+  counts: { errors: number; warnings: number };
+}) {
+  const [open, setOpen] = useState(false);
+
+  if (issues.length === 0) {
+    return (
+      <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-sm">
+        <strong className="font-bold">Nothing to fix.</strong> Every managed
+        page has a title and a description within the lengths search results
+        show, none are duplicated, and no record addresses collide.
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-xl border border-slate-300 bg-white overflow-hidden">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center justify-between gap-3 p-4 text-left hover:bg-slate-50 cursor-pointer"
+      >
+        <span className="text-sm text-slate-900">
+          {counts.errors > 0 && (
+            <strong className="font-bold text-red-700">
+              {counts.errors} to fix
+            </strong>
+          )}
+          {counts.errors > 0 && counts.warnings > 0 && <span className="text-slate-400"> · </span>}
+          {counts.warnings > 0 && (
+            <strong className="font-bold text-amber-700">
+              {counts.warnings} worth a look
+            </strong>
+          )}
+        </span>
+        <span className="text-xs font-mono text-slate-500">{open ? "hide" : "show all"}</span>
+      </button>
+
+      {open && (
+        <div className="border-t border-slate-200 divide-y divide-slate-100 max-h-80 overflow-y-auto">
+          {issues.map((issue, i) => (
+            <div key={i} className="p-3 flex items-start gap-2.5 text-[12px]">
+              <span
+                className={`font-mono shrink-0 ${
+                  issue.severity === "error" ? "text-red-600" : "text-amber-600"
+                }`}
+                aria-hidden
+              >
+                {issue.severity === "error" ? "●" : "▲"}
+              </span>
+              <span className="font-mono text-slate-500 shrink-0 w-28 truncate" title={issue.scope}>
+                {issue.scope}
+              </span>
+              <span className="text-slate-700">{issue.message}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <p className="px-4 py-2.5 border-t border-slate-200 bg-slate-50 text-[11px] text-slate-500 leading-relaxed">
+        These are facts about the text, not a prediction. Fixing them makes a
+        result readable and distinct; no tool can tell you what it does to a
+        position.
+      </p>
+    </div>
+  );
+}
+
 export default function AdminSeoView() {
   const [settings, setSettings] = useState<SiteSettings>(DEFAULT_SITE_SETTINGS);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<{ text: string; ok: boolean } | null>(null);
   const [activeRoute, setActiveRoute] = useState<string>("/");
+
+  /**
+   * Findings the browser cannot work out for itself: record slug collisions,
+   * and which routes the menus link to. Fetched once; the per-field checks
+   * below are recomputed locally so they track what is being typed.
+   */
+  const [serverIssues, setServerIssues] = useState<SeoIssue[]>([]);
+  const [linkedRoutes, setLinkedRoutes] = useState<string[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/seo/checks", { cache: "no-store" });
+        if (!res.ok) return;
+        const json = await res.json();
+        if (cancelled) return;
+        setServerIssues(
+          (json.issues as SeoIssue[]).filter((i) => i.field === "slug" || i.scope === "site")
+        );
+        setLinkedRoutes(Array.isArray(json.linkedRoutes) ? json.linkedRoutes : []);
+      } catch {
+        // The screen still works without them; it just checks less.
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  /** Re-run over the settings on screen, including unsaved edits. */
+  const liveIssues = useMemo(
+    () =>
+      runSeoChecks({
+        settings,
+        managedRoutes: SEO_MANAGED_ROUTES.map((r) => r.path),
+        linkedRoutes,
+      }),
+    [settings, linkedRoutes]
+  );
+
+  const issues = useMemo(
+    () => [...liveIssues, ...serverIssues],
+    [liveIssues, serverIssues]
+  );
+
+  const counts = useMemo(() => summarise(issues), [issues]);
+
+  const issuesFor = useCallback(
+    (scope: string, field: SeoIssue["field"]) =>
+      issues.filter((i) => i.scope === scope && i.field === field),
+    [issues]
+  );
 
   const showToast = useCallback((text: string, ok = true) => {
     setToast({ text, ok });
@@ -287,6 +446,8 @@ export default function AdminSeoView() {
 
       {/* ------------------------------------------------------------------ */}
       <section className="p-6 rounded-2xl bg-white border border-slate-200 space-y-5">
+        <SeoIssuePanel issues={issues} counts={counts} />
+
         <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
           <FileText className="w-4 h-4 text-sky-600" /> Per-page metadata
         </h3>
@@ -308,6 +469,13 @@ export default function AdminSeoView() {
               }`}
             >
               {route.label}
+              {issues.some(
+                (i) => i.scope === route.path && i.severity === "error"
+              ) ? (
+                <span className="ml-1.5 text-red-500" aria-label="has an error">●</span>
+              ) : issues.some((i) => i.scope === route.path) ? (
+                <span className="ml-1.5 text-amber-500" aria-label="has a warning">●</span>
+              ) : null}
             </button>
           ))}
         </div>
@@ -320,6 +488,7 @@ export default function AdminSeoView() {
               onChange={(e) => setPage(activeRoute, { title: e.target.value })}
             />
             <CharCount value={page.title} limit={TITLE_LIMIT} />
+            <IssueList issues={issuesFor(activeRoute, "title")} />
           </Field>
 
           <Field label="Description">
@@ -329,6 +498,7 @@ export default function AdminSeoView() {
               value={page.description}
               onChange={(description) => setPage(activeRoute, { description })}
             />
+            <IssueList issues={issuesFor(activeRoute, "description")} />
           </Field>
 
           <label className="flex items-center gap-2.5 text-sm text-slate-700">
@@ -340,6 +510,7 @@ export default function AdminSeoView() {
             />
             Keep this page out of search results
           </label>
+          <IssueList issues={issuesFor(activeRoute, "indexing")} />
 
           {/* Result preview, so copy can be judged at the length it will appear. */}
           <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
