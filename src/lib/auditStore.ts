@@ -45,7 +45,13 @@ export type AuditAction =
   | "project.updated"
   | "project.deleted"
   | "chat.deleted"
-  | "subscriber.deleted";
+  | "subscriber.deleted"
+  // Articles live in their own table rather than the content store, so they
+  // were outside the trail entirely: a post could be written, rewritten or
+  // deleted and nothing recorded it.
+  | "post.created"
+  | "post.updated"
+  | "post.deleted";
 
 export interface FieldChange {
   field: string;

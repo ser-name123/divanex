@@ -5,6 +5,8 @@ import { randomUUID } from "node:crypto";
 import { sanitizeInput, safeHttpUrl } from "@/lib/security";
 import { BlogPost } from "@/data/blogData";
 import { requirePermission } from "@/lib/guard";
+import { recordAudit } from "@/lib/auditStore";
+import { clientIp } from "@/lib/rate-limit";
 
 export async function GET(request: Request) {
   try {
@@ -133,10 +135,23 @@ export async function POST(request: Request) {
 
     const saved = await saveBlogPost(newPost);
 
+    await recordAudit({
+      actor: { email: check.admin.email, name: check.admin.name, role: check.admin.role },
+      action: "post.created",
+      targetType: "post",
+      targetId: saved.id,
+      targetLabel: saved.title,
+      ip: clientIp(request),
+      detail: `${saved.status} · /blog/${saved.slug}`,
+    });
+
     return NextResponse.json({
       success: true,
       post: saved,
-      message: "Article published successfully."
+      message:
+        saved.status === "published"
+          ? "Article published. It is live on the next page load."
+          : "Article saved as a draft. It is not public."
     });
   } catch (error) {
     console.error("[api:blog:POST]", error);

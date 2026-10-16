@@ -34,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const candidates = await collectSitemapCandidates();
   const decisions = [
-    ...decideSitemap(candidates, sitemapSettings),
+    ...decideSitemap(candidates, sitemapSettings, settings),
     ...decideExtraUrls(sitemapSettings),
   ];
 

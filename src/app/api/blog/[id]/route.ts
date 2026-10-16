@@ -2,6 +2,8 @@ import { isBlogCategory } from "@/lib/blogCategories";
 import { NextResponse } from "next/server";
 import { getBlogPosts, saveBlogPost, deleteBlogPost } from "@/lib/blogStore";
 import { requirePermission } from "@/lib/guard";
+import { diffObjects, recordAudit } from "@/lib/auditStore";
+import { clientIp } from "@/lib/rate-limit";
 import { sanitizeInput, safeHttpUrl } from "@/lib/security";
 import type { BlogPost } from "@/data/blogData";
 
@@ -78,10 +80,33 @@ export async function PUT(
 
     const saved = await saveBlogPost(updated);
 
+    // The same field-level diff the content store records, so an article edit
+    // reads the same way in the trail as any other content change.
+    const changes = diffObjects(
+      existing as unknown as Record<string, unknown>,
+      saved as unknown as Record<string, unknown>
+    );
+
+    await recordAudit({
+      actor: { email: check.admin.email, name: check.admin.name, role: check.admin.role },
+      action: "post.updated",
+      targetType: "post",
+      targetId: saved.id,
+      targetLabel: saved.title,
+      ip: clientIp(request),
+      detail: changes.length
+        ? `${changes.length} field${changes.length === 1 ? "" : "s"} changed`
+        : "saved with no field-level change",
+      changes,
+    });
+
     return NextResponse.json({
       success: true,
       post: saved,
-      message: "Article updated successfully."
+      message:
+        saved.status === "published"
+          ? "Article updated. The change is live on the next page load."
+          : "Article saved as a draft. It is not public."
     });
   } catch (error) {
     console.error("[api:blog:PUT]", error);
@@ -98,7 +123,23 @@ export async function DELETE(
     if (!check.ok) return check.response;
 
     const { id } = await params;
+
+    // Read it first: once it is gone the trail cannot say what was removed,
+    // and "deleted post-1a2b3c" tells nobody anything useful.
+    const posts = await getBlogPosts();
+    const doomed = posts.find((p) => p.id === id);
+
     await deleteBlogPost(id);
+
+    await recordAudit({
+      actor: { email: check.admin.email, name: check.admin.name, role: check.admin.role },
+      action: "post.deleted",
+      targetType: "post",
+      targetId: id,
+      targetLabel: doomed?.title || id,
+      ip: clientIp(request),
+      detail: doomed ? `was ${doomed.status} at /blog/${doomed.slug}` : "not found",
+    });
 
     return NextResponse.json({
       success: true,

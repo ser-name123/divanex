@@ -42,7 +42,7 @@ interface Decision {
   included: boolean;
   priority: number;
   changeFrequency: ChangeFrequency;
-  reason: "group" | "rule" | null;
+  reason: "group" | "rule" | "noindex" | null;
   overridden: boolean;
 }
 
@@ -210,12 +210,19 @@ export default function AdminSitemapView({ canEdit }: { canEdit: boolean }) {
         const rule = settings.rules[entry.path];
         const groupOn = settings.groups[entry.group] !== false;
         const ruleExcludes = rule?.include === false;
+        const hidden = entry.reason === "noindex";
         return {
           ...entry,
-          included: groupOn && !ruleExcludes,
+          included: groupOn && !ruleExcludes && !hidden,
           priority: rule?.priority ?? entry.defaultPriority,
           changeFrequency: rule?.changeFrequency ?? entry.defaultChangeFrequency,
-          reason: ruleExcludes ? ("rule" as const) : !groupOn ? ("group" as const) : null,
+          reason: hidden
+            ? ("noindex" as const)
+            : ruleExcludes
+              ? ("rule" as const)
+              : !groupOn
+                ? ("group" as const)
+                : null,
           overridden: Boolean(
             rule && (rule.include === false || rule.priority !== undefined || rule.changeFrequency)
           ),
@@ -409,7 +416,7 @@ export default function AdminSitemapView({ canEdit }: { canEdit: boolean }) {
           >
             <button
               type="button"
-              disabled={!canEdit || entry.reason === "group"}
+              disabled={!canEdit || entry.reason === "group" || entry.reason === "noindex"}
               title={
                 entry.reason === "group"
                   ? "Its whole section is switched off"
@@ -439,6 +446,13 @@ export default function AdminSitemapView({ canEdit }: { canEdit: boolean }) {
               {entry.reason === "group" && (
                 <p className="text-[10px] text-amber-700 mt-0.5">
                   Hidden because {GROUP_LABELS[entry.group]} is off.
+                </p>
+              )}
+              {entry.reason === "noindex" && (
+                <p className="text-[10px] text-amber-700 mt-0.5">
+                  Hidden because this page is set to noindex. Change that under
+                  Search &amp; Metadata, not here — a sitemap that offers a page
+                  which then refuses to be indexed is a contradiction.
                 </p>
               )}
             </div>

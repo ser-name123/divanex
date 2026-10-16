@@ -150,7 +150,39 @@ export function proxy(request: NextRequest) {
     pathname.startsWith("/api/auth");
   const isAdminPath = pathname.startsWith("/admin");
   const isApi = pathname.startsWith("/api/");
-  const maxReq = isAuthPath ? 20 : isAdminPath ? 60 : isApi ? 80 : 200;
+
+  /**
+   * Budgets, with the page one sized from measurement rather than instinct.
+   *
+   * Most of what arrives here is the app's own traffic, not the reader's:
+   * Next fetches the routes a link points at as it scrolls into view. One
+   * scrolled page view on this site costs about ninety requests through this
+   * function, and exactly one of them is a navigation. At 200 a minute, a
+   * genuine reader was refused after roughly two page views — the limiter was
+   * throttling the site's own prefetching and calling it abuse. It is why an
+   * ordinary sweep of the public pages kept returning 429.
+   *
+   * Prefetches cannot be told apart from navigations here. Next strips both
+   * `Next-Router-Prefetch` and the `_rsc` parameter before the proxy runs;
+   * a probe confirmed the proxy sees a bare path with no query at all, even
+   * for a request that demonstrably carried both. The proxy is meant to be
+   * CDN-deployable and is deliberately kept away from router internals, so
+   * there is no separate bucket to put them in.
+   *
+   * So the page budget is raised to match what a real visit costs: 2000 is
+   * about twenty page views a minute from one address, which leaves room for
+   * an engaged reader and for several people behind one office connection,
+   * while still bounding a crawler.
+   *
+   * The budgets that actually matter are unchanged. Credential guessing is
+   * held at 20 a minute and the API at 80 — those are the surfaces where a
+   * limit buys something, and neither is inflated by prefetching.
+   *
+   * Public pages are also served from Vercel's CDN, so this is a second line
+   * rather than the only one. A per-IP count in one serverless instance's
+   * memory was never the real defence.
+   */
+  const maxReq = isAuthPath ? 20 : isApi ? 80 : isAdminPath ? 60 : 2000;
 
   // Separate bucket per traffic class, so ordinary browsing cannot consume the
   // allowance that throttles credential guessing.

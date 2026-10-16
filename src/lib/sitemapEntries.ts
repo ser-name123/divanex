@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { getAllTechSlugs } from "@/data/techDetails";
 import { getContent } from "@/lib/contentStore";
 import { getBlogPosts } from "@/lib/blogStore";
+import type { SiteSettings } from "@/data/siteSettings";
 import {
   normalisePath,
   normalisePriority,
@@ -37,7 +38,7 @@ export interface SitemapDecision extends SitemapCandidate {
   priority: number;
   changeFrequency: ChangeFrequency;
   /** Why it is out, when it is out. */
-  reason: "group" | "rule" | null;
+  reason: "group" | "rule" | "noindex" | null;
   /** True when an operator has overridden something about this URL. */
   overridden: boolean;
 }
@@ -173,21 +174,44 @@ export async function collectSitemapCandidates(): Promise<SitemapCandidate[]> {
  */
 export function decideSitemap(
   candidates: SitemapCandidate[],
-  settings: SitemapSettings
+  settings: SitemapSettings,
+  site?: SiteSettings
 ): SitemapDecision[] {
+  /**
+   * A page the operator told search engines not to index.
+   *
+   * The sitemap used to list every page whatever its indexing setting, so
+   * marking one noindex in the console produced a contradiction: the sitemap
+   * invited the crawler and the page then refused it. Nothing was wrong on
+   * the live site only because no page had been marked yet — which is the
+   * worst way to find out.
+   *
+   * `discourageSearchEngines` turns the whole site noindex, and robots.txt
+   * already honours it; the sitemap now agrees rather than advertising pages
+   * the same settings are hiding.
+   */
+  const noIndexed = (path: string): boolean => {
+    if (!site) return false;
+    if (site.discourageSearchEngines) return true;
+    return site.pages?.[path]?.noIndex === true;
+  };
+
   return candidates.map((candidate) => {
     const rule = settings.rules[candidate.path];
     const groupOn = settings.groups[candidate.group] !== false;
     const ruleExcludes = rule?.include === false;
+    const hidden = noIndexed(candidate.path);
 
     return {
       ...candidate,
-      included: groupOn && !ruleExcludes,
+      included: groupOn && !ruleExcludes && !hidden,
       // A rule that names a group's URL still shows its own weights, so
       // switching the group back on restores what the operator chose.
       priority: normalisePriority(rule?.priority, candidate.defaultPriority),
       changeFrequency: rule?.changeFrequency || candidate.defaultChangeFrequency,
-      reason: ruleExcludes ? "rule" : !groupOn ? "group" : null,
+      // The indexing setting wins the explanation: an operator who set
+      // noindex and also wrote a rule should be told about the stronger one.
+      reason: hidden ? "noindex" : ruleExcludes ? "rule" : !groupOn ? "group" : null,
       overridden: Boolean(
         rule && (rule.include === false || rule.priority !== undefined || rule.changeFrequency)
       ),

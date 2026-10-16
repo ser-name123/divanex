@@ -17,6 +17,8 @@ import {
   getProjectById,
 } from "@/lib/projectsStore";
 import { requirePermission } from "@/lib/guard";
+import { recordAudit } from "@/lib/auditStore";
+import { clientIp } from "@/lib/rate-limit";
 
 /** Admin-only. Access is gated by src/proxy.ts. */
 
@@ -197,6 +199,15 @@ export async function POST(request: Request) {
       // Supabase is optional; in-memory store and localStorage keep data alive
     }
 
+    await recordAudit({
+      actor: { email: check.admin.email, name: check.admin.name, role: check.admin.role },
+      action: "project.created",
+      targetType: "project",
+      targetId: saved.id,
+      targetLabel: saved.projectName || saved.id,
+      ip: clientIp(request),
+    });
+
     return ok({ project: saved });
   } catch (error) {
     const msg = error instanceof Error ? error.message : "Internal error";
@@ -243,6 +254,16 @@ export async function PUT(request: Request) {
       // Ignored if Supabase not configured
     }
 
+    await recordAudit({
+      actor: { email: check.admin.email, name: check.admin.name, role: check.admin.role },
+      action: "project.updated",
+      targetType: "project",
+      targetId: id,
+      targetLabel: updated.projectName || id,
+      ip: clientIp(request),
+      detail: `${Object.keys(body).length} field(s) submitted`,
+    });
+
     return ok({ project: updated });
   } catch (error) {
     const msg = error instanceof Error ? error.message : "Internal error";
@@ -258,6 +279,9 @@ export async function DELETE(request: Request) {
     const id = new URL(request.url).searchParams.get("id");
     if (!id) return badRequest("Missing project ID.");
 
+    // Named before it is gone; an id alone explains nothing afterwards.
+    const doomed = getAllProjects().find((p) => p.id === id);
+
     deleteFromStore(id);
 
     try {
@@ -266,6 +290,15 @@ export async function DELETE(request: Request) {
     } catch {
       // Ignored if Supabase not configured
     }
+
+    await recordAudit({
+      actor: { email: check.admin.email, name: check.admin.name, role: check.admin.role },
+      action: "project.deleted",
+      targetType: "project",
+      targetId: id,
+      targetLabel: doomed?.projectName || id,
+      ip: clientIp(request),
+    });
 
     return ok({});
   } catch (error) {

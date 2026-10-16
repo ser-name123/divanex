@@ -11,6 +11,7 @@ import {
   tooManyRequests,
 } from "@/lib/api";
 import { requirePermission } from "@/lib/guard";
+import { recordAudit } from "@/lib/auditStore";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { containsThreatSignature } from "@/lib/security";
 import { sendFormNotifications } from "@/lib/formNotifications";
@@ -225,9 +226,28 @@ export async function DELETE(request: Request) {
     if (!id) return badRequest("Missing subscriber ID.");
 
     const supabase = getSupabase();
+
+    // Read the address first. After the delete the trail can only name an id,
+    // which answers none of the questions anyone asks about a removal.
+    const { data: existing } = await supabase
+      .from("subscribers")
+      .select("email, source, status")
+      .eq("id", id)
+      .maybeSingle();
+
     const { error } = await supabase.from("subscribers").delete().eq("id", id);
 
     if (error) return serverError("subscribers:delete", error);
+
+    await recordAudit({
+      actor: { email: check.admin.email, name: check.admin.name, role: check.admin.role },
+      action: "subscriber.deleted",
+      targetType: "subscriber",
+      targetId: id,
+      targetLabel: existing?.email || id,
+      ip: clientIp(request),
+      detail: existing ? `was ${existing.status} via ${existing.source}` : "not found",
+    });
 
     return ok({ removed: 1 });
   } catch (error) {

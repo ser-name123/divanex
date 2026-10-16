@@ -38,7 +38,7 @@ export async function GET() {
     ]);
 
     const candidates = await collectSitemapCandidates();
-    const generated = decideSitemap(candidates, sitemapSettings);
+    const generated = decideSitemap(candidates, sitemapSettings, settings);
     const extras = decideExtraUrls(sitemapSettings);
 
     const included = [...generated, ...extras].filter((entry) => entry.included).length;
