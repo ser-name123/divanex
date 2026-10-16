@@ -62,6 +62,13 @@ export interface SiteSettings {
   googleSiteVerification: string;
   bingSiteVerification: string;
 
+  // --- Analytics ----------------------------------------------------------
+  /**
+   * GA4 measurement id, the 'G-XXXXXXX' from the property. Empty means no
+   * tag is rendered at all, which is what a staging deploy wants.
+   */
+  googleAnalyticsId: string;
+
   // --- Per-page overrides -------------------------------------------------
   pages: Record<string, PageSeo>;
 }
@@ -134,6 +141,8 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
 
   googleSiteVerification: "",
   bingSiteVerification: "",
+
+  googleAnalyticsId: "G-09YCQ5JGWQ",
 
   pages: {
     "/": {

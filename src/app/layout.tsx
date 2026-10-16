@@ -6,6 +6,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import PageTransitionManager from "@/components/PageTransitionManager";
 import WebsitePreloader from "@/components/WebsitePreloader";
 import AiChatWidget from "@/components/chat/AiChatWidget";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { CurrencyProvider } from "@/context/CurrencyContext";
 import { getSiteSettings, absoluteUrl } from "@/lib/siteSettingsStore";
 import { getContent } from "@/lib/contentStore";
@@ -115,11 +116,12 @@ export default async function RootLayout({
   // through the providers. The header, footer and closing call-to-action need
   // all three on every route, so fetching them here is three reads per render
   // instead of three per section.
-  const [siteConfig, navigation, pages, sections] = await Promise.all([
+  const [siteConfig, navigation, pages, sections, settings] = await Promise.all([
     getContent("site-config"),
     getContent("navigation"),
     getContent("pages"),
     getContent("sections"),
+    getSiteSettings(),
   ]);
 
   return (
@@ -127,21 +129,6 @@ export default async function RootLayout({
       <head>
         <link rel="icon" href="/brand-logo-icon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/brand-logo-icon.png" />
-        {/* Google tag (gtag.js) */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-09YCQ5JGWQ"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-09YCQ5JGWQ');
-            `,
-          }}
-        />
       </head>
       <body
         suppressHydrationWarning
@@ -158,6 +145,7 @@ export default async function RootLayout({
           {children}
           {/* Futuristic Floating Scroll-To-Top & Progress Indicator */}
           <ScrollToTop />
+          <GoogleAnalytics measurementId={settings.googleAnalyticsId} />
           {/* Enterprise AI Live Chat & Support Widget */}
           <AiChatWidget />
         </CurrencyProvider>

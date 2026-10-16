@@ -526,6 +526,18 @@ export default function AdminSeoView() {
           </Field>
         </div>
 
+        <Field
+          label="Google Analytics measurement ID"
+          hint="The G-XXXXXXX from the GA4 property. Leave empty to stop reporting entirely — the tag is not rendered at all, and never on the admin console."
+        >
+          <input
+            className={inputClass}
+            value={settings.googleAnalyticsId}
+            placeholder="G-XXXXXXXXXX"
+            onChange={(e) => set("googleAnalyticsId", e.target.value.trim())}
+          />
+        </Field>
+
         <div className="flex flex-wrap gap-3 pt-1 text-xs">
           <a
             href="/sitemap.xml"

@@ -29,12 +29,45 @@ function supabaseOrigin(): string {
   }
 }
 
-function connectSrc(isDev: boolean): string {
+/**
+ * Where the Google tag loads from and reports to.
+ *
+ * Only the public policy gets these. The tag does not run in the admin
+ * console, and widening the strict policy for a script it never loads would
+ * weaken the one surface the nonce exists to protect.
+ *
+ * Measured before this existed: the tag was in the markup, the script was
+ * refused, and no collect request ever left the page — so the property had
+ * been receiving nothing at all.
+ */
+const ANALYTICS_SCRIPT_SRC = "https://www.googletagmanager.com";
+
+/**
+ * Where the beacons go. These were read off the blocked requests rather than
+ * copied from a guide: GA4 routes each visitor to one of several collection
+ * hosts, and a policy that names only the obvious one still drops the data.
+ *
+ * The last two belong to Google Signals — cross-device and demographics
+ * reporting, which the property has switched on. They receive a beacon and
+ * nothing more; neither origin is allowed to execute a script here.
+ */
+const ANALYTICS_CONNECT_SRC = [
+  "https://www.googletagmanager.com",
+  "https://www.google-analytics.com",
+  "https://*.google-analytics.com",
+  "https://analytics.google.com",
+  "https://*.analytics.google.com",
+  "https://stats.g.doubleclick.net",
+  "https://www.google.com",
+];
+
+function connectSrc(isDev: boolean, analytics: boolean): string {
   const origin = supabaseOrigin();
   return [
     "'self'",
     origin,
     origin ? origin.replace(/^https:/, "wss:") : "",
+    ...(analytics ? ANALYTICS_CONNECT_SRC : []),
     // Turbopack HMR.
     isDev ? "ws: wss:" : "",
   ]
@@ -42,12 +75,12 @@ function connectSrc(isDev: boolean): string {
     .join(" ");
 }
 
-const SHARED = (isDev: boolean) => [
+const SHARED = (isDev: boolean, analytics: boolean) => [
   "font-src 'self' https://fonts.gstatic.com data:",
   // Remote imagery is served over TLS only; plain http: would let a network
   // attacker swap assets on the page.
   "img-src 'self' data: blob: https:",
-  `connect-src ${connectSrc(isDev)}`,
+  `connect-src ${connectSrc(isDev, analytics)}`,
   "media-src 'self'",
   "worker-src 'self' blob:",
   "manifest-src 'self'",
@@ -63,9 +96,9 @@ const SHARED = (isDev: boolean) => [
 export function buildStaticCsp(isDev = process.env.NODE_ENV === "development"): string {
   return [
     "default-src 'self'",
-    `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+    `script-src 'self' 'unsafe-inline' ${ANALYTICS_SCRIPT_SRC}${isDev ? " 'unsafe-eval'" : ""}`,
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    ...SHARED(isDev),
+    ...SHARED(isDev, true),
   ].join("; ");
 }
 
@@ -80,7 +113,7 @@ export function buildNonceCsp(
     // Tailwind emits a stylesheet, but Next still inlines some style; nonce it
     // in production and stay permissive in dev where HMR rewrites styles.
     `style-src 'self' ${isDev ? "'unsafe-inline'" : `'nonce-${nonce}' 'unsafe-inline'`} https://fonts.googleapis.com`,
-    ...SHARED(isDev),
+    ...SHARED(isDev, false),
   ].join("; ");
 }
 

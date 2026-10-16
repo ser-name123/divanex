@@ -128,6 +128,10 @@ export async function PUT(request: Request) {
       ...(body.bingSiteVerification !== undefined && {
         bingSiteVerification: cleanString(body.bingSiteVerification, 200),
       }),
+
+      ...(body.googleAnalyticsId !== undefined && {
+        googleAnalyticsId: cleanString(body.googleAnalyticsId, 40),
+      }),
     };
 
     const pages = sanitizePages(body.pages);
