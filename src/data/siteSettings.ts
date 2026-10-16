@@ -95,7 +95,11 @@ export const SEO_MANAGED_ROUTES = [
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   siteName: "Divanex",
-  siteUrl: "https://divanex.vercel.app",
+  // The production domain, not the Vercel one. The stored settings already
+  // carry this, but a seed that names the preview host is a trapdoor: lose the
+  // row and every canonical, the sitemap and robots.txt quietly start pointing
+  // search engines at a second copy of the site.
+  siteUrl: "https://www.divanextechnologies.com",
   defaultTitle:
     "Divanex | Enterprise Software Engineering, Custom SaaS & AI Solutions",
   titleTemplate: "%s | Divanex",

@@ -288,7 +288,7 @@ function AdminDashboardContent() {
           <DatabaseStatusBanner />
 
           {activeTab === "overview" && (
-            <AdminOverviewView projects={projects} />
+            <AdminOverviewView />
           )}
 
           {activeTab === "chats" && <AdminChatsView />}
