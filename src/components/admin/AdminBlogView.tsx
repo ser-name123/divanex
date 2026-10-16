@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { BlogPost, initialBlogPosts } from "@/data/blogData";
 import {
@@ -36,6 +36,31 @@ export default function AdminBlogView({ initialPosts }: AdminBlogViewProps) {
   // the localStorage mirror this used to keep could go stale against it and
   // showed one browser a different set of posts from every other.
   const [posts, setPosts] = useState<BlogPost[]>(initialPosts || initialBlogPosts);
+
+  /**
+   * Load the real articles.
+   *
+   * This screen rendered the seed in src/data/blogData.ts and never asked the
+   * server, so it showed the ten posts that ship with the source rather than
+   * what the site is actually serving — and anything added here vanished from
+   * the list on the next reload.
+   */
+  useEffect(() => {
+    let live = true;
+    (async () => {
+      try {
+        const res = await fetch("/api/blog?status=all", { cache: "no-store" });
+        if (!res.ok) return;
+        const json = await res.json();
+        if (live && Array.isArray(json.posts)) setPosts(json.posts as BlogPost[]);
+      } catch {
+        // Leave the seed on screen; the banner already reports a dead database.
+      }
+    })();
+    return () => {
+      live = false;
+    };
+  }, []);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");

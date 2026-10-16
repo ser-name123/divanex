@@ -16,12 +16,28 @@ export async function GET(request: Request) {
 
     let posts = await getBlogPosts();
 
-    // If client is public, default to published only
-    if (status) {
-      posts = posts.filter((p) => p.status === status);
-    } else {
-      // Return published by default unless specified
-      posts = posts.filter((p) => p.status === "published");
+    /**
+     * Unpublished posts are for the console, never for the website.
+     *
+     * This defaulted to published and then let `?status=` override it with no
+     * check at all, so `/api/blog?status=draft` handed every unfinished
+     * article to anyone who asked. Nothing leaked only because no draft
+     * existed yet — the first one written would have been public the moment
+     * it was saved.
+     *
+     * The caller has to hold the right to read the console's content before
+     * any status other than published is honoured.
+     */
+    const wantsUnpublished = status !== null && status !== "published";
+
+    if (wantsUnpublished) {
+      const check = await requirePermission("content.view");
+      if (!check.ok) return check.response;
+    }
+
+    // The console needs drafts and published together; the website never does.
+    if (status !== "all") {
+      posts = posts.filter((p) => p.status === (status || "published"));
     }
 
     if (category && category !== "All") {

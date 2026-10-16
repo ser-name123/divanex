@@ -178,6 +178,45 @@ async function setup() {
         ON subscribers (created_at DESC);
     `);
 
+    // Blog articles.
+    //
+    // The store has always read and written `blog_posts`, and the table was
+    // never created. Reads fell through to the seed in src/data/blogData.ts and
+    // writes went to a module-level array, which on a serverless host lives in
+    // one instance and is gone by the next request — so publishing an article
+    // reported success and lost it.
+    //
+    // The read path treats any row at all as the whole blog, so this table must
+    // hold every post rather than only the ones added from the console; seeding
+    // it is part of setup, not an afterthought.
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS blog_posts (
+        id TEXT PRIMARY KEY,
+        slug TEXT NOT NULL UNIQUE,
+        title TEXT NOT NULL,
+        subtitle TEXT,
+        excerpt TEXT,
+        content TEXT,
+        cover_image TEXT,
+        category TEXT,
+        author JSONB,
+        published_at DATE,
+        read_time TEXT,
+        featured BOOLEAN NOT NULL DEFAULT false,
+        status TEXT NOT NULL DEFAULT 'draft',
+        views INTEGER NOT NULL DEFAULT 0,
+        likes INTEGER NOT NULL DEFAULT 0,
+        tags JSONB NOT NULL DEFAULT '[]'::jsonb,
+        table_of_contents JSONB NOT NULL DEFAULT '[]'::jsonb,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+      );
+      CREATE INDEX IF NOT EXISTS blog_posts_published_at_idx
+        ON blog_posts (published_at DESC);
+      CREATE INDEX IF NOT EXISTS blog_posts_status_idx
+        ON blog_posts (status);
+    `);
+
     // Admin sign-in one-time codes.
     //
     // These were held in a Map inside the login route, which only works while
@@ -257,7 +296,7 @@ async function setup() {
     // bypasses RLS by design.
     console.log("Enabling Row Level Security...");
 
-    const TABLES = ["leads", "estimates", "projects", "services", "system_logs", "site_settings", "site_content", "chat_sessions", "subscribers", "auth_challenges", "admin_users", "audit_events"];
+    const TABLES = ["leads", "estimates", "projects", "services", "system_logs", "site_settings", "site_content", "chat_sessions", "subscribers", "auth_challenges", "admin_users", "audit_events", "blog_posts"];
 
     for (const table of TABLES) {
       await client.query(`ALTER TABLE ${table} ENABLE ROW LEVEL SECURITY;`);

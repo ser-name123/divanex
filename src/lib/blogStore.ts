@@ -68,6 +68,19 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
   return post;
 }
 
+/**
+ * Writes an article.
+ *
+ * This used to update a module-level array, attempt the database, and discard
+ * whatever came back. Two things were wrong with that. The table did not
+ * exist, so every write failed — and because the result was never checked,
+ * the failure was invisible and the route reported success. And the array it
+ * fell back to lives in one serverless instance, so even a "saved" post was
+ * gone by the next request, from a different instance.
+ *
+ * A failed write now throws. Losing an article is bad; telling someone it was
+ * published when it was not is worse, because they stop looking for it.
+ */
 export async function saveBlogPost(post: BlogPost): Promise<BlogPost> {
   const existingIdx = memoryBlogPosts.findIndex((p) => p.id === post.id);
   if (existingIdx >= 0) {
@@ -76,9 +89,9 @@ export async function saveBlogPost(post: BlogPost): Promise<BlogPost> {
     memoryBlogPosts.unshift(post);
   }
 
-  try {
+  {
     const supabase = getSupabase();
-    await supabase.from("blog_posts").upsert({
+    const { error } = await supabase.from("blog_posts").upsert({
       id: post.id,
       slug: post.slug,
       title: post.title,
@@ -95,22 +108,27 @@ export async function saveBlogPost(post: BlogPost): Promise<BlogPost> {
       views: post.views,
       likes: post.likes,
       tags: post.tags,
-      table_of_contents: post.tableOfContents
+      table_of_contents: post.tableOfContents,
+      updated_at: new Date().toISOString()
     });
-  } catch {
-    // Local memory retained
+
+    if (error) {
+      throw new Error(`Could not save the article: ${error.message}`);
+    }
   }
 
   return post;
 }
 
+/** Deletes an article, and says so plainly when it could not. */
 export async function deleteBlogPost(id: string): Promise<boolean> {
-  memoryBlogPosts = memoryBlogPosts.filter((p) => p.id !== id);
-  try {
-    const supabase = getSupabase();
-    await supabase.from("blog_posts").delete().eq("id", id);
-  } catch {
-    // Local memory deleted
+  const supabase = getSupabase();
+  const { error } = await supabase.from("blog_posts").delete().eq("id", id);
+
+  if (error) {
+    throw new Error(`Could not delete the article: ${error.message}`);
   }
+
+  memoryBlogPosts = memoryBlogPosts.filter((p) => p.id !== id);
   return true;
 }
