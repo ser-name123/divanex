@@ -246,6 +246,9 @@
      and the value <em>before</em> and <em>after</em> for each field. It also
      records refusals — an attempt to reach something out of reach is logged
      too. Passwords, tokens and codes are never written into it.</p>
+  <p><strong>One exception worth knowing:</strong> blog posts, client sprints
+     and subscriber deletions are not yet recorded. A change to an article
+     leaves no trail. This is being fixed.</p>
 </section>
 
 <!-- =================== 3 =================== -->
@@ -270,13 +273,17 @@
   </ul>
 
   <h3>Undoing a mistake</h3>
-  <p>There is no one-click revert. What you do have:</p>
+  <p>There is no per-page "restore this version". There are two things that do work:</p>
   <ul>
-    <li>The Audit Trail shows the previous value of the field, so it can be
-        typed back in.</li>
-    <li>Backup, Audit &amp; Search takes a copy of every content record. Take
-        one before any large edit — that is what it is for.</li>
+    <li><strong>The Audit Trail</strong> shows the previous value of the field,
+        so it can be typed back in. Best for a single wrong word.</li>
+    <li><strong>Backup, Audit &amp; Search</strong> exports every content record
+        to a file and can import it back. Best for undoing a bad afternoon.
+        It replaces whole collections at once, so it will also discard any
+        good edits made since the backup — it asks you to confirm, and the
+        confirmation lists what it is about to overwrite.</li>
   </ul>
+  <p>Take a backup before any large edit. That is what it is for.</p>
 
   <h3>Deleting</h3>
   <p>Deleting a page, service or case study makes its address return
@@ -506,9 +513,9 @@
     <tr><td><strong>Draft and preview for pages</strong></td>
         <td>Saving publishes. Draft the wording elsewhere, then paste it in.
             Blog posts are the exception — they have a real draft state.</td></tr>
-    <tr><td><strong>Rollback</strong></td>
-        <td>The Audit Trail shows the old value; type it back. Take a backup
-            before a large edit.</td></tr>
+    <tr><td><strong>Per-version rollback</strong></td>
+        <td>No "restore this version" on a single page. Whole-content backup
+            and restore does work — see Part 3.</td></tr>
     <tr><td><strong>Media library</strong></td>
         <td>There is no uploader. Images are referenced by web address, so host
             the file elsewhere and paste the link.</td></tr>
@@ -524,7 +531,9 @@
         <td>Publish by hand at the time you want it live.</td></tr>
     <tr><td><strong>SEO warnings</strong></td>
         <td>Nothing flags a duplicate address, an over-long description or a
-            missing image description. Check these yourself for now.</td></tr>
+            missing image description. Check these yourself for now. Broken
+            internal links <em>are</em> checked — Backup, Audit &amp; Search
+            finds them.</td></tr>
   </table>
 </section>
 

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Divanex CMS — Addendum Audit</title>
+<style>
+  @page { size: A4; margin: 18mm 14mm 20mm 14mm; }
+  :root {
+    --ink:#10172a; --body:#333c52; --muted:#6b7489; --line:#d9dee8;
+    --brand:#0f7670; --deep:#000838; --soft:#f4f6f9;
+    --ok:#0f7670; --part:#a86a12; --miss:#b4332b; --na:#7b8294;
+  }
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI",system-ui,sans-serif;color:var(--body);font-size:9.6pt;line-height:1.48;margin:0}
+  h1,h2,h3{color:var(--ink);line-height:1.24}
+  h1{font-size:25pt;margin:0 0 4px;letter-spacing:-.4px}
+  h2{font-size:13.5pt;margin:0 0 9px;padding-bottom:6px;border-bottom:2px solid var(--brand)}
+  h3{font-size:10.5pt;margin:15px 0 5px;color:var(--deep)}
+  p{margin:0 0 8px}
+  section.part{page-break-before:always}
+  section.part:first-of-type{page-break-before:avoid}
+  .eyebrow{font-family:Consolas,monospace;font-size:7.4pt;letter-spacing:1.3px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:5px}
+
+  .cover{padding-top:46mm;page-break-after:always}
+  .cover h1{font-size:32pt}
+  .cover .sub{font-size:12.5pt;color:var(--muted);margin-top:6px}
+  .cover .rule{height:3px;background:var(--brand);width:70px;margin:20px 0}
+  .cover dl{margin:28px 0 0;display:grid;grid-template-columns:34mm 1fr;row-gap:5px;font-size:9.4pt}
+  .cover dt{color:var(--muted)} .cover dd{margin:0;color:var(--ink);font-weight:600}
+
+  table{width:100%;border-collapse:collapse;margin:7px 0 11px;font-size:8.8pt}
+  th,td{text-align:left;vertical-align:top;padding:5.5px 7px;border-bottom:1px solid var(--line)}
+  th{background:var(--soft);color:var(--ink);font-weight:700;font-size:7.9pt;text-transform:uppercase;letter-spacing:.45px}
+  tr{page-break-inside:avoid}
+
+  .st{font-weight:700;font-size:8pt;white-space:nowrap}
+  .st.ok{color:var(--ok)} .st.part{color:var(--part)} .st.miss{color:var(--miss)} .st.na{color:var(--na)}
+
+  code,.ev{font-family:Consolas,monospace;font-size:7.9pt;background:#eef1f6;padding:1px 3px;border-radius:3px;color:var(--deep);word-break:break-all}
+
+  .note,.warn{padding:9px 12px;margin:10px 0;font-size:9.2pt;border-left:3px solid var(--brand);background:var(--soft);page-break-inside:avoid}
+  .warn{border-left-color:#e3bb62;background:#fdf6e7;color:#6b4d10}
+  .note strong,.warn strong{display:block;margin-bottom:2px}
+
+  ul{margin:0 0 9px;padding-left:18px} li{margin-bottom:3px}
+
+  .legend{display:flex;gap:16px;font-size:8.6pt;margin:10px 0 14px;flex-wrap:wrap}
+  .legend span{font-weight:700}
+  .tally{font-size:9.4pt;margin-top:12px}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="eyebrow">Divanex Technologies</div>
+  <h1>Addendum Audit</h1>
+  <div class="sub">Every listed item marked against the current codebase</div>
+  <div class="rule"></div>
+  <p style="max-width:118mm;color:var(--muted);font-size:10.2pt">
+    The addendum asks for this before any development: each requirement marked
+    Working, Partial, Missing or Not Applicable, with evidence and a proposed
+    action, so that nothing already built is rebuilt.
+  </p>
+  <dl>
+    <dt>Audits</dt><dd>Missing Features Addendum, 16 October 2026</dd>
+    <dt>Codebase</dt><dd>main @ af976a2</dd>
+    <dt>Stack confirmed</dt><dd>Next.js 16 App Router, TypeScript, Supabase</dd>
+    <dt>Prepared</dt><dd>16 October 2026</dd>
+  </dl>
+</div>
+
+<!-- ============ METHOD ============ -->
+<section>
+  <h2>How this was checked</h2>
+
+  <p>Every status below came from reading the code or driving the running site,
+     not from the handbook. Where a claim could be tested against the live site
+     it was, and three findings in this report contradict what the handbook
+     says — those are corrected in Part 4.</p>
+
+  <div class="legend">
+    <span class="st ok">WORKING</span> built and verified &nbsp;
+    <span class="st part">PARTIAL</span> exists but short of the requirement &nbsp;
+    <span class="st miss">MISSING</span> no implementation &nbsp;
+    <span class="st na">N/A</span> does not apply here
+  </div>
+
+  <div class="warn">
+    <strong>Headline: the addendum is right about the big items, and wrong about one.</strong>
+    Six of the seven "not built yet" features are genuinely absent. Revision
+    rollback is the exception — a working whole-content backup and restore
+    already exists; what is missing is per-record version history.
+  </div>
+
+  <p>The audit also surfaced four defects the addendum does not mention, found
+     while checking the items it does. They are in Part 3 and matter more than
+     some of the P2 work.</p>
+</section>
+
+<!-- ============ PART 1 ============ -->
+<section class="part">
+  <div class="eyebrow">Part 1</div>
+  <h2>Section 2 — the seven "not built yet" features</h2>
+
+  <table>
+    <tr><th style="width:21%">Feature</th><th style="width:11%">Status</th><th style="width:34%">Evidence</th><th>Proposed action</th></tr>
+
+    <tr>
+      <td><strong>Page draft &amp; preview</strong></td>
+      <td class="st miss">MISSING</td>
+      <td>No draft field on page or section records. Saving calls
+          <span class="ev">purgeTag</span> and the change is live
+          (<span class="ev">contentStore.ts:152</span>). No preview surface
+          exists for pages.</td>
+      <td>Add a draft payload alongside the live one per collection, a preview
+          route that reads the draft behind admin auth, and separate Save
+          Draft from Publish.</td>
+    </tr>
+
+    <tr>
+      <td><strong>Revision rollback</strong></td>
+      <td class="st part">PARTIAL</td>
+      <td>No version table. But a full export and a confirmed import exist
+          (<span class="ev">AdminContentToolsView.tsx:109,128</span>), and
+          the audit trail stores before/after per field
+          (<span class="ev">auditStore.ts:130</span>).</td>
+      <td>Keep the backup. Add a snapshot row per save and a compare-and-restore
+          screen for a single record, which is the part that is actually
+          missing.</td>
+    </tr>
+
+    <tr>
+      <td><strong>Media library</strong></td>
+      <td class="st miss">MISSING</td>
+      <td>No upload endpoint, no Supabase Storage call, no multipart handler
+          anywhere in <span class="ev">src/</span>. Images are pasted URLs.</td>
+      <td>A Storage bucket, a server-side signed upload, type and size
+          validation, and a picker that stores alt text with the file.</td>
+    </tr>
+
+    <tr>
+      <td><strong>Redirect manager</strong></td>
+      <td class="st miss">MISSING</td>
+      <td>No <span class="ev">redirects()</span> in
+          <span class="ev">next.config.ts</span>, no redirect table or store.</td>
+      <td>A redirects collection read by the existing proxy, with loop
+          detection and a warning when an address in use is changed.</td>
+    </tr>
+
+    <tr>
+      <td><strong>Location pages</strong></td>
+      <td class="st miss">MISSING</td>
+      <td>No route for any of the nine markets under
+          <span class="ev">src/app/</span>.</td>
+      <td>One template plus a CMS collection. Blocked on genuine local detail
+          per market — see the note at the end of this part.</td>
+    </tr>
+
+    <tr>
+      <td><strong>Scheduled publishing</strong></td>
+      <td class="st miss">MISSING</td>
+      <td>No scheduled or publish-at field on posts
+          (<span class="ev">blogData.ts</span>), and nothing in the blog editor.
+          The addendum's "may already be supported" is not the case.</td>
+      <td>A publish-at timestamp plus a scheduled job. Needs a decision on
+          timezone and on what happens when a run is missed.</td>
+    </tr>
+
+    <tr>
+      <td><strong>SEO validation warnings</strong></td>
+      <td class="st miss">MISSING</td>
+      <td>No validation of any kind in
+          <span class="ev">AdminSeoView.tsx</span>. Length, duplicates and
+          missing fields are unchecked.</td>
+      <td>Checks computed on read and shown next to the field. Cheapest item
+          on this list and the one with the most day-to-day value.</td>
+    </tr>
+  </table>
+
+  <div class="note">
+    <strong>Location pages need content before they need code.</strong>
+    The template is perhaps two days. The nine markets are the real
+    constraint: the addendum itself forbids thin duplicates, and only Jaipur
+    has a real address. Decide what is genuinely true for each market before
+    the work is scheduled, or it will produce nine pages that should not be
+    indexed.
+  </div>
+</section>
+
+<!-- ============ PART 2 ============ -->
+<section class="part">
+  <div class="eyebrow">Part 2</div>
+  <h2>Section 3 — requirements to verify</h2>
+
+  <h3>3.1 Page content and section builder</h3>
+  <table>
+    <tr><th style="width:34%">Requirement</th><th style="width:11%">Status</th><th>Finding</th></tr>
+    <tr><td>Edit section fields</td><td class="st ok">WORKING</td>
+        <td>Every section on every page is reachable; the editor lists the union of
+            the registry and generated defaults so a section cannot be unreachable
+            (<span class="ev">AdminSectionsView.tsx:66</span>).</td></tr>
+    <tr><td>Add, duplicate, reorder, hide, remove sections</td><td class="st miss">MISSING</td>
+        <td>The editor edits sections that exist. There is no add, duplicate,
+            reorder or hide. This is the largest single gap in the addendum
+            and is understated by it.</td></tr>
+    <tr><td>Desktop / tablet / mobile preview</td><td class="st miss">MISSING</td>
+        <td>Only the forms screen has a preview iframe
+            (<span class="ev">AdminFormsView.tsx:372</span>). No page preview.</td></tr>
+    <tr><td>Page draft / publish / unpublish</td><td class="st miss">MISSING</td>
+        <td>As Part 1.</td></tr>
+    <tr><td>Defined fields per section type</td><td class="st ok">WORKING</td>
+        <td>Sections are typed as heading, items and call-to-action, generated
+            into <span class="ev">SECTION_DEFAULTS</span>.</td></tr>
+    <tr><td>No arbitrary HTML or JavaScript</td><td class="st ok">WORKING</td>
+        <td>Rich text escapes first and then applies markup
+            (<span class="ev">richText.ts:77</span>), so a tag entered in a
+            field renders as text.</td></tr>
+  </table>
+
+  <h3>3.2 Dynamic content types</h3>
+  <table>
+    <tr><th style="width:34%">Requirement</th><th style="width:11%">Status</th><th>Finding</th></tr>
+    <tr><td>Creating a service generates its public page</td><td class="st ok">WORKING</td>
+        <td>24 services live, each with its own address and metadata.</td></tr>
+    <tr><td>Portfolio linked to case study by a stable relationship</td><td class="st part">PARTIAL</td>
+        <td>Two collections joined by matching the project id by hand. This
+            produced 39 live links to pages nobody had written; the links are
+            now suppressed and the console warns, but the relationship is
+            still manual. The addendum is right to call this out.</td></tr>
+    <tr><td>Status, metadata, archive for services and case studies</td><td class="st miss">MISSING</td>
+        <td>Only blog posts carry a status. A service or case study is either
+            present and live, or deleted.</td></tr>
+    <tr><td>Reusable FAQ manager assignable to pages</td><td class="st part">PARTIAL</td>
+        <td>FAQs exist inside page and service records; they cannot be written
+            once and attached to several pages.</td></tr>
+    <tr><td>Testimonials with attribution</td><td class="st part">PARTIAL</td>
+        <td>53 records with name, company, role and project. No field records
+            whether permission to publish was given.</td></tr>
+  </table>
+
+  <h3>3.3 SEO and URL controls</h3>
+  <table>
+    <tr><th style="width:34%">Requirement</th><th style="width:11%">Status</th><th>Finding</th></tr>
+    <tr><td>Per-page title, description, social image, robots</td><td class="st ok">WORKING</td>
+        <td>16 routes editable (<span class="ev">siteSettings.ts</span>).</td></tr>
+    <tr><td>Per-page canonical override</td><td class="st part">PARTIAL</td>
+        <td>Canonicals are correct and automatic from the path
+            (<span class="ev">seo.ts:42</span>) but cannot be overridden.</td></tr>
+    <tr><td>Sitemap excludes drafts and noindex pages</td><td class="st part">PARTIAL</td>
+        <td>Draft posts are excluded
+            (<span class="ev">sitemapEntries.ts:151</span>). <strong>The
+            per-page noindex flag is not consulted at all</strong> — see
+            Part 3.</td></tr>
+    <tr><td>robots.txt uses the production domain</td><td class="st ok">WORKING</td>
+        <td>Verified live: host and sitemap both
+            <span class="ev">www.divanextechnologies.com</span>.</td></tr>
+    <tr><td>Broken-link check</td><td class="st ok">WORKING</td>
+        <td>Backup, Audit &amp; Search finds links pointing at pages that no
+            longer exist. Confirmed independently: all 109 sitemap addresses
+            return 200, and no internal link 404s.</td></tr>
+    <tr><td>Structured data from visible information</td><td class="st ok">WORKING</td>
+        <td>Built in <span class="ev">seo.ts</span> from the same records the
+            page renders.</td></tr>
+    <tr><td>Warn before a URL change or deletion</td><td class="st part">PARTIAL</td>
+        <td>Deleting a page warns and names the address that will start
+            returning Not Found
+            (<span class="ev">RecordPagesEditor.tsx:162</span>). Renaming does
+            not warn, and nothing checks what links in.</td></tr>
+  </table>
+
+  <h3>3.4 Security, roles and audit</h3>
+  <table>
+    <tr><th style="width:34%">Requirement</th><th style="width:11%">Status</th><th>Finding</th></tr>
+    <tr><td>Permissions enforced server-side</td><td class="st ok">WORKING</td>
+        <td>Every admin route gates on the server. Swept the whole API tree:
+            the only handlers without a gate are sign-in, sign-out, session and
+            the public blog read, which is correct.</td></tr>
+    <tr><td>Record who changed content, with before and after</td><td class="st part">PARTIAL</td>
+        <td>Everything through the content store is recorded with field diffs
+            (<span class="ev">content/[collection]/route.ts:108</span>).
+            <strong>Blog posts, client sprints and subscriber deletions are
+            not recorded at all</strong> — see Part 3.</td></tr>
+    <tr><td>Drafts and admin APIs not publicly reachable</td><td class="st ok">WORKING</td>
+        <td>No drafts exist to expose. Unauthenticated calls to admin
+            endpoints return 401.</td></tr>
+    <tr><td>Uploads validated</td><td class="st na">N/A</td>
+        <td>No upload path exists yet. Becomes a requirement with the media
+            library.</td></tr>
+    <tr><td>Service-role secret kept off the browser</td><td class="st ok">WORKING</td>
+        <td><span class="ev">supabase.ts</span> is marked
+            <span class="ev">server-only</span>, so an accidental client
+            import fails the build. RLS is on with no permissive policies.</td></tr>
+    <tr><td>Backup, migration and restore documented</td><td class="st part">PARTIAL</td>
+        <td>Scripts exist (<span class="ev">scripts/setup-db.js</span>,
+            <span class="ev">migrate-db.js</span>) and content backup and
+            restore work. The recovery procedure has not been written down or
+            rehearsed.</td></tr>
+  </table>
+
+  <h3>3.5 Integrations and dashboard</h3>
+  <table>
+    <tr><th style="width:34%">Requirement</th><th style="width:11%">Status</th><th>Finding</th></tr>
+    <tr><td>Analytics connected to a real source</td><td class="st ok">WORKING</td>
+        <td>Fixed during this audit cycle. The tag was present but refused by
+            the site's own security policy, so the property had been receiving
+            nothing. Now verified reporting from the live site.</td></tr>
+    <tr><td>Preserve GA4 conversion events</td><td class="st na">N/A</td>
+        <td>No custom events or conversions are defined in the code. Nothing
+            to preserve; worth configuring deliberately.</td></tr>
+    <tr><td>Publishing revalidates affected pages</td><td class="st ok">WORKING</td>
+        <td>Each save purges its cache tag and the routes that depend on it
+            (<span class="ev">cache.ts:97</span>).</td></tr>
+    <tr><td>Real metrics, no invented figures</td><td class="st ok">WORKING</td>
+        <td>Rebuilt during this audit cycle. The screen previously showed a
+            fixed revenue curve, a 99.9% SLA and a cache hit ratio for a cache
+            the site does not run.</td></tr>
+    <tr><td>Status and error reporting</td><td class="st ok">WORKING</td>
+        <td>A banner on every admin screen when the database is unreachable;
+            a mail-server check on the forms screen.</td></tr>
+    <tr><td>Forms, newsletter, chat, email</td><td class="st ok">WORKING</td>
+        <td>Six enquiries stored and retrievable; subscriber list and chat
+            screens operational.</td></tr>
+  </table>
+</section>
+
+<!-- ============ PART 3 ============ -->
+<section class="part">
+  <div class="eyebrow">Part 3</div>
+  <h2>Defects the addendum does not list</h2>
+
+  <p>Found while checking the items above. Each is small to fix and two of them
+     are losing information today.</p>
+
+  <h3>1. Blog posts leave no audit record</h3>
+  <p>Posts live in their own table rather than the content store, and that
+     path never calls the audit recorder
+     (<span class="ev">blogStore.ts</span>, <span class="ev">api/blog/route.ts</span>).
+     Anyone with content rights can publish, rewrite or delete an article and
+     the trail will not show it. The same is true of client sprints and
+     subscriber deletions.</p>
+  <p>The action names <span class="ev">project.created</span>,
+     <span class="ev">subscriber.deleted</span> and
+     <span class="ev">chat.deleted</span> are declared in the audit type and
+     never written by anything — the intent was there and the calls were never
+     added.</p>
+  <p><strong>Action:</strong> record the same diffs the content store records.
+     Half a day, and it closes a real hole in section 3.4.</p>
+
+  <h3>2. The sitemap ignores the noindex flag</h3>
+  <p>Draft posts are correctly excluded, but the per-page noindex setting is
+     never read when the sitemap is built
+     (<span class="ev">sitemapEntries.ts</span>). Setting a page to noindex in
+     the console would leave it listed in the sitemap — telling search engines
+     to crawl a page that then asks not to be indexed.</p>
+  <p>No page is currently set to noindex, so nothing is wrong on the live site
+     today. It will go wrong the first time the feature is used, which is the
+     worst way to find out.</p>
+  <p><strong>Action:</strong> filter on the flag. An hour.</p>
+
+  <h3>3. Rate limiting is per-instance and in memory</h3>
+  <p>The limit is 200 page requests per minute per address, counted in the
+     memory of whichever serverless instance answers
+     (<span class="ev">proxy.ts:153</span>). On a platform that runs many
+     instances the real limit is neither 200 nor predictable, which makes it
+     weaker protection than it looks. It can also catch several genuine
+     visitors sharing one office or mobile network.</p>
+  <p><strong>Action:</strong> move the counter to the database so one limit is
+     actually enforced, and reconsider the number. This is a security control,
+     so it should be a deliberate decision rather than a quiet change.</p>
+
+  <h3>4. Two components are built and never rendered</h3>
+  <p><span class="ev">EngagementModels.tsx</span> and
+     <span class="ev">SecurityComplianceSection.tsx</span> are complete and
+     unreferenced. They ship in the repository and confuse anyone searching
+     for where something is rendered.</p>
+  <p><strong>Action:</strong> delete them, or wire them in if they were meant
+     to be live.</p>
+</section>
+
+<!-- ============ PART 4 ============ -->
+<section class="part">
+  <div class="eyebrow">Part 4</div>
+  <h2>Corrections to the handbook</h2>
+
+  <p>The addendum was written from the handbook, so where the handbook was
+     wrong the addendum inherits it. Three corrections, and the handbook
+     itself will be reissued.</p>
+
+  <table>
+    <tr><th style="width:30%">Handbook says</th><th>Actually</th></tr>
+    <tr>
+      <td>"There is no rollback."</td>
+      <td>A full content backup and restore exists and works — export to a
+          file, import it back with a confirmation. What is missing is
+          per-record version history, which is a narrower gap and a smaller
+          job.</td>
+    </tr>
+    <tr>
+      <td>"Nothing flags a broken link."</td>
+      <td>Backup, Audit &amp; Search does find links pointing at pages that no
+          longer exist. The missing checks are the SEO ones: duplicate
+          addresses, over-long descriptions, missing image descriptions.</td>
+    </tr>
+    <tr>
+      <td>Audit trail covers content changes.</td>
+      <td>True for everything except blog posts, client sprints and subscriber
+          deletions. See Part 3.</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ============ PART 5 ============ -->
+<section class="part">
+  <div class="eyebrow">Part 5</div>
+  <h2>Tally and recommended order</h2>
+
+  <table>
+    <tr><th>Status</th><th style="width:12%">Count</th><th>Items</th></tr>
+    <tr><td class="st ok">WORKING</td><td>18</td>
+        <td>Section editing, typed fields, HTML escaping, service pages,
+            per-page SEO, robots domain, broken-link check, structured data,
+            server-side permissions, secret handling, analytics, revalidation,
+            real metrics, status reporting, forms, newsletter, chat,
+            draft exposure.</td></tr>
+    <tr><td class="st part">PARTIAL</td><td>8</td>
+        <td>Revision restore, portfolio relationship, FAQ reuse, testimonial
+            permission, canonical override, sitemap noindex, URL-change
+            warnings, content audit coverage, recovery documentation.</td></tr>
+    <tr><td class="st miss">MISSING</td><td>10</td>
+        <td>Page draft and preview, media library, redirects, location pages,
+            scheduled publishing, SEO warnings, section add/reorder/hide,
+            responsive preview, page unpublish, service and case status.</td></tr>
+    <tr><td class="st na">N/A</td><td>2</td>
+        <td>Upload validation, GA4 conversion preservation.</td></tr>
+  </table>
+
+  <h3>Suggested order, and why it differs from the addendum</h3>
+
+  <p>The addendum puts draft, media and restore first. Two changes are worth
+     considering.</p>
+
+  <table>
+    <tr><th style="width:8%">Order</th><th style="width:34%">Work</th><th>Reason</th></tr>
+    <tr><td><strong>1</strong></td><td>The four defects in Part 3</td>
+        <td>Not in the addendum, all small, and two are losing information or
+            will mislead search engines the first time a feature is used.</td></tr>
+    <tr><td><strong>2</strong></td><td>SEO validation warnings</td>
+        <td>P1 in the addendum, the cheapest item on the list, and it prevents
+            mistakes rather than recording them.</td></tr>
+    <tr><td><strong>3</strong></td><td>Draft, preview and publish</td>
+        <td>The largest safety gain. Everything published today goes live on
+            the first keystroke after Save.</td></tr>
+    <tr><td><strong>4</strong></td><td>Section add, duplicate, reorder, hide</td>
+        <td>Understated in the addendum. Without it a page's shape still needs
+            a developer, which is most of what a CMS is for.</td></tr>
+    <tr><td><strong>5</strong></td><td>Media library</td>
+        <td>Needs a storage bucket and an upload path; worth doing properly
+            once rather than quickly twice.</td></tr>
+    <tr><td><strong>6</strong></td><td>Per-record restore, redirects</td>
+        <td>Redirects matter more once addresses start changing, which the
+            draft and section work will cause.</td></tr>
+    <tr><td><strong>7</strong></td><td>Scheduled publishing, location pages</td>
+        <td>Location pages are blocked on real market content, not on code.</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>On the acceptance criteria.</strong>
+    Of the ten in section 5 of the addendum, two can be demonstrated today:
+    protected operations are refused to unauthorised users, and the existing
+    forms, newsletter, chat, analytics and navigation all work. The other
+    eight depend on the work above.
+  </div>
+</section>
+
+</body>
+</html>
